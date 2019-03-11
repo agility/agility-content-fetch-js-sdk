@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Home - Documentation</title>
+    <title>methods/getContentItem.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,25 +29,63 @@
 
 <div id="main">
     
+    <h1 class="page-title">methods/getContentItem.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import axios from 'axios'
+import utils from '../utils'
 
 
+/**
+ * Gets the details of a content item by their Content ID.
+ * @memberof AgilityFetch.Client
+ * @param {number} contentID - The unique content ID of the content item you wish to retrieve in the current language.
+ * @returns {Promise&lt;AgilityFetch.Types.ContentItem>} - Returns a content item object.
+ * @example
+ * 
+ * var api = agility.getApi({
+ *   instanceID: '1234-1234',
+ *   accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg==',
+ *   languageCode: 'en-us'
+ * });
+ * 
+ * const contentID = 22;
+ * 
+ * api.getContentItem(contentID)
+ *   .then(function(response) {
+ *     console.log(response);
+ *   })
+ *   .catch(function(response) {
+ *       console.log(response);
+ *   });
+*/
 
 
-
-
-
-
-
+function getContentItem(contentID) {
+    const req = {
+        url: `/item/${contentID}`,
+        method: 'get',
+        baseURL: utils.buildRequestUrlPath(this.config),
+        headers: utils.buildAuthHeader(this.config),
+        params:{
+            contentID: contentID
+        }
+    };
     
+    return axios(req);
+        
+}
 
-
-
+export default getContentItem;</code></pre>
+        </article>
+    </section>
 
 
 

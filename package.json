@@ -4,7 +4,8 @@
   "description": "JavaScript library for the Agility Fetch API (node and browser)",
   "main": "src/agility-js-sdk.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,8 @@
   },
   "homepage": "https://github.com/agility/agility-js-sdk#readme",
   "devDependencies": {
+    "agility-jsdoc-template": "1.0.0",
+    "minami": "^1.2.3",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3"
   },

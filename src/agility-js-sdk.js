@@ -1,17 +1,43 @@
-import axios from 'axios'
+/**
+ * Agility Fetch API JS SDK for retrieving content from the Agility CMS
+ * @namespace AgilityFetch
+ */
 
+/**
+ * Agility Fetch API JS SDK for retrieving content from the Agility CMS
+ * @namespace AgilityFetch.Client
+ */
+
+
+/**
+ * Types returned by the the Fetch API
+ * @namespace AgilityFetch.Types
+ */
+
+
+import createClient from './api-client'
 
 /** 
  * This is the description for create client 
+ * @func
+ * @name getApi
+ * @memberof AgilityFetch
  * @param {Object} config - API intialization params
  * @param {string} config.instanceID - The guid that represents your instance
  * @param {string} config.accessToken - The secret token that represents your application
  * @param {string} config.languageCode - The language you want to retreive content for
  * @param {boolean} [config.isPreview] - If your access token is for preview, then set this to true
+ * @return {AgilityFetch.Client}
+ * @example
+ * var client = agility.getApi({
+ *   instanceID: '1234-1234',
+ *   accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg==',
+ *   languageCode: 'en-us'
+ * })
  */
-function createClient(config) {
+function getApi(config) {
     validateConfigParams(config);
-    return new client(config);
+    return createClient(config);
 }
 
 function validateConfigParams(configParams) {
@@ -29,66 +55,7 @@ function validateConfigParams(configParams) {
     }
 }
 
-/** Does this show up
- * @private
- */
-function buildRequestUrlPath(config) {
-    let urlPath = null;
-    if(config.isPreview) {
-        urlPath = config.previewBaseUrl
-    } else {
-        urlPath = config.fetchBaseUrl
-    }
-    urlPath = `${urlPath}/${config.instanceID}/${config.languageCode}`;
-    return urlPath;
-}
-
-function buildAuthHeader(config) {
-    return {
-        'APIKey': config.accessToken
-    }
-}
-
-function client(userConfig) {
-    
-    //merge our config
-    this.config = {
-        ...defaultConfig,
-        ...userConfig
-    };
-
-    
-    /** Fetches the sitemap in a flat format, ideal for handling page routing*/
-    this.getSitemapFlat = function() {
-        const req = {
-            url: '/Sitemap/Flat',
-            method: 'get',
-            baseURL: buildRequestUrlPath(this.config),
-            headers: buildAuthHeader(this.config),
-            params:{}
-        };
-        
-        axios(req)
-            .then(function(response) {
-                console.log(response);
-            })
-            .catch(function(response) {
-                console.log(response);
-            });
-    }
-    
-}
-
-
-const defaultConfig = {
-    fetchBaseUrl: 'http://stackpath.publishwithagility.com',
-    previewBaseUrl: 'http://stackpath.publishwithagility.com',
-    isPreview: false,
-    instanceID: null,
-    accessToken: null,
-    languageCode: null
-}
 
 export default {
-    createClient
+    getApi
 };

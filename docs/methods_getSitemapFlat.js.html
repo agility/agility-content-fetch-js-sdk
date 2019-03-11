@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Home - Documentation</title>
+    <title>methods/getSitemapFlat.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,25 +29,56 @@
 
 <div id="main">
     
+    <h1 class="page-title">methods/getSitemapFlat.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import axios from 'axios'
+import utils from '../utils'
 
 
-
-
-
-
-
-
-
+/**
+ * Gets the sitemap in a flat format, ideal for page routing
+ * @memberof AgilityFetch.Client
+ * @returns {Promise&lt;AgilityFetch.Types.SitemapFlat>} - the flat sitemap
+ * @example
+ * 
+ * var api = agility.getApi({
+ *   instanceID: '1234-1234',
+ *   accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg==',
+ *   languageCode: 'en-us'
+ * });
+ * 
+ * api.getSitemapFlat()
+ *   .then(function(response) {
+ *     console.log(response);
+ *   })
+ *   .catch(function(response) {
+ *       console.log(response);
+ *   });
+*/
+function getSitemapFlat() {
+    const req = {
+        url: '/Sitemap/Flat',
+        method: 'get',
+        baseURL: utils.buildRequestUrlPath(this.config),
+        headers: utils.buildAuthHeader(this.config),
+        params:{}
+    };
     
+    return axios(req);
+        
+}
 
-
-
+export default getSitemapFlat;</code></pre>
+        </article>
+    </section>
 
 
 
