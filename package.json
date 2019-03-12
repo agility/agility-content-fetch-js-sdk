@@ -19,6 +19,7 @@
   "homepage": "https://github.com/agility/agility-js-sdk#readme",
   "devDependencies": {
     "agility-jsdoc-template": "1.0.0",
+    "jsdoc": "^3.5.5",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3"
   },
