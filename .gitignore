@@ -59,6 +59,3 @@ typings/
 
 # next.js build output
 .next
-
-#ensure docs are never tracked in this repo - a seperate repo is used for this
-docs/
