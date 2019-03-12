@@ -1,6 +1,6 @@
 {
   "name": "agility-js-sdk",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "JavaScript library for the Agility Fetch API (node and browser)",
   "main": "src/agility-js-sdk.js",
   "scripts": {
@@ -19,7 +19,6 @@
   "homepage": "https://github.com/agility/agility-js-sdk#readme",
   "devDependencies": {
     "agility-jsdoc-template": "1.0.0",
-    "minami": "^1.2.3",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3"
   },

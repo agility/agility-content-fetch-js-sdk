@@ -1,6 +1,6 @@
 {
     "source": {
-        "include": ["src"],
+        "include": ["src", "README.md", "package.json"],
         "includePattern": ".js$",
         "excludePattern": "(node_modules/|docs)"
     },
@@ -11,7 +11,7 @@
     "templates": {
         "cleverLinks": false,
         "monospaceLinks": true,
-        "useLongnameInNav": false,
+        "useLongnameInNav": true,
         "showInheritedInNav": true
     },
     "tags": {
