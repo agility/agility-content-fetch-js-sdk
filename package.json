@@ -1,6 +1,6 @@
 {
   "name": "@agility/content-fetch",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "JavaScript library for the Agility Fetch API (node and browser)",
   "main": "src/content-fetch.js",
   "scripts": {
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/agility/agility-js-sdk.git"
+    "url": "git+https://github.com/agility/agility-content-fetch-js-sdk.git"
   },
   "author": "James Vidler",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/agility/agility-js-sdk/issues"
+    "url": "https://github.com/agility/agility-content-fetch-js-sdk/issues"
   },
-  "homepage": "https://github.com/agility/agility-js-sdk#readme",
+  "homepage": "https://github.com/agility/agility-content-fetch-js-sdk#readme",
   "devDependencies": {
     "agility-jsdoc-template": "1.0.0",
     "jsdoc": "^3.5.5",
