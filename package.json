@@ -1,8 +1,8 @@
 {
-  "name": "agility-js-sdk",
+  "name": "content-fetch",
   "version": "0.1.1",
   "description": "JavaScript library for the Agility Fetch API (node and browser)",
-  "main": "src/agility-js-sdk.js",
+  "main": "src/content-fetch.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
