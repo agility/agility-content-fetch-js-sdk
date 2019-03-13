@@ -1,6 +1,6 @@
 {
   "name": "agility-js-sdk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "JavaScript library for the Agility Fetch API (node and browser)",
   "main": "src/agility-js-sdk.js",
   "scripts": {
