@@ -1,6 +1,6 @@
 import chai from 'chai'
 const assert = chai.assert;
-import aglFetch from '../src/content-fetch.js'
+import aglFetch from '../dist/agility-content-fetch.node.js'
 
 describe('Api', function() {
     it('should be able to retrieve a content item', function(done) {

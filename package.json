@@ -2,11 +2,11 @@
   "name": "@agility/content-fetch",
   "version": "0.1.3",
   "description": "JavaScript library for the Agility Fetch API (node and browser)",
-  "main": "dist/agility-content-fetch.min.js",
+  "main": "dist/agility-content-fetch.node.js",
   "scripts": {
     "test": "mocha --require @babel/register --recursive ./test",
     "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
-    "build": "webpack -p"
+    "build": "webpack --config webpack.config -p"
   },
   "repository": {
     "type": "git",
