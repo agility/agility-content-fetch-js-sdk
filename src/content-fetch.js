@@ -29,12 +29,16 @@ import createClient from './api-client'
  * @param {boolean} [config.isPreview] - If your access token is for preview, then set this to true
  * @return {AgilityFetch.Client}
  * @example
- * var client = agility.getApi({
+ * 
+ * import aglFetch from '&#64;agility/content-fetch'
+ * 
+ * const api = aglFetch.getApi({
  *   instanceID: '1234-1234',
  *   accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg==',
  *   languageCode: 'en-us'
- * })
+ * });
  */
+
 function getApi(config) {
     validateConfigParams(config);
     return createClient(config);

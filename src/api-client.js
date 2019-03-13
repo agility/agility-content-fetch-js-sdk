@@ -1,3 +1,4 @@
+import axios from 'axios'
 import getSitemapFlat from './methods/getSitemapFlat'
 import getSitemapNested from './methods/getSitemapNested'
 import getContentItem from './methods/getContentItem'
@@ -21,9 +22,16 @@ export default function createClient(userConfig) {
         ...defaultConfig,
         ...userConfig
     };
+    
+    function makeRequest(reqConfig) {
+        return axios(reqConfig).then(response => {
+            return response.data;
+        });   
+    }
 
     return {
         config: config,
+        makeRequest: makeRequest,
         getSitemapFlat: getSitemapFlat,
         getSitemapNested: getSitemapNested,
         getContentItem: getContentItem,

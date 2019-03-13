@@ -1,5 +1,5 @@
  /**
- * Defines a Content Item
+ * Defines a Page - TODO: document all properties
  * @typedef Page
  * @memberof AgilityFetch.Types
  * @property {number} pageID - The unique ID of the page in this language.

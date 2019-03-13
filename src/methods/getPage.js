@@ -1,43 +1,53 @@
-import axios from 'axios'
 import utils from '../utils'
-
 
 /**
  * Gets the details of a page by its Page ID.
  * @memberof AgilityFetch.Client
- * @param {number} pageID - The unique page ID of the page you wish to retrieve in the current language.
- * @returns {Promise<AgilityFetch.Types.ContentItem>} - Returns a content item object.
+ * @param {Object} requestParams - The parameters for the API request.
+ * @param {number} requestParams.pageID - The unique page ID of the page you wish to retrieve in the current language.
+ * @returns {Promise<AgilityFetch.Types.Page>} - Returns a page item object.
  * @example
  * 
- * var api = agility.getApi({
+ * import aglFetch from '&#64;agility/content-fetch'
+ * 
+ * var api = aglFetch.getApi({
  *   instanceID: '1234-1234',
  *   accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg==',
  *   languageCode: 'en-us'
  * });
  * 
- * const pageID = 1;
- * 
- * api.getPage(pageID)
- *   .then(function(response) {
- *     console.log(response);
- *   })
- *   .catch(function(response) {
- *       console.log(response);
- *   });
+ * api.getPage({
+ *     pageID: 1
+ * })
+ * .then(function(page) {
+ *     console.log(page);
+ * })
+ * .catch(function(error) {
+ *     console.log(error);
+ * });
 */
 
 
-function getPage(pageID) {
+function getPage(requestParams) {
+
+    validateRequestParams(requestParams);
+
     const req = {
-        url: `/page/${pageID}`,
+        url: `/page/${requestParams.pageID}`,
         method: 'get',
         baseURL: utils.buildRequestUrlPath(this.config),
         headers: utils.buildAuthHeader(this.config),
         params:{}
     };
     
-    return axios(req);
-        
+    return this.makeRequest(req);       
 }
+
+function validateRequestParams(requestParams) {
+    if(!requestParams.pageID) {
+        throw new TypeError('You must include a pageID in your request params.');
+    }
+}
+
 
 export default getPage;

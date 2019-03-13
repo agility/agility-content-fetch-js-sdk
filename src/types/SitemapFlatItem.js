@@ -1,5 +1,5 @@
  /**
- * Represents an item in a sitemap response
+ * Represents an item in a sitemap response - TODO: document all properties
  * @typedef {Object} SitemapFlatItem
  * @memberof AgilityFetch.Types
  * @property {number} pageID - The unique ID of the page in Agility in this language.

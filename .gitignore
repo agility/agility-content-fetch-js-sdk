@@ -62,3 +62,6 @@ typings/
 
 # make sure the docs are never checked in
 docs/
+
+# ignore the dist folder
+dist/
