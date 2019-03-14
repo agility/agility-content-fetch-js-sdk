@@ -6,7 +6,7 @@ const browserConfig = {
     output: {
         filename: 'agility-content-fetch.browser.js',
         path: path.resolve(__dirname, 'dist'),
-        library: 'aglFetch',
+        library: 'agility',
         libraryTarget: 'umd',
         libraryExport: 'default',
         umdNamedDefine: true,
@@ -32,7 +32,7 @@ const nodeConfig = {
     output: {
         filename: 'agility-content-fetch.node.js',
         path: path.resolve(__dirname, 'dist'),
-        library: 'aglFetch',
+        library: 'agility',
         libraryTarget: 'umd',
         libraryExport: 'default',
         umdNamedDefine: true,

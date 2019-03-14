@@ -8,9 +8,9 @@ import utils from '../utils'
  * @returns {Promise<AgilityFetch.Types.SitemapFlat>} - The sitemap response in a flat format.
  * @example
  * 
- * import aglFetch from '@agility/content-fetch'
+ * import agility from '@agility/content-fetch'
  * 
- * var api = aglFetch.getApi({
+ * var api = agility.getApi({
  *   instanceID: '1234-1234',
  *   accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg==',
  *   languageCode: 'en-us'

@@ -8,9 +8,9 @@ import utils from '../utils'
  * @returns {Promise<AgilityFetch.Types.ContentList>} - Returns a list of content items.
  * @example
  * 
- * import aglFetch from '@agility/content-fetch'
+ * import agility from '@agility/content-fetch'
  * 
- * const api = aglFetch.getApi({
+ * const api = agility.getApi({
  *   instanceID: '1234-1234',
  *   accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg==',
  *   languageCode: 'en-us'
