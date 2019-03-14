@@ -8,7 +8,7 @@ import utils from '../utils'
  * @returns {Promise<AgilityFetch.Types.ContentItem>} - Returns a content item object.
  * @example
  * 
- * import aglFetch from '&#64;agility/content-fetch'
+ * import aglFetch from '@agility/content-fetch'
  * 
  * const api = aglFetch.getApi({
  *   instanceID: '1234-1234',

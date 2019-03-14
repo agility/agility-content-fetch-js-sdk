@@ -30,7 +30,7 @@ import createClient from './api-client'
  * @return {AgilityFetch.Client}
  * @example
  * 
- * import aglFetch from '&#64;agility/content-fetch'
+ * import aglFetch from '@agility/content-fetch'
  * 
  * const api = aglFetch.getApi({
  *   instanceID: '1234-1234',
