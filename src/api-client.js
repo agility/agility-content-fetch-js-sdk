@@ -6,8 +6,8 @@ import getContentList from './methods/getContentList'
 import getPage from './methods/getPage'
 
 const defaultConfig = {
-    fetchBaseUrl: 'http://stackpath.publishwithagility.com',
-    previewBaseUrl: 'http://stackpath.publishwithagility.com',
+    fetchBaseUrl: 'https://g5s2z5b3.stackpathcdn.com',
+    previewBaseUrl: 'https://g5s2z5b3.stackpathcdn.com',
     isPreview: false,
     instanceID: null,
     accessToken: null,
@@ -22,7 +22,7 @@ export default function createClient(userConfig) {
         ...defaultConfig,
         ...userConfig
     };
-    
+
     function makeRequest(reqConfig) {
         return axios(reqConfig).then(response => {
             return response.data;
