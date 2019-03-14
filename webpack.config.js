@@ -38,6 +38,9 @@ const nodeConfig = {
         umdNamedDefine: true,
         globalObject: 'typeof self !== \'undefined\' ? self : this'
     },
+    optimization: {
+        minimize: false
+    },
     module: {
         rules : [
         // JavaScript
