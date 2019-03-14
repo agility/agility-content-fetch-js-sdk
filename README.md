@@ -16,7 +16,7 @@ You can use this in both node and browser based JS apps.
 In order to use this sdk, you'll need to install the script and you'll also need to authenticate your requests.
 
 ### Prerequisites
-You must have access to an Agility instance to retrieve the instance *guid* and generate your *apiKey*. Or, you must have these values provided to you.
+You must have access to an Agility instance to retrieve the *instanceID* and generate your *apiKey*. Or, you must have these values provided to you.
 
 ### Installation
 Install it using **npm** (recommended):
