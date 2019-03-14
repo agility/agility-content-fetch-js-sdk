@@ -1,4 +1,5 @@
 [![Build Status](https://agility.visualstudio.com/Agility%20Headless%20API/_apis/build/status/Agility%20Content%20Fetch%20JS%20SDK?branchName=master)](https://agility.visualstudio.com/Agility%20Headless%20API/_build/latest?definitionId=52&branchName=master)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c45f5d6e-923b-4019-820e-826e6185017d/deploy-status)](https://app.netlify.com/sites/keen-easley-cec13b/deploys)
 
 # Agility Content Fetch JS SDK
 This is the official JavaScript library for accessing live and preview content from your [Agility](https://agilitycms.com) CMS instance. 
