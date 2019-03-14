@@ -25,7 +25,7 @@ Install it using **npm** (recommended):
 npm install @agility/content-fetch
 ```
 
-If necessary, you can also reference a standalone package that can be used in a browser using a traditional **script** tag. In this case, the sdk can be accessed using a global variable by name of `aglFetch`:
+If necessary, you can also reference a standalone package that can be used in a browser using a traditional **script** tag. In this case, the sdk can be accessed using a global variable by name of `agility`:
 ```html
 <!-- Use a specific version (i.e. 0.1.4) -->
 <script type="text/javascript" src="https://unpkg.com/@agility/content-fetch@0.1.4/dist/agility-content-fetch.browser.js"></script>
@@ -35,10 +35,10 @@ If necessary, you can also reference a standalone package that can be used in a 
 ```
 ### Making a Request
 ```javascript
-import aglFetch from '@agility/content-fetch'
+import agility from '@agility/content-fetch'
 
 //initialize the api client
-const api = aglFetch.getApi({
+const api = agility.getApi({
   instanceID: '1234-1234',
   accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg==',
   languageCode: 'en-us'

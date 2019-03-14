@@ -8,9 +8,9 @@ import utils from '../utils'
  * @returns {Promise<AgilityFetch.Types.SitemapNested>} - The array of sitemap items returned.
  * @example
  * 
- * import aglFetch from '@agility/content-fetch'
+ * import agility from '@agility/content-fetch'
  * 
- * var api = aglFetch.getApi({
+ * var api = agility.getApi({
  *   instanceID: '1234-1234',
  *   accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg==',
  *   languageCode: 'en-us'
