@@ -12,8 +12,7 @@ const defaultConfig = {
     instanceID: null,
     accessToken: null,
     languageCode: null
-}
-
+};
 
 export default function createClient(userConfig) {
     
@@ -24,6 +23,7 @@ export default function createClient(userConfig) {
     };
 
     function makeRequest(reqConfig) {
+        
         return axios(reqConfig).then(response => {
             return response.data;
         });   
@@ -40,5 +40,3 @@ export default function createClient(userConfig) {
     }
 
 }
-
-

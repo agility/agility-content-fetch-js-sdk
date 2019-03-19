@@ -4,7 +4,7 @@
   "description": "JavaScript library for the Agility Fetch API (node and browser)",
   "main": "dist/agility-content-fetch.node.js",
   "scripts": {
-    "test": "mocha --require @babel/register --recursive ./test",
+    "test": "nyc --reporter=html --reporter=text mocha --require @babel/register --recursive ./test",
     "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
     "build": "webpack --config webpack.config -p"
   },
@@ -29,6 +29,7 @@
     "chai": "^4.2.0",
     "jsdoc": "^3.5.5",
     "mocha": "^6.0.2",
+    "nyc": "^13.3.0",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3"
   },

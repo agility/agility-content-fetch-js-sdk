@@ -46,6 +46,8 @@ function getSitemapFlat(requestParams) {
 function validateRequestParams(requestParams) {
     if(!requestParams.channelID) {
         throw new TypeError('You must include a channelID in your request params.');
+    } else {
+        return;
     }
 }
 

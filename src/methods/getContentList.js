@@ -46,6 +46,8 @@ function getContentList(requestParams) {
 function validateRequestParams(requestParams) {
     if(!requestParams.referenceName) {
         throw new TypeError('You must include a content referenceName in your request params.');
+    } else {
+        return;
     }
 }
 

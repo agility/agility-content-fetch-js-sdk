@@ -46,6 +46,8 @@ function getPage(requestParams) {
 function validateRequestParams(requestParams) {
     if(!requestParams.pageID) {
         throw new TypeError('You must include a pageID in your request params.');
+    } else {
+        return;
     }
 }
 

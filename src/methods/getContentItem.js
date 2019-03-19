@@ -46,6 +46,8 @@ function getContentItem(requestParams) {
 function validateRequestParams(requestParams) {
     if(!requestParams.contentID) {
         throw new TypeError('You must include a contentID number in your request params.');
+    } else {
+        return;
     }
 }
 
