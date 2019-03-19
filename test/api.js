@@ -25,6 +25,8 @@ function createPreviewApiClient() {
 
 describe('Api', function() {
 
+    this.timeout(5000);
+
     /* GET API CLIENT */
     it('should return an api client object from getApi', function(done) {
         var api = createApiClient();
