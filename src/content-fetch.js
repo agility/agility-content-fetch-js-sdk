@@ -49,13 +49,13 @@ function validateConfigParams(configParams) {
     if(!configParams.instanceID || configParams.instanceID.length == 0) {
         throw new TypeError('You must provide an instanceID');
     }
-
-    if(!configParams.accessToken || configParams.accessToken.length == 0) {
+    else if(!configParams.accessToken || configParams.accessToken.length == 0) {
         throw new TypeError('You must provide an access token');
     }
-
-    if(!configParams.languageCode || configParams.languageCode.length == 0) {
+    else if(!configParams.languageCode || configParams.languageCode.length == 0) {
         throw new TypeError('You must provide a language code');
+    } else {
+        return;
     }
 }
 

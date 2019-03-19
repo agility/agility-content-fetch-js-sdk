@@ -32,7 +32,9 @@ function getSitemapNested(requestParams) {
     validateRequestParams(requestParams);
 
     const req = {
-        url: `/Sitemap/Nested/${requestParams.channelID}`,
+        //HACK
+        //url: `/Sitemap/Nested/${requestParams.channelID}`,
+        url: `/Sitemap/Nested`,
         method: 'get',
         baseURL: utils.buildRequestUrlPath(this.config),
         headers: utils.buildAuthHeader(this.config),
