@@ -4,7 +4,7 @@ import utils from '../utils'
  * Gets the sitemap as an array in a nested format, ideal for generating menus.
  * @memberof AgilityFetch.Client
  * @param {Object} requestParams - The parameters for the API request.
- * @param {number} requestParams.channelID - The channelID of the sitemap to return. If you only have one channel, your channelID is likely *1*.
+ * @param {number} requestParams.channelName - The reference name of the digital channel of the sitemap to return. If you only have one channel, your channel reference name is likely *website*.
  * @returns {Promise<AgilityFetch.Types.SitemapNested>} - The array of sitemap items returned.
  * @example
  * 
@@ -17,7 +17,7 @@ import utils from '../utils'
  * });
  * 
  * api.getSitemapNested({
- *   channelID: 1
+ *   channelName: 'website'
  * })
  * .then(function(sitemap) {
  *   console.log(sitemap);
@@ -32,9 +32,7 @@ function getSitemapNested(requestParams) {
     validateRequestParams(requestParams);
 
     const req = {
-        //HACK
-        //url: `/Sitemap/Nested/${requestParams.channelID}`,
-        url: `/Sitemap/Nested`,
+        url: `/Sitemap/Nested/${requestParams.channelName}`,
         method: 'get',
         baseURL: utils.buildRequestUrlPath(this.config),
         headers: utils.buildAuthHeader(this.config),
@@ -45,8 +43,8 @@ function getSitemapNested(requestParams) {
 }
 
 function validateRequestParams(requestParams) {
-    if(!requestParams.channelID) {
-        throw new TypeError('You must include a channelID in your request params.');
+    if(!requestParams.channelName) {
+        throw new TypeError('You must include a channelName in your request params.');
     }
 }
 
