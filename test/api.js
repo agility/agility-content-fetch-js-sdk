@@ -155,8 +155,8 @@ describe('Api', function() {
             referenceName: 'posts'
         })
         .then(function(contentList) {
-            assert.strictEqual(contentList[0].contentID, 24);
-            assert.strictEqual(contentList[1].contentID, 25);
+            assert.strictEqual(contentList.items[0].contentID, 24);
+            assert.strictEqual(contentList.items[1].contentID, 25);
             done();
         })
         .catch(done);
@@ -168,8 +168,8 @@ describe('Api', function() {
             referenceName: 'posts'
         })
         .then(function(contentList) {
-            assert.strictEqual(contentList[0].contentID, 24);
-            assert.strictEqual(contentList[1].contentID, 25);
+            assert.strictEqual(contentList.items[0].contentID, 24);
+            assert.strictEqual(contentList.items[1].contentID, 25);
             done();
         })
         .catch(done);
@@ -235,7 +235,7 @@ describe('Api', function() {
     it('should retrieve a sitemap in a flat format in live mode', function(done) {
         var api = createApiClient();
         api.getSitemapFlat({
-            channelID: 1
+            channelName: 'website'
         })
         .then(function(sitemap) {
             assert.strictEqual(sitemap['/home'].pageID, 1);
@@ -247,7 +247,7 @@ describe('Api', function() {
     it('should retrieve a sitemap in a flat format in preview mode', function(done) {
         var api = createPreviewApiClient();
         api.getSitemapFlat({
-            channelID: 1
+            channelName: 'website'
         })
         .then(function(sitemap) {
             assert.strictEqual(sitemap['/home'].pageID, 1);
@@ -256,7 +256,7 @@ describe('Api', function() {
         .catch(done);
     })
 
-    it('should throw error if channelID not passed as argument for getSitemapFlat', function(done) {
+    it('should throw error if channelName not passed as argument for getSitemapFlat', function(done) {
         expect(function() {
             var api = createApiClient();
             api.getSitemapFlat({
@@ -276,7 +276,7 @@ describe('Api', function() {
     it('should retrieve a sitemap in a nested format in live mode', function(done) {
         var api = createApiClient();
         api.getSitemapNested({
-            channelID: 1
+            channelName: 'website'
         })
         .then(function(sitemap) {
             assert.strictEqual(sitemap[0].pageID, 1);
@@ -288,7 +288,7 @@ describe('Api', function() {
     it('should retrieve a sitemap in a nested format in preview mode', function(done) {
         var api = createPreviewApiClient();
         api.getSitemapNested({
-            channelID: 1
+            channelName: 'website'
         })
         .then(function(sitemap) {
             assert.strictEqual(sitemap[0].pageID, 1);
@@ -297,7 +297,7 @@ describe('Api', function() {
         .catch(done);
     })
 
-    it('should throw error if channelID not passed as argument for getSitemapNested', function(done) {
+    it('should throw error if channelName not passed as argument for getSitemapNested', function(done) {
         expect(function() {
             var api = createApiClient();
             api.getSitemapNested({
