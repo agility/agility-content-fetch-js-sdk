@@ -23,7 +23,10 @@ import utils from '../utils'
  * 
  * api.getContentList({
  *     referenceName: 'posts',
- *      
+ *     take: 50,
+ *     skip: 0,
+ *     sort: 'properties.created',
+ *     direction: 'asc' 
  * })
  * .then(function(contentList) {
  *     console.log(contentList);
