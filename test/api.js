@@ -25,7 +25,7 @@ function createPreviewApiClient() {
 
 describe('Api', function() {
 
-    this.timeout(5000);
+    this.timeout("30s");
 
     /* GET API CLIENT */
     it('should return an api client object from getApi', function(done) {
@@ -180,6 +180,109 @@ describe('Api', function() {
             var api = createApiClient();
             api.getContentList({
                 someOtherParam: 'posts'
+            })
+            .then(function(contentList) {
+                assert.strictEqual(contentList[0].contentID, 24);
+                assert.strictEqual(contentList[1].contentID, 25);
+                done();
+            })
+            .catch(done);
+        }).to.throw( TypeError );
+        done();
+    })
+
+    it('should throw error if take parameter is NOT a number in getContentList', function(done) {
+        expect(function() {
+            var api = createApiClient();
+            api.getContentList({
+                referenceName: 'posts',
+                take: 'ten'
+            })
+            .then(function(contentList) {
+                assert.strictEqual(contentList[0].contentID, 24);
+                assert.strictEqual(contentList[1].contentID, 25);
+                done();
+            })
+            .catch(done);
+        }).to.throw( TypeError );
+        done();
+    })
+
+    it('should throw error if take parameter is a number less than 1 in getContentList', function(done) {
+        expect(function() {
+            var api = createApiClient();
+            api.getContentList({
+                referenceName: 'posts',
+                take: 0
+            })
+            .then(function(contentList) {
+                assert.strictEqual(contentList[0].contentID, 24);
+                assert.strictEqual(contentList[1].contentID, 25);
+                done();
+            })
+            .catch(done);
+        }).to.throw( TypeError );
+        done();
+    })
+
+    it('should throw error if take parameter is a number greater than 50 in getContentList', function(done) {
+        expect(function() {
+            var api = createApiClient();
+            api.getContentList({
+                referenceName: 'posts',
+                take: 51
+            })
+            .then(function(contentList) {
+                assert.strictEqual(contentList[0].contentID, 24);
+                assert.strictEqual(contentList[1].contentID, 25);
+                done();
+            })
+            .catch(done);
+        }).to.throw( TypeError );
+        done();
+    })
+
+    it('should throw error if skip parameter is a number less than 0 in getContentList', function(done) {
+        expect(function() {
+            var api = createApiClient();
+            api.getContentList({
+                referenceName: 'posts',
+                skip: -1
+            })
+            .then(function(contentList) {
+                assert.strictEqual(contentList[0].contentID, 24);
+                assert.strictEqual(contentList[1].contentID, 25);
+                done();
+            })
+            .catch(done);
+        }).to.throw( TypeError );
+        done();
+    })
+
+    it('should throw error if skip parameter is NOT a number in getContentList', function(done) {
+        expect(function() {
+            var api = createApiClient();
+            api.getContentList({
+                referenceName: 'posts',
+                skip: 'ten'
+            })
+            .then(function(contentList) {
+                assert.strictEqual(contentList[0].contentID, 24);
+                assert.strictEqual(contentList[1].contentID, 25);
+                done();
+            })
+            .catch(done);
+        }).to.throw( TypeError );
+        done();
+    })
+
+    it('should throw error if direction parameter is NOT "asc" or "desc" in getContentList', function(done) {
+        expect(function() {
+            var api = createApiClient();
+            api.getContentList({
+                referenceName: 'posts',
+                sort: 'fields.title',
+                direction: 'up'
             })
             .then(function(contentList) {
                 assert.strictEqual(contentList[0].contentID, 24);
