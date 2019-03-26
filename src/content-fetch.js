@@ -25,7 +25,6 @@ import createClient from './api-client'
  * @param {Object} config - API intialization params
  * @param {string} config.instanceID - The guid that represents your instance.
  * @param {string} config.accessToken - The secret token that represents your application.
- * @param {string} config.languageCode - The language you want to retreive content for.
  * @param {boolean} [config.isPreview] - If your access token is for preview, then set this to true.
  * @return {AgilityFetch.Client}
  * @example
@@ -34,8 +33,7 @@ import createClient from './api-client'
  * 
  * const api = agility.getApi({
  *   instanceID: '1234-1234',
- *   accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg==',
- *   languageCode: 'en-us'
+ *   accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg=='
  * });
  */
 
@@ -51,9 +49,6 @@ function validateConfigParams(configParams) {
     }
     else if(!configParams.accessToken || configParams.accessToken.length == 0) {
         throw new TypeError('You must provide an access token');
-    }
-    else if(!configParams.languageCode || configParams.languageCode.length == 0) {
-        throw new TypeError('You must provide a language code');
     } else {
         return;
     }
