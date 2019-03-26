@@ -40,13 +40,13 @@ import agility from '@agility/content-fetch'
 //initialize the api client
 const api = agility.getApi({
   instanceID: '1234-1234',
-  accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg==',
-  languageCode: 'en-us'
+  accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg=='
 });
 
 //make the request: get a content item with the ID '22'
 api.getContentItem({
-    contentID: 22
+    contentID: 22,
+    languageCode: 'en-us'
 })
 .then(function(contentItem) {
     //on success

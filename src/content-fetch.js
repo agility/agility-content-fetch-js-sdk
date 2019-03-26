@@ -23,10 +23,10 @@ import createClient from './api-client'
  * @name getApi
  * @memberof AgilityFetch
  * @param {Object} config - API intialization params
- * @param {string} config.instanceID - The guid that represents your instance
- * @param {string} config.accessToken - The secret token that represents your application
- * @param {string} config.languageCode - The language you want to retreive content for
- * @param {boolean} [config.isPreview] - If your access token is for preview, then set this to true
+ * @param {string} config.instanceID - The guid that represents your instance.
+ * @param {string} config.accessToken - The secret token that represents your application.
+ * @param {string} config.languageCode - The language you want to retreive content for.
+ * @param {boolean} [config.isPreview] - If your access token is for preview, then set this to true.
  * @return {AgilityFetch.Client}
  * @example
  * 

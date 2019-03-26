@@ -73,8 +73,7 @@ describe('Api', function() {
     it('should throw an error if instanceID is not passed-in to getApi', function(done) {
         expect(function() {
             var api = agility.getApi({
-                accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg==',
-                languageCode: 'en-us'
+                accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg=='
             });
             assert.strictEqual(typeof(api), "object");
             done();
@@ -85,34 +84,20 @@ describe('Api', function() {
     it('should throw an error if accessToken is not passed-in to getApi', function(done) {
         expect(function() {
             var api = agility.getApi({
-                instanceID: '1234-1234',
-                languageCode: 'en-us'
+                instanceID: '1234-1234'
             });
             assert.strictEqual(typeof(api), "object");
             done();
         }).to.throw( TypeError );
         done();
     });
-
-    it('should throw an error if languageCode is not passed-in to getApi', function(done) {
-        expect(function() {
-            var api = agility.getApi({
-                instanceID: '1234-1234',
-                accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg=='
-            });
-            assert.strictEqual(typeof(api), "object");
-            done();
-        }).to.throw( TypeError );
-        done();
-    });
-
-
 
     /* CONTENT ITEM ******************************************************/
     it('should retrieve a content item in live mode', function(done) {
         var api = createApiClient();
         api.getContentItem({
-            contentID: 22
+            contentID: 22,
+            languageCode: 'en-us'
         })
         .then(function(contentItem) {
             assert.strictEqual(contentItem.contentID, 22);
@@ -124,7 +109,8 @@ describe('Api', function() {
     it('should retrieve a content item in preview mode', function(done) {
         var api = createPreviewApiClient();
         api.getContentItem({
-            contentID: 22
+            contentID: 22,
+            languageCode: 'en-us'
         })
         .then(function(contentItem) {
             assert.strictEqual(contentItem.contentID, 22);
@@ -137,7 +123,23 @@ describe('Api', function() {
         expect(function() {
             var api = createApiClient();
             api.getContentItem({
-                someOtherParam: 22
+                someOtherParam: 22,
+                languageCode: 'en-us'
+            })
+            .then(function(contentItem) {
+                assert.strictEqual(contentItem.contentID, 22);
+                done();
+            })
+            .catch(done);
+        }).to.throw( TypeError );
+        done();
+    })
+
+    it('should throw error if languageCode not passed as argument for getContentItem', function(done) {
+        expect(function() {
+            var api = createApiClient();
+            api.getContentItem({
+                contentID: 22
             })
             .then(function(contentItem) {
                 assert.strictEqual(contentItem.contentID, 22);
@@ -152,7 +154,8 @@ describe('Api', function() {
     it('should retrieve a content list in live mode', function(done) {
         var api = createApiClient();
         api.getContentList({
-            referenceName: 'posts'
+            referenceName: 'posts',
+            languageCode: 'en-us'
         })
         .then(function(contentList) {
             assert.strictEqual(contentList.items[0].contentID, 24);
@@ -165,7 +168,8 @@ describe('Api', function() {
     it('should retrieve a content list in preview mode', function(done) {
         var api = createPreviewApiClient();
         api.getContentList({
-            referenceName: 'posts'
+            referenceName: 'posts',
+            languageCode: 'en-us'
         })
         .then(function(contentList) {
             assert.strictEqual(contentList.items[0].contentID, 24);
@@ -179,7 +183,24 @@ describe('Api', function() {
         expect(function() {
             var api = createApiClient();
             api.getContentList({
-                someOtherParam: 'posts'
+                someOtherParam: 'posts',
+                languageCode: 'en-us'
+            })
+            .then(function(contentList) {
+                assert.strictEqual(contentList[0].contentID, 24);
+                assert.strictEqual(contentList[1].contentID, 25);
+                done();
+            })
+            .catch(done);
+        }).to.throw( TypeError );
+        done();
+    })
+
+    it('should throw error if languageCode param is missing in getContentList', function(done) {
+        expect(function() {
+            var api = createApiClient();
+            api.getContentList({
+                referenceName: 'posts'
             })
             .then(function(contentList) {
                 assert.strictEqual(contentList[0].contentID, 24);
@@ -196,6 +217,7 @@ describe('Api', function() {
             var api = createApiClient();
             api.getContentList({
                 referenceName: 'posts',
+                languageCode: 'en-us',
                 take: 'ten'
             })
             .then(function(contentList) {
@@ -213,6 +235,7 @@ describe('Api', function() {
             var api = createApiClient();
             api.getContentList({
                 referenceName: 'posts',
+                languageCode: 'en-us',
                 take: 0
             })
             .then(function(contentList) {
@@ -230,6 +253,7 @@ describe('Api', function() {
             var api = createApiClient();
             api.getContentList({
                 referenceName: 'posts',
+                languageCode: 'en-us',
                 take: 51
             })
             .then(function(contentList) {
@@ -247,6 +271,7 @@ describe('Api', function() {
             var api = createApiClient();
             api.getContentList({
                 referenceName: 'posts',
+                languageCode: 'en-us',
                 skip: -1
             })
             .then(function(contentList) {
@@ -264,6 +289,7 @@ describe('Api', function() {
             var api = createApiClient();
             api.getContentList({
                 referenceName: 'posts',
+                languageCode: 'en-us',
                 skip: 'ten'
             })
             .then(function(contentList) {
@@ -281,6 +307,7 @@ describe('Api', function() {
             var api = createApiClient();
             api.getContentList({
                 referenceName: 'posts',
+                languageCode: 'en-us',
                 sort: 'fields.title',
                 direction: 'up'
             })
@@ -294,11 +321,13 @@ describe('Api', function() {
         done();
     })
 
+
     /* GET PAGE *********************************************************/
     it('should retrieve a page in live mode', function(done) {
         var api = createApiClient();
         api.getPage({
-            pageID: 1
+            pageID: 1,
+            languageCode: 'en-us'
         })
         .then(function(page) {
             assert.strictEqual(page.pageID, 1);
@@ -310,7 +339,8 @@ describe('Api', function() {
     it('should retrieve a page in preview mode', function(done) {
         var api = createPreviewApiClient();
         api.getPage({
-            pageID: 1
+            pageID: 1,
+            languageCode: 'en-us'
         })
         .then(function(page) {
             assert.strictEqual(page.pageID, 1);
@@ -323,7 +353,23 @@ describe('Api', function() {
         expect(function() {
             var api = createApiClient();
             api.getPage({
-                someOtherParam: 1
+                someOtherParam: 1,
+                languageCode: 'en-us'
+            })
+            .then(function(page) {
+                assert.strictEqual(page.pageID, 1);
+                done();
+            })
+            .catch(done);
+        }).to.throw( TypeError );
+        done();
+    })
+
+    it('should throw error if languageCode not passed as argument for getPage', function(done) {
+        expect(function() {
+            var api = createApiClient();
+            api.getPage({
+                pageID: 1
             })
             .then(function(page) {
                 assert.strictEqual(page.pageID, 1);
@@ -338,7 +384,8 @@ describe('Api', function() {
     it('should retrieve a sitemap in a flat format in live mode', function(done) {
         var api = createApiClient();
         api.getSitemapFlat({
-            channelName: 'website'
+            channelName: 'website',
+            languageCode: 'en-us'
         })
         .then(function(sitemap) {
             assert.strictEqual(sitemap['/home'].pageID, 1);
@@ -350,7 +397,8 @@ describe('Api', function() {
     it('should retrieve a sitemap in a flat format in preview mode', function(done) {
         var api = createPreviewApiClient();
         api.getSitemapFlat({
-            channelName: 'website'
+            channelName: 'website',
+            languageCode: 'en-us'
         })
         .then(function(sitemap) {
             assert.strictEqual(sitemap['/home'].pageID, 1);
@@ -363,7 +411,23 @@ describe('Api', function() {
         expect(function() {
             var api = createApiClient();
             api.getSitemapFlat({
-                someOtherParam: 1
+                someOtherParam: 1,
+                languageCode: 'en-us'
+            })
+            .then(function(sitemap) {
+                assert.strictEqual(sitemap['/home'].pageID, 1);
+                done();
+            })
+            .catch(done);
+        }).to.throw( TypeError );
+        done();
+    })
+
+    it('should throw error if languageCode not passed as argument for getSitemapFlat', function(done) {
+        expect(function() {
+            var api = createApiClient();
+            api.getSitemapFlat({
+                channelName: 'website'
             })
             .then(function(sitemap) {
                 assert.strictEqual(sitemap['/home'].pageID, 1);
@@ -379,7 +443,8 @@ describe('Api', function() {
     it('should retrieve a sitemap in a nested format in live mode', function(done) {
         var api = createApiClient();
         api.getSitemapNested({
-            channelName: 'website'
+            channelName: 'website',
+            languageCode: 'en-us'
         })
         .then(function(sitemap) {
             assert.strictEqual(sitemap[0].pageID, 1);
@@ -391,7 +456,8 @@ describe('Api', function() {
     it('should retrieve a sitemap in a nested format in preview mode', function(done) {
         var api = createPreviewApiClient();
         api.getSitemapNested({
-            channelName: 'website'
+            channelName: 'website',
+            languageCode: 'en-us'
         })
         .then(function(sitemap) {
             assert.strictEqual(sitemap[0].pageID, 1);
@@ -404,7 +470,23 @@ describe('Api', function() {
         expect(function() {
             var api = createApiClient();
             api.getSitemapNested({
-                someOtherParam: 1
+                someOtherParam: 1,
+                languageCode: 'en-us'
+            })
+            .then(function(sitemap) {
+                assert.strictEqual(sitemap[0].pageID, 1);
+                done();
+            })
+            .catch(done);
+        }).to.throw( TypeError );
+        done();
+    })
+
+    it('should throw error if languageCode not passed as argument for getSitemapNested', function(done) {
+        expect(function() {
+            var api = createApiClient();
+            api.getSitemapNested({
+                channelName: 'website'
             })
             .then(function(sitemap) {
                 assert.strictEqual(sitemap[0].pageID, 1);

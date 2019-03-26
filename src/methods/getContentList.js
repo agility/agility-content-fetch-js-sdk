@@ -4,7 +4,8 @@ import utils from '../utils'
  * Retrieves a list of content items by reference name.
  * @memberof AgilityFetch.Client
  * @param {Object} requestParams - The parameters for the API request.
- * @param {string} requestParams.referenceName - The unique reference name of the content list you wish to retrieve in the current language.
+ * @param {string} requestParams.referenceName - The unique reference name of the content list you wish to retrieve in the specified language.
+ * @param {string} requestParams.languageCode - The language code of the content you want to retrieve.
  * @param {number} [requestParams.take] - The maximum number of items to retrieve in this request. Default is **10**. Maximum allowed is **50**.
  * @param {number} [requestParams.skip] - The number of items to skip from the list. Default is **0**. Used for implementing pagination.
  * @param {number} [requestParams.sort] - The field to sort the results by. Example *fields.title* or *properties.created*. 
@@ -17,16 +18,16 @@ import utils from '../utils'
  * 
  * const api = agility.getApi({
  *   instanceID: '1234-1234',
- *   accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg==',
- *   languageCode: 'en-us'
+ *   accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg=='
  * });
  * 
  * api.getContentList({
  *     referenceName: 'posts',
+ *     languageCode: 'en-us',
  *     take: 50,
  *     skip: 0,
  *     sort: 'properties.created',
- *     direction: 'asc' 
+ *     direction: 'asc'
  * })
  * .then(function(contentList) {
  *     console.log(contentList);
@@ -44,7 +45,7 @@ function getContentList(requestParams) {
     const req = {
         url: `/list/${requestParams.referenceName}`,
         method: 'get',
-        baseURL: utils.buildRequestUrlPath(this.config),
+        baseURL: utils.buildRequestUrlPath(this.config, requestParams.languageCode),
         headers: utils.buildAuthHeader(this.config),
         params:{}
     };
@@ -53,7 +54,10 @@ function getContentList(requestParams) {
 }
 
 function validateRequestParams(requestParams) {
-    if(!requestParams.referenceName) {
+    if(!requestParams.languageCode) {
+        throw new TypeError('You must include a languageCode in your request params.')
+    }
+    else if(!requestParams.referenceName) {
         //must have a referenceName
         throw new TypeError('You must include a content referenceName in your request params.');
     } else if(requestParams.take && isNaN(requestParams.take)) {
