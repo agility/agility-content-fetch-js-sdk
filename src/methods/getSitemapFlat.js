@@ -5,6 +5,7 @@ import utils from '../utils'
  * @memberof AgilityFetch.Client
  * @param {Object} requestParams - The parameters for the API request.
  * @param {number} requestParams.channelName - The reference name of the digital channel of the sitemap to return. If you only have one channel, your channel reference name is likely *website*.
+ * @param {string} requestParams.languageCode - The language code of the content you want to retrieve.
  * @returns {Promise<AgilityFetch.Types.SitemapFlat>} - The sitemap response in a flat format.
  * @example
  * 
@@ -12,18 +13,18 @@ import utils from '../utils'
  * 
  * var api = agility.getApi({
  *   instanceID: '1234-1234',
- *   accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg==',
- *   languageCode: 'en-us'
+ *   accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg=='
  * });
  * 
  * api.getSitemapFlat({
- *     channelName: 'website'
+ *      channelName: 'website',
+ *      languageCode: 'en-us'
  * })
  * .then(function(sitemap) {
- *   console.log(sitemap);
+ *      console.log(sitemap);
  * })
  * .catch(function(error) {
- *     console.log(error);
+ *      console.log(error);
  * });
 */
 
@@ -34,7 +35,7 @@ function getSitemapFlat(requestParams) {
     const req = {
         url: `/Sitemap/Flat/${requestParams.channelName}`,
         method: 'get',
-        baseURL: utils.buildRequestUrlPath(this.config),
+        baseURL: utils.buildRequestUrlPath(this.config, requestParams.languageCode),
         headers: utils.buildAuthHeader(this.config),
         params:{}
     };
@@ -43,7 +44,9 @@ function getSitemapFlat(requestParams) {
 }
 
 function validateRequestParams(requestParams) {
-    if(!requestParams.channelName) {
+    if(!requestParams.languageCode) {
+        throw new TypeError('You must include a languageCode in your request params.')
+    } else if(!requestParams.channelName) {
         throw new TypeError('You must include a channelName in your request params.');
     } else {
         return;

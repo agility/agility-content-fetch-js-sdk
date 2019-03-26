@@ -1,11 +1,11 @@
-function buildRequestUrlPath(config) {
+function buildRequestUrlPath(config, languageCode) {
     let urlPath = null;
     if(config.isPreview) {
         urlPath = config.previewBaseUrl
     } else {
         urlPath = config.fetchBaseUrl
     }
-    urlPath = `${urlPath}/${config.instanceID}/${config.languageCode}`;
+    urlPath = `${urlPath}/${config.instanceID}/${languageCode}`;
     return urlPath;
 }
 
