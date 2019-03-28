@@ -1,4 +1,4 @@
-import utils from '../utils'
+import { buildRequestUrlPath, buildAuthHeader } from '../utils'
 
 /**
  * Gets the details of a content item by their Content ID.
@@ -36,8 +36,8 @@ function getContentItem(requestParams) {
     const req = {
         url: `/item/${requestParams.contentID}`,
         method: 'get',
-        baseURL: utils.buildRequestUrlPath(this.config, requestParams.languageCode),
-        headers: utils.buildAuthHeader(this.config),
+        baseURL: buildRequestUrlPath(this.config, requestParams.languageCode),
+        headers: buildAuthHeader(this.config),
         params:{}
     };
     

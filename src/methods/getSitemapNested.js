@@ -1,4 +1,4 @@
-import utils from '../utils'
+import { buildRequestUrlPath, buildAuthHeader } from '../utils'
 
 /**
  * Gets the sitemap as an array in a nested format, ideal for generating menus.
@@ -35,8 +35,8 @@ function getSitemapNested(requestParams) {
     const req = {
         url: `/Sitemap/Nested/${requestParams.channelName}`,
         method: 'get',
-        baseURL: utils.buildRequestUrlPath(this.config, requestParams.languageCode),
-        headers: utils.buildAuthHeader(this.config),
+        baseURL: buildRequestUrlPath(this.config, requestParams.languageCode),
+        headers: buildAuthHeader(this.config),
         params:{}
     };
     

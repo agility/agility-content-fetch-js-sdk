@@ -1,4 +1,4 @@
-import utils from '../utils'
+import { buildRequestUrlPath, buildAuthHeader } from '../utils'
 
 /**
  * Retrieves a list of content items by reference name.
@@ -45,8 +45,8 @@ function getContentList(requestParams) {
     const req = {
         url: `/list/${requestParams.referenceName}`,
         method: 'get',
-        baseURL: utils.buildRequestUrlPath(this.config, requestParams.languageCode),
-        headers: utils.buildAuthHeader(this.config),
+        baseURL: buildRequestUrlPath(this.config, requestParams.languageCode),
+        headers: buildAuthHeader(this.config),
         params:{}
     };
     

@@ -1,4 +1,4 @@
-import utils from '../utils'
+import { buildRequestUrlPath, buildAuthHeader } from '../utils'
 
 /**
  * The sitemap, returned in a flat list, where the dictionary key is the page path. This method is ideal for page routing.
@@ -35,8 +35,8 @@ function getSitemapFlat(requestParams) {
     const req = {
         url: `/Sitemap/Flat/${requestParams.channelName}`,
         method: 'get',
-        baseURL: utils.buildRequestUrlPath(this.config, requestParams.languageCode),
-        headers: utils.buildAuthHeader(this.config),
+        baseURL: buildRequestUrlPath(this.config, requestParams.languageCode),
+        headers: buildAuthHeader(this.config),
         params:{}
     };
     
