@@ -12,6 +12,7 @@ You can use this in both node and browser based JS apps.
 - Get a page, including its content zones, modules, and their content
 - Get a content item
 - Query a content list
+- Optional in-memory caching
 
 ## Getting Started
 In order to use this sdk, you'll need to install the script and you'll also need to authenticate your requests.
@@ -28,7 +29,7 @@ npm install @agility/content-fetch
 If necessary, you can also reference a standalone package that can be used in a browser using a traditional **script** tag. In this case, the sdk can be accessed using a global variable by name of `agility`:
 ```html
 <!-- Use a specific version (i.e. 0.1.4) -->
-<script type="text/javascript" src="https://unpkg.com/@agility/content-fetch@0.1.4/dist/agility-content-fetch.browser.js"></script>
+<script type="text/javascript" src="https://unpkg.com/@agility/content-fetch@0.2.4/dist/agility-content-fetch.browser.js"></script>
 
 <!-- Or, Use the latest version -->
 <script type="text/javascript" src="https://unpkg.com/@agility/content-fetch@latest/dist/agility-content-fetch.browser.js"></script>
