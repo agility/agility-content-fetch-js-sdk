@@ -1,4 +1,4 @@
-[![Build Status](https://agility.visualstudio.com/Agility%20Headless%20API/_apis/build/status/Agility%20Content%20Fetch%20JS%20SDK?branchName=master)](https://agility.visualstudio.com/Agility%20Headless%20API/_build/latest?definitionId=52&branchName=master)
+[![Build Status](https://agility.visualstudio.com/Agility CMS/_apis/build/status/Agility%20Content%20Fetch%20JS%20SDK%20-%20Dev?branchName=dev)](https://agility.visualstudio.com/Agility CMS/_build/latest?definitionId=58&branchName=dev)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c45f5d6e-923b-4019-820e-826e6185017d/deploy-status)](https://app.netlify.com/sites/agilitydocs/deploys)
 
 # Agility Content Fetch JS SDK
