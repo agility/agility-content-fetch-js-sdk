@@ -36,8 +36,8 @@ import { isHttps } from './utils'
  * import agility from '@agility/content-fetch'
  * 
  * const api = agility.getApi({
- *   instanceID: '1234-1234',
- *   accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg==',
+ *   instanceID: '191309ca-e675-4be2-bb29-351879528707',
+ *   accessToken: 'aGd13M.fa30c36e553a36f871860407e902da9a7375322457acd6bcda038e60af699411',
  *   isPreview: false
  * });
  */
