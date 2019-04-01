@@ -1,4 +1,4 @@
-[![Build Status](https://agility.visualstudio.com/Agility CMS/_apis/build/status/Agility%20Content%20Fetch%20JS%20SDK%20-%20Dev?branchName=dev)](https://agility.visualstudio.com/Agility CMS/_build/latest?definitionId=58&branchName=dev)
+[![Build Status](https://agility.visualstudio.com/Agility%20CMS/_apis/build/status/Agility%20Content%20Fetch%20JS%20SDK%20-%20Dev?branchName=dev)](https://agility.visualstudio.com/Agility%20CMS/_build/latest?definitionId=58&branchName=dev)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c45f5d6e-923b-4019-820e-826e6185017d/deploy-status)](https://app.netlify.com/sites/agilitydocs/deploys)
 
 # Agility Content Fetch JS SDK
@@ -40,8 +40,8 @@ import agility from '@agility/content-fetch'
 
 //initialize the api client
 const api = agility.getApi({
-  instanceID: '1234-1234',
-  accessToken: 'fEpTcRnWO3EahHbojDCeY3PwGwAzpw2gveDuPn2l0nuqFbQYVcWrQ+a3/DHcWgCgn7UL2tgbSOS0AqrEOiXkTg=='
+  instanceID: '191309ca-e675-4be2-bb29-351879528707',
+  accessToken: 'aGd13M.fa30c36e553a36f871860407e902da9a7375322457acd6bcda038e60af699411'
 });
 
 //make the request: get a content item with the ID '22'
