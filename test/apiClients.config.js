@@ -1,9 +1,9 @@
 import agility from '../src/content-fetch'
 
-//Agiliy Instance = 'Headless Integration Testing'
+// Agiliy Instance = 'Headless Integration Testing'
 const instanceID = 'c741222b-1080-45f6-9a7f-982381c5a485';
-const accessTokenFetch = 'mn16Ui.17dc2f94908b113a6eb0869681f5cfa77df6dbd181d22943b64bf8ef728b6c5c';
-const accessTokenPreview = 'tR95Pt.cc81dfbe0726263d5d9618b21f49fe33830e5449395820ade1cad3ce89d22ed8';
+const accessTokenFetch = 'mn16Ui.a70c306e57eb682bf6dc5e42325dd77b06ddde33f5a8e46530e680ad334c7e6d';
+const accessTokenPreview = 'tR95Pt.3c66512540fbbb00944602c9be1ca913fe3d83f41fbec172fa005ef10d9d1273';
 
 function createApiClient() {
     var api = agility.getApi({
