@@ -7,8 +7,8 @@ import getContentList from './methods/getContentList'
 import getPage from './methods/getPage'
 
 const defaultConfig = {
-    fetchBaseUrl: 'https://g5s2z5b3.stackpathcdn.com',
-    previewBaseUrl: 'https://e5q8t3m6.stackpathcdn.com',
+    fetchBaseUrl: 'https://fetch.agilitycms.cloud',
+    previewBaseUrl: 'https://preview.agilitycms.cloud',
     baseUrl: null,
     isPreview: false,
     instanceID: null,

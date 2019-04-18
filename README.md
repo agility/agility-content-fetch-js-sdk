@@ -66,6 +66,17 @@ Full documentation for this sdk can be found in our [Agility Fetch JS SDK Refere
 Coming soon...
 
 
+## Contributing
+If you would like to contribute to this SDK, you can fork the repository and submit a pull request. We'd love to include your updates.
+
+### Running the Tests
+An essential part of contributing to this SDK is adding and running unit tests to ensure the stability of the project.
+```
+> npm run test
+```
+
+
+
 
 
 
