@@ -7,13 +7,13 @@ import getContentList from './methods/getContentList'
 import getPage from './methods/getPage'
 
 const defaultConfig = {
-    fetchBaseUrl: 'https://fetch.agilitycms.cloud',
-    previewBaseUrl: 'https://preview.agilitycms.cloud',
     baseUrl: null,
     isPreview: false,
     instanceID: null,
     accessToken: null,
     languageCode: null,
+    headers: {},
+    requiresGuidInHeaders: false,
     caching: {
         maxAge: 0 //caching disabled by default
     }
@@ -21,18 +21,21 @@ const defaultConfig = {
 
 export default function createClient(userConfig) {
     
-    //set default baseUrl
-    if(userConfig.isPreview) {
-        defaultConfig.baseUrl = defaultConfig.previewBaseUrl
-    } else {
-        defaultConfig.baseUrl = defaultConfig.fetchBaseUrl
-    }
 
     //merge our config - user values will override our defaults
-    const config = {
+    let config = {
         ...defaultConfig,
         ...userConfig
     };
+
+    //compute the base Url
+    if(!config.baseUrl) {
+        //use default url
+        config.baseUrl = `https://${config.instanceID}-api.agilitycms.cloud`;
+    } else {
+        //we are using a custom url, make sure we include the instanceID/Guid in the headers
+        config.requiresGuidInHeaders = true;
+    }
 
     let adapter = null;
 
