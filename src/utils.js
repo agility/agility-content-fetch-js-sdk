@@ -1,13 +1,31 @@
 function buildRequestUrlPath(config, languageCode) {
     let urlPath = null;
-    urlPath = `${config.baseUrl}/${config.instanceID}/${languageCode}`;
+    let apiFetchOrPreview = null;
+
+    if(config.isPreview) {
+        apiFetchOrPreview  = 'preview';
+    } else {
+        apiFetchOrPreview = 'fetch';
+    }
+
+    urlPath = `${config.baseUrl}/${apiFetchOrPreview}/${languageCode}`;
     return urlPath;
 }
 
 function buildAuthHeader(config) {
-    return {
+    let defaultAuthHeaders = {
         'APIKey': config.accessToken
+    };
+
+    if(config.requiresGuidInHeaders) {
+        defaultAuthHeaders.Guid = config.instanceID;
     }
+
+    return {
+        ...defaultAuthHeaders,
+        ...config.headers
+    }
+
 }
 
 function isHttps(url) {
