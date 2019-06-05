@@ -1,4 +1,4 @@
-[![Build Status](https://agility.visualstudio.com/Agility%20CMS/_apis/build/status/Agility%20Content%20Fetch%20JS%20SDK%20-%20Dev?branchName=dev)](https://agility.visualstudio.com/Agility%20CMS/_build/latest?definitionId=58&branchName=dev)
+[![Build Status](https://agility.visualstudio.com/Agility%20CMS/_apis/build/status/Fetch API/Agility%20Content%20Fetch%20JS%20SDK?branchName=master)](https://agility.visualstudio.com/Agility%20CMS/_build/latest?definitionId=59&branchName=master)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c45f5d6e-923b-4019-820e-826e6185017d/deploy-status)](https://app.netlify.com/sites/agilitydocs/deploys)
 
 # Agility Content Fetch JS SDK
@@ -11,7 +11,7 @@ You can use this in both node and browser based JS apps.
 - Get a sitemap for a given channel
 - Get a page, including its content zones, modules, and their content
 - Get a content item
-- Query a content list
+- Query a content list using a filter syntax
 - Optional in-memory caching
 
 ## Getting Started
@@ -28,8 +28,8 @@ npm install @agility/content-fetch
 
 If necessary, you can also reference a standalone package that can be used in a browser using a traditional **script** tag. In this case, the sdk can be accessed using a global variable by name of `agility`:
 ```html
-<!-- Use a specific version (i.e. 0.1.4) -->
-<script type="text/javascript" src="https://unpkg.com/@agility/content-fetch@0.2.4/dist/agility-content-fetch.browser.js"></script>
+<!-- Use a specific version (i.e. 0.4.2) -->
+<script type="text/javascript" src="https://unpkg.com/@agility/content-fetch@0.4.2/dist/agility-content-fetch.browser.js"></script>
 
 <!-- Or, Use the latest version -->
 <script type="text/javascript" src="https://unpkg.com/@agility/content-fetch@latest/dist/agility-content-fetch.browser.js"></script>
