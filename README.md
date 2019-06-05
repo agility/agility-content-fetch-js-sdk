@@ -18,7 +18,7 @@ You can use this in both node and browser based JS apps.
 In order to use this sdk, you'll need to install the script and you'll also need to authenticate your requests.
 
 ### Prerequisites
-You must have access to an Agility instance to retrieve the *instanceID* and generate your *apiKey*. Or, you must have these values provided to you.
+You must have access to an Agility instance to retrieve the *guid* and generate your *apiKey*. Or, you must have these values provided to you.
 
 ### Installation
 Install it using **npm** (recommended):
@@ -40,7 +40,7 @@ import agility from '@agility/content-fetch'
 
 //initialize the api client
 const api = agility.getApi({
-  instanceID: '191309ca-e675-4be2-bb29-351879528707',
+  guid: '191309ca-e675-4be2-bb29-351879528707',
   accessToken: 'aGd13M.fa30c36e553a36f871860407e902da9a7375322457acd6bcda038e60af699411'
 });
 

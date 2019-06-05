@@ -17,7 +17,7 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
  * import agility from '@agility/content-fetch'
  * 
  * const api = agility.getApi({
- *   instanceID: '191309ca-e675-4be2-bb29-351879528707',
+ *   guid: '191309ca-e675-4be2-bb29-351879528707',
  *   accessToken: 'aGd13M.fa30c36e553a36f871860407e902da9a7375322457acd6bcda038e60af699411',
  * });
  * 

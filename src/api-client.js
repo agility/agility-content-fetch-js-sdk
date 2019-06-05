@@ -9,7 +9,7 @@ import getPage from './methods/getPage'
 const defaultConfig = {
     baseUrl: null,
     isPreview: false,
-    instanceID: null,
+    guid: null,
     accessToken: null,
     languageCode: null,
     headers: {},
@@ -31,9 +31,9 @@ export default function createClient(userConfig) {
     //compute the base Url
     if(!config.baseUrl) {
         //use default url
-        config.baseUrl = `https://${config.instanceID}-api.agilitycms.cloud`;
+        config.baseUrl = `https://${config.guid}-api.agilitycms.cloud`;
     } else {
-        //we are using a custom url, make sure we include the instanceID/Guid in the headers
+        //we are using a custom url, make sure we include the guid in the headers
         config.requiresGuidInHeaders = true;
     }
 

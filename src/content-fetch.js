@@ -24,7 +24,7 @@ import { isHttps } from './utils'
  * @name getApi
  * @memberof AgilityFetch
  * @param {Object} config - API intialization params.
- * @param {string} config.instanceID - The guid that represents your instance.
+ * @param {string} config.guid - The guid that represents your instance.
  * @param {string} config.accessToken - The secret token that represents your application.
  * @param {boolean} [config.isPreview] - If your access token is for preview, then set this to true.
  * @param {Object} [config.caching] - Optional Caching options. Caching is disabled by default.
@@ -36,7 +36,7 @@ import { isHttps } from './utils'
  * import agility from '@agility/content-fetch'
  * 
  * const api = agility.getApi({
- *   instanceID: '191309ca-e675-4be2-bb29-351879528707',
+ *   guid: '191309ca-e675-4be2-bb29-351879528707',
  *   accessToken: 'aGd13M.fa30c36e553a36f871860407e902da9a7375322457acd6bcda038e60af699411',
  *   isPreview: false
  * });
@@ -49,8 +49,8 @@ function getApi(config) {
 
 function validateConfigParams(configParams) {
 
-    if(!configParams.instanceID || configParams.instanceID.length == 0) {
-        throw new TypeError('You must provide an instanceID.');
+    if(!configParams.guid || configParams.guid.length == 0) {
+        throw new TypeError('You must provide an guid.');
     } else if(!configParams.accessToken || configParams.accessToken.length == 0) {
         throw new TypeError('You must provide an access token.');
     } else if(configParams.caching && isNaN(configParams.caching.maxAge)) {

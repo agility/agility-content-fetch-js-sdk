@@ -18,7 +18,7 @@ function buildAuthHeader(config) {
     };
 
     if(config.requiresGuidInHeaders) {
-        defaultAuthHeaders.Guid = config.instanceID;
+        defaultAuthHeaders.Guid = config.guid;
     }
 
     return {
