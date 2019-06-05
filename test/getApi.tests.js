@@ -12,7 +12,7 @@ describe('getApi:', function() {
     
     it('should return an api client object with required params', function(done) {
         const api = agility.getApi({
-            instanceID: 'some-instanceID',
+            guid: 'some-guid',
             accessToken: 'some-access-token'
         });
         assert.strictEqual(typeof(api), "object");
@@ -21,7 +21,7 @@ describe('getApi:', function() {
 
     it('should return an api client object in preview mode', function(done) {
         const api = agility.getApi({
-            instanceID: 'some-instanceID',
+            guid: 'some-guid',
             accessToken: 'some-access-token',
             isPreview: true
         });
@@ -31,7 +31,7 @@ describe('getApi:', function() {
 
     it('should contain method for getContentItem', function(done) {
         const api = agility.getApi({
-            instanceID: 'some-instanceID',
+            guid: 'some-guid',
             accessToken: 'some-access-token'
         });
         assert.strictEqual(typeof(api.getContentItem), "function");
@@ -40,7 +40,7 @@ describe('getApi:', function() {
 
     it('should contain method for getContentList', function(done) {
         const api = agility.getApi({
-            instanceID: 'some-instanceID',
+            guid: 'some-guid',
             accessToken: 'some-access-token'
         });
         assert.strictEqual(typeof(api.getContentList), "function");
@@ -49,7 +49,7 @@ describe('getApi:', function() {
 
     it('should contain method for getPage', function(done) {
         const api = agility.getApi({
-            instanceID: 'some-instanceID',
+            guid: 'some-guid',
             accessToken: 'some-access-token'
         });
         assert.strictEqual(typeof(api.getPage), "function");
@@ -58,7 +58,7 @@ describe('getApi:', function() {
 
     it('should contain method for getSitemapFlat', function(done) {
         const api = agility.getApi({
-            instanceID: 'some-instanceID',
+            guid: 'some-guid',
             accessToken: 'some-access-token'
         });
         assert.strictEqual(typeof(api.getSitemapFlat), "function");
@@ -67,7 +67,7 @@ describe('getApi:', function() {
 
     it('should contain method for getSitemapNested', function(done) {
         const api = agility.getApi({
-            instanceID: 'some-instanceID',
+            guid: 'some-guid',
             accessToken: 'some-access-token'
         });
         assert.strictEqual(typeof(api.getSitemapNested), "function");
@@ -77,7 +77,7 @@ describe('getApi:', function() {
     it('should return an api client with the baseUrl overidden if passed-in correctly as params', function(done) {
         const baseUrl = 'https://fake-url.agilitycms.com';
         const api = agility.getApi({
-            instanceID: 'some-instanceID',
+            guid: 'some-guid',
             accessToken: 'some-access-token',
             baseUrl: baseUrl
         });
@@ -87,7 +87,7 @@ describe('getApi:', function() {
 
     // TESTING EXCEPTIONS ----------------------------------------------------
 
-    it('should throw an error if instanceID is not passed-in', function(done) {
+    it('should throw an error if guid is not passed-in', function(done) {
         expect(function() {
             var api = agility.getApi({
                 accessToken: 'some-access-token'
@@ -101,7 +101,7 @@ describe('getApi:', function() {
     it('should throw an error if accessToken is not passed-in', function(done) {
         expect(function() {
             var api = agility.getApi({
-                instanceID: 'some-instanceID'
+                guid: 'some-guid',
             });
             assert.strictEqual(typeof(api), "object");
             done();
@@ -112,7 +112,7 @@ describe('getApi:', function() {
     it('should throw an error if caching maxAge is passed-in and is not a number', function(done) {
         expect(function() {
             var api = agility.getApi({
-                instanceID: 'some-instanceID',
+                guid: 'some-guid',
                 accessToken: 'some-access-token',
                 caching: {
                     maxAge: 'ten thousand miliseconds'
@@ -128,7 +128,7 @@ describe('getApi:', function() {
     it('should throw an error if baseUrl is passed-in and is does not start with "https"', function(done) {
         expect(function() {
             var api = agility.getApi({
-                instanceID: 'some-instanceID',
+                guid: 'some-guid',
                 accessToken: 'some-access-token',
                 baseUrl: 'http://insecuresite.com'
             });
