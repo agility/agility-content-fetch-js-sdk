@@ -12,6 +12,29 @@ function buildRequestUrlPath(config, languageCode) {
     return urlPath;
 }
 
+function buildPathUrl(contentType, referenceName, sort, direction, filters, filtersLogicOperator) {
+    let url = `/${contentType}/${referenceName}?`;
+    filtersLogicOperator = filtersLogicOperator ? ` ${filtersLogicOperator} ` : ' AND ';
+
+    if (sort) {
+        url += `sort=${sort}&`;
+
+        if (direction) {
+            url += `direction=${direction}&`;
+        }
+    }
+
+    if (filters && filters.length > 0) {
+        url += 'filter='
+        for (let i = 0; i < filters.length; i++) {
+            let filter = filters[i];
+            url += `${filter.property}[${filter.operator}]${filter.value}` + (i < filters.length - 1 ? filtersLogicOperator : '');
+        }
+        url += '&';
+    }
+    return url;
+}
+
 function buildAuthHeader(config) {
     let defaultAuthHeaders = {
         'APIKey': config.accessToken
@@ -37,6 +60,7 @@ function isHttps(url) {
 
 
 export {
+    buildPathUrl,
     buildAuthHeader,
     buildRequestUrlPath,
     isHttps
