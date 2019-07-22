@@ -9,13 +9,14 @@ import {buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
  * @param {number} [requestParams.take] - The maximum number of items to retrieve in this request. Default is **10**. Maximum allowed is **50**.
  * @param {number} [requestParams.skip] - The number of items to skip from the list. Default is **0**. Used for implementing pagination.
  * @param {string} [requestParams.sort] - The field to sort the results by. Example *fields.title* or *properties.created*.
- * @param {string} [requestParams.direction] - The direction to sort the results by. Default is **asc**. Valid values are **asc**, **desc**.
- * @param {Array}  [requestParams.filters] - The collection of filters to filter the results by. A filter object contains properties called **property**, **operator**, **value**. Operators can be **eq** Equal To, **ne** Not Equal To, **gt** Greater Than, **gte** Greater Than or Equal To, **lt * @param {Array} [requestParams.filters] - The collection of filters to filter the results by. A filter object contains properties called **property**, **operator**, **value**. Operators can be **eq** Equal To, **ne** Not Equal To, **gt** Greater Than, **gte** Greater Than or Equal To, **lt** Less Than, **lte** Less Than or Equal To, **like** Like (string only)
- * @param (string) [requestParams.filtersLogicOperator] - The logic operator to combine multiple filters. **AND** (default), **OR**.
+ * @param {AgilityFetch.Types.SortDirection} [requestParams.direction] - The direction to sort the results by.
+ * @param {Array.<AgilityFetch.Types.Filter>}  [requestParams.filters] - The collection of filters to filter the results by.
+ * @param {AgilityFetch.Types.FilterLogicOperator} [requestParams.filtersLogicOperator] - The logic operator to combine multiple filters.
  * @returns {Promise<AgilityFetch.Types.ContentList>} - Returns a list of content items.
  * @example
  * 
  * import agility from '@agility/content-fetch'
+ * import types from ''
  * 
  * const api = agility.getApi({
  *   guid: '191309ca-e675-4be2-bb29-351879528707',
@@ -28,7 +29,7 @@ import {buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
  *     take: 50,
  *     skip: 0,
  *     sort: 'properties.created',
- *     direction: 'asc'
+ *     direction: SortDirections.Asc
  * })
  * .then(function(contentList) {
  *     console.log(contentList);
