@@ -1,4 +1,4 @@
-import { buildRequestUrlPath, buildAuthHeader } from '../utils'
+import {buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
 
 /**
  * Retrieves a list of content items by reference name.
@@ -8,9 +8,10 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
  * @param {string} requestParams.languageCode - The language code of the content you want to retrieve.
  * @param {number} [requestParams.take] - The maximum number of items to retrieve in this request. Default is **10**. Maximum allowed is **50**.
  * @param {number} [requestParams.skip] - The number of items to skip from the list. Default is **0**. Used for implementing pagination.
- * @param {number} [requestParams.sort] - The field to sort the results by. Example *fields.title* or *properties.created*. 
- * @param {number} [requestParams.direction] - The direction to sort the results by. Default is **asc**. Valid values are **asc**, **desc**.
- * @param {string} [requestParams.filter] - *Note: This parameter has not been implemented, but will be in a future version.*
+ * @param {string} [requestParams.sort] - The field to sort the results by. Example *fields.title* or *properties.created*.
+ * @param {string} [requestParams.direction] - The direction to sort the results by. Default is **asc**. Valid values are **asc**, **desc**.
+ * @param {Array}  [requestParams.filters] - The collection of filters to filter the results by. A filter object contains properties called **property**, **operator**, **value**. Operators can be **eq** Equal To, **ne** Not Equal To, **gt** Greater Than, **gte** Greater Than or Equal To, **lt * @param {Array} [requestParams.filters] - The collection of filters to filter the results by. A filter object contains properties called **property**, **operator**, **value**. Operators can be **eq** Equal To, **ne** Not Equal To, **gt** Greater Than, **gte** Greater Than or Equal To, **lt** Less Than, **lte** Less Than or Equal To, **like** Like (string only)
+ * @param (string) [requestParams.filtersLogicOperator] - The logic operator to combine multiple filters. **AND** (default), **OR**.
  * @returns {Promise<AgilityFetch.Types.ContentList>} - Returns a list of content items.
  * @example
  * 
@@ -43,7 +44,7 @@ function getContentList(requestParams) {
     validateRequestParams(requestParams);
 
     const req = {
-        url: `/list/${requestParams.referenceName}`,
+        url: buildPathUrl("list", requestParams.referenceName, requestParams.sort, requestParams.direction, requestParams.filters, requestParams.filtersLogicOperator),
         method: 'get',
         baseURL: buildRequestUrlPath(this.config, requestParams.languageCode),
         headers: buildAuthHeader(this.config),
@@ -75,12 +76,30 @@ function validateRequestParams(requestParams) {
     } else if(requestParams.skip && !isNaN(requestParams.skip) && requestParams.skip < 0) {
         //skip parameter must be a number greater than 0
         throw new TypeError('Skip parameter must be 0 or greater');
-    } else if (requestParams.direction && (requestParams.direction !== 'desc' || requestParams.direction !== 'asc')){
+    } else if (requestParams.direction && (requestParams.direction !== 'desc' && requestParams.direction !== 'asc')){
         //check if the request direction parameter is valid
         throw new TypeError('Direction parameter must have a value of "asc" or "desc"');
-    } else {
-        return;
+    } else if (requestParams.filters && requestParams.filters.length > 0){
+        //check if the request direction parameter is valid
+        for(let i = 0; i < requestParams.filters.length; i++) {
+            let filter = requestParams.filters[i];
+            if (!filter.hasOwnProperty('property')) {
+                throw new TypeError(JSON.stringify(filter) + " does not contain 'property'.");
+            } else if (!filter.hasOwnProperty('operator')) {
+                throw new TypeError(JSON.stringify(filter) + " does not contain 'operator'.");
+            } else if (!filter.hasOwnProperty('value')) {
+                throw new TypeError(JSON.stringify(filter) + " does not contain 'value'.");
+            }
+
+            if (['eq','ne','gt','gte','lt','lte','like'].indexOf(filter.operator.toLowerCase()) < 0) {
+                throw new TypeError(JSON.stringify(filter) + "Operator must be one of ['eq','ne','gt','gte','lt','lte','like'].");
+            }
+        }
+    } else if (requestParams.filtersLogicOperator && requestParams.filtersLogicOperator.toLowerCase() !== 'and' && requestParams.filtersLogicOperator.toLowerCase() !== 'or') {
+        throw new TypeError('FiltersLogicOperator parameter must have a value of "AND" or "OR"');
     }
+
+    return true;
 }
 
 export default getContentList;
