@@ -43,8 +43,8 @@ import {buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
  *     take: 50,
  *     skip: 0,
  *     filters: [
- *      {property: 'properties.versionID', operator: api.types.FilterOperators.EQUAL_TO, value: '40'},
- *      {property: 'properties.referenceName', operator: api.types.FilterOperators.LIKE, value: 'posts'}
+ *      {property: 'fields.title', operator: api.types.FilterOperators.EQUAL_TO, value: '"How this site works"'},
+ *      {property: 'fields.details', operator: api.types.FilterOperators.LIKE, value: '"Lorem ipsum dolar"'}
  *     ],
  *     filtersLogicOperator: api.types.FilterLogicOperators.OR
  * })
