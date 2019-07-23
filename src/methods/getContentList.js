@@ -28,7 +28,7 @@ import {buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
  *     take: 50,
  *     skip: 0,
  *     sort: 'properties.created',
- *     direction: api.Types.SortDirections.ASC
+ *     direction: api.types.SortDirections.ASC
  * })
  * .then(function(contentList) {
  *     console.log(contentList);
@@ -43,10 +43,10 @@ import {buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
  *     take: 50,
  *     skip: 0,
  *     filters: [
- *      {property: 'properties.versionID', operator: api.Types.FilterOperators.EQUAL_TO, value: '40'},
- *      {property: 'properties.referenceName', operator: api.Types.FilterOperators.LIKE, value: 'posts'}
+ *      {property: 'properties.versionID', operator: api.types.FilterOperators.EQUAL_TO, value: '40'},
+ *      {property: 'properties.referenceName', operator: api.types.FilterOperators.LIKE, value: 'posts'}
  *     ],
- *     filtersLogicOperator: api.Types.FilterLogicOperators.OR
+ *     filtersLogicOperator: api.types.FilterLogicOperators.OR
  * })
  * .then(function(contentList) {
  *     console.log(contentList);

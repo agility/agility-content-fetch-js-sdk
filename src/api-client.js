@@ -77,7 +77,7 @@ export default function createClient(userConfig) {
         getContentItem: getContentItem,
         getContentList: getContentList,
         getPage: getPage,
-        Types: {
+        types: {
             FilterOperators: FilterOperators,
             FilterLogicOperators: FilterLogicOperators,
             SortDirections: SortDirections
