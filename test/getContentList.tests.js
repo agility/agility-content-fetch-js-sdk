@@ -1,9 +1,6 @@
 import chai from 'chai'
 const assert = chai.assert;
 const expect = chai.expect;
-import { FilterOperators } from '../src/types/FilterOperator';
-import { SortDirections } from '../src/types/SortDirection';
-import { FilterLogicOperators } from '../src/types/FilterLogicOperator';
 import { createApiClient, createPreviewApiClient, createCatchedApiClient } from './apiClients.config'
 
 /* 
