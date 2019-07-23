@@ -5,6 +5,9 @@ import getSitemapNested from './methods/getSitemapNested'
 import getContentItem from './methods/getContentItem'
 import getContentList from './methods/getContentList'
 import getPage from './methods/getPage'
+import FilterOperators from './types/FilterOperator'
+import FilterLogicOperators from './types/FilterLogicOperator'
+import SortDirections from './types/SortDirection'
 
 const defaultConfig = {
     baseUrl: null,
@@ -73,7 +76,12 @@ export default function createClient(userConfig) {
         getSitemapNested: getSitemapNested,
         getContentItem: getContentItem,
         getContentList: getContentList,
-        getPage: getPage
+        getPage: getPage,
+        types: {
+            FilterOperators: FilterOperators,
+            FilterLogicOperators: FilterLogicOperators,
+            SortDirections: SortDirections
+        }
     }
 
 }
