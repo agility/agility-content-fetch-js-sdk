@@ -16,7 +16,6 @@ import {buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
  * @example
  * 
  * import agility from '@agility/content-fetch'
- * import types from ''
  * 
  * const api = agility.getApi({
  *   guid: '191309ca-e675-4be2-bb29-351879528707',
@@ -29,7 +28,25 @@ import {buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
  *     take: 50,
  *     skip: 0,
  *     sort: 'properties.created',
- *     direction: SortDirections.Asc
+ *     direction: api.Types.SortDirections.ASC
+ * })
+ * .then(function(contentList) {
+ *     console.log(contentList);
+ * })
+ * .catch(function(error) {
+ *     console.log(error);
+ * });
+ *
+ * api.getContentList({
+ *     referenceName: 'posts',
+ *     languageCode: 'en-us',
+ *     take: 50,
+ *     skip: 0,
+ *     filters: [
+ *      {property: 'properties.versionID', operator: api.Types.FilterOperators.EQUAL_TO, value: '40'},
+ *      {property: 'properties.referenceName', operator: api.Types.FilterOperators.LIKE, value: 'posts'}
+ *     ],
+ *     filtersLogicOperator: api.Types.FilterLogicOperators.OR
  * })
  * .then(function(contentList) {
  *     console.log(contentList);

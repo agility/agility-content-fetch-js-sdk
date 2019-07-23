@@ -192,7 +192,7 @@ describe('getContentList:', function() {
             referenceName: 'posts',
             languageCode: 'en-us',
             sort: 'properties.versionID',
-            direction: SortDirections.DESC
+            direction: api.Types.SortDirections.DESC
         })
         .then(function(contentList) {
             assert.strictEqual(contentList.items[0].contentID, 16);
@@ -208,7 +208,7 @@ describe('getContentList:', function() {
             api.getContentList({
                 referenceName: 'posts',
                 languageCode: 'en-us',
-                filters: [{operator: FilterOperators.EQUAL_TO, value: '40'}]
+                filters: [{operator: api.Types.FilterOperators.EQUAL_TO, value: '40'}]
             })
                 .then(function(contentList) {
                     done();
@@ -240,7 +240,7 @@ describe('getContentList:', function() {
             api.getContentList({
                 referenceName: 'posts',
                 languageCode: 'en-us',
-                filters: [{property: 'properties.versionID', operator: FilterOperators.EQUAL_TO}]
+                filters: [{property: 'properties.versionID', operator: api.Types.FilterOperators.EQUAL_TO}]
             })
                 .then(function(contentList) {
                     done();
@@ -287,8 +287,8 @@ describe('getContentList:', function() {
         api.getContentList({
             referenceName: 'posts',
             languageCode: 'en-us',
-            filters: [{property: 'properties.versionID', operator: FilterOperators.EQUAL_TO, value: '40'}, {property: 'properties.referenceName', operator: FilterOperators.LIKE, value: 'posts'}],
-            filtersLogicOperator: FilterLogicOperators.OR
+            filters: [{property: 'properties.versionID', operator: api.Types.FilterOperators.EQUAL_TO, value: '40'}, {property: 'properties.referenceName', operator: api.Types.FilterOperators.LIKE, value: 'posts'}],
+            filtersLogicOperator: api.Types.FilterLogicOperators.OR
         })
         .then(function(contentList) {
             assert.strictEqual(contentList.items[0].contentID, 15);
@@ -303,7 +303,7 @@ describe('getContentList:', function() {
         api.getContentList({
             referenceName: 'posts',
             languageCode: 'en-us',
-            filters: [{property: 'properties.versionID', operator: FilterOperators.EQUAL_TO, value: '40'}, {property: 'properties.referenceName', operator: FilterOperators.LIKE, value: 'posts'}]
+            filters: [{property: 'properties.versionID', operator: api.Types.FilterOperators.EQUAL_TO, value: '40'}, {property: 'properties.referenceName', operator: api.Types.FilterOperators.LIKE, value: 'posts'}]
         })
             .then(function(contentList) {
                 assert.strictEqual(contentList.items[0].contentID, 16);
