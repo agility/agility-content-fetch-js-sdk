@@ -37,7 +37,7 @@ function buildPathUrl(contentType, referenceName, sort, direction, filters, filt
 
 function buildAuthHeader(config) {
     let defaultAuthHeaders = {
-        'APIKey': config.accessToken
+        'APIKey': config.apiKey
     };
 
     if(config.requiresGuidInHeaders) {

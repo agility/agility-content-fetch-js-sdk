@@ -41,7 +41,7 @@ import agility from '@agility/content-fetch'
 //initialize the api client
 const api = agility.getApi({
   guid: '191309ca-e675-4be2-bb29-351879528707',
-  accessToken: 'aGd13M.fa30c36e553a36f871860407e902da9a7375322457acd6bcda038e60af699411'
+  apiKey: 'aGd13M.fa30c36e553a36f871860407e902da9a7375322457acd6bcda038e60af699411'
 });
 
 //make the request: get a content item with the ID '22'
