@@ -13,7 +13,7 @@ const defaultConfig = {
     baseUrl: null,
     isPreview: false,
     guid: null,
-    accessToken: null,
+    apiKey: null,
     languageCode: null,
     headers: {},
     requiresGuidInHeaders: false,

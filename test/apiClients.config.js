@@ -2,13 +2,13 @@ import agility from '../src/content-fetch'
 
 // Agility Instance = 'Headless Integration Testing' [Dev]
 const guid = 'c741222b-1080-45f6-9a7f-982381c5a485';
-const accessTokenFetch = 'UnitTestsFetch.2ace650991363fbcffa6776d411d1b0d616b8e3424ce842b81cba7af0039197e';
-const accessTokenPreview = 'UnitTestsPreview.69e6bca345ced0b7ca5ab358b351ea5c870790a5945c25d749a865332906b124';
+const apiKeyFetch = 'UnitTestsFetch.2ace650991363fbcffa6776d411d1b0d616b8e3424ce842b81cba7af0039197e';
+const apiKeyPreview = 'UnitTestsPreview.69e6bca345ced0b7ca5ab358b351ea5c870790a5945c25d749a865332906b124';
 
 function createApiClient() {
     var api = agility.getApi({
         guid: guid,
-        accessToken: accessTokenFetch
+        apiKey: apiKeyFetch
     });
     return api;
 }
@@ -17,7 +17,7 @@ function createApiClient() {
 function createCachedApiClient() {
     var api = agility.getApi({
         guid: guid,
-        accessToken: accessTokenFetch,
+        apiKey: apiKeyFetch,
         caching: {
             maxAge: 5 * 60 * 1000 //==5mins
         }
@@ -28,7 +28,7 @@ function createCachedApiClient() {
 function createPreviewApiClient() {
     var api = agility.getApi({
         guid: guid,
-        accessToken: accessTokenPreview,
+        apiKey: apiKeyPreview,
         isPreview: true
     });
     return api;
