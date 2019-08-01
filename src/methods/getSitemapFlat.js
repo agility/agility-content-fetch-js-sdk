@@ -33,7 +33,7 @@ function getSitemapFlat(requestParams) {
     validateRequestParams(requestParams);
 
     const req = {
-        url: `/Sitemap/Flat/${requestParams.channelName}`,
+        url: `/sitemap/flat/${requestParams.channelName}`,
         method: 'get',
         baseURL: buildRequestUrlPath(this.config, requestParams.languageCode),
         headers: buildAuthHeader(this.config),
