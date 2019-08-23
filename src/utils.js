@@ -12,11 +12,12 @@ function buildRequestUrlPath(config, languageCode) {
     return urlPath;
 }
 
-function buildPathUrl(contentType, referenceName, sort, direction, filters, filtersLogicOperator) {
-    let url = `/${contentType}/${referenceName}?`;
+function buildPathUrl(contentType, referenceName, sort, direction, filters, filtersLogicOperator, contentLinkDepth) {
+    let url = `/${contentType}/${referenceName}?contentLinkDepth=${contentLinkDepth}&`;
     filtersLogicOperator = filtersLogicOperator ? ` ${filtersLogicOperator} ` : ' AND ';
 
     if (sort) {
+
         url += `sort=${sort}&`;
 
         if (direction) {

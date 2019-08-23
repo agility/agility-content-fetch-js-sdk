@@ -52,6 +52,7 @@ describe('getContentItem:', function() {
             languageCode: 'en-us'
         })
         .then(function(contentItem) {
+
             assert.strictEqual(contentItem.contentID, ref.updatesMadeToPublishedContentItemID, 'retrieved content item we asked for');
             assert.notExists(contentItem.fromCache, 'content item should not be served from cache on first request')
             
@@ -60,6 +61,7 @@ describe('getContentItem:', function() {
                 languageCode: 'en-us'
             })
             .then(function(contentItem2) {
+                
                 assert.strictEqual(contentItem2.contentID, ref.updatesMadeToPublishedContentItemID, 'retrieved content item we asked for');
                 assert.strictEqual(contentItem2.fromCache, true, 'content item was retrieved from memory cache')
                 done();
@@ -91,6 +93,23 @@ describe('getContentItem:', function() {
             var api = createApiClient();
             api.getContentItem({
                 contentID: 22
+            })
+            .then(function(contentItem) {
+                assert.strictEqual(contentItem.contentID, 22);
+                done();
+            })
+            .catch(done);
+        }).to.throw( TypeError );
+        done();
+    })
+
+    it('should throw error if contentLinkDepth is not a number', function(done) {
+        expect(function() {
+            var api = createApiClient();
+            api.getContentItem({
+                contentID: 22,
+                languageCode: 'en-us',
+                contentLinkDepth: 'something'
             })
             .then(function(contentItem) {
                 assert.strictEqual(contentItem.contentID, 22);

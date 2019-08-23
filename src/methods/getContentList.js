@@ -6,6 +6,7 @@ import {buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
  * @param {Object} requestParams - The parameters for the API request.
  * @param {string} requestParams.referenceName - The unique reference name of the content list you wish to retrieve in the specified language.
  * @param {string} requestParams.languageCode - The language code of the content you want to retrieve.
+ * @param {number} [requestParams.contentLinkDepth] - The depth, representing the levels in which you want linked content auto-resolved. Default is 1.
  * @param {number} [requestParams.take] - The maximum number of items to retrieve in this request. Default is **10**. Maximum allowed is **50**.
  * @param {number} [requestParams.skip] - The number of items to skip from the list. Default is **0**. Used for implementing pagination.
  * @param {string} [requestParams.sort] - The field to sort the results by. Example *fields.title* or *properties.created*.
@@ -18,8 +19,8 @@ import {buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
  * import agility from '@agility/content-fetch'
  * 
  * const api = agility.getApi({
- *   guid: '191309ca-e675-4be2-bb29-351879528707',
- *   apiKey: 'aGd13M.fa30c36e553a36f871860407e902da9a7375322457acd6bcda038e60af699411',
+ *   guid: 'ade6cf3c',
+ *   apiKey: 'defaultlive.201ffdd0841cacad5bb647e76547e918b0c9ecdb8b5ddb3cf92e9a79b03623cb',
  * });
  * 
  * api.getContentList({
@@ -56,13 +57,20 @@ import {buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
  * });
 */
 
+const defaultParams = {
+    contentLinkDepth: 1
+}
+
 
 function getContentList(requestParams) {
 
     validateRequestParams(requestParams);
 
+    //merge default params with request params
+    requestParams = {...defaultParams, ...requestParams};
+
     const req = {
-        url: buildPathUrl("list", requestParams.referenceName, requestParams.sort, requestParams.direction, requestParams.filters, requestParams.filtersLogicOperator),
+        url: buildPathUrl("list", requestParams.referenceName, requestParams.sort, requestParams.direction, requestParams.filters, requestParams.filtersLogicOperator, requestParams.contentLinkDepth),
         method: 'get',
         baseURL: buildRequestUrlPath(this.config, requestParams.languageCode),
         headers: buildAuthHeader(this.config),

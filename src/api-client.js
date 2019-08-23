@@ -41,11 +41,12 @@ export default function createClient(userConfig) {
     }
 
     let adapter = null;
-
+    
     //should we turn on caching?
     if(config.caching.maxAge > 0) {
         const cache = setupCache({
-            maxAge: config.caching.maxAge
+            maxAge: config.caching.maxAge,
+            exclude: { query: false }
         });
         adapter = cache.adapter;
     }
@@ -65,7 +66,7 @@ export default function createClient(userConfig) {
                 data['fromCache'] = true;
             }
             return data;
-        });   
+        }); 
     }
 
     //export only these properties:
