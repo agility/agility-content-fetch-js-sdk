@@ -28,12 +28,6 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
  *     console.log(error);
  * });
 */
-
-const defaultParams = {
-    contentLinkDepth: 2
-}
-
-
 function getPage(requestParams) {
 
     validateRequestParams(requestParams);
@@ -60,6 +54,10 @@ function validateRequestParams(requestParams) {
     } else {
         return;
     }
+}
+
+const defaultParams = {
+    contentLinkDepth: 2
 }
 
 

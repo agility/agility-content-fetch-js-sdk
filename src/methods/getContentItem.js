@@ -29,11 +29,6 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
  * });
  * 
 */
-
-const defaultParams = {
-    contentLinkDepth: 1
-}
-
 function getContentItem(requestParams) {
 
     validateRequestParams(requestParams);
@@ -63,6 +58,10 @@ function validateRequestParams(requestParams) {
     } else {
         return;
     }
+}
+
+const defaultParams = {
+    contentLinkDepth: 1
 }
 
 export default getContentItem;

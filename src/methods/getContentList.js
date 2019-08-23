@@ -56,12 +56,6 @@ import {buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
  *     console.log(error);
  * });
 */
-
-const defaultParams = {
-    contentLinkDepth: 1
-}
-
-
 function getContentList(requestParams) {
 
     validateRequestParams(requestParams);
@@ -126,6 +120,10 @@ function validateRequestParams(requestParams) {
     }
 
     return true;
+}
+
+const defaultParams = {
+    contentLinkDepth: 1
 }
 
 export default getContentList;
