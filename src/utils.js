@@ -1,5 +1,4 @@
 function buildRequestUrlPath(config, languageCode) {
-    let urlPath = null;
     let apiFetchOrPreview = null;
 
     if(config.isPreview === true || config.isPreview === 'true') {
@@ -8,7 +7,7 @@ function buildRequestUrlPath(config, languageCode) {
         apiFetchOrPreview = 'fetch';
     }
 
-    urlPath = `${config.baseUrl}/${apiFetchOrPreview}/${languageCode}`;
+    let urlPath = `${config.baseUrl}/${apiFetchOrPreview}/${languageCode}`;
     return urlPath;
 }
 
