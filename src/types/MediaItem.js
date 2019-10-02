@@ -7,6 +7,6 @@
  * @property {string} url - The url of the media item.
  * @property {number} size - The size of the media item in bytes.
  * @property {date} modifiedOn - The last modified date and time of the media item.
- * @property {MediaItemMetaData} metaData - Meta data for the media item.
+ * @property {AgilityFetch.Types.MediaItemMetaData} metaData - Meta data for the media item.
  */
 
