@@ -1,7 +1,7 @@
 function buildRequestUrlPath(config, languageCode) {
     let apiFetchOrPreview = null;
 
-    if(config.isPreview) {
+    if(config.isPreview === true || config.isPreview === 'true') {
         apiFetchOrPreview  = 'preview';
     } else {
         apiFetchOrPreview = 'fetch';
