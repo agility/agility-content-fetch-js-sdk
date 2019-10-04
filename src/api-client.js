@@ -5,6 +5,7 @@ import getSitemapNested from './methods/getSitemapNested'
 import getContentItem from './methods/getContentItem'
 import getContentList from './methods/getContentList'
 import getPage from './methods/getPage'
+import getGallery from './methods/getGallery'
 import FilterOperators from './types/FilterOperator'
 import FilterLogicOperators from './types/FilterLogicOperator'
 import SortDirections from './types/SortDirection'
@@ -82,6 +83,7 @@ export default function createClient(userConfig) {
         getContentItem: getContentItem,
         getContentList: getContentList,
         getPage: getPage,
+        getGallery: getGallery,
         types: {
             FilterOperators: FilterOperators,
             FilterLogicOperators: FilterLogicOperators,
