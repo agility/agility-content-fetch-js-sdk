@@ -8,6 +8,7 @@ import getPage from './methods/getPage'
 import FilterOperators from './types/FilterOperator'
 import FilterLogicOperators from './types/FilterLogicOperator'
 import SortDirections from './types/SortDirection'
+import { logError } from './utils'
 
 const defaultConfig = {
     baseUrl: null,
@@ -66,7 +67,10 @@ export default function createClient(userConfig) {
                 data['fromCache'] = true;
             }
             return data;
-        }); 
+        })
+        .catch(async (error) => {
+            logError(`AgilityCMS Fetch API ERROR: Request failed for ${reqConfig.baseURL}${reqConfig.url} ... ${error} ... Does the item exist?`)
+        });
     }
 
     //export only these properties:

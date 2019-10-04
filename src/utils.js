@@ -1,3 +1,7 @@
+function logError(consoleMessage) {
+    console.error('\x1b[41m%s\x1b[0m', consoleMessage);
+}
+
 function buildRequestUrlPath(config, languageCode) {
     let urlPath = null;
     let apiFetchOrPreview = null;
@@ -64,5 +68,6 @@ export {
     buildPathUrl,
     buildAuthHeader,
     buildRequestUrlPath,
-    isHttps
+    isHttps,
+    logError
 }
