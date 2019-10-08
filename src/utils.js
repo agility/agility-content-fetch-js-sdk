@@ -2,6 +2,10 @@ function logError(consoleMessage) {
     console.error('\x1b[41m%s\x1b[0m', consoleMessage);
 }
 
+function logDebug(consoleMessage) {
+    console.log('\x1b[33m%s\x1b[0m', consoleMessage);
+}
+
 function buildRequestUrlPath(config, languageCode) {
     let apiFetchOrPreview = null;
 
@@ -68,5 +72,6 @@ export {
     buildAuthHeader,
     buildRequestUrlPath,
     isHttps,
-    logError
+    logError,
+    logDebug
 }
