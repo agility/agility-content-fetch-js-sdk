@@ -9,7 +9,7 @@ import getGallery from './methods/getGallery'
 import FilterOperators from './types/FilterOperator'
 import FilterLogicOperators from './types/FilterLogicOperator'
 import SortDirections from './types/SortDirection'
-import { logError } from './utils'
+import { logError, logDebug } from './utils'
 
 const defaultConfig = {
     baseUrl: null,
@@ -19,6 +19,7 @@ const defaultConfig = {
     languageCode: null,
     headers: {},
     requiresGuidInHeaders: false,
+    debug: false,
     caching: {
         maxAge: 0 //caching disabled by default
     }
@@ -60,8 +61,14 @@ export default function createClient(userConfig) {
 
     //the function that actually makes ALL our requests
     function makeRequest(reqConfig) {
-        //make the request using our axios instance        
+        
+        if(config.debug) {
+            logDebug(`AgilityCMS Fetch API LOG: ${reqConfig.baseURL}${reqConfig.url}`);
+        } 
+
+        //make the request using our axios instance       
         return api(reqConfig).then(async (response) => {
+            
             let data = response.data;
             //if our response is from cache, inject that property in the data response
             if(response.request.fromCache) {
