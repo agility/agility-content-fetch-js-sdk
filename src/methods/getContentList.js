@@ -64,7 +64,7 @@ function getContentList(requestParams) {
     requestParams = {...defaultParams, ...requestParams};
 
     const req = {
-        url: buildPathUrl("list", requestParams.referenceName, requestParams.sort, requestParams.direction, requestParams.filters, requestParams.filtersLogicOperator, requestParams.contentLinkDepth),
+        url: buildPathUrl("list", requestParams.referenceName, requestParams.skip, requestParams.take, requestParams.sort, requestParams.direction, requestParams.filters, requestParams.filtersLogicOperator, requestParams.contentLinkDepth),
         method: 'get',
         baseURL: buildRequestUrlPath(this.config, requestParams.languageCode),
         headers: buildAuthHeader(this.config),
