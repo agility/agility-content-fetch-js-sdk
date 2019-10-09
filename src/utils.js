@@ -19,17 +19,23 @@ function buildRequestUrlPath(config, languageCode) {
     return urlPath;
 }
 
-function buildPathUrl(contentType, referenceName, sort, direction, filters, filtersLogicOperator, contentLinkDepth) {
+function buildPathUrl(contentType, referenceName, skip, take, sort, direction, filters, filtersLogicOperator, contentLinkDepth) {
     let url = `/${contentType}/${referenceName}?contentLinkDepth=${contentLinkDepth}&`;
     filtersLogicOperator = filtersLogicOperator ? ` ${filtersLogicOperator} ` : ' AND ';
 
     if (sort) {
-
         url += `sort=${sort}&`;
-
         if (direction) {
             url += `direction=${direction}&`;
         }
+    }
+
+    if (skip) {
+        url += `skip=${skip}&`;
+    }
+
+    if (take) {
+        url += `take=${take}&`;
     }
 
     if (filters && filters.length > 0) {
