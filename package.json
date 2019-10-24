@@ -1,6 +1,6 @@
 {
   "name": "@agility/content-fetch",
-  "version": "0.5.9",
+  "version": "0.6.0",
   "description": "JavaScript library for the Agility Fetch API (node and browser)",
   "main": "dist/agility-content-fetch.node.js",
   "scripts": {
@@ -34,7 +34,7 @@
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
-    "axios": "^0.18.0",
-    "axios-cache-adapter": "^2.3.0"
+    "axios": "^0.18.1",
+    "axios-cache-adapter": "^2.4.1"
   }
 }
