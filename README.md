@@ -87,6 +87,7 @@ For docs & help around Agility CMS, please see [Agility CMS Documentation](https
 
 [Deploying your Agility CMS Create React App](https://help.agilitycms.com/hc/en-us/articles/360032203552-Deploying-your-Agility-CMS-Create-React-App)
 
+[Content Webhooks](https://help.agilitycms.com/hc/en-us/articles/360035934911)
 
 ## Contributing
 If you would like to contribute to this SDK, you can fork the repository and submit a pull request. We'd love to include your updates.
