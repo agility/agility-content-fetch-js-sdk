@@ -27,7 +27,7 @@
     "agility-jsdoc-template": "1.0.3",
     "babel-loader": "^8.0.5",
     "chai": "^4.2.0",
-    "jsdoc": "^3.5.5",
+    "jsdoc": "^3.6.3",
     "mocha": "^6.0.2",
     "nyc": "^13.3.0",
     "webpack": "^4.29.6",
