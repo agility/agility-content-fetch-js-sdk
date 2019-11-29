@@ -53,7 +53,7 @@ function validateRequestParams(requestParams) {
     }
     else if(!requestParams.contentID) {
         throw new TypeError('You must include a contentID number in your request params.');
-    } else if(requestParams.contentLinkDepth && (isNaN(requestParams.contentLinkDepth) || request.contentLinkDepth < 0)) {
+    } else if(requestParams.contentLinkDepth && (isNaN(requestParams.contentLinkDepth) || requestParams.contentLinkDepth < 0)) {
         throw new TypeError('When specifying contentLinkDepth, it must be a number greater than 0.');
     } else {
         return;
