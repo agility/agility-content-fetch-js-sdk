@@ -14,22 +14,23 @@ const ref = {
     updatesMadeToPublishedContentItemID: 15
 }
 
-describe('syncContentItems:', function () {
+describe('syncPageItems:', function () {
 
     this.timeout('120s');
 
-    it('should retrieve the oldest content items and ticks', function (done) {
+    it('should retrieve the oldest page items and ticks', function (done) {
         var api = createApiClient();
 
         let ticks = 0;
 
         //sync from scratch
-        api.syncContentItems({
+        api.syncPageItems({
             ticks: ticks,
             pageSize: 100,
             languageCode: 'en-us'
         })
             .then(function (syncRet) {
+
 
                 assert.isTrue(syncRet.ticks > 0, "should return a ticks value.")
                 assert.isTrue(syncRet.items.length > 0, "should return items.")
