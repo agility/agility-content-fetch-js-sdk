@@ -1,9 +1,9 @@
 import agility from '../src/content-fetch'
 
 // Agility Instance = 'Headless Integration Testing' [Dev]
-const guid = 'c1b270e3-1547-4f89-b79f-622c3dcec94a';
-const apiKeyFetch = 'FetchTest.572e23a397703a40ae62d885b51eacc0520c7cdd4be9ddede9304b304b6a7284';
-const apiKeyPreview = 'APITestK8.175ae1631a8c3c54b773f7e527ad5425279c9d75e06d6d84f30bc7f1c67e5024';
+const guid = 'c741222b-1080-45f6-9a7f-982381c5a485';
+const apiKeyFetch = 'UnitTestsFetch.2ace650991363fbcffa6776d411d1b0d616b8e3424ce842b81cba7af0039197e';
+const apiKeyPreview = 'UnitTestsPreview.69e6bca345ced0b7ca5ab358b351ea5c870790a5945c25d749a865332906b124';
 
 function createApiClient() {
     var api = agility.getApi({
