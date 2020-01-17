@@ -4,8 +4,30 @@
  */
 
 /**
- * Agility Fetch API JS SDK for retrieving content from the Agility CMS
+ * Agility Fetch API JS SDK client for Agility CMS
  * @namespace AgilityFetch.Client
+ */
+
+
+ /**
+ * Agility Fetch API JS SDK for retrieving content from the Agility CMS
+ * @namespace AgilityFetch.Client.Content
+ */
+
+  /**
+ * Agility Fetch API JS SDK for retrieving pages from the Agility CMS
+ * @namespace AgilityFetch.Client.Pages
+ */
+
+   /**
+ * Agility Fetch API JS SDK for retrieving media from the Agility CMS
+ * @namespace AgilityFetch.Client.Media
+ */
+
+
+  /**
+ * Agility Fetch API JS SDK for synchronizing content from Agility CMS
+ * @namespace AgilityFetch.Client.Sync
  */
 
 

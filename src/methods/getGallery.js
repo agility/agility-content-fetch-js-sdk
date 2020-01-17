@@ -2,7 +2,7 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
 
 /**
  * Gets the details of a gallery by their Gallery ID.
- * @memberof AgilityFetch.Client
+ * @memberof AgilityFetch.Client.Media
  * @param {Object} requestParams - The parameters for the API request.
  * @param {number} requestParams.galleryID - The galleryID of the requested item in this language.
  * @returns {Promise<AgilityFetch.Types.Gallery>} - Returns a gallery object.

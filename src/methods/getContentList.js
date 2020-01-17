@@ -2,7 +2,7 @@ import {buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
 
 /**
  * Retrieves a list of content items by reference name.
- * @memberof AgilityFetch.Client
+ * @memberof AgilityFetch.Client.Content
  * @param {Object} requestParams - The parameters for the API request.
  * @param {string} requestParams.referenceName - The unique reference name of the content list you wish to retrieve in the specified language.
  * @param {string} requestParams.languageCode - The language code of the content you want to retrieve.

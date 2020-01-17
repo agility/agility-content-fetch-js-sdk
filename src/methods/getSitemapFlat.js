@@ -2,7 +2,7 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
 
 /**
  * The sitemap, returned in a flat list, where the dictionary key is the page path. This method is ideal for page routing.
- * @memberof AgilityFetch.Client
+ * @memberof AgilityFetch.Client.Pages
  * @param {Object} requestParams - The parameters for the API request.
  * @param {number} requestParams.channelName - The reference name of the digital channel of the sitemap to return. If you only have one channel, your channel reference name is likely *website*.
  * @param {string} requestParams.languageCode - The language code of the content you want to retrieve.

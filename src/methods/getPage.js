@@ -2,7 +2,7 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
 
 /**
  * Gets the details of a page by its Page ID.
- * @memberof AgilityFetch.Client
+ * @memberof AgilityFetch.Client.Pages
  * @param {Object} requestParams - The parameters for the API request.
  * @param {number} requestParams.pageID - The unique page ID of the page you wish to retrieve in the current language.
  * @param {string} requestParams.languageCode - The language code of the content you want to retrieve.

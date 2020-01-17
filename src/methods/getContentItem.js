@@ -2,7 +2,7 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
 
 /**
  * Gets the details of a content item by their Content ID.
- * @memberof AgilityFetch.Client
+ * @memberof AgilityFetch.Client.Content
  * @param {Object} requestParams - The paramters for the API request.
  * @param {number} requestParams.contentID - The contentID of the requested item in this language.
  * @param {string} requestParams.languageCode - The language code of the content you want to retrieve.

@@ -6,8 +6,8 @@ import getContentItem from './methods/getContentItem'
 import getContentList from './methods/getContentList'
 import getPage from './methods/getPage'
 import getGallery from './methods/getGallery'
-import syncContentItems from './methods/syncContentItems'
-import syncPageItems from './methods/syncPageItems'
+import getSyncContent from './methods/getSyncContent'
+import getSyncPages from './methods/getSyncPages'
 import FilterOperators from './types/FilterOperator'
 import FilterLogicOperators from './types/FilterLogicOperator'
 import SortDirections from './types/SortDirection'
@@ -93,8 +93,8 @@ export default function createClient(userConfig) {
         getContentList: getContentList,
         getPage: getPage,
         getGallery: getGallery,
-        syncContentItems: syncContentItems,
-        syncPageItems: syncPageItems,
+        getSyncContent: getSyncContent,
+        getSyncPages: getSyncPages,
         types: {
             FilterOperators: FilterOperators,
             FilterLogicOperators: FilterLogicOperators,
