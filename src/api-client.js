@@ -25,12 +25,33 @@ const defaultConfig = {
     }
 };
 
+function buildEnvConfig() {
+    let env = process.env;
+    let envConfig = {};
+    if (env.hasOwnProperty('AGILITY_BASEURL')) {
+        envConfig.baseUrl = env.AGILITY_BASEURL;
+    }
+    if (env.hasOwnProperty('AGILITY_GUID')) {
+        envConfig.guid = env.AGILITY_GUID;
+    }
+    if (env.hasOwnProperty('AGILITY_APIKEY')) {
+        envConfig.apiKey = env.AGILITY_APIKEY;
+    }
+    if (env.hasOwnProperty('AGILITY_ISPREVIEW')){
+        envConfig.isPreview = env.AGILITY_ISPREVIEW;
+    }
+
+    return envConfig;
+}
+
 export default function createClient(userConfig) {
-    
+
+    let envConfig = buildEnvConfig();
 
     //merge our config - user values will override our defaults
     let config = {
         ...defaultConfig,
+        ...envConfig,
         ...userConfig
     };
 
