@@ -14,6 +14,8 @@ Don't have an Agility CMS instance? Sign up for [Free (forever)](https://account
 - Get a page, including its content zones, modules, and their content
 - Get a content item
 - Query a content list using a filter syntax
+- Get the details of a media gallery
+- Keep track of syncing content to your app
 - Optional in-memory caching
 
 ## Getting Started

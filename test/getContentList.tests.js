@@ -284,7 +284,7 @@ describe('getContentList:', function() {
         api.getContentList({
             referenceName: 'posts',
             languageCode: 'en-us',
-            filters: [{property: 'properties.versionID', operator: api.types.FilterOperators.EQUAL_TO, value: '40'}, {property: 'properties.referenceName', operator: api.types.FilterOperators.LIKE, value: 'posts'}],
+            filters: [{property: 'contentID', operator: api.types.FilterOperators.EQUAL_TO, value: '15'}, {property: 'properties.referenceName', operator: api.types.FilterOperators.LIKE, value: 'posts'}],
             filtersLogicOperator: api.types.FilterLogicOperators.OR
         })
         .then(function(contentList) {
@@ -300,7 +300,7 @@ describe('getContentList:', function() {
         api.getContentList({
             referenceName: 'posts',
             languageCode: 'en-us',
-            filters: [{property: 'properties.versionID', operator: api.types.FilterOperators.GREATER_THAN, value: '40'}, {property: 'properties.referenceName', operator: api.types.FilterOperators.LIKE, value: 'posts'}],
+            filters: [{property: 'contentID', operator: api.types.FilterOperators.EQUAL_TO, value: '16'}, {property: 'properties.referenceName', operator: api.types.FilterOperators.LIKE, value: 'posts'}],
             filtersLogicOperator: api.types.FilterLogicOperators.AND
         })
             .then(function(contentList) {
