@@ -300,7 +300,8 @@ describe('getContentList:', function() {
         api.getContentList({
             referenceName: 'posts',
             languageCode: 'en-us',
-            filters: [{property: 'contentID', operator: api.types.FilterOperators.EQUAL_TO, value: '16'}, {property: 'properties.referenceName', operator: api.types.FilterOperators.LIKE, value: 'posts'}]
+            filters: [{property: 'contentID', operator: api.types.FilterOperators.EQUAL_TO, value: '16'}, {property: 'properties.referenceName', operator: api.types.FilterOperators.LIKE, value: 'posts'}],
+            filtersLogicOperator: api.types.FilterLogicOperators.AND
         })
             .then(function(contentList) {
                 assert.strictEqual(contentList.items[0].contentID, 16);
