@@ -1,10 +1,10 @@
 {
   "name": "@agility/content-fetch",
-  "version": "0.4.4",
+  "version": "0.8.1",
   "description": "JavaScript library for the Agility Fetch API (node and browser)",
   "main": "dist/agility-content-fetch.node.js",
   "scripts": {
-    "test": "nyc --reporter=html --reporter=text mocha --require @babel/register --recursive ./test",
+    "test": "nyc --reporter=html --reporter=text mocha --require @babel/register --recursive ./test/",
     "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
     "build": "webpack --config webpack.config -p"
   },
@@ -24,7 +24,7 @@
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.3.4",
     "@babel/register": "^7.0.0",
-    "agility-jsdoc-template": "1.0.0",
+    "agility-jsdoc-template": "1.0.3",
     "babel-loader": "^8.0.5",
     "chai": "^4.2.0",
     "jsdoc": "^3.5.5",
@@ -34,7 +34,7 @@
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
-    "axios": "^0.18.0",
-    "axios-cache-adapter": "^2.3.0"
+    "axios": "^0.18.1",
+    "axios-cache-adapter": "^2.4.1"
   }
 }

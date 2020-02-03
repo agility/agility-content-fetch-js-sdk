@@ -1,7 +1,6 @@
 import chai from 'chai'
 const assert = chai.assert;
 const expect = chai.expect;
-
 import { createApiClient, createPreviewApiClient, createCatchedApiClient } from './apiClients.config'
 
 /* 
@@ -26,7 +25,7 @@ describe('getContentList:', function() {
             done();
         })
         .catch(done);
-    })
+    });
     
     it('should retrieve a content list in preview mode', function(done) {
         var api = createPreviewApiClient();
@@ -40,7 +39,7 @@ describe('getContentList:', function() {
             done();
         })
         .catch(done);
-    })
+    });
     
     it('should throw error if referenceName not passed as argument for getContentList', function(done) {
         expect(function() {
@@ -57,7 +56,7 @@ describe('getContentList:', function() {
             .catch(done);
         }).to.throw( TypeError );
         done();
-    })
+    });
     
     it('should throw error if languageCode param is missing in getContentList', function(done) {
         expect(function() {
@@ -73,7 +72,7 @@ describe('getContentList:', function() {
             .catch(done);
         }).to.throw( TypeError );
         done();
-    })
+    });
     
     it('should throw error if take parameter is NOT a number in getContentList', function(done) {
         expect(function() {
@@ -91,7 +90,7 @@ describe('getContentList:', function() {
             .catch(done);
         }).to.throw( TypeError );
         done();
-    })
+    });
     
     it('should throw error if take parameter is a number less than 1 in getContentList', function(done) {
         expect(function() {
@@ -109,7 +108,7 @@ describe('getContentList:', function() {
             .catch(done);
         }).to.throw( TypeError );
         done();
-    })
+    });
     
     it('should throw error if take parameter is a number greater than 50 in getContentList', function(done) {
         expect(function() {
@@ -127,7 +126,7 @@ describe('getContentList:', function() {
             .catch(done);
         }).to.throw( TypeError );
         done();
-    })
+    });
     
     it('should throw error if skip parameter is a number less than 0 in getContentList', function(done) {
         expect(function() {
@@ -145,7 +144,7 @@ describe('getContentList:', function() {
             .catch(done);
         }).to.throw( TypeError );
         done();
-    })
+    });
     
     it('should throw error if skip parameter is NOT a number in getContentList', function(done) {
         expect(function() {
@@ -163,8 +162,8 @@ describe('getContentList:', function() {
             .catch(done);
         }).to.throw( TypeError );
         done();
-    })
-    
+    });
+
     it('should throw error if direction parameter is NOT "asc" or "desc" in getContentList', function(done) {
         expect(function() {
             var api = createApiClient();
@@ -182,5 +181,133 @@ describe('getContentList:', function() {
             .catch(done);
         }).to.throw( TypeError );
         done();
-    })
-})
+    });
+
+    it('should sort the content list in live mode', function(done) {
+        var api = createApiClient();
+        api.getContentList({
+            referenceName: 'posts',
+            languageCode: 'en-us',
+            sort: 'properties.versionID',
+            direction: api.types.SortDirections.DESC
+        })
+        .then(function(contentList) {
+            assert.strictEqual(contentList.items[0].contentID, 16);
+            assert.strictEqual(contentList.items[1].contentID, 15);
+            done();
+        })
+        .catch(done);
+    });
+
+    it('should validate all filters contain property called \'property\'', function (done) {
+        expect(function() {
+            var api = createApiClient();
+            api.getContentList({
+                referenceName: 'posts',
+                languageCode: 'en-us',
+                filters: [{operator: api.types.FilterOperators.EQUAL_TO, value: '40'}]
+            })
+                .then(function(contentList) {
+                    done();
+                })
+                .catch(done);
+        }).to.throw( TypeError );
+        done();
+    });
+
+    it('should validate all filters contain property called \'operator\'', function (done) {
+        expect(function() {
+            var api = createApiClient();
+            api.getContentList({
+                referenceName: 'posts',
+                languageCode: 'en-us',
+                filters: [{property: 'properties.versionID', value: '40'}]
+            })
+                .then(function(contentList) {
+                    done();
+                })
+                .catch(done);
+        }).to.throw( TypeError );
+        done();
+    });
+
+    it('should validate all filters contain property called \'value\'', function (done) {
+        expect(function() {
+            var api = createApiClient();
+            api.getContentList({
+                referenceName: 'posts',
+                languageCode: 'en-us',
+                filters: [{property: 'properties.versionID', operator: api.types.FilterOperators.EQUAL_TO}]
+            })
+                .then(function(contentList) {
+                    done();
+                })
+                .catch(done);
+        }).to.throw( TypeError );
+        done();
+    });
+
+    it('should validate operator property on all filters', function (done) {
+        expect(function() {
+            var api = createApiClient();
+            api.getContentList({
+                referenceName: 'posts',
+                languageCode: 'en-us',
+                filters: [{property: 'properties.versionID', operator: 'xx', value: '40'}]
+            })
+                .then(function(contentList) {
+                    done();
+                })
+                .catch(done);
+        }).to.throw( TypeError );
+        done();
+    });
+
+    it('should validate the filtersLogicOperator to be AND or OR', function (done) {
+        expect(function() {
+            var api = createApiClient();
+            api.getContentList({
+                referenceName: 'posts',
+                languageCode: 'en-us',
+                filtersLogicOperator: 'SOME'
+            })
+                .then(function(contentList) {
+                    done();
+                })
+                .catch(done);
+        }).to.throw( TypeError );
+        done();
+    });
+
+    it('should filter the content list in live mode with OR operator between filters', function(done) {
+        var api = createApiClient();
+        api.getContentList({
+            referenceName: 'posts',
+            languageCode: 'en-us',
+            filters: [{property: 'contentID', operator: api.types.FilterOperators.EQUAL_TO, value: '15'}, {property: 'properties.referenceName', operator: api.types.FilterOperators.LIKE, value: 'posts'}],
+            filtersLogicOperator: api.types.FilterLogicOperators.OR
+        })
+        .then(function(contentList) {
+            assert.strictEqual(contentList.items[0].contentID, 15);
+            assert.strictEqual(contentList.items[1].contentID, 16);
+            done();
+        })
+        .catch(done);
+    });
+
+    it('should filter the content list in live mode with AND operator between filters', function(done) {
+        var api = createApiClient();
+        api.getContentList({
+            referenceName: 'posts',
+            languageCode: 'en-us',
+            filters: [{property: 'contentID', operator: api.types.FilterOperators.EQUAL_TO, value: '16'}, {property: 'properties.referenceName', operator: api.types.FilterOperators.LIKE, value: 'posts'}],
+            filtersLogicOperator: api.types.FilterLogicOperators.AND
+        })
+            .then(function(contentList) {
+                assert.strictEqual(contentList.items[0].contentID, 16);
+                assert.strictEqual(contentList.items.length, 1);
+                done();
+            })
+            .catch(done);
+    });
+});

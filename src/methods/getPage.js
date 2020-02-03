@@ -2,18 +2,19 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
 
 /**
  * Gets the details of a page by its Page ID.
- * @memberof AgilityFetch.Client
+ * @memberof AgilityFetch.Client.Pages
  * @param {Object} requestParams - The parameters for the API request.
  * @param {number} requestParams.pageID - The unique page ID of the page you wish to retrieve in the current language.
  * @param {string} requestParams.languageCode - The language code of the content you want to retrieve.
+ * @param {number} [requestParams.contentLinkDepth] - The depth, representing the levels in which you want linked content auto-resolved. Default is 2.
  * @returns {Promise<AgilityFetch.Types.Page>} - Returns a page item object.
  * @example
  * 
  * import agility from '@agility/content-fetch'
  * 
  * const api = agility.getApi({
- *   guid: '191309ca-e675-4be2-bb29-351879528707',
- *   accessToken: 'aGd13M.fa30c36e553a36f871860407e902da9a7375322457acd6bcda038e60af699411',
+ *   guid: 'ade6cf3c',
+ *   apiKey: 'defaultlive.201ffdd0841cacad5bb647e76547e918b0c9ecdb8b5ddb3cf92e9a79b03623cb',
  * });
  * 
  * api.getPage({
@@ -27,14 +28,15 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
  *     console.log(error);
  * });
 */
-
-
 function getPage(requestParams) {
 
     validateRequestParams(requestParams);
 
+    //merge default params with request params
+    requestParams = {...defaultParams, ...requestParams};
+
     const req = {
-        url: `/page/${requestParams.pageID}`,
+        url: `/page/${requestParams.pageID}?contentLinkDepth=${requestParams.contentLinkDepth}`,
         method: 'get',
         baseURL: buildRequestUrlPath(this.config, requestParams.languageCode),
         headers: buildAuthHeader(this.config),
@@ -52,6 +54,10 @@ function validateRequestParams(requestParams) {
     } else {
         return;
     }
+}
+
+const defaultParams = {
+    contentLinkDepth: 2
 }
 
 
