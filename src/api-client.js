@@ -28,19 +28,22 @@ const defaultConfig = {
 };
 
 function buildEnvConfig() {
-    let env = process.env;
     let envConfig = {};
-    if (env.hasOwnProperty('AGILITY_BASEURL')) {
-        envConfig.baseUrl = env.AGILITY_BASEURL;
-    }
-    if (env.hasOwnProperty('AGILITY_GUID')) {
-        envConfig.guid = env.AGILITY_GUID;
-    }
-    if (env.hasOwnProperty('AGILITY_APIKEY')) {
-        envConfig.apiKey = env.AGILITY_APIKEY;
-    }
-    if (env.hasOwnProperty('AGILITY_ISPREVIEW')){
-        envConfig.isPreview = env.AGILITY_ISPREVIEW;
+
+    if (process && process.env) {
+        let env = process.env;
+        if (env.hasOwnProperty('AGILITY_BASEURL')) {
+            envConfig.baseUrl = env.AGILITY_BASEURL;
+        }
+        if (env.hasOwnProperty('AGILITY_GUID')) {
+            envConfig.guid = env.AGILITY_GUID;
+        }
+        if (env.hasOwnProperty('AGILITY_APIKEY')) {
+            envConfig.apiKey = env.AGILITY_APIKEY;
+        }
+        if (env.hasOwnProperty('AGILITY_ISPREVIEW')){
+            envConfig.isPreview = env.AGILITY_ISPREVIEW;
+        }
     }
 
     return envConfig;
