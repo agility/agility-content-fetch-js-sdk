@@ -40,7 +40,7 @@
 import createClient from './api-client'
 import { isHttps } from './utils'
 
-/** 
+/**
  * How to create an instance of an an API client for the Agility Content Fetch REST API.
  * @func
  * @name getApi
@@ -54,9 +54,9 @@ import { isHttps } from './utils'
  * @param {string} [config.baseUrl] - Optionally override the default API Base Url.
  * @return {AgilityFetch.Client}
  * @example
- * 
+ *
  * import agility from '@agility/content-fetch'
- * 
+ *
  * const api = agility.getApi({
  *   guid: '191309ca-e675-4be2-bb29-351879528707',
  *   apiKey: 'aGd13M.fa30c36e553a36f871860407e902da9a7375322457acd6bcda038e60af699411',

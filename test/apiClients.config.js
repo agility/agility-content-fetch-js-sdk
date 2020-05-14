@@ -8,7 +8,7 @@ const apiKeyPreview = 'UnitTestsPreview.69e6bca345ced0b7ca5ab358b351ea5c870790a5
 function createApiClient() {
     var api = agility.getApi({
         guid: guid,
-        apiKey: apiKeyFetch
+		apiKey: apiKeyFetch
     });
     return api;
 }
