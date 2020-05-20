@@ -3,7 +3,7 @@ const assert = chai.assert;
 const expect = chai.expect;
 import { createApiClient, createPreviewApiClient, createCatchedApiClient } from './apiClients.config'
 
-/* 
+/*
     This file contains static references to content from the instance configured in the apiClient.config file.
 */
 
@@ -26,7 +26,7 @@ describe('getContentList:', function() {
         })
         .catch(done);
     });
-    
+
     it('should retrieve a content list in preview mode', function(done) {
         var api = createPreviewApiClient();
         api.getContentList({
@@ -40,7 +40,7 @@ describe('getContentList:', function() {
         })
         .catch(done);
     });
-    
+
     it('should throw error if referenceName not passed as argument for getContentList', function(done) {
         expect(function() {
             var api = createApiClient();
@@ -57,7 +57,7 @@ describe('getContentList:', function() {
         }).to.throw( TypeError );
         done();
     });
-    
+
     it('should throw error if languageCode param is missing in getContentList', function(done) {
         expect(function() {
             var api = createApiClient();
@@ -73,7 +73,7 @@ describe('getContentList:', function() {
         }).to.throw( TypeError );
         done();
     });
-    
+
     it('should throw error if take parameter is NOT a number in getContentList', function(done) {
         expect(function() {
             var api = createApiClient();
@@ -91,7 +91,7 @@ describe('getContentList:', function() {
         }).to.throw( TypeError );
         done();
     });
-    
+
     it('should throw error if take parameter is a number less than 1 in getContentList', function(done) {
         expect(function() {
             var api = createApiClient();
@@ -109,7 +109,7 @@ describe('getContentList:', function() {
         }).to.throw( TypeError );
         done();
     });
-    
+
     it('should throw error if take parameter is a number greater than 50 in getContentList', function(done) {
         expect(function() {
             var api = createApiClient();
@@ -127,7 +127,7 @@ describe('getContentList:', function() {
         }).to.throw( TypeError );
         done();
     });
-    
+
     it('should throw error if skip parameter is a number less than 0 in getContentList', function(done) {
         expect(function() {
             var api = createApiClient();
@@ -145,7 +145,7 @@ describe('getContentList:', function() {
         }).to.throw( TypeError );
         done();
     });
-    
+
     it('should throw error if skip parameter is NOT a number in getContentList', function(done) {
         expect(function() {
             var api = createApiClient();
@@ -192,8 +192,7 @@ describe('getContentList:', function() {
             direction: api.types.SortDirections.DESC
         })
         .then(function(contentList) {
-            assert.strictEqual(contentList.items[0].contentID, 16);
-            assert.strictEqual(contentList.items[1].contentID, 15);
+            assert.isTrue(contentList.items[0].contentID > contentList.items[1].contentID);
             done();
         })
         .catch(done);

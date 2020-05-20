@@ -5,6 +5,7 @@
   "main": "dist/agility-content-fetch.node.js",
   "scripts": {
     "test": "nyc --reporter=html --reporter=text mocha --require @babel/register --recursive ./test/",
+    "test-r": "nyc --reporter=html --reporter=text mocha --require @babel/register --recursive ./test/getUrlRedirections.tests.js",
     "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
     "build": "webpack --config webpack.config -p"
   },

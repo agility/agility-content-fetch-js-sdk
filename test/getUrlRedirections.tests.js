@@ -22,11 +22,16 @@ describe('getUrlRedirections:', function() {
         api.getUrlRedirections({
             lastAccessDate: null
         })
-            .then(function({lastAccessDate, items}) {
+            .then(function({ lastAccessDate, isUpToDate, items }) {
 
 				assert.isArray(items, "the items should be an array.");
-				assert.isDefined(lastAccessDate.getUTCFullYear, "the lastAccessDate should be a date object.");
-				assert.isTrue(lastAccessDate.getUTCFullYear() > 2000, "the lastAccessDate should be a recent date.")
+
+				assert.isFalse(isUpToDate, "the results should NOT be up to date" )
+				assert.isDefined(lastAccessDate, "the lastAccessDate should be a returned.");
+
+				let dt = new Date(lastAccessDate);
+
+				assert.isTrue(dt.getUTCFullYear() > 2000, "the lastAccessDate should be a recent date.")
 
 				persistedLastAccessDate = lastAccessDate;
 
@@ -40,10 +45,10 @@ describe('getUrlRedirections:', function() {
         api.getUrlRedirections({
             lastAccessDate: persistedLastAccessDate
         })
-            .then(function({lastAccessDate, items}) {
+            .then(function({lastAccessDate, items, isUpToDate}) {
 
 				assert.isArray(items, "the items should be an array.");
-
+				assert.isTrue(isUpToDate, "the results should be up to date" )
 				assert.equal(items.length, 0, "the list of items should be empty.")
 
                 done();

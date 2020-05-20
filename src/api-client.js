@@ -83,9 +83,13 @@ export default function createClient(userConfig) {
         adapter = cache.adapter;
     }
 
+	const https= require("https")
 
     //create apply the adapter to our axios instance
     const api = axios.create({
+		httpsAgent: new https.Agent({
+			rejectUnauthorized: false
+		  }),
 		adapter: adapter,
 	})
 
@@ -107,16 +111,7 @@ export default function createClient(userConfig) {
                 data['fromCache'] = true;
 			}
 
-			if (! reqConfig.returnHeaders) {
-				//if they just wanted the data...
-				return data;
-			} else {
-				//if they indicated they wanted the headers as well as the data...
-				return {
-					headers: response.headers,
-					data
-				}
-			}
+			return data;
 
 
         })
