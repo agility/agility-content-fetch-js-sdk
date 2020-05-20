@@ -9,14 +9,14 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
  * @param {number} [requestParams.contentLinkDepth] - The depth, representing the levels in which you want linked content auto-resolved. Default is 1.
  * @returns {Promise<AgilityFetch.Types.ContentItem>} - Returns a content item object.
  * @example
- * 
+ *
  * import agility from '@agility/content-fetch'
- * 
+ *
  * const api = agility.getApi({
  *   guid: 'ade6cf3c',
  *   apiKey: 'defaultlive.201ffdd0841cacad5bb647e76547e918b0c9ecdb8b5ddb3cf92e9a79b03623cb',
  * });
- * 
+ *
  * api.getContentItem({
  *     contentID: 22,
  *     languageCode: 'en-us'
@@ -27,7 +27,7 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
  * .catch(function(error) {
  *     console.log(error);
  * });
- * 
+ *
 */
 function getContentItem(requestParams) {
 
@@ -41,9 +41,9 @@ function getContentItem(requestParams) {
         method: 'get',
         baseURL: buildRequestUrlPath(this.config, requestParams.languageCode),
         headers: buildAuthHeader(this.config),
-        params:{}
+		params:{}
     };
-    
+
     return this.makeRequest(req);
 }
 

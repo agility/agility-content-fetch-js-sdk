@@ -6,8 +6,11 @@ import getContentItem from './methods/getContentItem'
 import getContentList from './methods/getContentList'
 import getPage from './methods/getPage'
 import getGallery from './methods/getGallery'
+import getUrlRedirections from './methods/getUrlRedirections'
+
 import getSyncContent from './methods/getSyncContent'
 import getSyncPages from './methods/getSyncPages'
+
 import FilterOperators from './types/FilterOperator'
 import FilterLogicOperators from './types/FilterLogicOperator'
 import SortDirections from './types/SortDirection'
@@ -80,10 +83,13 @@ export default function createClient(userConfig) {
         adapter = cache.adapter;
     }
 
+
     //create apply the adapter to our axios instance
     const api = axios.create({
-        adapter: adapter
-    })
+		adapter: adapter,
+	})
+
+
 
     //the function that actually makes ALL our requests
     function makeRequest(reqConfig) {
@@ -99,8 +105,20 @@ export default function createClient(userConfig) {
             //if our response is from cache, inject that property in the data response
             if (response.request.fromCache) {
                 data['fromCache'] = true;
-            }
-            return data;
+			}
+
+			if (! reqConfig.returnHeaders) {
+				//if they just wanted the data...
+				return data;
+			} else {
+				//if they indicated they wanted the headers as well as the data...
+				return {
+					headers: response.headers,
+					data
+				}
+			}
+
+
         })
             .catch(async (error) => {
                 logError(`AgilityCMS Fetch API ERROR: Request failed for ${reqConfig.baseURL}${reqConfig.url} ... ${error} ... Does the item exist?`)
@@ -110,15 +128,16 @@ export default function createClient(userConfig) {
     //export only these properties:
     return {
         config: config,
-        makeRequest: makeRequest,
-        getSitemapFlat: getSitemapFlat,
-        getSitemapNested: getSitemapNested,
-        getContentItem: getContentItem,
-        getContentList: getContentList,
-        getPage: getPage,
-        getGallery: getGallery,
-        getSyncContent: getSyncContent,
-        getSyncPages: getSyncPages,
+        makeRequest,
+        getSitemapFlat,
+        getSitemapNested,
+        getContentItem,
+        getContentList,
+        getPage,
+        getGallery,
+        getSyncContent,
+		getSyncPages,
+		getUrlRedirections,
         types: {
             FilterOperators: FilterOperators,
             FilterLogicOperators: FilterLogicOperators,
