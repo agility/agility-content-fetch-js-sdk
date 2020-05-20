@@ -34,6 +34,11 @@ function getUrlRedirections(requestParams) {
 
 	let url = "";
 	if (requestParams.lastAccessDate) {
+
+		if (! requestParams.lastAccessDate.toISOString) {
+			requestParams.lastAccessDate = new Date(requestParams.lastAccessDate);
+		}
+
 		url = `/?lastAccessDate=${requestParams.lastAccessDate.toISOString()}`
 	}
 
@@ -43,35 +48,22 @@ function getUrlRedirections(requestParams) {
 		method: 'get',
 		baseURL: buildRequestUrlPath(this.config, 'urlredirection'),
 		headers: buildAuthHeader(this.config),
-		params: {},
-		returnHeaders: true
+		params: {}
 	};
 
 	const self = this;
 	let promise = new Promise(function (resolve, reject) {
 
 		self.makeRequest(req)
-			.then(response => {
+			.then(data => {
 
-				if (response == undefined || ! response)  {
+				if (data == undefined || ! data)  {
 					reject(new Error("The URL redirections could not be retrieved."));
 				} else {
-
-					const {headers, data} = response;
-
-					//pull the lastAccessDate from the header
-					let lastAccessDate = null;
-					if (headers) {
-						let dateStr = headers["x-lastaccessdate"];
-						if (dateStr) lastAccessDate = new Date(dateStr);
-					}
-
-					//return an object with items and lastAccessDate
-					resolve({ lastAccessDate, items: data  });
+					resolve(data);
 				}
 			})
 			.catch(error => {
-				console.log("error in url redir")
 				reject(error);
 			}
 		);
@@ -81,8 +73,15 @@ function getUrlRedirections(requestParams) {
 
 function validateRequestParams(requestParams) {
 
-	if (requestParams.lastAccessDate  && ! requestParams.lastAccessDate.toISOString) {
-		throw new TypeError('You must include a valid Datetime for the lastAccessDate.');
+	if (requestParams.lastAccessDate) {
+
+		if (! requestParams.lastAccessDate.toISOString) {
+			let dt = new Date(requestParams.lastAccessDate);
+
+			if (isNaN(dt)) {
+				throw new TypeError('You must include a valid Datetime for the lastAccessDate.');
+			}
+		}
 	} else {
 		return;
 	}
