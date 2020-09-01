@@ -1,11 +1,14 @@
 {
   "name": "@agility/content-fetch",
-  "version": "0.8.2",
+  "version": "0.9.0",
   "description": "JavaScript library for the Agility Fetch API (node and browser)",
   "main": "dist/agility-content-fetch.node.js",
   "scripts": {
     "test": "nyc --reporter=html --reporter=text mocha --require @babel/register --recursive ./test/",
     "test-r": "nyc --reporter=html --reporter=text mocha --require @babel/register --recursive ./test/getUrlRedirections.tests.js",
+    "test-cl": "nyc --reporter=html --reporter=text mocha --require @babel/register --recursive ./test/getContentList.tests.js",
+    "test-ci": "nyc --reporter=html --reporter=text mocha --require @babel/register --recursive ./test/getContentItem.tests.js",
+    "test-pg": "nyc --reporter=html --reporter=text mocha --require @babel/register --recursive ./test/getPage.tests.js",
     "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
     "build": "webpack --config webpack.config -p"
   },

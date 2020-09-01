@@ -19,7 +19,7 @@ function buildRequestUrlPath(config, languageCode) {
     return urlPath;
 }
 
-function buildPathUrl(contentType, referenceName, skip, take, sort, direction, filters, filtersLogicOperator, contentLinkDepth) {
+function buildPathUrl(contentType, referenceName, skip, take, sort, direction, filters, filtersLogicOperator, contentLinkDepth, expandAllContentLinks) {
     let url = `/${contentType}/${referenceName}?contentLinkDepth=${contentLinkDepth}&`;
     filtersLogicOperator = filtersLogicOperator ? ` ${filtersLogicOperator} ` : ' AND ';
 
@@ -46,6 +46,11 @@ function buildPathUrl(contentType, referenceName, skip, take, sort, direction, f
         }
         url += '&';
     }
+
+    if(expandAllContentLinks) {
+        url += `expandAllContentLinks=${expandAllContentLinks}&`;
+    }
+
     return url;
 }
 

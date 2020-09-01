@@ -120,5 +120,63 @@ describe('getContentItem:', function() {
         done();
     })
 
+    it('should throw error if expandAllContentLinks is not true/false', function(done) {
+        expect(function() {
+            var api = createApiClient();
+            api.getContentItem({
+                contentID: 22,
+                languageCode: 'en-us',
+                expandAllContentLinks: 'something'
+            })
+            .then(function(contentItem) {
+                assert.strictEqual(contentItem.contentID, 22);
+                done();
+            })
+            .catch(done);
+        }).to.throw( TypeError );
+        done();
+    })
+
+    it('should expand all content links when expandContentLinks are set to true', function(done) {
+        var api = createApiClient();
+        api.getContentItem({
+            contentID: 65, //item within listwithnestedcontentlinks
+            languageCode: 'en-us',
+            expandAllContentLinks: true
+        })
+        .then(function(contentItem) {
+            assert.strictEqual(Array.isArray(contentItem.fields.posts), true);
+            done();
+        })
+        .catch(done);
+    })
+
+    it('should NOT expand all content links when expandContentLinks are set to false', function(done) {
+        var api = createApiClient();
+        api.getContentItem({
+            contentID: 65, //item within listwithnestedcontentlinks
+            languageCode: 'en-us',
+            expandAllContentLinks: false
+        })
+        .then(function(contentItem) {
+            assert.strictEqual(Array.isArray(contentItem.fields.posts), false);
+            done();
+        })
+        .catch(done);
+    })
+
+    it('should NOT expand all content links when expandContentLinks is not set', function(done) {
+        var api = createApiClient();
+        api.getContentItem({
+            contentID: 65, //item within listwithnestedcontentlinks
+            languageCode: 'en-us',
+        })
+        .then(function(contentItem) {
+            assert.strictEqual(Array.isArray(contentItem.fields.posts), false);
+            done();
+        })
+        .catch(done);
+    })
+
 });
 

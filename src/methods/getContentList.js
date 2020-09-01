@@ -6,10 +6,11 @@ import {buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
  * @param {Object} requestParams - The parameters for the API request.
  * @param {string} requestParams.referenceName - The unique reference name of the content list you wish to retrieve in the specified language.
  * @param {string} requestParams.languageCode - The language code of the content you want to retrieve.
- * @param {number} [requestParams.contentLinkDepth] - The depth, representing the levels in which you want linked content auto-resolved. Default is 1.
+ * @param {number} [requestParams.contentLinkDepth] - The depth, representing the levels in which you want linked content auto-resolved. Default is **1**.
+ * @param {boolean} [requestParams.expandAllContentLinks] - Whether or not to expand entire linked content references, includings lists and items that are rendered in the CMS as Grid or Link. Default is **false**
  * @param {number} [requestParams.take] - The maximum number of items to retrieve in this request. Default is **10**. Maximum allowed is **50**.
  * @param {number} [requestParams.skip] - The number of items to skip from the list. Default is **0**. Used for implementing pagination.
- * @param {string} [requestParams.sort] - The field to sort the results by. Example *fields.title* or *properties.modified*.
+ * @param {string} [requestParams.sort] - The field to sort the results by. Example **fields.title** or **properties.modified**.
  * @param {AgilityFetch.Types.SortDirection} [requestParams.direction] - The direction to sort the results by.
  * @param {Array.<AgilityFetch.Types.Filter>}  [requestParams.filters] - The collection of filters to filter the results by.
  * @param {AgilityFetch.Types.FilterLogicOperator} [requestParams.filtersLogicOperator] - The logic operator to combine multiple filters.
@@ -60,11 +61,13 @@ function getContentList(requestParams) {
 
     validateRequestParams(requestParams);
 
+    requestParams.referenceName = sanitizeReferenceName(requestParams.referenceName);
+
     //merge default params with request params
     requestParams = {...defaultParams, ...requestParams};
 
     const req = {
-        url: buildPathUrl("list", requestParams.referenceName, requestParams.skip, requestParams.take, requestParams.sort, requestParams.direction, requestParams.filters, requestParams.filtersLogicOperator, requestParams.contentLinkDepth),
+        url: buildPathUrl("list", requestParams.referenceName, requestParams.skip, requestParams.take, requestParams.sort, requestParams.direction, requestParams.filters, requestParams.filtersLogicOperator, requestParams.contentLinkDepth, requestParams.expandAllContentLinks),
         method: 'get',
         baseURL: buildRequestUrlPath(this.config, requestParams.languageCode),
         headers: buildAuthHeader(this.config),
@@ -72,6 +75,10 @@ function getContentList(requestParams) {
     };
     
     return this.makeRequest(req);   
+}
+
+function sanitizeReferenceName(referenceName) {
+    return referenceName.toLowerCase();
 }
 
 function validateRequestParams(requestParams) {
@@ -117,13 +124,16 @@ function validateRequestParams(requestParams) {
         }
     } else if (requestParams.filtersLogicOperator && requestParams.filtersLogicOperator.toLowerCase() !== 'and' && requestParams.filtersLogicOperator.toLowerCase() !== 'or') {
         throw new TypeError('FiltersLogicOperator parameter must have a value of "AND" or "OR"');
+    } else  if(requestParams.expandAllContentLinks && typeof requestParams.expandAllContentLinks !== 'boolean') {
+        throw new TypeError('ExpandAllContentLinks parameter must be a value of true or false');
     }
 
     return true;
 }
 
 const defaultParams = {
-    contentLinkDepth: 1
+    contentLinkDepth: 1,
+    expandAllContentLinks: false
 }
 
 export default getContentList;

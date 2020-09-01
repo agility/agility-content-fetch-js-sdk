@@ -6,7 +6,8 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
  * @param {Object} requestParams - The parameters for the API request.
  * @param {number} requestParams.pageID - The unique page ID of the page you wish to retrieve in the current language.
  * @param {string} requestParams.languageCode - The language code of the content you want to retrieve.
- * @param {number} [requestParams.contentLinkDepth] - The depth, representing the levels in which you want linked content auto-resolved. Default is 2.
+ * @param {boolean} [requestParams.expandAllContentLinks] - Whether or not to expand entire linked content references, includings lists and items that are rendered in the CMS as Grid or Link. Default is **false**
+ * @param {number} [requestParams.contentLinkDepth] - The depth, representing the levels in which you want linked content auto-resolved. Default is **2**.
  * @returns {Promise<AgilityFetch.Types.Page>} - Returns a page item object.
  * @example
  * 
@@ -36,7 +37,7 @@ function getPage(requestParams) {
     requestParams = {...defaultParams, ...requestParams};
 
     const req = {
-        url: `/page/${requestParams.pageID}?contentLinkDepth=${requestParams.contentLinkDepth}`,
+        url: `/page/${requestParams.pageID}?contentLinkDepth=${requestParams.contentLinkDepth}&expandAllContentLinks=${requestParams.expandAllContentLinks}`,
         method: 'get',
         baseURL: buildRequestUrlPath(this.config, requestParams.languageCode),
         headers: buildAuthHeader(this.config),
@@ -51,13 +52,16 @@ function validateRequestParams(requestParams) {
         throw new TypeError('You must include a languageCode in your request params.')
     } else if(!requestParams.pageID) {
         throw new TypeError('You must include a pageID in your request params.');
+    } else  if(requestParams.expandAllContentLinks && typeof requestParams.expandAllContentLinks !== 'boolean') {
+        throw new TypeError('ExpandAllContentLinks parameter must be a value of true or false');
     } else {
         return;
     }
 }
 
 const defaultParams = {
-    contentLinkDepth: 2
+    contentLinkDepth: 2,
+    expandAllContentLinks: true
 }
 
 
