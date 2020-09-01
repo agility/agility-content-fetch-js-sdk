@@ -302,11 +302,25 @@ describe('getContentList:', function() {
             filters: [{property: 'contentID', operator: api.types.FilterOperators.EQUAL_TO, value: '16'}, {property: 'properties.referenceName', operator: api.types.FilterOperators.LIKE, value: 'posts'}],
             filtersLogicOperator: api.types.FilterLogicOperators.AND
         })
-            .then(function(contentList) {
-                assert.strictEqual(contentList.items[0].contentID, 16);
-                assert.strictEqual(contentList.items.length, 1);
-                done();
-            })
-            .catch(done);
+        .then(function(contentList) {
+            assert.strictEqual(contentList.items[0].contentID, 16);
+            assert.strictEqual(contentList.items.length, 1);
+            done();
+        })
+        .catch(done);
     });
+
+    it('should expand all content links when expandContentLinks are set to true', function(done) {
+        var api = createApiClient();
+        api.getContentList({
+            referenceName: 'posts',
+            languageCode: 'en-us',
+            expandAllContentLinks: true
+        })
+        .then(function(contentList) {
+            console.log(contentList);
+            done();
+        })
+        .catch(done);
+    })
 });
