@@ -6,7 +6,8 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
  * @param {Object} requestParams - The paramters for the API request.
  * @param {number} requestParams.contentID - The contentID of the requested item in this language.
  * @param {string} requestParams.languageCode - The language code of the content you want to retrieve.
- * @param {number} [requestParams.contentLinkDepth] - The depth, representing the levels in which you want linked content auto-resolved. Default is 1.
+ * @param {number} [requestParams.contentLinkDepth] - The depth, representing the levels in which you want linked content auto-resolved. Default is **1**.
+ * @param {boolean} [requestParams.expandAllContentLinks] - Whether or not to expand entire linked content references, includings lists and items that are rendered in the CMS as Grid or Link. Default is **false**
  * @returns {Promise<AgilityFetch.Types.ContentItem>} - Returns a content item object.
  * @example
  *
@@ -37,7 +38,7 @@ function getContentItem(requestParams) {
     requestParams = {...defaultParams, ...requestParams};
 
     const req = {
-        url: `/item/${requestParams.contentID}?contentLinkDepth=${requestParams.contentLinkDepth}`,
+        url: `/item/${requestParams.contentID}?contentLinkDepth=${requestParams.contentLinkDepth}&expandAllContentLinks=${requestParams.expandAllContentLinks}`,
         method: 'get',
         baseURL: buildRequestUrlPath(this.config, requestParams.languageCode),
         headers: buildAuthHeader(this.config),
@@ -55,13 +56,16 @@ function validateRequestParams(requestParams) {
         throw new TypeError('You must include a contentID number in your request params.');
     } else if(requestParams.contentLinkDepth && (isNaN(requestParams.contentLinkDepth) || requestParams.contentLinkDepth < 0)) {
         throw new TypeError('When specifying contentLinkDepth, it must be a number greater than 0.');
+    } else  if(requestParams.expandAllContentLinks && typeof requestParams.expandAllContentLinks !== 'boolean') {
+        throw new TypeError('ExpandAllContentLinks parameter must be a value of true or false');
     } else {
         return;
     }
 }
 
 const defaultParams = {
-    contentLinkDepth: 1
+    contentLinkDepth: 1,
+    expandAllContentLinks: false
 }
 
 export default getContentItem;

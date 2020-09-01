@@ -313,12 +313,39 @@ describe('getContentList:', function() {
     it('should expand all content links when expandContentLinks are set to true', function(done) {
         var api = createApiClient();
         api.getContentList({
-            referenceName: 'posts',
+            referenceName: 'listwithnestedcontentlink',
             languageCode: 'en-us',
             expandAllContentLinks: true
         })
         .then(function(contentList) {
-            console.log(contentList);
+            assert.strictEqual(Array.isArray(contentList.items[0].fields.posts), true);
+            done();
+        })
+        .catch(done);
+    })
+
+    it('should NOT expand all content links when expandContentLinks are set to false', function(done) {
+        var api = createApiClient();
+        api.getContentList({
+            referenceName: 'listwithnestedcontentlink',
+            languageCode: 'en-us',
+            expandAllContentLinks: false
+        })
+        .then(function(contentList) {
+            assert.strictEqual(Array.isArray(contentList.items[0].fields.posts), false);
+            done();
+        })
+        .catch(done);
+    })
+
+    it('should NOT expand all content links when expandContentLinks is not set at all', function(done) {
+        var api = createApiClient();
+        api.getContentList({
+            referenceName: 'listwithnestedcontentlink',
+            languageCode: 'en-us'
+        })
+        .then(function(contentList) {
+            assert.strictEqual(Array.isArray(contentList.items[0].fields.posts), false);
             done();
         })
         .catch(done);

@@ -73,5 +73,21 @@ import { createApiClient, createPreviewApiClient, createCatchedApiClient } from 
         }).to.throw( TypeError );
         done();
     })
+
+    it('should retrieve a page and expand all content links when expandAllContentLink is set to true', function(done) {
+        var api = createApiClient();
+        api.getPage({
+            pageID: 2,
+            languageCode: 'en-us',
+            expandAllContentLinks: true
+        })
+        .then(function(page) {
+            assert.strictEqual(Array.isArray(page.zones.MainContentZone[2].item.fields.posts), true);
+            done();
+        })
+        .catch(done);
+    })
+
+    
  })
  
