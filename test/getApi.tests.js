@@ -85,6 +85,50 @@ describe('getApi:', function() {
         done();
     });
 
+    it('should return an api client with new stackpath baseUrl based on canada', function(done) {
+        const baseUrl = 'https://api-ca.aglty.io/some-guid-c';
+        const api = agility.getApi({
+            guid: 'some-guid-c',
+            apiKey: 'some-access-token',
+            baseUrl: null
+        });
+        assert.strictEqual(api.config.baseUrl, baseUrl);
+        done();
+    });
+
+    it('should return an api client with new stackpath baseUrl based on usa', function(done) {
+        const baseUrl = 'https://api.aglty.io/some-guid-u';
+        const api = agility.getApi({
+            guid: 'some-guid-u',
+            apiKey: 'some-access-token',
+            baseUrl: null
+        });
+        assert.strictEqual(api.config.baseUrl, baseUrl);
+        done();
+    });
+
+    it('should return an api client with new stackpath baseUrl based on dev', function(done) {
+        const baseUrl = 'https://api-dev.aglty.io/some-guid-d';
+        const api = agility.getApi({
+            guid: 'some-guid-d',
+            apiKey: 'some-access-token',
+            baseUrl: null
+        });
+        assert.strictEqual(api.config.baseUrl, baseUrl);
+        done();
+    });
+
+    it('should return an api client with legacy stackpath baseUrl', function(done) {
+        const baseUrl = 'https://some-guid-api.agilitycms.cloud';
+        const api = agility.getApi({
+            guid: 'some-guid',
+            apiKey: 'some-access-token',
+            baseUrl: null
+        });
+        assert.strictEqual(api.config.baseUrl, baseUrl);
+        done();
+    });
+
     // TESTING EXCEPTIONS ----------------------------------------------------
 
     it('should throw an error if guid is not passed-in', function(done) {

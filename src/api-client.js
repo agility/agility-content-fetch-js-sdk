@@ -52,6 +52,27 @@ function buildEnvConfig() {
     return envConfig;
 }
 
+function buildBaseUrl(guid) {
+
+    let baseUrlSuffixes = {
+        u: '',
+        c: '-ca',
+        e: '-eu',
+        d: '-dev'
+    }
+
+    let suffix = guid.substr(guid.length - 2, 2);
+    let env = suffix.substr(1);
+    // New format of guid
+    if (suffix.startsWith('-') && baseUrlSuffixes.hasOwnProperty(env)) {
+        return `https://api${baseUrlSuffixes[env]}.aglty.io/${guid}`
+    }
+    else {
+        //use default url
+        return `https://${guid}-api.agilitycms.cloud`;
+    }
+}
+
 export default function createClient(userConfig) {
 
     let envConfig = buildEnvConfig();
@@ -65,8 +86,7 @@ export default function createClient(userConfig) {
 
     //compute the base Url
     if (!config.baseUrl) {
-        //use default url
-        config.baseUrl = `https://${config.guid}-api.agilitycms.cloud`;
+        config.baseUrl = buildBaseUrl(config.guid);
     } else {
         //we are using a custom url, make sure we include the guid in the headers
         config.requiresGuidInHeaders = true;
