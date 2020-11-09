@@ -1,7 +1,12 @@
 import chai from 'chai'
 const assert = chai.assert;
 const expect = chai.expect;
-import { createApiClient, createPreviewApiClient, createCatchedApiClient } from './apiClients.config'
+import {
+    createApiClient,
+    createPreviewApiClient,
+    createCachedApiClient,
+    createApiClientWithNewCdn
+} from './apiClients.config'
 
 /*
     This file contains static references to content from the instance configured in the apiClient.config file.
@@ -349,5 +354,19 @@ describe('getContentList:', function() {
             done();
         })
         .catch(done);
+    })
+
+    it('should be able to fetch a list using global cdn site', function(done) {
+        var api = createApiClientWithNewCdn();
+        let referenceName = 'jssdklist';
+        api.getContentList({
+            referenceName: referenceName,
+            languageCode: 'en-us'
+        })
+            .then(function(contentList) {
+                assert.strictEqual(contentList.items[0].properties.referenceName, referenceName);
+                done();
+            })
+            .catch(done);
     })
 });
