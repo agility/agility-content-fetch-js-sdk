@@ -140,6 +140,10 @@ export default function createClient(userConfig) {
                 data['fromCache'] = true;
 			}
 
+            if (config.debug) {
+                data['agilityResponseHeaders'] = response.headers;
+            }
+
 			return data;
 
 
