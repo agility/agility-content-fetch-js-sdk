@@ -4,7 +4,6 @@ const expect = chai.expect;
 import {
     createApiClient,
     createPreviewApiClient,
-    createCachedApiClient,
     createApiClientWithNewCdn
 } from './apiClients.config'
 

@@ -2,7 +2,7 @@ import chai from 'chai'
 const assert = chai.assert;
 const expect = chai.expect;
 
-import { createApiClient, createPreviewApiClient, createCachedApiClient } from './apiClients.config'
+import { createApiClient, createPreviewApiClient } from './apiClients.config'
 import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 
 /*
