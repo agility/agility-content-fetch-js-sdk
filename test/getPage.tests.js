@@ -2,7 +2,7 @@ import chai from 'chai'
 const assert = chai.assert;
 const expect = chai.expect;
 
-import { createApiClient, createPreviewApiClient } from './apiClients.config'
+import { createApiClient, createPreviewApiClient, createCatchedApiClient } from './apiClients.config'
 
 /* 
     This file contains static references to content from the instance configured in the apiClient.config file.
