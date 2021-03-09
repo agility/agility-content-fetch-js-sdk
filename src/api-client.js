@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { setupCache } from 'axios-cache-adapter'
 import getSitemapFlat from './methods/getSitemapFlat'
 import getSitemapNested from './methods/getSitemapNested'
 import getContentItem from './methods/getContentItem'
@@ -93,6 +94,14 @@ export default function createClient(userConfig) {
 
     let adapter = null;
 
+    //should we turn on caching?
+    if (config.caching.maxAge > 0) {
+        const cache = setupCache({
+            maxAge: config.caching.maxAge,
+            exclude: { query: false }
+        });
+        adapter = cache.adapter;
+    }
 
 	const https= require("https")
 
@@ -103,11 +112,14 @@ export default function createClient(userConfig) {
 		api = axios.create({
 			httpsAgent: new https.Agent({
 				rejectUnauthorized: false
-			})
+			}),
+			adapter: adapter,
 		})
 	} else {
 		//we can't use the https.Agent
-		api = axios.create({})
+		api = axios.create({
+			adapter: adapter,
+		})
 	}
 
 
@@ -123,12 +135,17 @@ export default function createClient(userConfig) {
         return api(reqConfig).then(async (response) => {
 
             let data = response.data;
+            //if our response is from cache, inject that property in the data response
+            if (response.request.fromCache) {
+                data['fromCache'] = true;
+			}
+
 			return data;
 
 
         })
             .catch(async (error) => {
-                logError(`AgilityCMS Fetch API ERROR: Request failed for ${reqConfig.baseURL}${reqConfig.url} ... ${error}.`)
+                logError(`AgilityCMS Fetch API ERROR: Request failed for ${reqConfig.baseURL}${reqConfig.url} ... ${error} ... Does the item exist?`)
             });
     }
 
