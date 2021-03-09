@@ -153,6 +153,21 @@ describe('getApi:', function() {
         done();
     });
 
+    it('should throw an error if caching maxAge is passed-in and is not a number', function(done) {
+        expect(function() {
+            var api = agility.getApi({
+                guid: 'some-guid',
+                apiKey: 'some-access-token',
+                caching: {
+                    maxAge: 'ten thousand miliseconds'
+                }
+            });
+            assert.strictEqual(typeof(api), "object");
+            done();
+        }).to.throw( TypeError );
+        done();
+    });
+
 
     it('should throw an error if baseUrl is passed-in and is does not start with "https"', function(done) {
         expect(function() {
