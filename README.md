@@ -16,7 +16,6 @@ Don't have an Agility CMS instance? Sign up for [Free (forever)](https://account
 - Query a content list using a filter syntax
 - Get the details of a media gallery
 - Keep track of syncing content to your app
-- Optional in-memory caching
 
 ## Getting Started
 In order to use this sdk, you'll need to install the script and you'll also need to authenticate your requests.
