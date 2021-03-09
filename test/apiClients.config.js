@@ -22,17 +22,6 @@ function createApiClientWithNewCdn() {
     return api;
 }
 
-function createCachedApiClient() {
-    var api = agility.getApi({
-        guid: guid,
-        apiKey: apiKeyFetch,
-        caching: {
-            maxAge: 5 * 60 * 1000 //==5mins
-        }
-    });
-    return api;
-}
-
 function createPreviewApiClient() {
     var api = agility.getApi({
         guid: guid,
@@ -44,7 +33,6 @@ function createPreviewApiClient() {
 
 export {
     createApiClient,
-    createCachedApiClient,
     createPreviewApiClient,
     createApiClientWithNewCdn
 }

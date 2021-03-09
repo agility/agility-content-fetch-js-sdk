@@ -49,8 +49,6 @@ import { isHttps } from './utils'
  * @param {string} config.guid - The guid that represents your instance.
  * @param {string} config.apiKey - The secret token that represents your application.
  * @param {boolean} [config.isPreview] - If your access token is for preview, then set this to true.
- * @param {Object} [config.caching] - Optional Caching options. Caching is disabled by default.
- * @param {number} [config.caching.maxAge] - In miliseconds. Default value is *0* (disabled). Recommeded value is *180000* (3 mins). Requests are cached in memory only (node or browser).
  * @param {string} [config.baseUrl] - Optionally override the default API Base Url.
  * @return {AgilityFetch.Client}
  * @example
@@ -71,12 +69,14 @@ function getApi(config) {
 
 function validateConfigParams(configParams) {
 
+    if(configParams.caching) {
+        console.warn('The built-in caching has been deprecated from @agility/content-fetch as of version `1.1.0`. The `caching` parameter will have no effect.');
+    }
+
     if(!configParams.guid || configParams.guid.length == 0) {
         throw new TypeError('You must provide an guid.');
     } else if(!configParams.apiKey || configParams.apiKey.length == 0) {
-        throw new TypeError('You must provide an access token.');
-    } else if(configParams.caching && isNaN(configParams.caching.maxAge)) {
-        throw new TypeError('When specifying a cache maxAge, you must set a number value in miliseconds, i.e. 180000 (3 mins).');
+        throw new TypeError('You must provide an access token.');  
     } else if(configParams.baseUrl && !isHttps(configParams.baseUrl)) {
         throw new TypeError(`When specifying a baseUrl (${configParams.baseUrl}), it must be over HTTPs.`);
     } else {
