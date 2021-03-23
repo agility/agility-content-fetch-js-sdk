@@ -6,7 +6,7 @@ function logDebug(consoleMessage) {
     console.log('\x1b[33m%s\x1b[0m', consoleMessage);
 }
 
-function buildRequestUrlPath(config, languageCode) {
+function buildRequestUrlPath(config, locale) {
     let apiFetchOrPreview = null;
 
     if(config.isPreview === true || config.isPreview === 'true') {
@@ -15,7 +15,7 @@ function buildRequestUrlPath(config, languageCode) {
         apiFetchOrPreview = 'fetch';
     }
 
-    let urlPath = `${config.baseUrl}/${apiFetchOrPreview}/${languageCode}`;
+    let urlPath = `${config.baseUrl}/${apiFetchOrPreview}/${locale}`;
     return urlPath;
 }
 

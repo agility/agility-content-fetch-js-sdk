@@ -18,7 +18,7 @@ describe('getSitemapFlat:', function() {
         var api = createApiClient();
         api.getSitemapFlat({
             channelName: 'website',
-            languageCode: 'en-us'
+            locale: 'en-us'
         })
         .then(function(sitemap) {
             assert.strictEqual(sitemap['/home'].pageID, 2);
@@ -31,7 +31,7 @@ describe('getSitemapFlat:', function() {
         var api = createPreviewApiClient();
         api.getSitemapFlat({
             channelName: 'website',
-            languageCode: 'en-us'
+            locale: 'en-us'
         })
         .then(function(sitemap) {
             assert.strictEqual(sitemap['/home'].pageID, 2);
@@ -45,7 +45,7 @@ describe('getSitemapFlat:', function() {
             var api = createApiClient();
             api.getSitemapFlat({
                 someOtherParam: 1,
-                languageCode: 'en-us'
+                locale: 'en-us'
             })
             .then(function(sitemap) {
                 assert.strictEqual(sitemap['/home'].pageID, 2);
@@ -56,7 +56,7 @@ describe('getSitemapFlat:', function() {
         done();
     })
     
-    it('should throw error if languageCode not passed as argument for getSitemapFlat', function(done) {
+    it('should throw error if locale not passed as argument for getSitemapFlat', function(done) {
         expect(function() {
             var api = createApiClient();
             api.getSitemapFlat({

@@ -5,7 +5,8 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
  * @memberof AgilityFetch.Client.Pages
  * @param {Object} requestParams - The parameters for the API request.
  * @param {number} requestParams.channelName - The reference name of the digital channel of the sitemap to return. If you only have one channel, your channel reference name is likely *website*.
- * @param {string} requestParams.languageCode - The language code of the content you want to retrieve.
+ * @param {string} requestParams.locale - The locale code of the content you want to retrieve.
+ * @param {string} requestParams.languageCode - DEPRECATED: Use locale instead - The language code of the content you want to retrieve.
  * @returns {Promise<AgilityFetch.Types.SitemapNested>} - The array of sitemap items returned.
  * @example
  * 
@@ -18,7 +19,7 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
  * 
  * api.getSitemapNested({
  *      channelName: 'website',
- *      languageCode: 'en-us'
+ *      locale: 'en-us'
  * })
  * .then(function(sitemap) {
  *      console.log(sitemap);
@@ -35,7 +36,7 @@ function getSitemapNested(requestParams) {
     const req = {
         url: `/sitemap/nested/${requestParams.channelName}`,
         method: 'get',
-        baseURL: buildRequestUrlPath(this.config, requestParams.languageCode),
+        baseURL: buildRequestUrlPath(this.config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
         headers: buildAuthHeader(this.config),
         params:{}
     };
@@ -44,8 +45,8 @@ function getSitemapNested(requestParams) {
 }
 
 function validateRequestParams(requestParams) {
-    if(!requestParams.languageCode) {
-        throw new TypeError('You must include a languageCode in your request params.')
+    if(!requestParams.languageCode && !requestParams.locale) {
+        throw new TypeError('You must include a locale in your request params.')
     } else if(!requestParams.channelName) {
         throw new TypeError('You must include a channelName in your request params.');
     }

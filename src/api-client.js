@@ -21,7 +21,7 @@ const defaultConfig = {
     isPreview: false,
     guid: null,
     apiKey: null,
-    languageCode: null,
+    locale: null,
     headers: {},
     requiresGuidInHeaders: false,
     debug: false,

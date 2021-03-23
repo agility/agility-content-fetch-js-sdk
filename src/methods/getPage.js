@@ -5,7 +5,8 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
  * @memberof AgilityFetch.Client.Pages
  * @param {Object} requestParams - The parameters for the API request.
  * @param {number} requestParams.pageID - The unique page ID of the page you wish to retrieve in the current language.
- * @param {string} requestParams.languageCode - The language code of the content you want to retrieve.
+ * @param {string} requestParams.locale - The locale code of the content you want to retrieve.
+ * @param {string} requestParams.languageCode - DEPRECATED: Use locale instead - The language code of the content you want to retrieve.
  * @param {boolean} [requestParams.expandAllContentLinks] - Whether or not to expand entire linked content references, includings lists and items that are rendered in the CMS as Grid or Link. Default is **false**
  * @param {number} [requestParams.contentLinkDepth] - The depth, representing the levels in which you want linked content auto-resolved. Default is **2**.
  * @returns {Promise<AgilityFetch.Types.Page>} - Returns a page item object.
@@ -20,7 +21,7 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
  * 
  * api.getPage({
  *     pageID: 1,
- *     languageCode: 'en-us'
+ *     locale: 'en-us'
  * })
  * .then(function(page) {
  *     console.log(page);
@@ -39,7 +40,7 @@ function getPage(requestParams) {
     const req = {
         url: `/page/${requestParams.pageID}?contentLinkDepth=${requestParams.contentLinkDepth}&expandAllContentLinks=${requestParams.expandAllContentLinks}`,
         method: 'get',
-        baseURL: buildRequestUrlPath(this.config, requestParams.languageCode),
+        baseURL: buildRequestUrlPath(this.config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
         headers: buildAuthHeader(this.config),
         params:{}
     };
@@ -48,8 +49,8 @@ function getPage(requestParams) {
 }
 
 function validateRequestParams(requestParams) {
-    if(!requestParams.languageCode) {
-        throw new TypeError('You must include a languageCode in your request params.')
+    if(!requestParams.languageCode && !requestParams.locale) {
+        throw new TypeError('You must include a locale in your request params.')
     } else if(!requestParams.pageID) {
         throw new TypeError('You must include a pageID in your request params.');
     } else  if(requestParams.expandAllContentLinks && typeof requestParams.expandAllContentLinks !== 'boolean') {

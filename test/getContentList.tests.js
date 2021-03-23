@@ -22,7 +22,7 @@ describe('getContentList:', function() {
         var api = createApiClient();
         api.getContentList({
             referenceName: 'posts',
-            languageCode: 'en-us'
+            locale: 'en-us'
         })
         .then(function(contentList) {
             assert.strictEqual(contentList.items[0].contentID, 15);
@@ -36,7 +36,7 @@ describe('getContentList:', function() {
         var api = createPreviewApiClient();
         api.getContentList({
             referenceName: 'posts',
-            languageCode: 'en-us'
+            locale: 'en-us'
         })
         .then(function(contentList) {
             assert.strictEqual(contentList.items[0].contentID, 15);
@@ -51,7 +51,7 @@ describe('getContentList:', function() {
             var api = createApiClient();
             api.getContentList({
                 someOtherParam: 'posts',
-                languageCode: 'en-us'
+                locale: 'en-us'
             })
             .then(function(contentList) {
                 assert.strictEqual(contentList[0].contentID, 24);
@@ -63,7 +63,7 @@ describe('getContentList:', function() {
         done();
     });
 
-    it('should throw error if languageCode param is missing in getContentList', function(done) {
+    it('should throw error if locale param is missing in getContentList', function(done) {
         expect(function() {
             var api = createApiClient();
             api.getContentList({
@@ -84,7 +84,7 @@ describe('getContentList:', function() {
             var api = createApiClient();
             api.getContentList({
                 referenceName: 'posts',
-                languageCode: 'en-us',
+                locale: 'en-us',
                 take: 'ten'
             })
             .then(function(contentList) {
@@ -102,7 +102,7 @@ describe('getContentList:', function() {
             var api = createApiClient();
             api.getContentList({
                 referenceName: 'posts',
-                languageCode: 'en-us',
+                locale: 'en-us',
                 take: 0
             })
             .then(function(contentList) {
@@ -120,7 +120,7 @@ describe('getContentList:', function() {
             var api = createApiClient();
             api.getContentList({
                 referenceName: 'posts',
-                languageCode: 'en-us',
+                locale: 'en-us',
                 take: 51
             })
             .then(function(contentList) {
@@ -138,7 +138,7 @@ describe('getContentList:', function() {
             var api = createApiClient();
             api.getContentList({
                 referenceName: 'posts',
-                languageCode: 'en-us',
+                locale: 'en-us',
                 skip: -1
             })
             .then(function(contentList) {
@@ -156,7 +156,7 @@ describe('getContentList:', function() {
             var api = createApiClient();
             api.getContentList({
                 referenceName: 'posts',
-                languageCode: 'en-us',
+                locale: 'en-us',
                 skip: 'ten'
             })
             .then(function(contentList) {
@@ -174,7 +174,7 @@ describe('getContentList:', function() {
             var api = createApiClient();
             api.getContentList({
                 referenceName: 'posts',
-                languageCode: 'en-us',
+                locale: 'en-us',
                 sort: 'fields.title',
                 direction: 'up'
             })
@@ -192,7 +192,7 @@ describe('getContentList:', function() {
         var api = createApiClient();
         api.getContentList({
             referenceName: 'posts',
-            languageCode: 'en-us',
+            locale: 'en-us',
             sort: 'properties.versionID',
             direction: api.types.SortDirections.DESC
         })
@@ -208,7 +208,7 @@ describe('getContentList:', function() {
             var api = createApiClient();
             api.getContentList({
                 referenceName: 'posts',
-                languageCode: 'en-us',
+                locale: 'en-us',
                 filters: [{operator: api.types.FilterOperators.EQUAL_TO, value: '40'}]
             })
                 .then(function(contentList) {
@@ -224,7 +224,7 @@ describe('getContentList:', function() {
             var api = createApiClient();
             api.getContentList({
                 referenceName: 'posts',
-                languageCode: 'en-us',
+                locale: 'en-us',
                 filters: [{property: 'properties.versionID', value: '40'}]
             })
                 .then(function(contentList) {
@@ -240,7 +240,7 @@ describe('getContentList:', function() {
             var api = createApiClient();
             api.getContentList({
                 referenceName: 'posts',
-                languageCode: 'en-us',
+                locale: 'en-us',
                 filters: [{property: 'properties.versionID', operator: api.types.FilterOperators.EQUAL_TO}]
             })
                 .then(function(contentList) {
@@ -256,7 +256,7 @@ describe('getContentList:', function() {
             var api = createApiClient();
             api.getContentList({
                 referenceName: 'posts',
-                languageCode: 'en-us',
+                locale: 'en-us',
                 filters: [{property: 'properties.versionID', operator: 'xx', value: '40'}]
             })
                 .then(function(contentList) {
@@ -272,7 +272,7 @@ describe('getContentList:', function() {
             var api = createApiClient();
             api.getContentList({
                 referenceName: 'posts',
-                languageCode: 'en-us',
+                locale: 'en-us',
                 filtersLogicOperator: 'SOME'
             })
                 .then(function(contentList) {
@@ -287,7 +287,7 @@ describe('getContentList:', function() {
         var api = createApiClient();
         api.getContentList({
             referenceName: 'posts',
-            languageCode: 'en-us',
+            locale: 'en-us',
             filters: [{property: 'contentID', operator: api.types.FilterOperators.EQUAL_TO, value: '15'}, {property: 'properties.referenceName', operator: api.types.FilterOperators.LIKE, value: 'posts'}],
             filtersLogicOperator: api.types.FilterLogicOperators.OR
         })
@@ -303,7 +303,7 @@ describe('getContentList:', function() {
         var api = createApiClient();
         api.getContentList({
             referenceName: 'posts',
-            languageCode: 'en-us',
+            locale: 'en-us',
             filters: [{property: 'contentID', operator: api.types.FilterOperators.EQUAL_TO, value: '16'}, {property: 'properties.referenceName', operator: api.types.FilterOperators.LIKE, value: 'posts'}],
             filtersLogicOperator: api.types.FilterLogicOperators.AND
         })
@@ -319,7 +319,7 @@ describe('getContentList:', function() {
         var api = createApiClient();
         api.getContentList({
             referenceName: 'listwithnestedcontentlink',
-            languageCode: 'en-us',
+            locale: 'en-us',
             expandAllContentLinks: true
         })
         .then(function(contentList) {
@@ -333,7 +333,7 @@ describe('getContentList:', function() {
         var api = createApiClient();
         api.getContentList({
             referenceName: 'listwithnestedcontentlink',
-            languageCode: 'en-us',
+            locale: 'en-us',
             expandAllContentLinks: false
         })
         .then(function(contentList) {
@@ -347,7 +347,7 @@ describe('getContentList:', function() {
         var api = createApiClient();
         api.getContentList({
             referenceName: 'listwithnestedcontentlink',
-            languageCode: 'en-us'
+            locale: 'en-us'
         })
         .then(function(contentList) {
             assert.strictEqual(Array.isArray(contentList.items[0].fields.posts), false);
@@ -361,7 +361,7 @@ describe('getContentList:', function() {
         let referenceName = 'jssdklist';
         api.getContentList({
             referenceName: referenceName,
-            languageCode: 'en-us'
+            locale: 'en-us'
         })
             .then(function(contentList) {
                 assert.strictEqual(contentList.items[0].properties.referenceName, referenceName);

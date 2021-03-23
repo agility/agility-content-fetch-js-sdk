@@ -21,7 +21,7 @@ import { createApiClient, createPreviewApiClient, createCatchedApiClient } from 
         var api = createApiClient();
         api.getPage({
             pageID: 2,
-            languageCode: 'en-us'
+            locale: 'en-us'
         })
         .then(function(page) {
             assert.strictEqual(page.pageID, 2);
@@ -34,7 +34,7 @@ import { createApiClient, createPreviewApiClient, createCatchedApiClient } from 
         var api = createPreviewApiClient();
         api.getPage({
             pageID: 2,
-            languageCode: 'en-us'
+            locale: 'en-us'
         })
         .then(function(page) {
             assert.strictEqual(page.pageID, 2);
@@ -48,7 +48,7 @@ import { createApiClient, createPreviewApiClient, createCatchedApiClient } from 
             var api = createApiClient();
             api.getPage({
                 someOtherParam: 1,
-                languageCode: 'en-us'
+                locale: 'en-us'
             })
             .then(function(page) {
                 assert.strictEqual(page.pageID, 2);
@@ -59,7 +59,7 @@ import { createApiClient, createPreviewApiClient, createCatchedApiClient } from 
         done();
     })
     
-    it('should throw error if languageCode not passed as argument for getPage', function(done) {
+    it('should throw error if locale not passed as argument for getPage', function(done) {
         expect(function() {
             var api = createApiClient();
             api.getPage({
@@ -78,7 +78,7 @@ import { createApiClient, createPreviewApiClient, createCatchedApiClient } from 
         var api = createApiClient();
         api.getPage({
             pageID: 2,
-            languageCode: 'en-us',
+            locale: 'en-us',
             expandAllContentLinks: true
         })
         .then(function(page) {
