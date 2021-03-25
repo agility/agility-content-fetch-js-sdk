@@ -51,7 +51,7 @@ const api = agility.getApi({
 //make the request: get a content item with the ID '22'
 api.getContentItem({
     contentID: 22,
-    languageCode: 'en-us'
+    locale: 'en-us'
 })
 .then(function(contentItem) {
     //on success

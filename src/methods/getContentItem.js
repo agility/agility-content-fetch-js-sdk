@@ -5,7 +5,8 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
  * @memberof AgilityFetch.Client.Content
  * @param {Object} requestParams - The paramters for the API request.
  * @param {number} requestParams.contentID - The contentID of the requested item in this language.
- * @param {string} requestParams.languageCode - The language code of the content you want to retrieve.
+ * @param {string} requestParams.locale - The locale code of the content you want to retrieve.
+ * @param {string} requestParams.languageCode DEPRECATED: Use locale instead - The language code of the content you want to retrieve.
  * @param {number} [requestParams.contentLinkDepth] - The depth, representing the levels in which you want linked content auto-resolved. Default is **1**.
  * @param {boolean} [requestParams.expandAllContentLinks] - Whether or not to expand entire linked content references, includings lists and items that are rendered in the CMS as Grid or Link. Default is **false**
  * @returns {Promise<AgilityFetch.Types.ContentItem>} - Returns a content item object.
@@ -20,7 +21,7 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
  *
  * api.getContentItem({
  *     contentID: 22,
- *     languageCode: 'en-us'
+ *     locale: 'en-us'
  * })
  * .then(function(contentItem) {
  *     console.log(contentItem);
@@ -40,7 +41,7 @@ function getContentItem(requestParams) {
     const req = {
         url: `/item/${requestParams.contentID}?contentLinkDepth=${requestParams.contentLinkDepth}&expandAllContentLinks=${requestParams.expandAllContentLinks}`,
         method: 'get',
-        baseURL: buildRequestUrlPath(this.config, requestParams.languageCode),
+        baseURL: buildRequestUrlPath(this.config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
         headers: buildAuthHeader(this.config),
 		params:{}
     };
@@ -49,8 +50,8 @@ function getContentItem(requestParams) {
 }
 
 function validateRequestParams(requestParams) {
-    if(!requestParams.languageCode) {
-        throw new TypeError('You must include a languageCode in your request params.')
+    if(!requestParams.languageCode && !requestParams.locale) {
+        throw new TypeError('You must include a locale in your request params.')
     }
     else if(!requestParams.contentID) {
         throw new TypeError('You must include a contentID number in your request params.');

@@ -5,7 +5,8 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
  * @memberof AgilityFetch.Client.Sync
  * @param {Object} requestParams - The paramters for the API request.
  * @param {number} requestParams.syncToken - The sync token provided in the response to a previous sync API call. To start a new sync, use the value of '0'.
- * @param {string} requestParams.languageCode - The language code of the content you want to retrieve.
+ * @param {string} requestParams.locale - The locale code of the content you want to retrieve.
+ * @param {string} requestParams.languageCode - DEPRECATED: Use locale instead - The language code of the content you want to retrieve.
  * @param {number} [requestParams.pageSize] - The number of items to return back with each call.  Default is 500.
  * @returns {Promise<AgilityFetch.Types.SyncContent>} - Returns a list of content item objects.
  * @example
@@ -19,7 +20,7 @@ import { buildRequestUrlPath, buildAuthHeader } from '../utils'
  * 
  * api.getSyncContent({
  *      syncToken: '0', //to start a new sync
- *      languageCode: 'en-us',
+ *      locale: 'en-us',
  *      pageSize: 500
  * })
  * .then(function(contentList) {
@@ -39,7 +40,7 @@ function getSyncContent(requestParams) {
     const req = {
         url: `/sync/items?pageSize=${requestParams.pageSize}&syncToken=${requestParams.syncToken}`,
         method: 'get',
-        baseURL: buildRequestUrlPath(this.config, requestParams.languageCode),
+        baseURL: buildRequestUrlPath(this.config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
         headers: buildAuthHeader(this.config),
         params: {}
     };
@@ -48,8 +49,8 @@ function getSyncContent(requestParams) {
 }
 
 function validateRequestParams(requestParams) {
-    if (!requestParams.languageCode) {
-        throw new TypeError('You must include a languageCode in your request params.')
+    if (!requestParams.languageCode && !requestParams.locale) {
+        throw new TypeError('You must include a locale in your request params.')
     }
     else if (requestParams.syncToken == undefined || requestParams.syncToken == null) {
         throw new TypeError('You must include a syncToken value your request params.  Use zero (0) to start a new sync.');

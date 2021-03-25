@@ -27,7 +27,7 @@ describe('getSyncPages:', function () {
         api.getSyncPages({
             syncToken: syncToken,
             pageSize: 100,
-            languageCode: 'en-us'
+            locale: 'en-us'
         })
             .then(function (syncRet) {
 

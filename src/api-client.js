@@ -21,7 +21,7 @@ const defaultConfig = {
     isPreview: false,
     guid: null,
     apiKey: null,
-    languageCode: null,
+    locale: null,
     headers: {},
     requiresGuidInHeaders: false,
     debug: false,
@@ -139,6 +139,10 @@ export default function createClient(userConfig) {
             if (response.request.fromCache) {
                 data['fromCache'] = true;
 			}
+
+            if (config.debug) {
+                data['agilityResponseHeaders'] = response.headers;
+            }
 
 			return data;
 

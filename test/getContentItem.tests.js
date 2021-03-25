@@ -26,7 +26,7 @@ describe('getContentItem:', function() {
         var api = createApiClient();
         api.getContentItem({
             contentID: ref.updatesMadeToPublishedContentItemID,
-            languageCode: 'en-us'
+            locale: 'en-us'
         })
         .then(function(contentItem) {
             assert.strictEqual(contentItem.contentID, ref.updatesMadeToPublishedContentItemID, 'retrieved content item we asked for');
@@ -40,7 +40,7 @@ describe('getContentItem:', function() {
         var api = createPreviewApiClient();
         api.getContentItem({
             contentID: ref.updatesMadeToPublishedContentItemID,
-            languageCode: 'en-us'
+            locale: 'en-us'
         })
         .then(function(contentItem) {
             assert.strictEqual(contentItem.contentID, ref.updatesMadeToPublishedContentItemID, 'retrieved content item we asked for');
@@ -54,7 +54,7 @@ describe('getContentItem:', function() {
         var api = createCachedApiClient();
         api.getContentItem({
             contentID: ref.updatesMadeToPublishedContentItemID,
-            languageCode: 'en-us'
+            locale: 'en-us'
         })
         .then(function(contentItem) {
 
@@ -63,7 +63,7 @@ describe('getContentItem:', function() {
             
             api.getContentItem({
                 contentID: ref.updatesMadeToPublishedContentItemID,
-                languageCode: 'en-us'
+                locale: 'en-us'
             })
             .then(function(contentItem2) {
                 
@@ -82,7 +82,7 @@ describe('getContentItem:', function() {
             var api = createApiClient();
             api.getContentItem({
                 someOtherParam: 22,
-                languageCode: 'en-us'
+                locale: 'en-us'
             })
             .then(function(contentItem) {
                 assert.strictEqual(contentItem.contentID, 22);
@@ -93,7 +93,7 @@ describe('getContentItem:', function() {
         done();
     })
     
-    it('should throw error if languageCode not passed as argument for getContentItem', function(done) {
+    it('should throw error if locale not passed as argument for getContentItem', function(done) {
         expect(function() {
             var api = createApiClient();
             api.getContentItem({
@@ -113,7 +113,7 @@ describe('getContentItem:', function() {
             var api = createApiClient();
             api.getContentItem({
                 contentID: 22,
-                languageCode: 'en-us',
+                locale: 'en-us',
                 contentLinkDepth: 'something'
             })
             .then(function(contentItem) {
@@ -130,7 +130,7 @@ describe('getContentItem:', function() {
             var api = createApiClient();
             api.getContentItem({
                 contentID: 22,
-                languageCode: 'en-us',
+                locale: 'en-us',
                 expandAllContentLinks: 'something'
             })
             .then(function(contentItem) {
@@ -146,7 +146,7 @@ describe('getContentItem:', function() {
         var api = createApiClient();
         api.getContentItem({
             contentID: 65, //item within listwithnestedcontentlinks
-            languageCode: 'en-us',
+            locale: 'en-us',
             expandAllContentLinks: true
         })
         .then(function(contentItem) {
@@ -160,7 +160,7 @@ describe('getContentItem:', function() {
         var api = createApiClient();
         api.getContentItem({
             contentID: 65, //item within listwithnestedcontentlinks
-            languageCode: 'en-us',
+            locale: 'en-us',
             expandAllContentLinks: false
         })
         .then(function(contentItem) {
@@ -174,7 +174,7 @@ describe('getContentItem:', function() {
         var api = createApiClient();
         api.getContentItem({
             contentID: 65, //item within listwithnestedcontentlinks
-            languageCode: 'en-us',
+            locale: 'en-us',
         })
         .then(function(contentItem) {
             assert.strictEqual(Array.isArray(contentItem.fields.posts), false);
@@ -187,7 +187,7 @@ describe('getContentItem:', function() {
         var api = createApiClientWithNewCdn();
         api.getContentItem({
             contentID: 4, //item within jssdklist
-            languageCode: 'en-us',
+            locale: 'en-us',
         })
             .then(function(contentItem) {
                 assert.strictEqual(contentItem.fields.title, 'JS SDK Item - DO NOT DELETE');

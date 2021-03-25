@@ -18,7 +18,7 @@ describe('getSitemapNested:', function() {
         var api = createApiClient();
         api.getSitemapNested({
             channelName: 'website',
-            languageCode: 'en-us'
+            locale: 'en-us'
         })
         .then(function(sitemap) {
             assert.strictEqual(sitemap[0].pageID, 2);
@@ -31,7 +31,7 @@ describe('getSitemapNested:', function() {
         var api = createPreviewApiClient();
         api.getSitemapNested({
             channelName: 'website',
-            languageCode: 'en-us'
+            locale: 'en-us'
         })
         .then(function(sitemap) {
             assert.strictEqual(sitemap[0].pageID, 2);
@@ -45,7 +45,7 @@ describe('getSitemapNested:', function() {
             var api = createApiClient();
             api.getSitemapNested({
                 someOtherParam: 1,
-                languageCode: 'en-us'
+                locale: 'en-us'
             })
             .then(function(sitemap) {
                 assert.strictEqual(sitemap[0].pageID, 2);
@@ -56,7 +56,7 @@ describe('getSitemapNested:', function() {
         done();
     })
     
-    it('should throw error if languageCode not passed as argument for getSitemapNested', function(done) {
+    it('should throw error if locale not passed as argument for getSitemapNested', function(done) {
         expect(function() {
             var api = createApiClient();
             api.getSitemapNested({

@@ -27,7 +27,7 @@ describe('getSyncContent:', function () {
         api.getSyncContent({
             syncToken: syncToken,
             pageSize: 100,
-            languageCode: 'en-us'
+            locale: 'en-us'
         })
             .then(function (syncRet) {
 

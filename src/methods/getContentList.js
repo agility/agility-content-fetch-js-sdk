@@ -5,7 +5,8 @@ import {buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
  * @memberof AgilityFetch.Client.Content
  * @param {Object} requestParams - The parameters for the API request.
  * @param {string} requestParams.referenceName - The unique reference name of the content list you wish to retrieve in the specified language.
- * @param {string} requestParams.languageCode - The language code of the content you want to retrieve.
+ * @param {string} requestParams.locale - The locale code of the content you want to retrieve.
+ * @param {string} requestParams.languageCode - DEPRECATED: Use locale instead - The language code of the content you want to retrieve.
  * @param {number} [requestParams.contentLinkDepth] - The depth, representing the levels in which you want linked content auto-resolved. Default is **1**.
  * @param {boolean} [requestParams.expandAllContentLinks] - Whether or not to expand entire linked content references, includings lists and items that are rendered in the CMS as Grid or Link. Default is **false**
  * @param {number} [requestParams.take] - The maximum number of items to retrieve in this request. Default is **10**. Maximum allowed is **50**.
@@ -26,7 +27,7 @@ import {buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
  * 
  * api.getContentList({
  *     referenceName: 'posts',
- *     languageCode: 'en-us',
+ *     locale: 'en-us',
  *     take: 50,
  *     skip: 0,
  *     sort: 'properties.modified',
@@ -41,7 +42,7 @@ import {buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
  *
  * api.getContentList({
  *     referenceName: 'posts',
- *     languageCode: 'en-us',
+ *     locale: 'en-us',
  *     take: 50,
  *     skip: 0,
  *     filters: [
@@ -69,7 +70,7 @@ function getContentList(requestParams) {
     const req = {
         url: buildPathUrl("list", requestParams.referenceName, requestParams.skip, requestParams.take, requestParams.sort, requestParams.direction, requestParams.filters, requestParams.filtersLogicOperator, requestParams.contentLinkDepth, requestParams.expandAllContentLinks),
         method: 'get',
-        baseURL: buildRequestUrlPath(this.config, requestParams.languageCode),
+        baseURL: buildRequestUrlPath(this.config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
         headers: buildAuthHeader(this.config),
         params:{}
     };
@@ -82,8 +83,8 @@ function sanitizeReferenceName(referenceName) {
 }
 
 function validateRequestParams(requestParams) {
-    if(!requestParams.languageCode) {
-        throw new TypeError('You must include a languageCode in your request params.')
+    if(!requestParams.languageCode && !requestParams.locale) {
+        throw new TypeError('You must include a locale in your request params.')
     }
     else if(!requestParams.referenceName) {
         //must have a referenceName
