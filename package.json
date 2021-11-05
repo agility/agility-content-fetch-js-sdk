@@ -1,6 +1,6 @@
 {
   "name": "@agility/content-fetch",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "JavaScript library for the Agility Fetch API (node and browser)",
   "main": "dist/agility-content-fetch.node.js",
   "scripts": {
@@ -16,7 +16,8 @@
     "type": "git",
     "url": "git+https://github.com/agility/agility-content-fetch-js-sdk.git"
   },
-  "author": "James Vidler",
+  "author": "Agility CMS",
+  "contributors": ["James Vidler", "Joel Varty", "Joshua Isaac"],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/agility/agility-content-fetch-js-sdk/issues"

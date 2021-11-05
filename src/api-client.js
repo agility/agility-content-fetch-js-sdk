@@ -103,26 +103,11 @@ export default function createClient(userConfig) {
         adapter = cache.adapter;
     }
 
-	const https= require("https")
-
 	let api = null;
 
-	if (https.Agent) {
-		//create apply the adapter to our axios instance
-		api = axios.create({
-			httpsAgent: new https.Agent({
-				rejectUnauthorized: false
-			}),
-			adapter: adapter,
-		})
-	} else {
-		//we can't use the https.Agent
-		api = axios.create({
-			adapter: adapter,
-		})
-	}
-
-
+	api = axios.create({
+		adapter: adapter,
+	})
 
     //the function that actually makes ALL our requests
     function makeRequest(reqConfig) {
