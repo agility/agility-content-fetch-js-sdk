@@ -193,11 +193,10 @@ describe('getContentList:', function() {
         api.getContentList({
             referenceName: 'posts',
             locale: 'en-us',
-            sort: 'properties.contentID',
-            direction: api.types.SortDirections.DESC
+            sort: 'contentID',
         })
         .then(function(contentList) {
-            assert.isTrue(contentList.items[0].contentID > contentList.items[1].contentID);
+            assert.isTrue(contentList.items[0].contentID < contentList.items[1].contentID);
             done();
         })
         .catch(done);
