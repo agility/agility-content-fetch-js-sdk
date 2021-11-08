@@ -17,7 +17,11 @@
     "url": "git+https://github.com/agility/agility-content-fetch-js-sdk.git"
   },
   "author": "Agility CMS",
-  "contributors": ["James Vidler", "Joel Varty", "Joshua Isaac"],
+  "contributors": [
+    "James Vidler",
+    "Joel Varty",
+    "Joshua Isaac"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/agility/agility-content-fetch-js-sdk/issues"

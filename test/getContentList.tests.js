@@ -193,7 +193,7 @@ describe('getContentList:', function() {
         api.getContentList({
             referenceName: 'posts',
             locale: 'en-us',
-            sort: 'properties.versionID',
+            sort: 'properties.contentID',
             direction: api.types.SortDirections.DESC
         })
         .then(function(contentList) {
