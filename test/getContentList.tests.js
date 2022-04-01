@@ -115,13 +115,13 @@ describe('getContentList:', function() {
         done();
     });
 
-    it('should throw error if take parameter is a number greater than 50 in getContentList', function(done) {
+    it('should throw error if take parameter is a number greater than 250 in getContentList', function(done) {
         expect(function() {
             var api = createApiClient();
             api.getContentList({
                 referenceName: 'posts',
                 locale: 'en-us',
-                take: 51
+                take: 251
             })
             .then(function(contentList) {
                 assert.strictEqual(contentList[0].contentID, 24);
