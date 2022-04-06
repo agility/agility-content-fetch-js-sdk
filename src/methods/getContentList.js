@@ -9,7 +9,7 @@ import {buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
  * @param {string} requestParams.languageCode - DEPRECATED: Use locale instead - The language code of the content you want to retrieve.
  * @param {number} [requestParams.contentLinkDepth] - The depth, representing the levels in which you want linked content auto-resolved. Default is **1**.
  * @param {boolean} [requestParams.expandAllContentLinks] - Whether or not to expand entire linked content references, includings lists and items that are rendered in the CMS as Grid or Link. Default is **false**
- * @param {number} [requestParams.take] - The maximum number of items to retrieve in this request. Default is **10**. Maximum allowed is **50**.
+ * @param {number} [requestParams.take] - The maximum number of items to retrieve in this request. Default is **10**. Maximum allowed is **250**.
  * @param {number} [requestParams.skip] - The number of items to skip from the list. Default is **0**. Used for implementing pagination.
  * @param {string} [requestParams.sort] - The field to sort the results by. Example **fields.title** or **properties.modified**.
  * @param {AgilityFetch.Types.SortDirection} [requestParams.direction] - The direction to sort the results by.
@@ -17,14 +17,14 @@ import {buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
  * @param {AgilityFetch.Types.FilterLogicOperator} [requestParams.filtersLogicOperator] - The logic operator to combine multiple filters.
  * @returns {Promise<AgilityFetch.Types.ContentList>} - Returns a list of content items.
  * @example
- * 
+ *
  * import agility from '@agility/content-fetch'
- * 
+ *
  * const api = agility.getApi({
  *   guid: 'ade6cf3c',
  *   apiKey: 'defaultlive.201ffdd0841cacad5bb647e76547e918b0c9ecdb8b5ddb3cf92e9a79b03623cb',
  * });
- * 
+ *
  * api.getContentList({
  *     referenceName: 'posts',
  *     locale: 'en-us',
@@ -74,8 +74,8 @@ function getContentList(requestParams) {
         headers: buildAuthHeader(this.config),
         params:{}
     };
-    
-    return this.makeRequest(req);   
+
+    return this.makeRequest(req);
 }
 
 function sanitizeReferenceName(referenceName) {
@@ -95,9 +95,9 @@ function validateRequestParams(requestParams) {
     } else if((requestParams.take || requestParams.take == 0)  && !isNaN(requestParams.take) && requestParams.take < 1) {
         //take parameter must be greater than 0
         throw new TypeError('Take parameter must be greater than 0.');
-    } else if(requestParams.take && !isNaN(requestParams.take) && requestParams.take > 50) {
-        //take parameter cannot be greater than 50
-        throw new TypeError('Take parameter must be 50 or less.');
+    } else if(requestParams.take && !isNaN(requestParams.take) && requestParams.take > 250) {
+        //take parameter cannot be greater than 250
+        throw new TypeError('Take parameter must be 250 or less.');
     } else if(requestParams.skip && isNaN(requestParams.skip)) {
         //skip parameter must be a number
         throw new TypeError('Skip parameter must be a number.');
