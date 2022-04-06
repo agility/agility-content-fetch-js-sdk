@@ -9,7 +9,8 @@ const apiKeyPreview = 'UnitTestsPreview.69e6bca345ced0b7ca5ab358b351ea5c870790a5
 function createApiClient() {
     var api = agility.getApi({
         guid: guid,
-		apiKey: apiKeyFetch
+        apiKey: apiKeyFetch,
+        baseUrl: `https://api-dev.aglty.io/${guid}`
     });
     return api;
 }
@@ -28,7 +29,8 @@ function createCachedApiClient() {
         apiKey: apiKeyFetch,
         caching: {
             maxAge: 5 * 60 * 1000 //==5mins
-        }
+        },
+        baseUrl: `https://api-dev.aglty.io/${guid}`
     });
     return api;
 }
@@ -37,7 +39,8 @@ function createPreviewApiClient() {
     var api = agility.getApi({
         guid: guid,
         apiKey: apiKeyPreview,
-        isPreview: true
+        isPreview: true,
+        baseUrl: `https://api-dev.aglty.io/${guid}`
     });
     return api;
 }
