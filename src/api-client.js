@@ -58,6 +58,7 @@ function buildBaseUrl(guid) {
         u: '',
         c: '-ca',
         e: '-eu',
+        a: '-aus',
         d: '-dev'
     }
 
