@@ -6,7 +6,7 @@ This is the official JavaScript library for accessing live and preview content f
 
 You can use this in both node and browser based JS apps.
 
-Don't have an Agility CMS instance? Sign up for [Free (forever)](https://account.agilitycms.com/sign-up?product=agility-free) today!
+Don't have an Agility CMS instance? Sign up for [Free Trial](https://agilitycms.com/free) today!
 
 ## Features
 - Queries the high-availability, CDN backed Agility Fetch REST API
