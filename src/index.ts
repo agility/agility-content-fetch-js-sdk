@@ -1,2 +1,2 @@
 export { Config } from "./types/Config"
-export * from "./api-client";
+export * as agilityFetch from "./api-client";

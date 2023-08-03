@@ -1,5 +1,6 @@
 import { buildRequestUrlPath, buildAuthHeader } from '../utils'
 import { SitemapFlat } from '../types/SitemapFlat';
+import { ApiClientInstance } from '../types/Client'
 
 /**
  * The sitemap, returned in a flat list, where the dictionary key is the page path. This method is ideal for page routing.
@@ -36,19 +37,19 @@ export interface SitemapFlatRequestParams {
     languageCode: string;
 }
 
-function getSitemapFlat(requestParams: SitemapFlatRequestParams): Promise<SitemapFlat> {
+function getSitemapFlat(this: ApiClientInstance, requestParams: SitemapFlatRequestParams): Promise<SitemapFlat> {
 
     validateRequestParams(requestParams);
 
     const req = {
         url: `/sitemap/flat/${requestParams.channelName}`,
         method: 'get',
-        baseURL: buildRequestUrlPath(this._config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
-        headers: buildAuthHeader(this._config),
+        baseURL: buildRequestUrlPath(this.config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
+        headers: buildAuthHeader(this.config),
         params:{}
     };
     
-    return this._makeRequest(req);      
+    return this.makeRequest(req);      
 }
 
 function validateRequestParams(requestParams) {

@@ -18,6 +18,32 @@ import { logError, logDebug } from './utils'
 import { Config } from './types/Config'
 import { EnvConfig } from './types/EnvConfig'
 import { isHttps } from './utils'
+import * as types from './types'
+
+/**
+ * How to create an instance of an an API client for the Agility Content Fetch REST API.
+ * @func
+ * @name getApi
+ * @memberof AgilityFetch
+ * @param {Object} config - API intialization params.
+ * @param {string} config.guid - The guid that represents your instance.
+ * @param {string} config.apiKey - The secret token that represents your application.
+ * @param {boolean} [config.isPreview] - If your access token is for preview, then set this to true.
+ * @param {Object} [config.caching] - Optional Caching options. Caching is disabled by default.
+ * @param {number} [config.caching.maxAge] - In miliseconds. Default value is *0* (disabled). Recommeded value is *180000* (3 mins). Requests are cached in memory only (node or browser).
+ * @param {string} [config.baseUrl] - Optionally override the default API Base Url.
+ * @return {AgilityFetch.Client}
+ * @example
+ *
+ * import agility from '@agility/content-fetch'
+ *
+ * const api = agility.getApi({
+ *   guid: '191309ca-e675-4be2-bb29-351879528707',
+ *   apiKey: 'aGd13M.fa30c36e553a36f871860407e902da9a7375322457acd6bcda038e60af699411',
+ *   isPreview: false
+ * });
+ */
+
 
 const defaultConfig: Config = {
     baseUrl: null,
@@ -96,15 +122,16 @@ function validateConfigParams(configParams: Config) {
     }
 }
 
-export class ApiClient {
-    _config!: Config;
+export interface ApiClientInstance {
+    config: Config;
+    makeRequest(req: any): Promise<any>; // Replace 'any' with the proper type for req if possible.
+  }
+
+class ApiClient {
+    config!: Config;
     _api!: AxiosInstance;
 
     constructor(userConfig: Config){
-
-        //validate the config params
-        validateConfigParams(userConfig);
-
         const envConfig = buildEnvConfig();
 
         //merge our config - user values will override our defaults
@@ -122,7 +149,7 @@ export class ApiClient {
             config.requiresGuidInHeaders = true;
         }
         
-        this._config = config;
+        this.config = config;
     
         let adapter: AxiosAdapter | undefined = undefined;
     
@@ -141,49 +168,51 @@ export class ApiClient {
 
     }
 
-    async _getContentItem(params: ContentItemRequestParams) {
+    types = types;
+
+    async getContentItem(params: ContentItemRequestParams) {
         return getContentItem.call(this, params);
     }
 
-    async _getContentList(params: ContentListRequestParams) {
+    async getContentList(params: ContentListRequestParams) {
         return getContentList.call(this, params);   
     }
 
-    async _getGallery(params: GalleryRequestParams) {
+    async getGallery(params: GalleryRequestParams) {
         return getGallery.call(this, params);   
     }
 
-    async _getPage(params: PageRequestParams) {
+    async getPage(params: PageRequestParams) {
         return getPage.call(this, params);
     }
 
-    async _getSitemapFlat(params: SitemapFlatRequestParams) {
+    async getSitemapFlat(params: SitemapFlatRequestParams) {
         return getSitemapFlat.call(this, params);
     }
 
-    async _getSitemapNested(params: SitemapNestedRequestParams) {
+    async getSitemapNested(params: SitemapNestedRequestParams) {
         return getSitemapNested.call(this, params);
     }
 
-    async _getUrlRedirections(params: UrlRedirectionsRequestParams) {
+    async getUrlRedirections(params: UrlRedirectionsRequestParams) {
         return getUrlRedirections.call(this, params);
     }
 
-    async _getSyncContent(params: SyncContentRequestParams) {
+    async getSyncContent(params: SyncContentRequestParams) {
         return getSyncContent.call(this, params);
     }
 
-    async _getSyncPages(params: SyncPagesRequestParams) {
+    async getSyncPages(params: SyncPagesRequestParams) {
         return getSyncPages.call(this, params);
     }
 
     //the function that actually makes ALL our requests
-    async _makeRequest(reqConfig : {
+    async makeRequest(reqConfig : {
         baseURL: string,
         url: string,
     }){
     
-        if (this._config.debug) {
+        if (this.config.debug) {
             logDebug(`AgilityCMS Fetch API LOG: ${reqConfig.baseURL}${reqConfig.url}`);
         }
 
@@ -196,7 +225,7 @@ export class ApiClient {
                 data['fromCache'] = true
             }
 
-            if (this._config.debug) {
+            if (this.config.debug) {
                 data['agilityResponseHeaders'] = response.headers
             }
             return await data
@@ -204,4 +233,11 @@ export class ApiClient {
             logError(`AgilityCMS Fetch API ERROR: Request failed for ${reqConfig.baseURL}${reqConfig.url} ... ${error} ... Does the item exist?`)
         }
     }
+}
+
+export default types
+
+export function getApi(config: Config) {
+    validateConfigParams(config);
+    return new ApiClient(config);
 }

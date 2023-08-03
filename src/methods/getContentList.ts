@@ -3,7 +3,7 @@ import { Filter } from '../types/Filter';
 import { FilterLogicOperator } from '../types/FilterLogicOperator';
 import { SortDirection } from '../types/SortDirection';
 import { ContentList } from '../types/ContentList';
-
+import { ApiClientInstance } from '../types/Client'
 
 /**
  * Retrieves a list of content items by reference name.
@@ -79,7 +79,7 @@ export interface ContentListRequestParams {
      FilterLogicOperator; 
 }
 
-function getContentList(requestParams: ContentListRequestParams): Promise<ContentList> {
+function getContentList(this: ApiClientInstance, requestParams: ContentListRequestParams): Promise<ContentList> {
 
     validateRequestParams(requestParams);
 
@@ -91,12 +91,12 @@ function getContentList(requestParams: ContentListRequestParams): Promise<Conten
     const req = {
         url: buildPathUrl("list", requestParams.referenceName, requestParams.skip, requestParams.take, requestParams.sort, requestParams.direction, requestParams.filters, requestParams.filtersLogicOperator, requestParams.contentLinkDepth, requestParams.expandAllContentLinks),
         method: 'get',
-        baseURL: buildRequestUrlPath(this._config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
-        headers: buildAuthHeader(this._config),
+        baseURL: buildRequestUrlPath(this.config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
+        headers: buildAuthHeader(this.config),
         params:{}
     };
 
-    return this._makeRequest(req);
+    return this.makeRequest(req);
 }
 
 function sanitizeReferenceName(referenceName) {

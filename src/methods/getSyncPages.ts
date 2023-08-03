@@ -1,5 +1,6 @@
 import { buildRequestUrlPath, buildAuthHeader } from '../utils'
 import { Page } from '../types/Page';
+import { ApiClientInstance } from '../types/Client'
 
 /**
  * Retrieves a list of pages that need to be synced based on the provided sync pages token, and returns the next sync token.
@@ -42,19 +43,19 @@ export interface SyncPagesRequestParams {
     pageSize?: number;
 }
 
-function getSyncPages(requestParams: SyncPagesRequestParams): Promise<Page> {
+function getSyncPages(this: ApiClientInstance, requestParams: SyncPagesRequestParams): Promise<Page> {
 
     validateRequestParams(requestParams);
 
     const req = {
         url: `/sync/pages?pageSize=${requestParams.pageSize}&syncToken=${requestParams.syncToken}`,
         method: 'get',
-        baseURL: buildRequestUrlPath(this._config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
-        headers: buildAuthHeader(this._config),
+        baseURL: buildRequestUrlPath(this.config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
+        headers: buildAuthHeader(this.config),
         params: {}
     };
 
-    return this._makeRequest(req);
+    return this.makeRequest(req);
 }
 
 function validateRequestParams(requestParams) {

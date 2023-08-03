@@ -1,5 +1,7 @@
 import { buildRequestUrlPath, buildAuthHeader } from '../utils'
 import { Gallery } from '../types/Gallery';
+import { ApiClientInstance } from '../types/Client'
+
 /**
  * Gets the details of a gallery by their Gallery ID.
  * @memberof AgilityFetch.Client.Pages
@@ -33,7 +35,7 @@ export interface UrlRedirectionsRequestParams {
 	lastAccessDate?: Date;
 }
 
-function getUrlRedirections(requestParams: UrlRedirectionsRequestParams): Promise<Gallery> {
+function getUrlRedirections(this: ApiClientInstance, requestParams: UrlRedirectionsRequestParams): Promise<Gallery> {
 
 	validateRequestParams(requestParams);
 
@@ -51,8 +53,8 @@ function getUrlRedirections(requestParams: UrlRedirectionsRequestParams): Promis
 	const req = {
 		url: url,
 		method: 'get',
-		baseURL: buildRequestUrlPath(this._config, 'urlredirection'),
-		headers: buildAuthHeader(this._config),
+		baseURL: buildRequestUrlPath(this.config, 'urlredirection'),
+		headers: buildAuthHeader(this.config),
 		params: {}
 	};
 
@@ -83,11 +85,10 @@ function validateRequestParams(requestParams) {
 		if (! requestParams.lastAccessDate.toISOString) {
 			let dt = new Date(requestParams.lastAccessDate);
 			
-			/*
-			if (isNaN(dt)) {
+			if (isNaN(dt.getTime())) {
 				throw new TypeError('You must include a valid Datetime for the lastAccessDate.');
 			}
-			*/
+			
 		}
 	} else {
 		return;

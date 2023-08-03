@@ -1,5 +1,5 @@
 import { buildRequestUrlPath, buildAuthHeader } from '../utils'
-
+import { ApiClientInstance } from '../types/Client'
 
 /**
  * Gets the details of a content item by their Content ID.
@@ -49,7 +49,7 @@ const defaultParams = {
     expandAllContentLinks: false
 }
 
-function getContentItem(requestParams: ContentItemRequestParams): Promise<ContentItem> {
+function getContentItem(this: ApiClientInstance, requestParams: ContentItemRequestParams): Promise<ContentItem> {
     console.log('getContentItem', this);
     validateRequestParams(requestParams);
 
@@ -59,12 +59,12 @@ function getContentItem(requestParams: ContentItemRequestParams): Promise<Conten
     const req = {
         url: `/item/${requestParams.contentID}?contentLinkDepth=${requestParams.contentLinkDepth}&expandAllContentLinks=${requestParams.expandAllContentLinks}`,
         method: 'get',
-        baseURL: buildRequestUrlPath(this._config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
-        headers: buildAuthHeader(this._config),
+        baseURL: buildRequestUrlPath(this.config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
+        headers: buildAuthHeader(this.config),
 		params:{}
     };
 
-    return this._makeRequest(req);
+    return this.makeRequest(req);
 }
 
 function validateRequestParams(requestParams: ContentItemRequestParams) {

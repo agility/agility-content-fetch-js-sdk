@@ -1,5 +1,6 @@
 import { buildRequestUrlPath, buildAuthHeader } from '../utils'
 import { Gallery } from '../types/Gallery';
+import { ApiClientInstance } from '../types/Client'
 
 /**
  * Gets the details of a gallery by their Gallery ID.
@@ -32,7 +33,7 @@ export interface GalleryRequestParams {
     galleryID: number;
 }
 
-function getGallery(requestParams: GalleryRequestParams): Promise<Gallery> {
+function getGallery(this: ApiClientInstance, requestParams: GalleryRequestParams): Promise<Gallery> {
 
     validateRequestParams(requestParams);
 
@@ -42,12 +43,12 @@ function getGallery(requestParams: GalleryRequestParams): Promise<Gallery> {
     const req = {
         url: `/${requestParams.galleryID}`,
         method: 'get',
-        baseURL: buildRequestUrlPath(this._config, 'gallery'),
-        headers: buildAuthHeader(this._config),
+        baseURL: buildRequestUrlPath(this.config, 'gallery'),
+        headers: buildAuthHeader(this.config),
         params:{}
     };
     
-    return this._makeRequest(req);
+    return this.makeRequest(req);
 }
 
 function validateRequestParams(requestParams) {

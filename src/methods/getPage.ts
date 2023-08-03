@@ -1,5 +1,6 @@
 import { buildRequestUrlPath, buildAuthHeader } from '../utils'
 import { Page } from '../types/Page';
+import { ApiClientInstance } from '../types/Client'
 
 /**
  * Gets the details of a page by its Page ID.
@@ -40,7 +41,7 @@ export interface PageRequestParams {
     contentLinkDepth?: number;
 }
 
-function getPage(requestParams: PageRequestParams): Promise<Page> {
+function getPage(this: ApiClientInstance, requestParams: PageRequestParams): Promise<Page> {
 
     validateRequestParams(requestParams);
 
@@ -50,12 +51,14 @@ function getPage(requestParams: PageRequestParams): Promise<Page> {
     const req = {
         url: `/page/${requestParams.pageID}?contentLinkDepth=${requestParams.contentLinkDepth}&expandAllContentLinks=${requestParams.expandAllContentLinks}`,
         method: 'get',
-        baseURL: buildRequestUrlPath(this._config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
-        headers: buildAuthHeader(this._config),
+        baseURL: buildRequestUrlPath(this.config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
+        headers: buildAuthHeader(this.config),
         params:{}
     };
+
+    console.log(req, 'hellooo')
     
-    return this._makeRequest(req);       
+    return this.makeRequest(req);       
 }
 
 function validateRequestParams(requestParams) {
