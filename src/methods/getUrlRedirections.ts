@@ -32,7 +32,7 @@ import { ApiClientInstance } from '../types/Client'
 */
 
 export interface UrlRedirectionsRequestParams {
-	lastAccessDate?: Date;
+	lastAccessDate?: Date | null;
 }
 
 function getUrlRedirections(this: ApiClientInstance, requestParams: UrlRedirectionsRequestParams): Promise<Gallery> {

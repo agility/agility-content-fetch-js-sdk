@@ -36,7 +36,6 @@ import { ApiClientInstance } from '../types/Client'
 export interface PageRequestParams {
     pageID: number;
     locale: string;
-    languageCode: string;
     expandAllContentLinks?: boolean;
     contentLinkDepth?: number;
 }
@@ -51,7 +50,7 @@ function getPage(this: ApiClientInstance, requestParams: PageRequestParams): Pro
     const req = {
         url: `/page/${requestParams.pageID}?contentLinkDepth=${requestParams.contentLinkDepth}&expandAllContentLinks=${requestParams.expandAllContentLinks}`,
         method: 'get',
-        baseURL: buildRequestUrlPath(this.config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
+        baseURL: buildRequestUrlPath(this.config, requestParams.locale),
         headers: buildAuthHeader(this.config),
         params:{}
     };

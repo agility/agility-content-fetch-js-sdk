@@ -37,8 +37,8 @@ import { ContentItem } from '../types/ContentItem';
 
 export interface ContentItemRequestParams {
     contentID: number;
-    locale: string;
-    languageCode: string;
+    locale?: string;
+    languageCode?: string;
     contentLinkDepth?: number;
     expandAllContentLinks?: boolean;
 }
@@ -50,7 +50,6 @@ const defaultParams = {
 }
 
 function getContentItem(this: ApiClientInstance, requestParams: ContentItemRequestParams): Promise<ContentItem> {
-    console.log('getContentItem', this);
     validateRequestParams(requestParams);
 
     //merge default params with request params

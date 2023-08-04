@@ -39,7 +39,6 @@ import { ApiClientInstance } from '../types/Client'
 export interface SyncContentRequestParams {
     syncToken: number;
     locale: string;
-    languageCode: string;
     pageSize?: number;
 }
 
@@ -50,7 +49,7 @@ function getSyncContent(this: ApiClientInstance, requestParams: SyncContentReque
     const req = {
         url: `/sync/items?pageSize=${requestParams.pageSize}&syncToken=${requestParams.syncToken}`,
         method: 'get',
-        baseURL: buildRequestUrlPath(this.config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
+        baseURL: buildRequestUrlPath(this.config, requestParams.locale),
         headers: buildAuthHeader(this.config),
         params: {}
     };

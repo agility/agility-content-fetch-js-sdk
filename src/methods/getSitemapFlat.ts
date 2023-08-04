@@ -32,9 +32,8 @@ import { ApiClientInstance } from '../types/Client'
 */
 
 export interface SitemapFlatRequestParams {
-    channelName: number;
+    channelName: string;
     locale: string;
-    languageCode: string;
 }
 
 function getSitemapFlat(this: ApiClientInstance, requestParams: SitemapFlatRequestParams): Promise<SitemapFlat> {
@@ -44,7 +43,7 @@ function getSitemapFlat(this: ApiClientInstance, requestParams: SitemapFlatReque
     const req = {
         url: `/sitemap/flat/${requestParams.channelName}`,
         method: 'get',
-        baseURL: buildRequestUrlPath(this.config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
+        baseURL: buildRequestUrlPath(this.config, requestParams.locale),
         headers: buildAuthHeader(this.config),
         params:{}
     };
