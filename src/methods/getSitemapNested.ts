@@ -33,7 +33,8 @@ import { ApiClientInstance } from '../types/Client'
 
 export interface SitemapNestedRequestParams {
     channelName: string;
-    locale: string;
+    locale?: string;
+    languageCode?: string;
 }
 
 function getSitemapNested(this: ApiClientInstance, requestParams: SitemapNestedRequestParams): Promise<SitemapNested> {
@@ -43,7 +44,7 @@ function getSitemapNested(this: ApiClientInstance, requestParams: SitemapNestedR
     const req = {
         url: `/sitemap/nested/${requestParams.channelName}`,
         method: 'get',
-        baseURL: buildRequestUrlPath(this.config, requestParams.locale),
+        baseURL: buildRequestUrlPath(this.config, requestParams.locale || requestParams.languageCode),
         headers: buildAuthHeader(this.config),
         params:{}
     };

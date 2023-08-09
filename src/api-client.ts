@@ -125,6 +125,16 @@ function validateConfigParams(configParams: Config) {
 export interface ApiClientInstance {
     config: Config;
     makeRequest(req: any): Promise<any>; // Replace 'any' with the proper type for req if possible.
+    getSitemapFlat(params: SitemapFlatRequestParams): Promise<any>;
+    getSitemapNested(params: SitemapNestedRequestParams): Promise<any>;
+    getContentItem(params: ContentItemRequestParams): Promise<any>;
+    getContentList(params: ContentListRequestParams): Promise<any>;
+    getPage(params: PageRequestParams): Promise<any>;
+    getGallery(params: GalleryRequestParams): Promise<any>;
+    getUrlRedirections(params: UrlRedirectionsRequestParams): Promise<any>;
+    getSyncContent(params: SyncContentRequestParams): Promise<any>;
+    getSyncPages(params: SyncPagesRequestParams): Promise<any>;
+
   }
 
 class ApiClient {
@@ -235,9 +245,10 @@ class ApiClient {
     }
 }
 
-export default types
 
-export function getApi(config: Config) {
+function getApi(config: Config) {
     validateConfigParams(config);
     return new ApiClient(config);
 }
+
+export default getApi;

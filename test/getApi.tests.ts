@@ -1,4 +1,4 @@
-import { agilityFetch } from '../src/index';
+import agilityFetch from '../src/index';
 
 //This is a synchronous test
 describe('getApi:', function() {

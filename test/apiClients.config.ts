@@ -1,4 +1,4 @@
-import { agilityFetch } from '../src/index';
+import agilityFetch from '../src/index';
 
 // Agility Instance = 'Headless Integration Testing' [Dev]
 const guid = 'c741222b-1080-45f6-9a7f-982381c5a485';

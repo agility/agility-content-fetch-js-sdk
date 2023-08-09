@@ -66,8 +66,8 @@ import { ApiClientInstance } from '../types/Client'
 
 export interface ContentListRequestParams { 
     referenceName: string; 
-    locale: string; 
-    languageCode: string; 
+    locale?: string; 
+    languageCode?: string; 
     contentLinkDepth?: number; 
     expandAllContentLinks?: boolean; 
     take?: number; 
