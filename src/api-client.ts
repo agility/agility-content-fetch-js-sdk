@@ -1,5 +1,4 @@
 import axios, { AxiosAdapter, AxiosInstance } from 'axios'
-import { setupCache } from 'axios-cache-adapter'
 import getSitemapFlat, { SitemapFlatRequestParams } from './methods/getSitemapFlat'
 import getSitemapNested, { SitemapNestedRequestParams } from './methods/getSitemapNested'
 import getContentItem, { ContentItemRequestParams } from './methods/getContentItem'
@@ -164,6 +163,8 @@ class ApiClient {
         let adapter: AxiosAdapter | undefined = undefined;
     
         //should we turn on caching?
+
+        /*
         if (config.caching.maxAge > 0) {
             const cache = setupCache({
                 maxAge: config.caching.maxAge,
@@ -171,10 +172,9 @@ class ApiClient {
             });
             adapter = cache.adapter;
         }
+        */
     
-        this._api = axios.create({
-            adapter: adapter,
-        })
+        this._api = axios.create()
 
     }
 

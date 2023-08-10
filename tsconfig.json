@@ -3,7 +3,7 @@
     "module" : "commonjs",
 	  "allowJs": true,
 	  "declaration": true,
-	  "jsx": "react",
+	  "jsx": "react-jsx",
 	  "target": "es5",
 	  "outDir": "./dist/",
 	  "lib": ["es2016", "dom"],

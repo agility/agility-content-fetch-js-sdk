@@ -1,11 +1,26 @@
-export { Config } from "./types/Config"
-export { ContentItem } from "./types/ContentItem"
-export { ContentList } from "./types/ContentList"
-export { Gallery } from "./types/Gallery"
-export { Page } from "./types/Page"
+import { Config } from "./types/Config"
+import { ContentItem } from "./types/ContentItem"
+import { ContentList } from "./types/ContentList"
+import { Gallery } from "./types/Gallery"
+import { Page } from "./types/Page"
 
 import getApi, { ApiClientInstance } from "./api-client";
 
+export type { 
+    ApiClientInstance,
+    Config,
+    ContentItem,
+    ContentList,
+    Gallery,
+    Page
+ }
 
-export { ApiClientInstance }
-export default {getApi};
+ // Default export
+const agilityRestAPI = {
+    getApi
+}
+
+export {
+    getApi
+}
+ 

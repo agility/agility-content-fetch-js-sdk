@@ -10,5 +10,6 @@ import { ContentItem } from "./ContentItem";
 export interface ContentZone {
   module: string;
   item: ContentItem;
+  customData?: any;
 }
   

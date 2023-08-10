@@ -53,7 +53,7 @@ import { SitemapVisibility } from "./SitemapVisibility";
       templateName: string;
       securePage: boolean;
       properties: SystemProperties; // Replace with the actual SystemProperties interface
-      zones: { [key: string]: ContentZone }; // Replace with the actual ContentZone interface
+      zones: { [key: string]: ContentZone[] }; // Replace with the actual ContentZone interface
       redirectUrl?: string;
       dynamicItemContentID?: number;
       visible: SitemapVisibility; // Replace with the actual SitemapVisibility type
