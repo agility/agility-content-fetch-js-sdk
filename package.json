@@ -1,6 +1,6 @@
 {
   "name": "@agility/content-fetch",
-  "version": "2.0.0-rc6",
+  "version": "2.0.0-rc7",
   "description": "JavaScript library for the Agility Fetch API (node and browser)",
   "repository": {
     "type": "git",
@@ -22,10 +22,6 @@
     "prepare": "yarn build",
     "test": "jest",
     "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
-  },
-  "exports": {
-    "import": "./dist/node.js",
-    "require": "./dist/browser.js"
   },
   "keywords": [
     "typescript",
