@@ -12,17 +12,20 @@
   "homepage": "https://github.com/agility/agility-content-fetch-js-sdk.git#readme",
   "main": "./dist/node.js",
   "browser": "./dist/browser.js",
-  "module": "./dist/browser.js",
   "types": "./dist/index.d.ts",
   "engines": {
     "node": ">= 18.0.0"
   },
   "scripts": {
     "clean": "rimraf dist",
-    "build": "node build.js",
+    "build": "yarn clean && node build.js",
     "prepare": "yarn build",
     "test": "jest",
     "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
+  },
+  "exports": {
+    "node": "./dist/node.js",
+    "default": "./dist/browser.js"
   },
   "keywords": [
     "typescript",
