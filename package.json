@@ -1,6 +1,6 @@
 {
   "name": "@agility/content-fetch",
-  "version": "2.0.0-rc7",
+  "version": "2.0.0-rc9",
   "description": "JavaScript library for the Agility Fetch API (node and browser)",
   "repository": {
     "type": "git",
@@ -11,6 +11,7 @@
   },
   "homepage": "https://github.com/agility/agility-content-fetch-js-sdk.git#readme",
   "main": "./dist/browser.js",
+  "browser": "./dist/browser.js",
   "module": "./dist/node.js",
   "types": "./dist/index.d.ts",
   "engines": {
