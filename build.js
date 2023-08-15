@@ -11,10 +11,8 @@ execSync('tsc --emitDeclarationOnly');
 esbuild.build({
   entryPoints: ['./src/index.ts'],
   bundle: true,
-  minify: true,
-  sourcemap: true,
   outfile: './dist/browser.js',
-  target: ['browser'],
+  // target: ['browser'],
   platform: 'browser',
 }).catch(() => process.exit(1));
 
@@ -23,6 +21,6 @@ esbuild.build({
   entryPoints: ['./src/index.ts'],
   bundle: true,
   outfile: './dist/node.js',
-  target: ['node18'], // Adjust this to match your Node.js version
+  //  target: ['node18'], // Adjust this to match your Node.js version
   platform: 'node',
 }).catch(() => process.exit(1));
