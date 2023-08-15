@@ -4,7 +4,7 @@ import { ContentList } from "./types/ContentList"
 import { Gallery } from "./types/Gallery"
 import { Page } from "./types/Page"
 
-import getApi, { ApiClientInstance } from "./api-client";
+import { ApiClientInstance, getApi } from "./api-client";
 
 export type { 
     ApiClientInstance,
@@ -15,12 +15,10 @@ export type {
     Page
  }
 
- // Default export
-const agilityRestAPI = {
-    getApi
-}
-
 export {
     getApi
 }
- 
+
+ module.exports = {
+    getApi
+}

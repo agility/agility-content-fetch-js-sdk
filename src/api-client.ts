@@ -58,31 +58,6 @@ const defaultConfig: Config = {
     }
 };
 
-function buildEnvConfig() {
-    const envConfig: EnvConfig = {
-        baseUrl: null,
-        isPreview: false,
-        guid: null,
-        apiKey: null
-    };
-
-    if (process && process.env) {
-        let env = process.env;
-        if (env.AGILITY_BASEURL) {
-            envConfig.baseUrl = env.AGILITY_BASEURL;
-        }
-        if (env.AGILITY_GUID) {
-            envConfig.guid = env.AGILITY_GUID;
-        }
-        if (env.AGILITY_APIKEY) {
-            envConfig.apiKey = env.AGILITY_APIKEY;
-        }
-        
-        envConfig.isPreview = env.AGILITY_ISPREVIEW === 'true';
-    }
-
-    return envConfig;
-}
 
 function buildBaseUrl(guid: string) {
 
@@ -141,12 +116,10 @@ class ApiClient {
     _api!: AxiosInstance;
 
     constructor(userConfig: Config){
-        const envConfig = buildEnvConfig();
 
         //merge our config - user values will override our defaults
         let config: Config = {
             ...defaultConfig,
-            ...envConfig,
             ...userConfig
         };
     
@@ -246,7 +219,7 @@ class ApiClient {
 }
 
 
-function getApi(config: Config) {
+export function getApi(config: Config) {
     validateConfigParams(config);
     return new ApiClient(config);
 }
