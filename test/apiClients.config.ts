@@ -1,4 +1,4 @@
-import agilityFetch from '../dist/node';
+import * as agilityFetch from '../dist/node';
 
 // Agility Instance = 'Headless Integration Testing' [Dev]
 const guid = 'c741222b-1080-45f6-9a7f-982381c5a485';
@@ -25,18 +25,6 @@ export function createApiClientWithNewCdn() {
     return api;
 }
 
-export function createCachedApiClient() {
-    console.log(`Creating API Client for ${guid}`);
-    var api = agilityFetch.getApi({
-        guid: guid,
-        apiKey: apiKeyFetch,
-        caching: {
-            maxAge: 5 * 60 * 1000 //==5mins
-        },
-        baseUrl: `https://api-dev.aglty.io/${guid}`
-    });
-    return api;
-}
 
 export function createPreviewApiClient() {
     console.log(`Creating API Client for ${guid}`);

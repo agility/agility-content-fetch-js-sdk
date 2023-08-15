@@ -1,10 +1,10 @@
-import agilityFetch from '../src/index';
+import * as agilityFetch from '../dist/node';
 
 //This is a synchronous test
-describe('getApi:', function() {
+describe('getApi:', function () {
 
     jest.setTimeout(120000);
-    
+
     it('should return an api client object with required params', () => {
         const api = agilityFetch.getApi({
             guid: 'some-guid',
@@ -22,52 +22,52 @@ describe('getApi:', function() {
         expect(api.config.isPreview).toBe(true);
     });
 
-    it('should contain method for getContentItem', function(done) {
+    it('should contain method for getContentItem', function (done) {
         const api = agilityFetch.getApi({
             guid: 'some-guid',
             apiKey: 'some-access-token'
         });
-        expect(typeof(api.getContentItem)).toBe("function");
+        expect(typeof (api.getContentItem)).toBe("function");
         done();
     })
 
-    it('should contain method for getContentList', function(done) {
+    it('should contain method for getContentList', function (done) {
         const api = agilityFetch.getApi({
             guid: 'some-guid',
             apiKey: 'some-access-token'
         });
-        expect(typeof(api.getContentList)).toBe("function");
+        expect(typeof (api.getContentList)).toBe("function");
         done();
     })
 
-    it('should contain method for getPage', function(done) {
+    it('should contain method for getPage', function (done) {
         const api = agilityFetch.getApi({
             guid: 'some-guid',
             apiKey: 'some-access-token'
         });
-        expect(typeof(api.getPage)).toBe("function");
+        expect(typeof (api.getPage)).toBe("function");
         done();
     })
 
-    it('should contain method for getSitemapFlat', function(done) {
+    it('should contain method for getSitemapFlat', function (done) {
         const api = agilityFetch.getApi({
             guid: 'some-guid',
             apiKey: 'some-access-token'
         });
-        expect(typeof(api.getSitemapFlat)).toBe("function");
+        expect(typeof (api.getSitemapFlat)).toBe("function");
         done();
     })
 
-    it('should contain method for getSitemapNested', function(done) {
+    it('should contain method for getSitemapNested', function (done) {
         const api = agilityFetch.getApi({
             guid: 'some-guid',
             apiKey: 'some-access-token'
         });
-        expect(typeof(api.getSitemapNested)).toBe("function");
+        expect(typeof (api.getSitemapNested)).toBe("function");
         done();
     })
 
-    it('should return an api client with the baseUrl overidden if passed-in correctly as params', function(done) {
+    it('should return an api client with the baseUrl overidden if passed-in correctly as params', function (done) {
         const baseUrl = 'https://fake-url.agilitycms.com';
         const api = agilityFetch.getApi({
             guid: 'some-guid',
@@ -78,7 +78,7 @@ describe('getApi:', function() {
         done();
     });
 
-    it('should return an api client with new stackpath baseUrl based on canada', function(done) {
+    it('should return an api client with new stackpath baseUrl based on canada', function (done) {
         const baseUrl = 'https://api-ca.aglty.io/some-guid-c';
         const api = agilityFetch.getApi({
             guid: 'some-guid-c',
@@ -89,7 +89,7 @@ describe('getApi:', function() {
         done();
     });
 
-    it('should return an api client with new stackpath baseUrl based on usa', function(done) {
+    it('should return an api client with new stackpath baseUrl based on usa', function (done) {
         const baseUrl = 'https://api.aglty.io/some-guid-u';
         const api = agilityFetch.getApi({
             guid: 'some-guid-u',
@@ -100,7 +100,7 @@ describe('getApi:', function() {
         done();
     });
 
-    it('should return an api client with new stackpath baseUrl based on dev', function(done) {
+    it('should return an api client with new stackpath baseUrl based on dev', function (done) {
         const baseUrl = 'https://api-dev.aglty.io/some-guid-d';
         const api = agilityFetch.getApi({
             guid: 'some-guid-d',
@@ -111,7 +111,7 @@ describe('getApi:', function() {
         done();
     });
 
-    it('should return an api client with legacy stackpath baseUrl', function(done) {
+    it('should return an api client with legacy stackpath baseUrl', function (done) {
         const baseUrl = 'https://some-guid-api.agilitycms.cloud';
         const api = agilityFetch.getApi({
             guid: 'some-guid',
@@ -149,5 +149,5 @@ describe('getApi:', function() {
             });
         }).toThrow(TypeError);
     });
- 
+
 });

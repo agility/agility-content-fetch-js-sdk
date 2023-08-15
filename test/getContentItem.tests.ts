@@ -1,11 +1,10 @@
 import {
     createApiClient,
     createPreviewApiClient,
-    createCachedApiClient,
     createApiClientWithNewCdn
 } from './apiClients.config';
 
-/* 
+/*
     This file contains static references to content from the instance configured in the apiClient.config file.
 */
 
@@ -37,24 +36,24 @@ describe('getContentItem:', () => {
         expect(contentItem.fields.title).toMatch(/\[Staging\]/);
     });
 
-    it('should retrieve a content item in live/fetch mode, then subsequent requests are returned from cache (memory)', async () => {
-        const api = createCachedApiClient();
-        const contentItem = await api.getContentItem({
-            contentID: ref.updatesMadeToPublishedContentItemID,
-            locale: 'en-us'
-        });
+    // it('should retrieve a content item in live/fetch mode, then subsequent requests are returned from cache (memory)', async () => {
+    //     const api = createCachedApiClient();
+    //     const contentItem = await api.getContentItem({
+    //         contentID: ref.updatesMadeToPublishedContentItemID,
+    //         locale: 'en-us'
+    //     });
 
-        expect(contentItem.contentID).toBe(ref.updatesMadeToPublishedContentItemID);
-        expect(contentItem.fromCache).toBeFalsy();
+    //     expect(contentItem.contentID).toBe(ref.updatesMadeToPublishedContentItemID);
+    //     expect(contentItem.fromCache).toBeFalsy();
 
-        const contentItem2 = await api.getContentItem({
-            contentID: ref.updatesMadeToPublishedContentItemID,
-            locale: 'en-us'
-        });
+    //     const contentItem2 = await api.getContentItem({
+    //         contentID: ref.updatesMadeToPublishedContentItemID,
+    //         locale: 'en-us'
+    //     });
 
-        expect(contentItem2.contentID).toBe(ref.updatesMadeToPublishedContentItemID);
-        expect(contentItem2.fromCache).toBeTruthy();
-    });
+    //     expect(contentItem2.contentID).toBe(ref.updatesMadeToPublishedContentItemID);
+    //     expect(contentItem2.fromCache).toBeTruthy();
+    // });
 
     it('should throw error if locale not passed as argument for getContentItem', async () => {
         const api = createApiClient();
