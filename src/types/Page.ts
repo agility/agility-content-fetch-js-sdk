@@ -41,7 +41,7 @@
 import { ContentZone } from "./ContentZone";
 import { SystemProperties } from "./SystemProperties";
 import { SitemapVisibility } from "./SitemapVisibility";
-
+import { SEOProperties } from "./SEO";
 
     export interface Page {
       pageID: number;
@@ -57,5 +57,6 @@ import { SitemapVisibility } from "./SitemapVisibility";
       redirectUrl?: string;
       dynamicItemContentID?: number;
       visible: SitemapVisibility; // Replace with the actual SitemapVisibility type
+      seo?: SEOProperties;
     }
   
