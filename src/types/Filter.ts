@@ -10,7 +10,7 @@
 
     export interface Filter {
       property: string;
-      operator: FilterOperator;
+      operator: FilterOperator | "eq" | "ne" | "gt" | "lt" | "ge" | "le" | "contains";
       value: string;
     }
   
