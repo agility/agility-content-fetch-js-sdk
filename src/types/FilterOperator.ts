@@ -10,21 +10,21 @@
  * @memberOf AgilityFetch.Types
  * @readonly
  */
-const FilterOperators = {
+enum FilterOperators {
     /** Equal To */
-    EQUAL_TO: "eq",
+    EQUAL_TO = "eq",
     /** Not Equal To */
-    NOT_EQUAL_TO: "ne",
+    NOT_EQUAL_TO = "ne",
     /** Less Than */
-    LESS_THAN: "lt",
+    LESS_THAN = "lt",
     /** Less Than or Equal To */
-    LESS_THAN_OR_EQUAL_TO: "lte",
+    LESS_THAN_OR_EQUAL_TO = "lte",
     /** Greater Than */
-    GREATER_THAN: "gt",
+    GREATER_THAN = "gt",
     /** Greater Than or Equal To */
-    GREATER_THAN_OR_EQUAL_TO: "gte",
+    GREATER_THAN_OR_EQUAL_TO = "gte",
     /** Like (string only) */
-    LIKE: "like"
+    LIKE = "like"
 };
 
 export default FilterOperators;
