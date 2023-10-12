@@ -13,14 +13,14 @@ import { ApiClientInstance } from '../types/Client'
  * @param {number} [requestParams.contentLinkDepth] - The depth, representing the levels in which you want linked content auto-resolved. Default is **2**.
  * @returns {Promise<AgilityFetch.Types.Page>} - Returns a page item object.
  * @example
- * 
+ *
  * import agility from '@agility/content-fetch'
- * 
+ *
  * const api = agility.getApi({
  *   guid: 'ade6cf3c',
  *   apiKey: 'defaultlive.201ffdd0841cacad5bb647e76547e918b0c9ecdb8b5ddb3cf92e9a79b03623cb',
  * });
- * 
+ *
  * api.getPage({
  *     pageID: 1,
  *     locale: 'en-us'
@@ -46,27 +46,25 @@ function getPage(this: ApiClientInstance, requestParams: PageRequestParams): Pro
     validateRequestParams(requestParams);
 
     //merge default params with request params
-    requestParams = {...defaultParams, ...requestParams};
+    requestParams = { ...defaultParams, ...requestParams };
 
     const req = {
         url: `/page/${requestParams.pageID}?contentLinkDepth=${requestParams.contentLinkDepth}&expandAllContentLinks=${requestParams.expandAllContentLinks}`,
         method: 'get',
         baseURL: buildRequestUrlPath(this.config, requestParams.locale || requestParams.languageCode),
         headers: buildAuthHeader(this.config),
-        params:{}
+        params: {}
     };
 
-    console.log(req, 'hellooo')
-    
-    return this.makeRequest(req);       
+    return this.makeRequest(req);
 }
 
 function validateRequestParams(requestParams) {
-    if(!requestParams.languageCode && !requestParams.locale) {
+    if (!requestParams.languageCode && !requestParams.locale) {
         throw new TypeError('You must include a locale in your request params.')
-    } else if(!requestParams.pageID) {
+    } else if (!requestParams.pageID) {
         throw new TypeError('You must include a pageID in your request params.');
-    } else  if(requestParams.expandAllContentLinks && typeof requestParams.expandAllContentLinks !== 'boolean') {
+    } else if (requestParams.expandAllContentLinks && typeof requestParams.expandAllContentLinks !== 'boolean') {
         throw new TypeError('ExpandAllContentLinks parameter must be a value of true or false');
     } else {
         return;
