@@ -1,6 +1,6 @@
 {
   "name": "@agility/content-fetch",
-  "version": "2.0.0-rc17",
+  "version": "2.0.0-rc19",
   "description": "JavaScript library for the Agility Fetch API (node and browser)",
   "repository": {
     "type": "git",
@@ -39,9 +39,7 @@
     "Joshua Isaac"
   ],
   "license": "MIT",
-  "dependencies": {
-    "axios": "^0.27.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^29.5.3",
     "@types/node": "^18.11.9",

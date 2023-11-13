@@ -53,28 +53,28 @@ function getContentItem(this: ApiClientInstance, requestParams: ContentItemReque
     validateRequestParams(requestParams);
 
     //merge default params with request params
-    requestParams = {...defaultParams, ...requestParams};
+    requestParams = { ...defaultParams, ...requestParams };
 
     const req = {
         url: `/item/${requestParams.contentID}?contentLinkDepth=${requestParams.contentLinkDepth}&expandAllContentLinks=${requestParams.expandAllContentLinks}`,
         method: 'get',
         baseURL: buildRequestUrlPath(this.config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
         headers: buildAuthHeader(this.config),
-		params:{}
+        params: {}
     };
 
     return this.makeRequest(req);
 }
 
 function validateRequestParams(requestParams: ContentItemRequestParams) {
-    if(!requestParams.languageCode && !requestParams.locale) {
+    if (!requestParams.languageCode && !requestParams.locale) {
         throw new TypeError('You must include a locale in your request params.')
     }
-    else if(!requestParams.contentID) {
+    else if (!requestParams.contentID) {
         throw new TypeError('You must include a contentID number in your request params.');
-    } else if(requestParams.contentLinkDepth && (isNaN(requestParams.contentLinkDepth) || requestParams.contentLinkDepth < 0)) {
+    } else if (requestParams.contentLinkDepth && (isNaN(requestParams.contentLinkDepth) || requestParams.contentLinkDepth < 0)) {
         throw new TypeError('When specifying contentLinkDepth, it must be a number greater than 0.');
-    } else  if(requestParams.expandAllContentLinks && typeof requestParams.expandAllContentLinks !== 'boolean') {
+    } else if (requestParams.expandAllContentLinks && typeof requestParams.expandAllContentLinks !== 'boolean') {
         throw new TypeError('ExpandAllContentLinks parameter must be a value of true or false');
     } else {
         return;
