@@ -84,7 +84,7 @@ function buildBaseUrl(guid: string) {
 function validateConfigParams(configParams: Config) {
 
 	if (!configParams.guid || configParams.guid.length == 0) {
-		throw new TypeError('You must provide an guid.');
+		throw new TypeError('You must provide a guid.');
 	} else if (!configParams.apiKey || configParams.apiKey.length == 0) {
 		throw new TypeError('You must provide an access token.');
 	} else if (configParams.caching && isNaN(configParams.caching.maxAge)) {
