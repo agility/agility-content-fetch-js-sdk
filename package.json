@@ -1,6 +1,6 @@
 {
   "name": "@agility/content-fetch",
-  "version": "2.0.0-rc19",
+  "version": "2.0.0-rc23",
   "description": "JavaScript library for the Agility Fetch API (node and browser)",
   "repository": {
     "type": "git",

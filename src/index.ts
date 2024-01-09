@@ -5,20 +5,22 @@ import { Gallery } from "./types/Gallery"
 import { Page } from "./types/Page"
 
 import { ApiClientInstance, getApi } from "./api-client";
+import { ContentReference } from "./types/ContentReference"
 
-export type { 
+export type {
     ApiClientInstance,
     Config,
     ContentItem,
     ContentList,
+    ContentReference,
     Gallery,
     Page
- }
+}
 
 export {
     getApi
 }
 
- module.exports = {
+module.exports = {
     getApi
 }

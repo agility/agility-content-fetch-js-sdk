@@ -176,6 +176,7 @@ class ApiClient {
 	//the function that actually makes ALL our requests
 	async makeRequest(reqConfig: RequestParams) {
 
+		const isPreview = !!this.config.isPreview
 
 		if (this.config.debug) {
 			logDebug(`AgilityCMS Fetch API LOG: ${reqConfig.baseURL}${reqConfig.url}`);
@@ -186,16 +187,22 @@ class ApiClient {
 
 			const fullUrl = `${reqConfig.baseURL}${reqConfig.url}`
 
-			let init: RequestInit = {
+
+			let init: any = {
+				...this.config.fetchConfig,
 				method: "GET",
 				headers: {
 					...reqConfig.headers,
 					'Content-Type': 'application/json',
 					'Accept': 'application/json',
-
 				}
 			}
 
+			//MOD: joelv - add some extra caching stuff here for next.js
+			if (isPreview) {
+				init.cache = "no-store"
+				delete init.next
+			}
 
 			const response = await fetch(fullUrl, init)
 			if (!response.ok) {
@@ -222,6 +229,7 @@ class ApiClient {
 
 export function getApi(config: Config) {
 	validateConfigParams(config);
+	if (!config.fetchConfig) config.fetchConfig = {}
 	return new ApiClient(config);
 }
 

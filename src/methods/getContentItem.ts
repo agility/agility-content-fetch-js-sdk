@@ -49,7 +49,7 @@ const defaultParams = {
     expandAllContentLinks: false
 }
 
-function getContentItem(this: ApiClientInstance, requestParams: ContentItemRequestParams): Promise<ContentItem> {
+function getContentItem<T>(this: ApiClientInstance, requestParams: ContentItemRequestParams): Promise<ContentItem<T>> {
     validateRequestParams(requestParams);
 
     //merge default params with request params
