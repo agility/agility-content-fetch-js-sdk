@@ -1,6 +1,7 @@
 import { buildRequestUrlPath, buildAuthHeader } from '../utils'
 import { SyncContent } from '../types/SyncContent';
 import { ApiClientInstance } from '../types/Client'
+import { TypeError } from '../types/errors/Errors';
 
 /**
  * Retrieves a list of content items that need to be synced based on the provided sync content items token, and returns the next sync token.
@@ -12,14 +13,14 @@ import { ApiClientInstance } from '../types/Client'
  * @param {number} [requestParams.pageSize] - The number of items to return back with each call.  Default is 500.
  * @returns {Promise<AgilityFetch.Types.SyncContent>} - Returns a list of content item objects.
  * @example
- * 
+ *
  * import agility from '@agility/content-fetch'
- * 
+ *
  * const api = agility.getApi({
  *   guid: 'ade6cf3c',
  *   apiKey: 'defaultlive.201ffdd0841cacad5bb647e76547e918b0c9ecdb8b5ddb3cf92e9a79b03623cb',
  * });
- * 
+ *
  * api.getSyncContent({
  *      syncToken: '0', //to start a new sync
  *      locale: 'en-us',
@@ -27,9 +28,9 @@ import { ApiClientInstance } from '../types/Client'
  * })
  * .then(function(contentList) {
  *      console.log(contentList.items);
- * 
+ *
  *      //the next sync token to use, continue to call this method (loop) until no sync token is provided in the response. This indicates your are up to date.
- *      console.log(contentList.syncToken); 
+ *      console.log(contentList.syncToken);
  * })
  * .catch(function(error) {
  *      console.log(error);
@@ -60,10 +61,10 @@ function getSyncContent(this: ApiClientInstance, requestParams: SyncContentReque
 
 function validateRequestParams(requestParams) {
     if (!requestParams.languageCode && !requestParams.locale) {
-        throw new TypeError('You must include a locale in your request params.')
+        throw new TypeError('You must include a locale in your request params.', validateRequestParams)
     }
     else if (requestParams.syncToken == undefined || requestParams.syncToken == null) {
-        throw new TypeError('You must include a syncToken value your request params.  Use zero (0) to start a new sync.');
+        throw new TypeError('You must include a syncToken value your request params.  Use zero (0) to start a new sync.', validateRequestParams);
     } else {
         return;
     }

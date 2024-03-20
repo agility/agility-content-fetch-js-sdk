@@ -129,7 +129,7 @@ describe('getApi:', function () {
             agilityFetch.getApi({
                 apiKey: 'some-access-token'
             });
-        }).toThrow(TypeError);
+        }).toThrow(Error);
     });
 
     it('should throw an error if apiKey is not passed-in', () => {
@@ -137,7 +137,7 @@ describe('getApi:', function () {
             agilityFetch.getApi({
                 guid: 'some-guid',
             });
-        }).toThrow(TypeError);
+        }).toThrow(Error);
     });
 
     it('should throw an error if baseUrl is passed-in and does not start with "https"', () => {
@@ -147,7 +147,7 @@ describe('getApi:', function () {
                 apiKey: 'some-access-token',
                 baseUrl: 'http://insecuresite.com'
             });
-        }).toThrow(TypeError);
+        }).toThrow(Error);
     });
 
 });

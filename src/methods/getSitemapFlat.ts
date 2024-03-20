@@ -1,6 +1,7 @@
 import { buildRequestUrlPath, buildAuthHeader } from '../utils'
 import { SitemapFlat } from '../types/SitemapFlat';
 import { ApiClientInstance } from '../types/Client'
+import { TypeError } from '../types/errors/Errors';
 
 /**
  * The sitemap, returned in a flat list, where the dictionary key is the page path. This method is ideal for page routing.
@@ -11,14 +12,14 @@ import { ApiClientInstance } from '../types/Client'
  * @param {string} requestParams.languageCode - DEPRECATED: Use locale instead - The language code of the content you want to retrieve.
  * @returns {Promise<AgilityFetch.Types.SitemapFlat>} - The sitemap response in a flat format.
  * @example
- * 
+ *
  * import agility from '@agility/content-fetch'
- * 
+ *
  * const api = agility.getApi({
  *   guid: 'ade6cf3c',
  *   apiKey: 'defaultlive.201ffdd0841cacad5bb647e76547e918b0c9ecdb8b5ddb3cf92e9a79b03623cb',
  * });
- * 
+ *
  * api.getSitemapFlat({
  *      channelName: 'website',
  *      locale: 'en-us'
@@ -37,7 +38,7 @@ export interface SitemapFlatRequestParams {
     languageCode?: string;
 }
 
-function getSitemapFlat(this: ApiClientInstance, requestParams: SitemapFlatRequestParams ): Promise<SitemapFlat> {
+function getSitemapFlat(this: ApiClientInstance, requestParams: SitemapFlatRequestParams): Promise<SitemapFlat> {
 
     validateRequestParams(requestParams);
 
@@ -46,17 +47,17 @@ function getSitemapFlat(this: ApiClientInstance, requestParams: SitemapFlatReque
         method: 'get',
         baseURL: buildRequestUrlPath(this.config, requestParams.locale || requestParams.languageCode),
         headers: buildAuthHeader(this.config),
-        params:{}
+        params: {}
     };
-    
-    return this.makeRequest(req);      
+
+    return this.makeRequest(req);
 }
 
 function validateRequestParams(requestParams) {
-    if(!requestParams.languageCode && !requestParams.locale) {
-        throw new TypeError('You must include a locale in your request params.')
-    } else if(!requestParams.channelName) {
-        throw new TypeError('You must include a channelName in your request params.');
+    if (!requestParams.languageCode && !requestParams.locale) {
+        throw new TypeError('You must include a locale in your request params.', validateRequestParams)
+    } else if (!requestParams.channelName) {
+        throw new TypeError('You must include a channelName in your request params.', validateRequestParams);
     } else {
         return;
     }

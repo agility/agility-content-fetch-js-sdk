@@ -18,6 +18,7 @@ import { EnvConfig } from './types/EnvConfig'
 import { isHttps } from './utils'
 import * as types from './types'
 import { RequestParams } from './types/Client'
+import { TypeError } from './types/errors/Errors'
 
 /**
  * How to create an instance of an an API client for the Agility Content Fetch REST API.

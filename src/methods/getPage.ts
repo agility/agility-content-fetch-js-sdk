@@ -1,6 +1,7 @@
 import { buildRequestUrlPath, buildAuthHeader } from '../utils'
 import { Page } from '../types/Page';
 import { ApiClientInstance } from '../types/Client'
+import { TypeError } from '../types/errors/Errors';
 
 /**
  * Gets the details of a page by its Page ID.
@@ -61,11 +62,11 @@ function getPage(this: ApiClientInstance, requestParams: PageRequestParams): Pro
 
 function validateRequestParams(requestParams) {
     if (!requestParams.languageCode && !requestParams.locale) {
-        throw new TypeError('You must include a locale in your request params.')
+        throw new TypeError('You must include a locale in your request params.', validateRequestParams)
     } else if (!requestParams.pageID) {
-        throw new TypeError('You must include a pageID in your request params.');
+        throw new TypeError('You must include a pageID in your request params.', validateRequestParams);
     } else if (requestParams.expandAllContentLinks && typeof requestParams.expandAllContentLinks !== 'boolean') {
-        throw new TypeError('ExpandAllContentLinks parameter must be a value of true or false');
+        throw new TypeError('ExpandAllContentLinks parameter must be a value of true or false', validateRequestParams);
     } else {
         return;
     }

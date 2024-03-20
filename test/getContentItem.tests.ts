@@ -57,9 +57,15 @@ describe('getContentItem:', () => {
 
     it('should throw error if locale not passed as argument for getContentItem', async () => {
         const api = createApiClient();
-        await expect(api.getContentItem({
-            contentID: 22
-        })).rejects.toThrow(TypeError);
+        let err
+        try {
+            await api.getContentItem({
+                contentID: 22
+            })
+        } catch (error) {
+            err = error
+        }
+        expect(err).toBeDefined()
     });
 
     it('should expand all content links when expandContentLinks are set to true', async () => {

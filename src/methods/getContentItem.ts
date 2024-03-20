@@ -34,6 +34,7 @@ import { ApiClientInstance } from '../types/Client'
 */
 
 import { ContentItem } from '../types/ContentItem';
+import { TypeError } from '../types/errors/Errors';
 
 export interface ContentItemRequestParams {
     contentID: number;
@@ -67,10 +68,12 @@ function getContentItem<T>(this: ApiClientInstance, requestParams: ContentItemRe
 }
 
 function validateRequestParams(requestParams: ContentItemRequestParams) {
+
     if (!requestParams.languageCode && !requestParams.locale) {
-        throw new TypeError('You must include a locale in your request params.')
+        throw new TypeError('You must include a locale in your request params.', validateRequestParams)
     }
     else if (!requestParams.contentID) {
+
         throw new TypeError('You must include a contentID number in your request params.');
     } else if (requestParams.contentLinkDepth && (isNaN(requestParams.contentLinkDepth) || requestParams.contentLinkDepth < 0)) {
         throw new TypeError('When specifying contentLinkDepth, it must be a number greater than 0.');

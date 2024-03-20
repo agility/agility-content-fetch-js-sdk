@@ -1,9 +1,10 @@
-import {buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
+import { buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
 import { Filter } from '../types/Filter';
 import { FilterLogicOperator } from '../types/FilterLogicOperator';
 import { SortDirection } from '../types/SortDirection';
 import { ContentList } from '../types/ContentList';
 import { ApiClientInstance } from '../types/Client'
+import { TypeError } from '../types/errors/Errors';
 
 /**
  * Retrieves a list of content items by reference name.
@@ -64,98 +65,98 @@ import { ApiClientInstance } from '../types/Client'
  * });
 */
 
-export interface ContentListRequestParams { 
-    referenceName: string; 
-    locale?: string; 
-    languageCode?: string; 
-    contentLinkDepth?: number; 
-    expandAllContentLinks?: boolean; 
-    take?: number; 
-    skip?: number; 
-    sort?: string; 
-    direction?: SortDirection; 
-    filters?: Array<Filter>;
-     filtersLogicOperator?: 
-     FilterLogicOperator; 
+export interface ContentListRequestParams {
+	referenceName: string;
+	locale?: string;
+	languageCode?: string;
+	contentLinkDepth?: number;
+	expandAllContentLinks?: boolean;
+	take?: number;
+	skip?: number;
+	sort?: string;
+	direction?: SortDirection;
+	filters?: Array<Filter>;
+	filtersLogicOperator?:
+	FilterLogicOperator;
 }
 
 function getContentList(this: ApiClientInstance, requestParams: ContentListRequestParams): Promise<ContentList> {
 
-    validateRequestParams(requestParams);
+	validateRequestParams(requestParams);
 
-    requestParams.referenceName = sanitizeReferenceName(requestParams.referenceName);
+	requestParams.referenceName = sanitizeReferenceName(requestParams.referenceName);
 
-    //merge default params with request params
-    requestParams = {...defaultParams, ...requestParams};
+	//merge default params with request params
+	requestParams = { ...defaultParams, ...requestParams };
 
-    const req = {
-        url: buildPathUrl("list", requestParams.referenceName, requestParams.skip, requestParams.take, requestParams.sort, requestParams.direction, requestParams.filters, requestParams.filtersLogicOperator, requestParams.contentLinkDepth, requestParams.expandAllContentLinks),
-        method: 'get',
-        baseURL: buildRequestUrlPath(this.config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
-        headers: buildAuthHeader(this.config),
-        params:{}
-    };
+	const req = {
+		url: buildPathUrl("list", requestParams.referenceName, requestParams.skip, requestParams.take, requestParams.sort, requestParams.direction, requestParams.filters, requestParams.filtersLogicOperator, requestParams.contentLinkDepth, requestParams.expandAllContentLinks),
+		method: 'get',
+		baseURL: buildRequestUrlPath(this.config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
+		headers: buildAuthHeader(this.config),
+		params: {}
+	};
 
-    return this.makeRequest(req);
+	return this.makeRequest(req);
 }
 
 function sanitizeReferenceName(referenceName) {
-    return referenceName.toLowerCase();
+	return referenceName.toLowerCase();
 }
 
 function validateRequestParams(requestParams) {
-    if(!requestParams.languageCode && !requestParams.locale) {
-        throw new TypeError('You must include a locale in your request params.')
-    }
-    else if(!requestParams.referenceName) {
-        //must have a referenceName
-        throw new TypeError('You must include a content referenceName in your request params.');
-    } else if(requestParams.take && isNaN(requestParams.take)) {
-        //take parameter must be a number
-        throw new TypeError('Take parameter must be a number.')
-    } else if((requestParams.take || requestParams.take == 0)  && !isNaN(requestParams.take) && requestParams.take < 1) {
-        //take parameter must be greater than 0
-        throw new TypeError('Take parameter must be greater than 0.');
-    } else if(requestParams.take && !isNaN(requestParams.take) && requestParams.take > 250) {
-        //take parameter cannot be greater than 250
-        throw new TypeError('Take parameter must be 250 or less.');
-    } else if(requestParams.skip && isNaN(requestParams.skip)) {
-        //skip parameter must be a number
-        throw new TypeError('Skip parameter must be a number.');
-    } else if(requestParams.skip && !isNaN(requestParams.skip) && requestParams.skip < 0) {
-        //skip parameter must be a number greater than 0
-        throw new TypeError('Skip parameter must be 0 or greater');
-    } else if (requestParams.direction && (requestParams.direction !== 'desc' && requestParams.direction !== 'asc')){
-        //check if the request direction parameter is valid
-        throw new TypeError('Direction parameter must have a value of "asc" or "desc"');
-    } else if (requestParams.filters && requestParams.filters.length > 0){
-        //check if the request direction parameter is valid
-        for(let i = 0; i < requestParams.filters.length; i++) {
-            let filter = requestParams.filters[i];
-            if (!filter.hasOwnProperty('property')) {
-                throw new TypeError(JSON.stringify(filter) + " does not contain 'property'.");
-            } else if (!filter.hasOwnProperty('operator')) {
-                throw new TypeError(JSON.stringify(filter) + " does not contain 'operator'.");
-            } else if (!filter.hasOwnProperty('value')) {
-                throw new TypeError(JSON.stringify(filter) + " does not contain 'value'.");
-            }
+	if (!requestParams.languageCode && !requestParams.locale) {
+		throw new TypeError('You must include a locale in your request params.', validateRequestParams)
+	}
+	else if (!requestParams.referenceName) {
+		//must have a referenceName
+		throw new TypeError('You must include a content referenceName in your request params.', validateRequestParams);
+	} else if (requestParams.take && isNaN(requestParams.take)) {
+		//take parameter must be a number
+		throw new TypeError('Take parameter must be a number.', validateRequestParams)
+	} else if ((requestParams.take || requestParams.take == 0) && !isNaN(requestParams.take) && requestParams.take < 1) {
+		//take parameter must be greater than 0
+		throw new TypeError('Take parameter must be greater than 0.', validateRequestParams);
+	} else if (requestParams.take && !isNaN(requestParams.take) && requestParams.take > 250) {
+		//take parameter cannot be greater than 250
+		throw new TypeError('Take parameter must be 250 or less.', validateRequestParams);
+	} else if (requestParams.skip && isNaN(requestParams.skip)) {
+		//skip parameter must be a number
+		throw new TypeError('Skip parameter must be a number.', validateRequestParams);
+	} else if (requestParams.skip && !isNaN(requestParams.skip) && requestParams.skip < 0) {
+		//skip parameter must be a number greater than 0
+		throw new TypeError('Skip parameter must be 0 or greater', validateRequestParams);
+	} else if (requestParams.direction && (requestParams.direction !== 'desc' && requestParams.direction !== 'asc')) {
+		//check if the request direction parameter is valid
+		throw new TypeError('Direction parameter must have a value of "asc" or "desc"', validateRequestParams);
+	} else if (requestParams.filters && requestParams.filters.length > 0) {
+		//check if the request direction parameter is valid
+		for (let i = 0; i < requestParams.filters.length; i++) {
+			let filter = requestParams.filters[i];
+			if (!filter.hasOwnProperty('property')) {
+				throw new TypeError(JSON.stringify(filter) + " does not contain 'property'.", validateRequestParams);
+			} else if (!filter.hasOwnProperty('operator')) {
+				throw new TypeError(JSON.stringify(filter) + " does not contain 'operator'.", validateRequestParams);
+			} else if (!filter.hasOwnProperty('value')) {
+				throw new TypeError(JSON.stringify(filter) + " does not contain 'value'.", validateRequestParams);
+			}
 
-            if (['eq','ne','gt','gte','lt','lte','like'].indexOf(filter.operator.toLowerCase()) < 0) {
-                throw new TypeError(JSON.stringify(filter) + "Operator must be one of ['eq','ne','gt','gte','lt','lte','like'].");
-            }
-        }
-    } else if (requestParams.filtersLogicOperator && requestParams.filtersLogicOperator.toLowerCase() !== 'and' && requestParams.filtersLogicOperator.toLowerCase() !== 'or') {
-        throw new TypeError('FiltersLogicOperator parameter must have a value of "AND" or "OR"');
-    } else  if(requestParams.expandAllContentLinks && typeof requestParams.expandAllContentLinks !== 'boolean') {
-        throw new TypeError('ExpandAllContentLinks parameter must be a value of true or false');
-    }
+			if (['eq', 'ne', 'gt', 'gte', 'lt', 'lte', 'like'].indexOf(filter.operator.toLowerCase()) < 0) {
+				throw new TypeError(JSON.stringify(filter) + "Operator must be one of ['eq','ne','gt','gte','lt','lte','like', 'in', 'contains'].", validateRequestParams);
+			}
+		}
+	} else if (requestParams.filtersLogicOperator && requestParams.filtersLogicOperator.toLowerCase() !== 'and' && requestParams.filtersLogicOperator.toLowerCase() !== 'or') {
+		throw new TypeError('FiltersLogicOperator parameter must have a value of "AND" or "OR"', validateRequestParams);
+	} else if (requestParams.expandAllContentLinks && typeof requestParams.expandAllContentLinks !== 'boolean') {
+		throw new TypeError('ExpandAllContentLinks parameter must be a value of true or false', validateRequestParams);
+	}
 
-    return true;
+	return true;
 }
 
 const defaultParams = {
-    contentLinkDepth: 1,
-    expandAllContentLinks: false
+	contentLinkDepth: 1,
+	expandAllContentLinks: false
 }
 
 export default getContentList;

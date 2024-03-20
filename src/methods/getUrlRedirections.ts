@@ -1,6 +1,7 @@
 import { buildRequestUrlPath, buildAuthHeader } from '../utils'
 import { Gallery } from '../types/Gallery';
 import { ApiClientInstance } from '../types/Client'
+import { TypeError } from '../types/errors/Errors';
 
 /**
  * Gets the details of a gallery by their Gallery ID.
@@ -42,7 +43,7 @@ function getUrlRedirections(this: ApiClientInstance, requestParams: UrlRedirecti
 	let url = "";
 	if (requestParams.lastAccessDate) {
 
-		if (! requestParams.lastAccessDate.toISOString) {
+		if (!requestParams.lastAccessDate.toISOString) {
 			requestParams.lastAccessDate = new Date(requestParams.lastAccessDate);
 		}
 
@@ -63,7 +64,7 @@ function getUrlRedirections(this: ApiClientInstance, requestParams: UrlRedirecti
 		self.makeRequest(req)
 			.then((data: Gallery) => {
 
-				if (data == undefined || ! data)  {
+				if (data == undefined || !data) {
 					reject(new Error("The URL redirections could not be retrieved."));
 				} else {
 					resolve(data);
@@ -72,7 +73,7 @@ function getUrlRedirections(this: ApiClientInstance, requestParams: UrlRedirecti
 			.catch(error => {
 				reject(error);
 			}
-		);
+			);
 	});
 
 	return promise;
@@ -82,13 +83,13 @@ function validateRequestParams(requestParams) {
 
 	if (requestParams.lastAccessDate) {
 
-		if (! requestParams.lastAccessDate.toISOString) {
+		if (!requestParams.lastAccessDate.toISOString) {
 			let dt = new Date(requestParams.lastAccessDate);
-			
+
 			if (isNaN(dt.getTime())) {
-				throw new TypeError('You must include a valid Datetime for the lastAccessDate.');
+				throw new TypeError('You must include a valid Datetime for the lastAccessDate.', validateRequestParams);
 			}
-			
+
 		}
 	} else {
 		return;
