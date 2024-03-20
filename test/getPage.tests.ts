@@ -10,7 +10,7 @@ describe('getPage:', () => {
       pageID: 2,
       locale: 'en-us',
     });
-    console.log(page, 'check this')
+
     expect(page.pageID).toBe(2);
   });
 
@@ -21,8 +21,18 @@ describe('getPage:', () => {
       pageID: 2,
       locale: 'en-us',
     });
-    console.log(page, 'check this')
+
     expect(page.pageID).toBe(2);
+  });
+
+  it('should not show a console error if a page is not found', async () => {
+    const api = createPreviewApiClient();
+    const page = await api.getPage({
+      pageID: 999999,
+      locale: 'en-us',
+    });
+
+    expect(page).toBe(undefined);
   });
 
   it('should retrieve a page and expand all content links when expandAllContentLink is set to true', async () => {
@@ -35,5 +45,5 @@ describe('getPage:', () => {
     expect(Array.isArray(page.zones.MainContentZone[2].item.fields.posts)).toBe(true);
   });
 
-  
+
 });

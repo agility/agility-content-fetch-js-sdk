@@ -1,10 +1,34 @@
-function logError(consoleMessage) {
-	console.error('\x1b[41m%s\x1b[0m', consoleMessage);
+import { Config } from "./types/Config";
+
+interface LogProps {
+	config: Config,
+	message: string
+
 }
 
-function logDebug(consoleMessage) {
-	console.log('\x1b[33m%s\x1b[0m', consoleMessage);
+function logDebug({ config, message }: LogProps) {
+	if (config.logLevel !== 'debug' && !config.debug) return
+	console.log('\x1b[33m%s\x1b[0m', message);
 }
+
+function logInfo({ config, message }: LogProps) {
+	if (config.logLevel !== 'debug' && config.logLevel !== "info") return
+	console.log('\x1b[33m%s\x1b[0m', message);
+}
+
+function logWarning({ config, message }: LogProps) {
+	if (config.logLevel !== 'debug' && config.logLevel !== "info" && config.logLevel !== "warn") return
+	console.warn('\x1b[33m%s\x1b[0m', message);
+}
+
+
+
+function logError({ config, message }: LogProps) {
+	if (config.logLevel === 'silent') return
+	console.error('\x1b[41m%s\x1b[0m', message);
+}
+
+
 
 function buildRequestUrlPath(config, locale) {
 	let apiFetchOrPreview = '';
@@ -87,5 +111,7 @@ export {
 	buildRequestUrlPath,
 	isHttps,
 	logError,
-	logDebug
+	logDebug,
+	logInfo,
+	logWarning
 }

@@ -7,7 +7,7 @@ const apiKeyPreview = 'UnitTestsPreview.69e6bca345ced0b7ca5ab358b351ea5c870790a5
 
 
 export function createApiClient() {
-    console.log(`Creating API Client for ${guid}`);
+
     var api = agilityFetch.getApi({
         guid: guid,
         apiKey: apiKeyFetch,
@@ -17,7 +17,7 @@ export function createApiClient() {
 }
 
 export function createApiClientWithNewCdn() {
-    console.log(`Creating API Client for ${guid}`);
+
     var api = agilityFetch.getApi({
         guid: '2b64a4d8-d',
         apiKey: 'JSSDK.e27e61f56d4c9b58ab98961aaf86a0d3c544dfe7d0eb385ece42123dad5d1af7'
@@ -27,7 +27,7 @@ export function createApiClientWithNewCdn() {
 
 
 export function createPreviewApiClient() {
-    console.log(`Creating API Client for ${guid}`);
+
     var api = agilityFetch.getApi({
         guid: guid,
         apiKey: apiKeyPreview,

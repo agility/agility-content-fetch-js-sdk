@@ -12,7 +12,7 @@ import getSyncPages, { SyncPagesRequestParams } from './methods/getSyncPages'
 import FilterOperators from './types/FilterOperator'
 import { FilterLogicOperators } from './types/FilterLogicOperator'
 import { SortDirections } from './types/SortDirection'
-import { logError, logDebug } from './utils'
+import { logError, logDebug, logInfo, logWarning } from './utils'
 import { Config } from './types/Config'
 import { EnvConfig } from './types/EnvConfig'
 import { isHttps } from './utils'
@@ -50,8 +50,10 @@ const defaultConfig: Config = {
 	guid: null,
 	apiKey: null,
 	locale: null,
+
 	headers: {},
 	requiresGuidInHeaders: false,
+	logLevel: 'warn',
 	debug: false,
 	caching: {
 		maxAge: 0 //caching disabled by default
@@ -178,9 +180,9 @@ class ApiClient {
 
 		const isPreview = !!this.config.isPreview
 
-		if (this.config.debug) {
-			logDebug(`AgilityCMS Fetch API LOG: ${reqConfig.baseURL}${reqConfig.url}`);
-		}
+
+		logDebug({ config: this.config, message: `AgilityCMS Fetch API LOG: ${reqConfig.baseURL}${reqConfig.url}` });
+
 
 		//make the request using our axios instance
 		try {
@@ -207,7 +209,15 @@ class ApiClient {
 			const response = await fetch(fullUrl, init)
 			if (!response.ok) {
 				// *** NOT ok ***
-				logError(`AgilityCMS Fetch API ERROR: Request returned a ${response.status} response  for ${reqConfig.baseURL}${reqConfig.url}. ${response.statusText}`)
+
+				//if not found, just return
+				if (response.status === 404) {
+					logInfo({ config: this.config, message: `AgilityCMS Fetch API: Request returned a ${response.status} response  for ${reqConfig.baseURL}${reqConfig.url}. ${response.statusText}` })
+					return
+				}
+
+				// all other errors
+				logError({ config: this.config, message: `AgilityCMS Fetch API ERROR: Request returned a ${response.status} response  for ${reqConfig.baseURL}${reqConfig.url}. ${response.statusText}` })
 				return
 			}
 
@@ -221,7 +231,7 @@ class ApiClient {
 			return data
 
 		} catch (error) {
-			logError(`AgilityCMS Fetch API ERROR: Request failed for ${reqConfig.baseURL}${reqConfig.url} ... ${error} ... Does the item exist?`)
+			logError({ config: this.config, message: `AgilityCMS Fetch API ERROR: Request failed for ${reqConfig.baseURL}${reqConfig.url} ... ${error}` })
 		}
 	}
 }

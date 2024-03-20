@@ -2,13 +2,15 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c45f5d6e-923b-4019-820e-826e6185017d/deploy-status)](https://app.netlify.com/sites/agilitydocs/deploys)
 
 # Agility Content Fetch JS SDK
-This is the official JavaScript library for accessing live and preview content from your [Agility CMS](https://agilitycms.com) instance. 
+
+This is the official JavaScript library for accessing live and preview content from your [Agility CMS](https://agilitycms.com) instance.
 
 You can use this in both node and browser based JS apps.
 
 Don't have an Agility CMS instance? Sign up for [Free Trial](https://agilitycms.com/free) today!
 
 ## Features
+
 - Queries the high-availability, CDN backed Agility Fetch REST API
 - Get a sitemap for a given channel
 - Get a page, including its content zones, modules, and their content
@@ -19,56 +21,62 @@ Don't have an Agility CMS instance? Sign up for [Free Trial](https://agilitycms.
 - Optional in-memory caching
 
 ## Getting Started
+
 In order to use this sdk, you'll need to install the script and you'll also need to authenticate your requests.
 
 ### Prerequisites
-You must have access to an Agility instance to retrieve the *guid* and generate your *apiKey*. Or, you must have these values provided to you.
+
+You must have access to an Agility instance to retrieve the _guid_ and generate your _apiKey_. Or, you must have these values provided to you.
 
 ### Installation
-Install it using **npm** (recommended):
+
+**npm**
+
 ```
 npm install @agility/content-fetch
 ```
 
-If necessary, you can also reference a standalone package that can be used in a browser using a traditional **script** tag. In this case, the sdk can be accessed using a global variable by name of `agility`:
-```html
-<!-- Use a specific version (i.e. 0.4.2) -->
-<script type="text/javascript" src="https://unpkg.com/@agility/content-fetch@0.4.2/dist/agility-content-fetch.browser.js"></script>
+**yarn**
 
-<!-- Or, Use the latest version -->
-<script type="text/javascript" src="https://unpkg.com/@agility/content-fetch@latest/dist/agility-content-fetch.browser.js"></script>
 ```
+yarn add @agility/content-fetch
+```
+
 ### Making a Request
+
 ```javascript
-import agility from '@agility/content-fetch'
+import agility from "@agility/content-fetch"
 
 //initialize the api client
 const api = agility.getApi({
-  guid: 'ade6cf3c',
-  apiKey: 'defaultlive.201ffdd0841cacad5bb647e76547e918b0c9ecdb8b5ddb3cf92e9a79b03623cb'
-});
+	guid: "ade6cf3c",
+	apiKey: "defaultlive.201ffdd0841cacad5bb647e76547e918b0c9ecdb8b5ddb3cf92e9a79b03623cb",
+})
 
 //make the request: get a content item with the ID '22'
-api.getContentItem({
-    contentID: 22,
-    locale: 'en-us'
-})
-.then(function(contentItem) {
-    //on success
-    console.log(contentItem);
-})
-.catch(function(error) {
-    //on error
-    console.log(error);
-});
+api
+	.getContentItem({
+		contentID: 22,
+		locale: "en-us",
+	})
+	.then(function (contentItem) {
+		//on success
+		console.log(contentItem)
+	})
+	.catch(function (error) {
+		//on error
+		console.log(error)
+	})
 ```
 
 ## Documentation
+
 Full documentation for this SDK can be found in our [Agility Fetch JS SDK Reference Doc](https://agilitydocs.netlify.com/agility-content-fetch-js-sdk/).
 
 For docs & help around Agility CMS, please see [Agility CMS Documentation](https://help.agilitycms.com/hc/en-us)
 
 ## Tutorials
+
 [About the Content Fetch API](https://help.agilitycms.com/hc/en-us/articles/360031985112-About-the-Content-Fetch-API)
 
 [Authenticating your Content Fetch API Calls](https://help.agilitycms.com/hc/en-us/articles/360032225191-Authenticating-your-Content-Fetch-API-Calls)
@@ -92,17 +100,13 @@ For docs & help around Agility CMS, please see [Agility CMS Documentation](https
 [Content Webhooks](https://help.agilitycms.com/hc/en-us/articles/360035934911)
 
 ## Contributing
+
 If you would like to contribute to this SDK, you can fork the repository and submit a pull request. We'd love to include your updates.
 
 ### Running the Tests
+
 An essential part of contributing to this SDK is adding and running unit tests to ensure the stability of the project.
+
 ```
 > npm run test
 ```
-
-
-
-
-
-
-
