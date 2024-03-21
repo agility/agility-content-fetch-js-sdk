@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+    "module" : "commonjs",
+	  "allowJs": true,
+	  "declaration": true,
+	  "jsx": "react-jsx",
+	  "target": "es5",
+	  "outDir": "./dist/",
+	  "lib": ["es2016", "dom"],
+	  "esModuleInterop": true,
+	  "skipLibCheck": true,
+	  "allowSyntheticDefaultImports": true
+	},
+  "include": ["src", "src/api-client.ts"]
+  }
