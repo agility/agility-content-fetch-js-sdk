@@ -3,7 +3,7 @@
 
 # Agility Content Fetch JS SDK
 
-This is the official JavaScript library for accessing live and preview content from your [Agility CMS](https://agilitycms.com) instance.
+This is the official JavaScript/TypeScript library for accessing live and preview content from your [Agility CMS](https://agilitycms.com) instance.
 
 You can use this in both node and browser based JS apps.
 
@@ -18,11 +18,10 @@ Don't have an Agility CMS instance? Sign up for [Free Trial](https://agilitycms.
 - Query a content list using a filter syntax
 - Get the details of a media gallery
 - Keep track of syncing content to your app
-- Optional in-memory caching
 
 ## Getting Started
 
-In order to use this sdk, you'll need to install the script and you'll also need to authenticate your requests.
+In order to use this sdk, you'll need to install the `@agility/content-fetch` package and you'll also need to authenticate your requests.
 
 ### Prerequisites
 
@@ -49,24 +48,15 @@ import agility from "@agility/content-fetch"
 
 //initialize the api client
 const api = agility.getApi({
-	guid: "ade6cf3c",
-	apiKey: "defaultlive.201ffdd0841cacad5bb647e76547e918b0c9ecdb8b5ddb3cf92e9a79b03623cb",
+	guid: "[guid]",
+	apiKey: "[your-api-key]",
 })
 
-//make the request: get a content item with the ID '22'
-api
-	.getContentItem({
-		contentID: 22,
-		locale: "en-us",
-	})
-	.then(function (contentItem) {
-		//on success
-		console.log(contentItem)
-	})
-	.catch(function (error) {
-		//on error
-		console.log(error)
-	})
+//make the request: get a content item with the ID 22 in locale 'en-us'
+const contentItems = await api.getContentItem({
+	contentID: 22,
+	locale: "en-us",
+})
 ```
 
 ## Documentation
