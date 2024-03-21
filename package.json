@@ -1,6 +1,6 @@
 {
   "name": "@agility/content-fetch",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "JavaScript library for the Agility Fetch API (node and browser)",
   "repository": {
     "type": "git",
@@ -34,9 +34,7 @@
   "author": "Agility CMS",
   "contributors": [
     "Kevin Tran",
-    "James Vidler",
-    "Joel Varty",
-    "Joshua Isaac"
+    "Joel Varty"
   ],
   "license": "MIT",
   "dependencies": {},
@@ -50,6 +48,5 @@
     "rimraf": "^5.0.1",
     "ts-jest": "^29.1.1",
     "typescript": "^5.1.6"
-  },
-  "packageManager": "yarn@3.6.1"
+  }
 }
