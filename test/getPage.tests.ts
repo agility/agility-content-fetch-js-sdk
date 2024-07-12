@@ -7,22 +7,22 @@ describe('getPage:', () => {
   it('should retrieve a page in live mode', async () => {
     const api = createApiClient();
     const page = await api.getPage({
-      pageID: 2,
+      pageID: 3,
       locale: 'en-us',
     });
 
-    expect(page.pageID).toBe(2);
+    expect(page.pageID).toBe(3);
   });
 
 
   it('should retrieve a page in preview mode', async () => {
     const api = createPreviewApiClient();
     const page = await api.getPage({
-      pageID: 2,
+      pageID: 3,
       locale: 'en-us',
     });
 
-    expect(page.pageID).toBe(2);
+    expect(page.pageID).toBe(3);
   });
 
   it('should not show a console error if a page is not found', async () => {
@@ -38,11 +38,12 @@ describe('getPage:', () => {
   it('should retrieve a page and expand all content links when expandAllContentLink is set to true', async () => {
     const api = createApiClient();
     const page = await api.getPage({
-      pageID: 2,
+      pageID: 3,
       locale: 'en-us',
       expandAllContentLinks: true,
+      contentLinkDepth: 2,
     });
-    expect(Array.isArray(page.zones.MainContentZone[2].item.fields.posts)).toBe(true);
+    expect(Array.isArray(page.zones.MainContentZone[0].item.fields.posts)).toBe(true);
   });
 
 

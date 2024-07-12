@@ -16,16 +16,6 @@ export function createApiClient() {
     return api;
 }
 
-export function createApiClientWithNewCdn() {
-
-    var api = agilityFetch.getApi({
-        guid: '2b64a4d8-d',
-        apiKey: 'JSSDK.e27e61f56d4c9b58ab98961aaf86a0d3c544dfe7d0eb385ece42123dad5d1af7'
-    });
-    return api;
-}
-
-
 export function createPreviewApiClient() {
 
     var api = agilityFetch.getApi({

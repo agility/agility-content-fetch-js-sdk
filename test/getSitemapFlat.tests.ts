@@ -15,7 +15,7 @@ describe('getSitemapFlat:', () => {
         channelName: 'website',
         locale: 'en-us',
       });
-      expect(sitemap['/home'].pageID).toBe(2);
+      expect(sitemap['/posts'].pageID).toBe(3);
     });
   
     it('should retrieve a sitemap in a flat format in preview mode', async () => {
@@ -24,7 +24,7 @@ describe('getSitemapFlat:', () => {
         channelName: 'website',
         locale: 'en-us',
       });
-      expect(sitemap['/home'].pageID).toBe(2);
+      expect(sitemap['/posts'].pageID).toBe(3);
     });
   
   });

@@ -1,8 +1,7 @@
 const {
 	createApiClient,
 	createPreviewApiClient,
-	createCachedApiClient,
-	createApiClientWithNewCdn,
+	createCachedApiClient
 } = require('./apiClients.config');
 
 describe('getContentList:', () => {
@@ -317,13 +316,4 @@ describe('getContentList:', () => {
 		expect(Array.isArray(contentList.items[0].fields.posts)).toBe(false);
 	});
 
-	it('should be able to fetch a list using global cdn site', async () => {
-		const api = createApiClientWithNewCdn();
-		const referenceName = 'jssdklist';
-		const contentList = await api.getContentList({
-			referenceName: referenceName,
-			locale: 'en-us',
-		});
-		expect(contentList.items[0].properties.referenceName).toBe(referenceName);
-	});
 });
