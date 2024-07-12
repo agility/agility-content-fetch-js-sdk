@@ -3,18 +3,14 @@ import getSitemapNested, { SitemapNestedRequestParams } from './methods/getSitem
 import getContentItem, { ContentItemRequestParams } from './methods/getContentItem'
 import getContentList, { ContentListRequestParams } from './methods/getContentList'
 import getPage, { PageRequestParams } from './methods/getPage'
+import getPageByPath, { PageByPathRequestParams } from './methods/getPageByPath'
 import getGallery, { GalleryRequestParams } from './methods/getGallery'
 import getUrlRedirections, { UrlRedirectionsRequestParams } from './methods/getUrlRedirections'
 
 import getSyncContent, { SyncContentRequestParams } from './methods/getSyncContent'
 import getSyncPages, { SyncPagesRequestParams } from './methods/getSyncPages'
-
-import FilterOperators from './types/FilterOperator'
-import { FilterLogicOperators } from './types/FilterLogicOperator'
-import { SortDirections } from './types/SortDirection'
-import { logError, logDebug, logInfo, logWarning } from './utils'
+import { logError, logDebug, logInfo } from './utils'
 import { Config } from './types/Config'
-import { EnvConfig } from './types/EnvConfig'
 import { isHttps } from './utils'
 import * as types from './types'
 import { RequestParams } from './types/Client'
@@ -107,6 +103,7 @@ export interface ApiClientInstance {
 	getContentItem(params: ContentItemRequestParams): Promise<any>;
 	getContentList(params: ContentListRequestParams): Promise<any>;
 	getPage(params: PageRequestParams): Promise<any>;
+	getPageByPath(params: PageByPathRequestParams): Promise<any>;
 	getGallery(params: GalleryRequestParams): Promise<any>;
 	getUrlRedirections(params: UrlRedirectionsRequestParams): Promise<any>;
 	getSyncContent(params: SyncContentRequestParams): Promise<any>;
@@ -154,6 +151,10 @@ class ApiClient {
 
 	async getPage(params: PageRequestParams) {
 		return getPage.call(this, params);
+	}
+
+	async getPageByPath(params: PageByPathRequestParams) {
+		return getPageByPath.call(this, params);
 	}
 
 	async getSitemapFlat(params: SitemapFlatRequestParams) {
