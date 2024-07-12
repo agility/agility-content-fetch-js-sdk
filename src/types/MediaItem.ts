@@ -20,8 +20,6 @@
   }
 
   export interface MediaItemMetaData {
-    // Define properties of the media item meta data if needed
-    // For example:
-    metaProperty: string;
-    // ...
+    pixelHeight: number;
+    pixelWidth: number;
   }
