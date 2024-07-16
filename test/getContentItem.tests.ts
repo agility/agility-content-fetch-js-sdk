@@ -100,7 +100,7 @@ describe('getContentItem:', () => {
     it('should be able to fetch an item using global cdn site', async () => {
         const api = createApiClientWithNewCdn();
         const contentItem = await api.getContentItem({
-            contentID: 4,
+            contentID: 65,
             locale: 'en-us'
         });
         expect(contentItem.fields.title).toBe('JS SDK Item - DO NOT DELETE');

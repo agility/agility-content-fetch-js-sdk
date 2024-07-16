@@ -319,7 +319,7 @@ describe('getContentList:', () => {
 
 	it('should be able to fetch a list using global cdn site', async () => {
 		const api = createApiClientWithNewCdn();
-		const referenceName = 'jssdklist';
+		const referenceName = 'posts';
 		const contentList = await api.getContentList({
 			referenceName: referenceName,
 			locale: 'en-us',

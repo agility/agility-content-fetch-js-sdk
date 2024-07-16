@@ -8,10 +8,10 @@
  */
 
 
-    export interface Filter {
-      property: string;
-      operator: FilterOperator | "eq" | "ne" | "gt" | "lt" | "ge" | "le" | "contains";
-      value: string;
-    }
-  
-    export type FilterOperator = "eq" | "ne" | "gt" | "lt" | "ge" | "le" | "contains";
+export interface Filter {
+  property: string;
+  operator: FilterOperator | "eq" | "ne" | "gt" | "lt" | "ge" | "le" | "contains" | "like" | "in";
+  value: string;
+}
+
+export type FilterOperator = "eq" | "ne" | "gt" | "lt" | "ge" | "le" | "contains" | "like" | "in";
