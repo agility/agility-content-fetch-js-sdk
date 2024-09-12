@@ -16,17 +16,6 @@ export function createApiClient() {
     return api;
 }
 
-export function createApiClientWithNewCdn() {
-
-    var api = agilityFetch.getApi({
-        guid: guid,
-        apiKey: apiKeyFetch,
-        baseUrl: `https://api-dev.aglty.io/${guid}`
-    });
-    return api;
-}
-
-
 export function createPreviewApiClient() {
 
     var api = agilityFetch.getApi({
@@ -36,4 +25,3 @@ export function createPreviewApiClient() {
         baseUrl: `https://api-dev.aglty.io/${guid}`
     });
     return api;
-}

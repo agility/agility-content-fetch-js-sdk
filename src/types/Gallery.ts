@@ -8,15 +8,7 @@
  * @property {number} count - The count of media items in the gallery.
  * @property {Array<AgilityFetch.Types.MediaItem>} media - Array of media items in the gallery.
  */
-
-    export interface MediaItem {
-      mediaID: number;
-      name: string;
-      // Define other properties of AgilityFetch.Types.MediaItem if necessary
-      // For example:
-      // url: string;
-      // altText: string;
-    }
+import { MediaItem } from './MediaItem';
   
     export interface Gallery {
       galleryID: number;

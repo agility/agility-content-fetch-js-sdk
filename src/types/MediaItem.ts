@@ -9,6 +9,7 @@
  * @property {date} modifiedOn - The last modified date and time of the media item.
  * @property {AgilityFetch.Types.MediaItemMetaData} metaData - Meta data for the media item.
  */
+import { MediaItemMetaData } from "./MediaItemMetaData";
 
  export interface MediaItem {
     mediaID: number;
@@ -17,11 +18,4 @@
     size: number;
     modifiedOn: Date;
     metaData: MediaItemMetaData;
-  }
-
-  export interface MediaItemMetaData {
-    // Define properties of the media item meta data if needed
-    // For example:
-    metaProperty: string;
-    // ...
   }
