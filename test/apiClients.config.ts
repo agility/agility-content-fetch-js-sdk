@@ -25,4 +25,3 @@ export function createPreviewApiClient() {
         baseUrl: `https://api-dev.aglty.io/${guid}`
     });
     return api;
-}

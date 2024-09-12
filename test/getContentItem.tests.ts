@@ -95,4 +95,3 @@ describe('getContentItem:', () => {
         });
         expect(Array.isArray(contentItem.fields.posts)).toBe(false);
     });
-});
