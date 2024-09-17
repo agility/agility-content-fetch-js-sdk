@@ -43,8 +43,9 @@ function buildRequestUrlPath(config, locale) {
 	return urlPath;
 }
 
-function buildPathUrl(contentType, referenceName, skip, take, sort, direction, filters, filtersLogicOperator, contentLinkDepth, expandAllContentLinks) {
+function buildPathUrl(contentType, referenceName, skip, take, sort, direction, filters, filtersLogicOperator, filterString, contentLinkDepth, expandAllContentLinks) {
 	let url = `/${contentType}/${referenceName}?contentLinkDepth=${contentLinkDepth}&`;
+
 	filtersLogicOperator = filtersLogicOperator ? ` ${filtersLogicOperator} ` : ' AND ';
 
 	if (sort) {
@@ -63,12 +64,16 @@ function buildPathUrl(contentType, referenceName, skip, take, sort, direction, f
 	}
 
 	if (filters && filters.length > 0) {
+		//use the filters array if we have it
 		url += 'filter='
 		for (let i = 0; i < filters.length; i++) {
 			let filter = filters[i];
 			url += `${filter.property}[${filter.operator}]${filter.value}` + (i < filters.length - 1 ? filtersLogicOperator : '');
 		}
 		url += '&';
+	} else if (filterString) {
+		//use the filterString if we have it and no array has been pased
+		url += `filter=${filterString}&`;
 	}
 
 	if (expandAllContentLinks) {
