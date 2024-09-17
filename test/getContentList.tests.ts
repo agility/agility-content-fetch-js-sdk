@@ -295,11 +295,6 @@ describe('getContentList:', () => {
 			referenceName: 'posts',
 			locale: 'en-us',
 			filterString: `contentID[eq]15 or properties.referenceName[like]"posts"`
-			// [
-			// 	{ property: 'contentID', operator: api.types.FilterOperators.EQUAL_TO, value: '15' },
-			// 	{ property: 'properties.referenceName', operator: api.types.FilterOperators.LIKE, value: 'posts' },
-			// ],
-			// filtersLogicOperator: api.types.FilterLogicOperators.OR,
 		});
 		expect(contentList.items[0].contentID).toBe(16);
 		expect(contentList.items[3].contentID).toBe(15);

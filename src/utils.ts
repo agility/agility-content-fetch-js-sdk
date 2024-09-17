@@ -73,7 +73,7 @@ function buildPathUrl(contentType, referenceName, skip, take, sort, direction, f
 		url += '&';
 	} else if (filterString) {
 		//use the filterString if we have it and no array has been pased
-		url += `filter=${filterString}&`;
+		url += `filter=${encodeURIComponent(filterString)}&`;
 	}
 
 	if (expandAllContentLinks) {
