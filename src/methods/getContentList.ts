@@ -66,15 +66,62 @@ import { TypeError } from '../types/errors/Errors';
 */
 
 export interface ContentListRequestParams {
+
+	/**
+	 * The unique reference name of the content list you wish to retrieve in the specified language.
+	 */
 	referenceName: string;
+
+	/**
+	 * The locale code of the content you want to retrieve.
+	 */
 	locale?: string;
+
+	/**
+	 * The language code of the content you want to retrieve.
+	 * DEPRECATED: Use locale instead.
+	 */
 	languageCode?: string;
+
+	/**
+	 * The depth, representing the levels in which you want linked content auto-resolved.
+	 */
 	contentLinkDepth?: number;
+
+	/**
+	 * Whether or not to expand entire linked content references, includings lists and items that are rendered in the CMS as Grid or Link.
+	 */
 	expandAllContentLinks?: boolean;
+
+	/**
+	 * The number of items to retrieve in this request. Default is 10. Maximum allowed is 250.
+	 */
 	take?: number;
+
+	/**
+	 * The number of items to skip from the list. Used for implementing pagination.
+	 */
 	skip?: number;
+
+	/**
+	 * The field to sort the results by. Example fields.title or properties.modified.
+	 */
 	sort?: string;
+
+	/**
+	 * The direction to sort the results by.
+	 */
 	direction?: SortDirection;
+
+	/**
+	 * Option: you can provide a plain text filter string as opposed to an array of filters.  This is useful if you have brackets in your filter expression.
+	 */
+	filterString?: string;
+
+	/**
+	 * Provide an array of filters as opposed to a plain text filter string.
+	 * If you need advanced filering with brackets, use the filterString operator.
+	 */
 	filters?: Array<Filter>;
 	filtersLogicOperator?:
 	FilterLogicOperator;
@@ -90,7 +137,7 @@ function getContentList(this: ApiClientInstance, requestParams: ContentListReque
 	requestParams = { ...defaultParams, ...requestParams };
 
 	const req = {
-		url: buildPathUrl("list", requestParams.referenceName, requestParams.skip, requestParams.take, requestParams.sort, requestParams.direction, requestParams.filters, requestParams.filtersLogicOperator, requestParams.contentLinkDepth, requestParams.expandAllContentLinks),
+		url: buildPathUrl("list", requestParams.referenceName, requestParams.skip, requestParams.take, requestParams.sort, requestParams.direction, requestParams.filters, requestParams.filtersLogicOperator, requestParams.filterString, requestParams.contentLinkDepth, requestParams.expandAllContentLinks),
 		method: 'get',
 		baseURL: buildRequestUrlPath(this.config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
 		headers: buildAuthHeader(this.config),

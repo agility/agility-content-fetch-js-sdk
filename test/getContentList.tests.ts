@@ -272,6 +272,8 @@ describe('getContentList:', () => {
 		expect(contentList.items[3].contentID).toBe(15);
 	});
 
+
+
 	it('should filter the content list in live mode with AND operator between filters', async () => {
 		const api = createApiClient();
 		const contentList = await api.getContentList({
@@ -285,6 +287,17 @@ describe('getContentList:', () => {
 		});
 		expect(contentList.items[0].contentID).toBe(16);
 		expect(contentList.items.length).toBe(1);
+	});
+
+	it('should filter the content list using a string in live mode ', async () => {
+		const api = createApiClient();
+		const contentList = await api.getContentList({
+			referenceName: 'posts',
+			locale: 'en-us',
+			filterString: `contentID[eq]15 or properties.referenceName[like]"posts"`
+		});
+		expect(contentList.items[0].contentID).toBe(16);
+		expect(contentList.items[3].contentID).toBe(15);
 	});
 
 	it('should expand all content links when expandContentLinks are set to true', async () => {
