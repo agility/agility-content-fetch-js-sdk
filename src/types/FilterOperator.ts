@@ -18,11 +18,11 @@ enum FilterOperators {
     /** Less Than */
     LESS_THAN = "lt",
     /** Less Than or Equal To */
-    LESS_THAN_OR_EQUAL_TO = "lte",
+    LESS_THAN_OR_EQUAL_TO = "le",
     /** Greater Than */
     GREATER_THAN = "gt",
     /** Greater Than or Equal To */
-    GREATER_THAN_OR_EQUAL_TO = "gte",
+    GREATER_THAN_OR_EQUAL_TO = "ge",
     /** Like (string only) */
     LIKE = "like",
     /** Contains (string only) */
