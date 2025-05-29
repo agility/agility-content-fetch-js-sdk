@@ -24,7 +24,11 @@ enum FilterOperators {
     /** Greater Than or Equal To */
     GREATER_THAN_OR_EQUAL_TO = "gte",
     /** Like (string only) */
-    LIKE = "like"
+    LIKE = "like",
+    /** Contains (string only) */
+    CONTAINS = "contains",
+    /** In (multiple values) */
+    IN = "in"
 };
 
 export default FilterOperators;
