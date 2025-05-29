@@ -18,17 +18,19 @@ enum FilterOperators {
     /** Less Than */
     LESS_THAN = "lt",
     /** Less Than or Equal To */
-    LESS_THAN_OR_EQUAL_TO = "le",
+    LESS_THAN_OR_EQUAL_TO = "lte",
     /** Greater Than */
     GREATER_THAN = "gt",
     /** Greater Than or Equal To */
-    GREATER_THAN_OR_EQUAL_TO = "ge",
+    GREATER_THAN_OR_EQUAL_TO = "gte",
+    /** Range */
+    RANGE = "range",
     /** Like (string only) */
     LIKE = "like",
-    /** Contains (string only) */
-    CONTAINS = "contains",
     /** In (multiple values) */
-    IN = "in"
+    IN = "in",
+    /** Contains (string only) */
+    CONTAINS = "contains"
 };
 
 export default FilterOperators;
