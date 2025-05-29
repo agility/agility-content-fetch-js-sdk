@@ -188,9 +188,9 @@ function validateRequestParams(requestParams) {
 				throw new TypeError(JSON.stringify(filter) + " does not contain 'value'.", validateRequestParams);
 			}
 
-			if (['eq', 'ne', 'gt', 'gte', 'lt', 'lte', 'like', 'in', 'contains'
+			if (['eq', 'ne', 'lt', 'lte', 'gt', 'gte', 'range', 'like', 'in', 'contains'
 			].indexOf(filter.operator.toLowerCase()) < 0) {
-				throw new TypeError(JSON.stringify(filter) + "Operator must be one of ['eq','ne','gt','gte','lt','lte','like', 'in', 'contains'].", validateRequestParams);
+				throw new TypeError(JSON.stringify(filter) + "Operator must be one of ['eq','ne','lt','lte','gt','gte','range','like','in','contains'].", validateRequestParams);
 			}
 		}
 	} else if (requestParams.filtersLogicOperator && requestParams.filtersLogicOperator.toLowerCase() !== 'and' && requestParams.filtersLogicOperator.toLowerCase() !== 'or') {

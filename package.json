@@ -1,6 +1,6 @@
 {
   "name": "@agility/content-fetch",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "JS/TS library for the Agility Fetch API",
   "repository": {
     "type": "git",
@@ -34,7 +34,8 @@
   "author": "Agility CMS",
   "contributors": [
     "Kevin Tran",
-    "Joel Varty"
+    "Joel Varty",
+    "Aaron Taylor"
   ],
   "license": "MIT",
   "dependencies": {},

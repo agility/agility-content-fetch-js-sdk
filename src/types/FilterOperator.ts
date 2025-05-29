@@ -23,8 +23,14 @@ enum FilterOperators {
     GREATER_THAN = "gt",
     /** Greater Than or Equal To */
     GREATER_THAN_OR_EQUAL_TO = "gte",
+    /** Range */
+    RANGE = "range",
     /** Like (string only) */
-    LIKE = "like"
+    LIKE = "like",
+    /** In (multiple values) */
+    IN = "in",
+    /** Contains (string only) */
+    CONTAINS = "contains"
 };
 
 export default FilterOperators;
