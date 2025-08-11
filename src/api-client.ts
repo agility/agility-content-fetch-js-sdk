@@ -65,7 +65,8 @@ function buildBaseUrl(guid: string) {
 		c: '-ca',
 		e: '-eu',
 		a: '-aus',
-		d: '-dev'
+		d: '-dev',
+		'us2': '-us2'
 	}
 
 	let suffix = guid.substr(guid.length - 2, 2);
