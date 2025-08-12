@@ -100,6 +100,17 @@ describe('getApi:', function () {
         done();
     });
 
+    it('should return an api client with new stackpath baseUrl based on us2', function (done) {
+        const baseUrl = 'https://api-usa2.aglty.io/someguid-us2';
+        const api = agilityFetch.getApi({
+            guid: 'someguid-us2',
+            apiKey: 'some-access-token',
+            baseUrl: null
+        });
+        expect(api.config.baseUrl).toBe(baseUrl);
+        done();
+    });
+
     it('should return an api client with new stackpath baseUrl based on dev', function (done) {
         const baseUrl = 'https://api-dev.aglty.io/some-guid-d';
         const api = agilityFetch.getApi({
