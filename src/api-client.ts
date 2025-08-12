@@ -60,24 +60,29 @@ const defaultConfig: Config = {
 
 function buildBaseUrl(guid: string) {
 
-	let baseUrlSuffixes = {
+	const baseUrlSuffixes: { [key: string]: string } = {
 		u: '',
 		c: '-ca',
 		e: '-eu',
 		a: '-aus',
-		d: '-dev'
+		d: '-dev',
+		us2: '-usa2'
+	};
+
+	// Match for -us2, -c, -u, -e, -a, -d at the end of the guid
+	const match = guid.match(/-(us2|[ucead])$/);
+
+	if (match) {
+		const env = match[1];
+		if (baseUrlSuffixes.hasOwnProperty(env)) {
+			const url = `https://api${baseUrlSuffixes[env]}.aglty.io/${guid}`;
+			return url;
+		}
 	}
 
-	let suffix = guid.substr(guid.length - 2, 2);
-	let env = suffix.substr(1);
-	// New format of guid
-	if (suffix.startsWith('-') && baseUrlSuffixes.hasOwnProperty(env)) {
-		return `https://api${baseUrlSuffixes[env]}.aglty.io/${guid}`
-	}
-	else {
-		//use default url
-		return `https://${guid}-api.agilitycms.cloud`;
-	}
+	// use default url
+	const legacyUrl = `https://${guid}-api.agilitycms.cloud`;
+	return legacyUrl;
 }
 
 function validateConfigParams(configParams: Config) {
