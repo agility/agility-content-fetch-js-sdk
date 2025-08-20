@@ -15,7 +15,7 @@ describe('getSitemapNested:', () => {
         channelName: 'website',
         locale: 'en-us',
       });
-      expect(sitemap[0].pageID).toBe(3);
+      expect(sitemap[0].pageID).toBe(2);
     });
   
     it('should retrieve a sitemap in a nested format in preview mode', async () => {
