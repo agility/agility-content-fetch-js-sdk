@@ -8,8 +8,8 @@ import {
 */
 
 const ref = {
-    publishedContentItemID: 15,
-    updatesMadeToPublishedContentItemID: 15
+    publishedContentItemID: 16,
+    updatesMadeToPublishedContentItemID: 16
 }
 
 describe('getContentItem:', () => {
@@ -28,10 +28,10 @@ describe('getContentItem:', () => {
     it('should retrieve a content item in preview mode and return the latest staging version', async () => {
         const api = createPreviewApiClient();
         const contentItem = await api.getContentItem({
-            contentID: ref.updatesMadeToPublishedContentItemID,
+            contentID: 15,
             locale: 'en-us'
         });
-        expect(contentItem.contentID).toBe(ref.updatesMadeToPublishedContentItemID);
+        expect(contentItem.contentID).toBe(15);
         expect(contentItem.fields.title).toMatch(/\[Staging\]/);
     });
 
