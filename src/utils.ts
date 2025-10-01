@@ -45,10 +45,14 @@ function buildRequestUrlPath(config, locale) {
 	return urlPath;
 }
 
-function buildPathUrl(contentType, referenceName, skip, take, sort, direction, filters, filtersLogicOperator, filterString, contentLinkDepth, expandAllContentLinks) {
+function buildPathUrl(contentType, referenceName, skip, take, sort, direction, filters, filtersLogicOperator, filterString, contentLinkDepth, expandAllContentLinks, fields) {
 	let url = `/${contentType}/${referenceName}?contentLinkDepth=${contentLinkDepth}&`;
 
 	filtersLogicOperator = filtersLogicOperator ? ` ${filtersLogicOperator} ` : ' AND ';
+
+	if (fields) {
+		url += `fields=${encodeURIComponent(fields)}&`;
+	}
 
 	if (sort) {
 		url += `sort=${sort}&`;

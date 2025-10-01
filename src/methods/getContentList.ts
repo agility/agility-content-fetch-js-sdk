@@ -15,6 +15,7 @@ import { ApiTypes } from '../types/generated';
  * @param {number} [requestParams.skip] - The number of items to skip from the list. Default is **0**. Used for implementing pagination.
  * @param {string} [requestParams.sort] - The field to sort the results by. Example **fields.title** or **properties.modified**.
  * @param {AgilityFetch.Types.SortDirection} [requestParams.direction] - The direction to sort the results by.
+ * @param {string} [requestParams.fields] - A comma separated list of the fields to return. Example **fields.title,fields.description**.
  * @param {Array.<AgilityFetch.Types.Filter>}  [requestParams.filters] - The collection of filters to filter the results by.
  * @param {AgilityFetch.Types.FilterLogicOperator} [requestParams.filtersLogicOperator] - The logic operator to combine multiple filters.
  * @returns {Promise<AgilityFetch.Types.ContentList>} - Returns a list of content items.
@@ -47,6 +48,7 @@ import { ApiTypes } from '../types/generated';
  *     locale: 'en-us',
  *     take: 50,
  *     skip: 0,
+ *     fields: 'fields.title,fields.description,properties.modified',
  *     filters: [
  *      {property: 'fields.title', operator: api.types.FilterOperators.EQUAL_TO, value: '"How this site works"'},
  *      {property: 'fields.details', operator: api.types.FilterOperators.LIKE, value: '"Lorem ipsum dolar"'}
@@ -110,6 +112,11 @@ export interface ContentListRequestParams {
 	direction?: SortDirection;
 
 	/**
+	 * A comma separated list of the fields to return.
+	 */
+	fields?: string;
+
+	/**
 	 * Option: you can provide a plain text filter string as opposed to an array of filters.  This is useful if you have brackets in your filter expression.
 	 */
 	filterString?: string;
@@ -136,7 +143,7 @@ function getContentList(this: ApiClientInstance, requestParams: ContentListReque
 	requestParams = { ...defaultParams, ...requestParams };
 
 	const req = {
-		url: buildPathUrl("list", requestParams.referenceName, requestParams.skip, requestParams.take, requestParams.sort, requestParams.direction, requestParams.filters, requestParams.filtersLogicOperator, requestParams.filterString, requestParams.contentLinkDepth, requestParams.expandAllContentLinks),
+		url: buildPathUrl("list", requestParams.referenceName, requestParams.skip, requestParams.take, requestParams.sort, requestParams.direction, requestParams.filters, requestParams.filtersLogicOperator, requestParams.filterString, requestParams.contentLinkDepth, requestParams.expandAllContentLinks, requestParams.fields),
 		method: 'get',
 		baseURL: buildRequestUrlPath(this.config, requestParams.locale ? requestParams.locale : requestParams.languageCode),
 		headers: buildAuthHeader(this.config),
