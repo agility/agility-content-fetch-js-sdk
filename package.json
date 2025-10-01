@@ -27,7 +27,7 @@
     "types:generate:prod:v1": "openapi-typescript https://api.aglty.io/swagger/v1/swagger.json -o src/types/generated/v1.ts",
     "types:generate:prod:v2": "openapi-typescript https://api.aglty.io/swagger/v2/swagger.json -o src/types/generated/v2.ts",
     "build": "node build.js",
-    "prepare": "yarn build",
+    "prepare": "npm run build",
     "test": "npm run test:all",
     "test:unit": "jest --config jest.unit.config.js",
     "test:integration": "jest --config jest.integration.config.js",
@@ -62,12 +62,13 @@
     "ts-jest": "^29.4.4",
     "typescript": "^5.1.6"
   },
-  "resolutions": {
+  "overrides": {
     "braces": "^3.0.3",
     "micromatch": "^4.0.8",
     "cross-spawn": "^7.0.5",
     "brace-expansion": "^1.1.12",
     "tmp": "^0.2.4",
-    "@babel/helpers": "^7.26.10"
+    "@babel/helpers": "^7.26.10",
+    "glob": "^10.0.0"
   }
 }

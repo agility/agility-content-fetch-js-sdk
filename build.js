@@ -13,6 +13,7 @@ esbuild.build({
   bundle: true,
   outfile: './dist/browser.js',
   platform: 'browser',
+  format: 'esm',
 }).catch(() => process.exit(1));
 
 // Build for Node.js
@@ -21,4 +22,5 @@ esbuild.build({
   bundle: true,
   outfile: './dist/node.js',
   platform: 'node',
+  format: 'cjs',
 }).catch(() => process.exit(1));
