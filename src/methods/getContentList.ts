@@ -1,10 +1,6 @@
 import { buildPathUrl, buildRequestUrlPath, buildAuthHeader } from '../utils'
-import { Filter } from '../types/Filter';
-import { FilterLogicOperator } from '../types/FilterLogicOperator';
-import { SortDirection } from '../types/SortDirection';
-import { ContentList } from '../types/ContentList';
-import { ApiClientInstance } from '../types/Client'
-import { TypeError } from '../types/errors/Errors';
+import { Filter, FilterLogicOperator, SortDirection, ApiClientInstance, TypeError } from '../types/sdk';
+import { ApiTypes } from '../types/generated';
 
 /**
  * Retrieves a list of content items by reference name.
@@ -127,7 +123,10 @@ export interface ContentListRequestParams {
 	FilterLogicOperator;
 }
 
-function getContentList(this: ApiClientInstance, requestParams: ContentListRequestParams): Promise<ContentList> {
+// Method overloads for type safety based on API version
+function getContentList(this: ApiClientInstance & { config: { apiVersion: 'v1' } }, requestParams: ContentListRequestParams): Promise<ApiTypes.V1.ContentList>;
+function getContentList(this: ApiClientInstance & { config: { apiVersion: 'v2' } }, requestParams: ContentListRequestParams): Promise<ApiTypes.V2.ContentList>;
+function getContentList(this: ApiClientInstance, requestParams: ContentListRequestParams): Promise<any> {
 
 	validateRequestParams(requestParams);
 

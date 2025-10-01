@@ -1,7 +1,6 @@
 import { buildRequestUrlPath, buildAuthHeader } from '../utils'
-import { Gallery } from '../types/Gallery';
-import { ApiClientInstance } from '../types/Client'
-import { TypeError } from '../types/errors/Errors';
+import { ApiClientInstance, TypeError } from '../types/sdk';
+import { ApiTypes } from '../types/generated';
 
 /**
  * Gets the details of a gallery by their Gallery ID.
@@ -36,7 +35,10 @@ export interface UrlRedirectionsRequestParams {
 	lastAccessDate?: Date | null;
 }
 
-function getUrlRedirections(this: ApiClientInstance, requestParams: UrlRedirectionsRequestParams): Promise<Gallery> {
+// Method overloads for type safety based on API version
+function getUrlRedirections(this: ApiClientInstance & { config: { apiVersion: 'v1' } }, requestParams: UrlRedirectionsRequestParams): Promise<ApiTypes.V1.UrlRedirection[]>;
+function getUrlRedirections(this: ApiClientInstance & { config: { apiVersion: 'v2' } }, requestParams: UrlRedirectionsRequestParams): Promise<ApiTypes.V2.UrlRedirection[]>;
+function getUrlRedirections(this: ApiClientInstance, requestParams: UrlRedirectionsRequestParams): Promise<any> {
 
 	validateRequestParams(requestParams);
 
@@ -60,9 +62,9 @@ function getUrlRedirections(this: ApiClientInstance, requestParams: UrlRedirecti
 	};
 
 	const self = this;
-	let promise = new Promise<Gallery>(function (resolve, reject) {
+	let promise = new Promise<ApiTypes.V1.UrlRedirection[] | ApiTypes.V2.UrlRedirection[]>(function (resolve, reject) {
 		self.makeRequest(req)
-			.then((data: Gallery) => {
+			.then((data: ApiTypes.V1.UrlRedirection[] | ApiTypes.V2.UrlRedirection[]) => {
 
 				if (data == undefined || !data) {
 					reject(new Error("The URL redirections could not be retrieved."));

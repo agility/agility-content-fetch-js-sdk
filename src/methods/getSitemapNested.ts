@@ -1,7 +1,6 @@
 import { buildRequestUrlPath, buildAuthHeader } from '../utils'
-import { SitemapNested } from '../types/SitemapNested';
-import { ApiClientInstance } from '../types/Client'
-import { TypeError } from '../types/errors/Errors';
+import { ApiClientInstance, TypeError } from '../types/sdk';
+import { ApiTypes } from '../types/generated';
 
 /**
  * Gets the sitemap as an array in a nested format, ideal for generating menus.
@@ -38,7 +37,10 @@ export interface SitemapNestedRequestParams {
     languageCode?: string;
 }
 
-function getSitemapNested(this: ApiClientInstance, requestParams: SitemapNestedRequestParams): Promise<SitemapNested> {
+// Method overloads for type safety based on API version
+function getSitemapNested(this: ApiClientInstance & { config: { apiVersion: 'v1' } }, requestParams: SitemapNestedRequestParams): Promise<ApiTypes.V1.SitemapNested>;
+function getSitemapNested(this: ApiClientInstance & { config: { apiVersion: 'v2' } }, requestParams: SitemapNestedRequestParams): Promise<ApiTypes.V2.SitemapNested>;
+function getSitemapNested(this: ApiClientInstance, requestParams: SitemapNestedRequestParams): Promise<any> {
 
     validateRequestParams(requestParams);
 

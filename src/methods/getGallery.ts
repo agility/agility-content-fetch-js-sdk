@@ -1,7 +1,6 @@
 import { buildRequestUrlPath, buildAuthHeader } from '../utils'
-import { Gallery } from '../types/Gallery';
-import { ApiClientInstance } from '../types/Client'
-import { TypeError } from '../types/errors/Errors';
+import { ApiClientInstance, TypeError } from '../types/sdk';
+import { ApiTypes } from '../types/generated';
 
 /**
  * Gets the details of a gallery by their Gallery ID.
@@ -34,7 +33,10 @@ export interface GalleryRequestParams {
     galleryID: number;
 }
 
-function getGallery(this: ApiClientInstance, requestParams: GalleryRequestParams): Promise<Gallery> {
+// Method overloads for type safety based on API version
+function getGallery(this: ApiClientInstance & { config: { apiVersion: 'v1' } }, requestParams: GalleryRequestParams): Promise<ApiTypes.V1.Gallery>;
+function getGallery(this: ApiClientInstance & { config: { apiVersion: 'v2' } }, requestParams: GalleryRequestParams): Promise<ApiTypes.V2.Gallery>;
+function getGallery(this: ApiClientInstance, requestParams: GalleryRequestParams): Promise<any> {
 
     validateRequestParams(requestParams);
 

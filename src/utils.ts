@@ -25,7 +25,8 @@ function logWarning({ config, message }: LogProps) {
 
 function logError({ config, message }: LogProps) {
 	if (config.logLevel === 'silent') return
-	console.error('\x1b[41m%s\x1b[0m', message);
+	// console.error('\x1b[41m%s\x1b[0m', message);
+	console.log(message);
 }
 
 
@@ -39,6 +40,7 @@ function buildRequestUrlPath(config, locale) {
 		apiFetchOrPreview = 'fetch';
 	}
 
+	// Version path is now handled in the baseUrl, not here
 	let urlPath = `${config.baseUrl}/${apiFetchOrPreview}/${locale}`;
 	return urlPath;
 }

@@ -1,7 +1,6 @@
 import { buildRequestUrlPath, buildAuthHeader } from '../utils'
-import { SyncContent } from '../types/SyncContent';
-import { ApiClientInstance } from '../types/Client'
-import { TypeError } from '../types/errors/Errors';
+import { ApiClientInstance, TypeError } from '../types/sdk';
+import { ApiTypes } from '../types/generated';
 
 /**
  * Retrieves a list of content items that need to be synced based on the provided sync content items token, and returns the next sync token.
@@ -44,7 +43,10 @@ export interface SyncContentRequestParams {
     languageCode?: string;
 }
 
-function getSyncContent(this: ApiClientInstance, requestParams: SyncContentRequestParams): Promise<SyncContent> {
+// Method overloads for type safety based on API version
+function getSyncContent(this: ApiClientInstance & { config: { apiVersion: 'v1' } }, requestParams: SyncContentRequestParams): Promise<ApiTypes.V1.ContentItemSync>;
+function getSyncContent(this: ApiClientInstance & { config: { apiVersion: 'v2' } }, requestParams: SyncContentRequestParams): Promise<ApiTypes.V2.ContentItemSync>;
+function getSyncContent(this: ApiClientInstance, requestParams: SyncContentRequestParams): Promise<any> {
 
     validateRequestParams(requestParams);
 
