@@ -22,31 +22,31 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
+          cache: 'npm'
           
       - name: Cache node_modules
         uses: actions/cache@v4
         with:
           path: |
             node_modules
-            ~/.cache/yarn
-          key: ${{ runner.os }}-node-${{ matrix.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            ~/.npm
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-${{ matrix.node-version }}-yarn-
+            ${{ runner.os }}-node-${{ matrix.node-version }}-npm-
             ${{ runner.os }}-node-${{ matrix.node-version }}-
             
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
         
       - name: Security audit
-        run: yarn audit --audit-level moderate
+        run: npm audit --audit-level moderate
         continue-on-error: true
         
       - name: Build project
-        run: yarn build
+        run: npm run build
         
       - name: Run tests
-        run: yarn test
+        run: npm test
         env:
           AGILITY_GUID: ${{ secrets.AGILITY_GUID }}
           AGILITY_FETCH_API_KEY: ${{ secrets.AGILITY_FETCH_API_KEY }}
