@@ -161,7 +161,7 @@ describe('getSyncContent Unit Tests', () => {
       expect(result.syncToken).toBeDefined();
       expect(result.items).toBeDefined();
       expect(Array.isArray(result.items)).toBe(true);
-      expect(result.hasMore).toBeDefined(); // V2 has additional metadata
+      expect(result.hasMore).toBeDefined(); // V3 has additional metadata
       expect(result.nextSyncToken).toBeDefined();
     });
   });

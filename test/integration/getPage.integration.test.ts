@@ -1,8 +1,8 @@
 import {
     createV1FetchClient,
-    createV2FetchClient,
+    createV3FetchClient,
     createV1PreviewClient,
-    createV2PreviewClient,
+    createV3PreviewClient,
     testConfig
 } from '../apiClients.config';
 
@@ -66,8 +66,8 @@ describe('getPage Integration', () => {
     });
 
     describe('V3 API', () => {
-        it('should retrieve page with V2 fetch API', async () => {
-            const api = createV2FetchClient();
+        it('should retrieve page with V3 fetch API', async () => {
+            const api = createV3FetchClient();
             
             // First, get the sitemap to find a real page ID
             const sitemap = await api.getSitemapFlat({
@@ -76,7 +76,7 @@ describe('getPage Integration', () => {
             });
 
             if (!sitemap || Object.keys(sitemap).length === 0) {
-                console.log(`ℹ️  No pages found in sitemap - skipping V2 fetch getPage test`);
+                console.log(`ℹ️  No pages found in sitemap - skipping V3 fetch getPage test`);
                 return;
             }
 
@@ -93,8 +93,8 @@ describe('getPage Integration', () => {
             expect(result.properties).toBeDefined();
         });
 
-        it('should retrieve page with V2 preview API', async () => {
-            const api = createV2PreviewClient();
+        it('should retrieve page with V3 preview API', async () => {
+            const api = createV3PreviewClient();
             
             // First, get the sitemap to find a real page ID
             const sitemap = await api.getSitemapFlat({
@@ -103,7 +103,7 @@ describe('getPage Integration', () => {
             });
 
             if (!sitemap || Object.keys(sitemap).length === 0) {
-                console.log(`ℹ️  No pages found in sitemap - skipping V2 preview getPage test`);
+                console.log(`ℹ️  No pages found in sitemap - skipping V3 preview getPage test`);
                 return;
             }
 

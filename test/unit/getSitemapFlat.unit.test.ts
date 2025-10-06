@@ -122,7 +122,7 @@ describe('getSitemapFlat Unit Tests', () => {
       expect(result).toEqual(mockV3SitemapFlat);
       expect(typeof result).toBe('object');
       expect(result['/']).toBeDefined();
-      expect(result['/'].lastModified).toBeDefined(); // V2 has additional metadata
+      expect(result['/'].lastModified).toBeDefined(); // V3 has additional metadata
     });
   });
 

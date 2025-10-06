@@ -124,7 +124,7 @@ describe('getSitemapNested Unit Tests', () => {
       expect(Array.isArray(result)).toBe(true);
       expect(result[0].pageID).toBeDefined();
       expect(result[0].children).toBeDefined();
-      expect(result[0].lastModified).toBeDefined(); // V2 has additional metadata
+      expect(result[0].lastModified).toBeDefined(); // V3 has additional metadata
     });
   });
 

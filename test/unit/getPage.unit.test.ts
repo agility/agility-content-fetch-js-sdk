@@ -141,10 +141,10 @@ describe('getPage Unit Tests', () => {
       expect(result).toEqual(mockV3Page);
       expect(result.pageID).toBeDefined();
       expect(result.zones).toBeDefined();
-      expect(result.seo).toBeDefined(); // V2 has SEO data
+      expect(result.seo).toBeDefined(); // V3 has SEO data
     });
 
-    it('should default to V2 when no version specified', async () => {
+    it('should default to V3 when no version specified', async () => {
       api = getApi({
         guid: 'test-guid-d',
         apiKey: 'test-key'

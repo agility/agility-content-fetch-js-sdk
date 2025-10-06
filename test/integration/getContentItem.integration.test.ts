@@ -1,8 +1,8 @@
 import {
     createV1FetchClient,
-    createV2FetchClient,
+    createV3FetchClient,
     createV1PreviewClient,
-    createV2PreviewClient,
+    createV3PreviewClient,
     testConfig
 } from '../apiClients.config';
 
@@ -69,8 +69,8 @@ describe('getContentItem Integration', () => {
     });
 
     describe('V3 API', () => {
-        it('should retrieve content item with V2 fetch API', async () => {
-            const api = createV2FetchClient();
+        it('should retrieve content item with V3 fetch API', async () => {
+            const api = createV3FetchClient();
             
             // First, get the posts list to find a real content ID
             const contentList = await api.getContentList({
@@ -80,7 +80,7 @@ describe('getContentItem Integration', () => {
             });
 
             if (!contentList || !contentList.items || contentList.items.length === 0) {
-                console.log(`ℹ️  No content found in '${testConfig.testContentListRef}' list - skipping V2 fetch getContentItem test`);
+                console.log(`ℹ️  No content found in '${testConfig.testContentListRef}' list - skipping V3 fetch getContentItem test`);
                 return;
             }
 
@@ -97,8 +97,8 @@ describe('getContentItem Integration', () => {
             expect(result.fields).toBeDefined();
         });
 
-        it('should retrieve content item with V2 preview API', async () => {
-            const api = createV2PreviewClient();
+        it('should retrieve content item with V3 preview API', async () => {
+            const api = createV3PreviewClient();
             
             // First, get the posts list to find a real content ID
             const contentList = await api.getContentList({
@@ -108,7 +108,7 @@ describe('getContentItem Integration', () => {
             });
 
             if (!contentList || !contentList.items || contentList.items.length === 0) {
-                console.log(`ℹ️  No content found in '${testConfig.testContentListRef}' list - skipping V2 preview getContentItem test`);
+                console.log(`ℹ️  No content found in '${testConfig.testContentListRef}' list - skipping V3 preview getContentItem test`);
                 return;
             }
 

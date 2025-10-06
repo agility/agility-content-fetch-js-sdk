@@ -1,8 +1,8 @@
 import {
 	createV1FetchClient,
-	createV2FetchClient,
+	createV3FetchClient,
 	createV1PreviewClient,
-	createV2PreviewClient,
+	createV3PreviewClient,
 	testConfig
 } from '../apiClients.config';
 
@@ -38,8 +38,8 @@ describe('getContentList Integration', () => {
 	});
 
 	describe('V3 API', () => {
-		it('should retrieve content list with V2 fetch API', async () => {
-			const api = createV2FetchClient();
+		it('should retrieve content list with V3 fetch API', async () => {
+			const api = createV3FetchClient();
 			const result = await api.getContentList({
 				referenceName: testConfig.testContentListRef,
 				locale: testConfig.testLocale,
@@ -51,8 +51,8 @@ describe('getContentList Integration', () => {
 			expect(Array.isArray(result.items)).toBe(true);
 		});
 
-		it('should retrieve content list with V2 preview API', async () => {
-			const api = createV2PreviewClient();
+		it('should retrieve content list with V3 preview API', async () => {
+			const api = createV3PreviewClient();
 			const result = await api.getContentList({
 				referenceName: testConfig.testContentListRef,
 				locale: testConfig.testLocale,

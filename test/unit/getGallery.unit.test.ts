@@ -112,11 +112,11 @@ describe('getGallery Unit Tests', () => {
       expect(result.galleryID).toBeDefined();
       expect(result.media).toBeDefined();
       expect(Array.isArray(result.media)).toBe(true);
-      expect(result.createdDate).toBeDefined(); // V2 has additional metadata
+      expect(result.createdDate).toBeDefined(); // V3 has additional metadata
       expect(result.modifiedDate).toBeDefined();
     });
 
-    it('should default to V2 when no version specified', async () => {
+    it('should default to V3 when no version specified', async () => {
       api = getApi({
         guid: 'test-guid-d',
         apiKey: 'test-key'

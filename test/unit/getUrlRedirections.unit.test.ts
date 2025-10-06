@@ -152,7 +152,7 @@ describe('getUrlRedirections Unit Tests', () => {
         expect(result[0].url).toBeDefined();
         expect(result[0].destinationUrl).toBeDefined();
         expect(result[0].statusCode).toBeDefined();
-        expect(result[0].createdDate).toBeDefined(); // V2 has additional metadata
+        expect(result[0].createdDate).toBeDefined(); // V3 has additional metadata
         expect(result[0].isActive).toBeDefined();
       }
     });

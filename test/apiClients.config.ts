@@ -82,7 +82,7 @@ export function createV1FetchClient() {
 /**
  * Creates a V3 API client for fetch (live) mode
  */
-export function createV2FetchClient() {
+export function createV3FetchClient() {
     validateTestConfig();
     
     return agilityFetch.getApi({
@@ -111,7 +111,7 @@ export function createV1PreviewClient() {
 /**
  * Creates a V3 API client for preview mode
  */
-export function createV2PreviewClient() {
+export function createV3PreviewClient() {
     validateTestConfig();
     
     return agilityFetch.getApi({
@@ -123,11 +123,11 @@ export function createV2PreviewClient() {
     });
 }
 
-// Legacy functions for backward compatibility (default to V2)
+// Legacy functions for backward compatibility (default to V3)
 export function createApiClient() {
-    return createV2FetchClient();
+    return createV3FetchClient();
 }
 
 export function createPreviewApiClient() {
-    return createV2PreviewClient();
+    return createV3PreviewClient();
 }
