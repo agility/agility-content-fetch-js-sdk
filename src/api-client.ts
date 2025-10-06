@@ -70,7 +70,7 @@ function buildBaseUrl(guid: string, apiVersion?: 'v1' | 'v3') {
 		us2: '-usa2'
 	};
 
-	// Add version path for v2 API - version comes after domain, before GUID
+	// Add version path for v3 API - version comes after domain, before GUID
 	const versionPath = apiVersion === 'v3' ? '/v3' : '';
 
 	// Match for -us2, -c, -u, -e, -a, -d at the end of the guid
