@@ -1,6 +1,6 @@
 {
   "name": "@agility/content-fetch",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "JS/TS library for the Agility Fetch API",
   "repository": {
     "type": "git",
@@ -20,12 +20,12 @@
   "scripts": {
     "clean": "rimraf dist",
     "types:generate": "npm run types:generate:dev",
-    "types:generate:dev": "npm run types:generate:dev:v1 && npm run types:generate:dev:v2",
+    "types:generate:dev": "npm run types:generate:dev:v1 && npm run types:generate:dev:v3",
     "types:generate:dev:v1": "openapi-typescript https://api-dev.aglty.io/swagger/v1/swagger.json -o src/types/generated/v1.ts",
-    "types:generate:dev:v2": "openapi-typescript https://api-dev.aglty.io/swagger/v2/swagger.json -o src/types/generated/v2.ts",
-    "types:generate:prod": "npm run types:generate:prod:v1 && npm run types:generate:prod:v2",
+    "types:generate:dev:v3": "openapi-typescript https://api-dev.aglty.io/swagger/v3/swagger.json -o src/types/generated/v3.ts",
+    "types:generate:prod": "npm run types:generate:prod:v1 && npm run types:generate:prod:v3",
     "types:generate:prod:v1": "openapi-typescript https://api.aglty.io/swagger/v1/swagger.json -o src/types/generated/v1.ts",
-    "types:generate:prod:v2": "openapi-typescript https://api.aglty.io/swagger/v2/swagger.json -o src/types/generated/v2.ts",
+    "types:generate:prod:v3": "openapi-typescript https://api.aglty.io/swagger/v3/swagger.json -o src/types/generated/v3.ts",
     "build": "node build.js",
     "prepare": "npm run build",
     "test": "npm run test:all",

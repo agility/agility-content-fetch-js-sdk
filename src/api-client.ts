@@ -47,7 +47,7 @@ const defaultConfig: Config = {
 	guid: null,
 	apiKey: null,
 	locale: null,
-	apiVersion: 'v2', // Default to v2 for better types and modern API
+	apiVersion: 'v3', // Default to v3 for better types and modern API
 
 	headers: {},
 	requiresGuidInHeaders: false,
@@ -59,7 +59,7 @@ const defaultConfig: Config = {
 };
 
 
-function buildBaseUrl(guid: string, apiVersion?: 'v1' | 'v2') {
+function buildBaseUrl(guid: string, apiVersion?: 'v1' | 'v3') {
 
 	const baseUrlSuffixes: { [key: string]: string } = {
 		u: '',
@@ -71,7 +71,7 @@ function buildBaseUrl(guid: string, apiVersion?: 'v1' | 'v2') {
 	};
 
 	// Add version path for v2 API - version comes after domain, before GUID
-	const versionPath = apiVersion === 'v2' ? '/v2' : '';
+	const versionPath = apiVersion === 'v3' ? '/v3' : '';
 
 	// Match for -us2, -c, -u, -e, -a, -d at the end of the guid
 	const match = guid.match(/-(us2|[ucead])$/);

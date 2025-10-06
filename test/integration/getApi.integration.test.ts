@@ -84,7 +84,7 @@ describe('getApi:', function () {
             apiKey: 'some-access-token'
         });
         expect(api.config.baseUrl).toContain('api-ca.aglty.io');
-        expect(api.config.baseUrl).toContain('/v2/');
+        expect(api.config.baseUrl).toContain('/v3/');
         expect(api.config.baseUrl).toContain('some-guid-c');
         done();
     });
@@ -95,7 +95,7 @@ describe('getApi:', function () {
             apiKey: 'some-access-token'
         });
         expect(api.config.baseUrl).toContain('api.aglty.io');
-        expect(api.config.baseUrl).toContain('/v2/');
+        expect(api.config.baseUrl).toContain('/v3/');
         expect(api.config.baseUrl).toContain('some-guid-u');
         done();
     });
@@ -106,7 +106,7 @@ describe('getApi:', function () {
             apiKey: 'some-access-token'
         });
         expect(api.config.baseUrl).toContain('api-usa2.aglty.io');
-        expect(api.config.baseUrl).toContain('/v2/');
+        expect(api.config.baseUrl).toContain('/v3/');
         expect(api.config.baseUrl).toContain('someguid-us2');
         done();
     });
@@ -117,7 +117,7 @@ describe('getApi:', function () {
             apiKey: 'some-access-token'
         });
         expect(api.config.baseUrl).toContain('api-dev.aglty.io');
-        expect(api.config.baseUrl).toContain('/v2/');
+        expect(api.config.baseUrl).toContain('/v3/');
         expect(api.config.baseUrl).toContain('some-guid-d');
         done();
     });
@@ -128,7 +128,7 @@ describe('getApi:', function () {
             apiKey: 'some-access-token'
         });
         expect(api.config.baseUrl).toContain('api-dev.aglty.io');
-        expect(api.config.baseUrl).toContain('/v2/');
+        expect(api.config.baseUrl).toContain('/v3/');
         expect(api.config.baseUrl).toContain('some-guid');
         done();
     });

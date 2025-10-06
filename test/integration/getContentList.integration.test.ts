@@ -37,7 +37,7 @@ describe('getContentList Integration', () => {
 		});
 	});
 
-	describe('V2 API', () => {
+	describe('V3 API', () => {
 		it('should retrieve content list with V2 fetch API', async () => {
 			const api = createV2FetchClient();
 			const result = await api.getContentList({

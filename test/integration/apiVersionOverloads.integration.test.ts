@@ -26,7 +26,7 @@ describe('API Version Integration Tests', () => {
     });
   });
 
-  describe('V2 API', () => {
+  describe('V3 API', () => {
     it('should successfully call V2 getContentList endpoint', async () => {
       const api = createV2FetchClient();
       
@@ -40,12 +40,12 @@ describe('API Version Integration Tests', () => {
       expect(result).toBeDefined();
       expect(result.items).toBeDefined();
       expect(Array.isArray(result.items)).toBe(true);
-      expect(api.config.apiVersion).toBe('v2');
+      expect(api.config.apiVersion).toBe('v3');
     });
 
-    it('should default to V2 API version', () => {
+    it('should default to V3 API version', () => {
       const api = createV2FetchClient();
-      expect(api.config.apiVersion).toBe('v2');
+      expect(api.config.apiVersion).toBe('v3');
     });
   });
 });

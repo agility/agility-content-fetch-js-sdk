@@ -132,7 +132,7 @@ export interface ContentListRequestParams {
 
 // Method overloads for type safety based on API version
 function getContentList(this: ApiClientInstance & { config: { apiVersion: 'v1' } }, requestParams: ContentListRequestParams): Promise<ApiTypes.V1.ContentList>;
-function getContentList(this: ApiClientInstance & { config: { apiVersion: 'v2' } }, requestParams: ContentListRequestParams): Promise<ApiTypes.V2.ContentList>;
+function getContentList(this: ApiClientInstance & { config: { apiVersion: 'v3' } }, requestParams: ContentListRequestParams): Promise<ApiTypes.V3.ContentList>;
 function getContentList(this: ApiClientInstance, requestParams: ContentListRequestParams): Promise<any> {
 
 	validateRequestParams(requestParams);

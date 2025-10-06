@@ -39,7 +39,7 @@ export interface SitemapNestedRequestParams {
 
 // Method overloads for type safety based on API version
 function getSitemapNested(this: ApiClientInstance & { config: { apiVersion: 'v1' } }, requestParams: SitemapNestedRequestParams): Promise<ApiTypes.V1.SitemapNested>;
-function getSitemapNested(this: ApiClientInstance & { config: { apiVersion: 'v2' } }, requestParams: SitemapNestedRequestParams): Promise<ApiTypes.V2.SitemapNested>;
+function getSitemapNested(this: ApiClientInstance & { config: { apiVersion: 'v3' } }, requestParams: SitemapNestedRequestParams): Promise<ApiTypes.V3.SitemapNested>;
 function getSitemapNested(this: ApiClientInstance, requestParams: SitemapNestedRequestParams): Promise<any> {
 
     validateRequestParams(requestParams);

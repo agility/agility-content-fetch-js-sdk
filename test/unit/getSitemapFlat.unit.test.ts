@@ -7,7 +7,7 @@
 import { getApi } from '../../src/api-client';
 import { mockApiClient, mockApiClientWithError, verifyRequestCall, resetAllMocks } from '../utils/mock-helpers';
 import { mockV1SitemapFlat } from '../fixtures/v1-responses';
-import { mockV2SitemapFlat } from '../fixtures/v2-responses';
+import { mockV3SitemapFlat } from '../fixtures/v3-responses';
 
 describe('getSitemapFlat Unit Tests', () => {
   let api: any;
@@ -37,7 +37,7 @@ describe('getSitemapFlat Unit Tests', () => {
     });
 
     it('should accept languageCode as fallback for locale', async () => {
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
       
       await api.getSitemapFlat({
         channelName: 'website',
@@ -54,7 +54,7 @@ describe('getSitemapFlat Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
     });
 
     it('should build correct URL with basic parameters', async () => {
@@ -82,7 +82,7 @@ describe('getSitemapFlat Unit Tests', () => {
       });
 
       const call = api.makeRequest.mock.calls[0][0];
-      expect(call.baseURL).toContain('/v2/');
+      expect(call.baseURL).toContain('/v3/');
       expect(call.baseURL).toContain('/fetch/en-us');
     });
   });
@@ -106,20 +106,20 @@ describe('getSitemapFlat Unit Tests', () => {
       expect(result['/']).toBeDefined();
     });
 
-    it('should return V2 response type for V2 API', async () => {
+    it('should return V3 response type for V3 API', async () => {
       api = getApi({
         guid: 'test-guid-d',
         apiKey: 'test-key',
-        apiVersion: 'v2'
+        apiVersion: 'v3'
       });
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
 
       const result = await api.getSitemapFlat({
         channelName: 'website',
         locale: 'en-us'
       });
 
-      expect(result).toEqual(mockV2SitemapFlat);
+      expect(result).toEqual(mockV3SitemapFlat);
       expect(typeof result).toBe('object');
       expect(result['/']).toBeDefined();
       expect(result['/'].lastModified).toBeDefined(); // V2 has additional metadata
@@ -132,7 +132,7 @@ describe('getSitemapFlat Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
     });
 
     it('should use GET method', async () => {
@@ -150,7 +150,7 @@ describe('getSitemapFlat Unit Tests', () => {
         apiKey: 'test-key',
         isPreview: true
       });
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
 
       await api.getSitemapFlat({
         channelName: 'website',
@@ -158,7 +158,7 @@ describe('getSitemapFlat Unit Tests', () => {
       });
 
       const call = api.makeRequest.mock.calls[0][0];
-      expect(call.baseURL).toContain('/v2/');
+      expect(call.baseURL).toContain('/v3/');
       expect(call.baseURL).toContain('/preview/en-us');
     });
   });
@@ -196,7 +196,7 @@ describe('getSitemapFlat Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
     });
 
     it('should return sitemap with proper flat structure', async () => {

@@ -44,7 +44,7 @@ describe('API Connectivity Integration Tests', () => {
     });
   });
 
-  describe('V2 API', () => {
+  describe('V3 API', () => {
     it('should connect to V2 fetch API', async () => {
       const api = createV2FetchClient();
       

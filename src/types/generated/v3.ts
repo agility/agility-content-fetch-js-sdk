@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-    "/v2/{guid}/{apitype}/contentmodels": {
+    "/v3/{guid}/{apitype}/contentmodels": {
         parameters: {
             query?: never;
             header?: never;
@@ -66,7 +66,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/v2/{guid}/{apitype}/gallery/{id}": {
+    "/v3/{guid}/{apitype}/gallery/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -127,7 +127,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/v2/{guid}/{apitype}/{locale}/item/{id}": {
+    "/v3/{guid}/{apitype}/{locale}/item/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -195,7 +195,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/v2/{guid}/{apitype}/{locale}/list/{referenceName}": {
+    "/v3/{guid}/{apitype}/{locale}/list/{referenceName}": {
         parameters: {
             query?: never;
             header?: never;
@@ -273,7 +273,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/v2/{guid}/{apitype}/{locale}/page/{id}": {
+    "/v3/{guid}/{apitype}/{locale}/page/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -341,7 +341,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/v2/{guid}/{apitype}/{locale}/page/{channel}": {
+    "/v3/{guid}/{apitype}/{locale}/page/{channel}": {
         parameters: {
             query?: never;
             header?: never;
@@ -411,7 +411,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/v2/{guid}/{apitype}/{locale}/sitemap/flat/{channelName}": {
+    "/v3/{guid}/{apitype}/{locale}/sitemap/flat/{channelName}": {
         parameters: {
             query?: never;
             header?: never;
@@ -476,7 +476,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/v2/{guid}/{apitype}/{locale}/sitemap/nested/{channelName}": {
+    "/v3/{guid}/{apitype}/{locale}/sitemap/nested/{channelName}": {
         parameters: {
             query?: never;
             header?: never;
@@ -539,7 +539,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/v2/{guid}/{apitype}/{locale}/sync/items": {
+    "/v3/{guid}/{apitype}/{locale}/sync/items": {
         parameters: {
             query?: never;
             header?: never;
@@ -606,7 +606,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/v2/{guid}/{apitype}/{locale}/sync/pages": {
+    "/v3/{guid}/{apitype}/{locale}/sync/pages": {
         parameters: {
             query?: never;
             header?: never;
@@ -673,7 +673,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/v2/{guid}/{apitype}/urlredirection": {
+    "/v3/{guid}/{apitype}/urlredirection": {
         parameters: {
             query?: never;
             header?: never;

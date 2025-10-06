@@ -1,4 +1,4 @@
-name: CI
+name: CI/CD
 
 on:
   pull_request:
@@ -60,3 +60,5 @@ jobs:
           key: ${{ runner.os }}-build-${{ matrix.node-version }}-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-build-${{ matrix.node-version }}-
+
+  

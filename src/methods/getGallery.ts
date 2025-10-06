@@ -35,7 +35,7 @@ export interface GalleryRequestParams {
 
 // Method overloads for type safety based on API version
 function getGallery(this: ApiClientInstance & { config: { apiVersion: 'v1' } }, requestParams: GalleryRequestParams): Promise<ApiTypes.V1.Gallery>;
-function getGallery(this: ApiClientInstance & { config: { apiVersion: 'v2' } }, requestParams: GalleryRequestParams): Promise<ApiTypes.V2.Gallery>;
+function getGallery(this: ApiClientInstance & { config: { apiVersion: 'v3' } }, requestParams: GalleryRequestParams): Promise<ApiTypes.V3.Gallery>;
 function getGallery(this: ApiClientInstance, requestParams: GalleryRequestParams): Promise<any> {
 
     validateRequestParams(requestParams);

@@ -7,7 +7,7 @@
 import { getApi } from '../../src/api-client';
 import { mockApiClient, mockApiClientWithError, verifyRequestCall, resetAllMocks } from '../utils/mock-helpers';
 import { mockV1UrlRedirections } from '../fixtures/v1-responses';
-import { mockV2UrlRedirections } from '../fixtures/v2-responses';
+import { mockV3UrlRedirections } from '../fixtures/v3-responses';
 
 describe('getUrlRedirections Unit Tests', () => {
   let api: any;
@@ -25,7 +25,7 @@ describe('getUrlRedirections Unit Tests', () => {
     });
 
     it('should accept empty parameters', async () => {
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
       
       await api.getUrlRedirections({});
 
@@ -33,7 +33,7 @@ describe('getUrlRedirections Unit Tests', () => {
     });
 
     it('should accept null lastAccessDate', async () => {
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
       
       await api.getUrlRedirections({
         lastAccessDate: null
@@ -43,7 +43,7 @@ describe('getUrlRedirections Unit Tests', () => {
     });
 
     it('should accept valid Date object for lastAccessDate', async () => {
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
       const testDate = new Date('2023-01-01T00:00:00.000Z');
       
       await api.getUrlRedirections({
@@ -54,7 +54,7 @@ describe('getUrlRedirections Unit Tests', () => {
     });
 
     it('should accept date string for lastAccessDate', async () => {
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
       
       await api.getUrlRedirections({
         lastAccessDate: '2023-01-01T00:00:00.000Z' as any
@@ -76,7 +76,7 @@ describe('getUrlRedirections Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
     });
 
     it('should build correct URL without lastAccessDate', async () => {
@@ -136,17 +136,17 @@ describe('getUrlRedirections Unit Tests', () => {
       }
     });
 
-    it('should return V2 response type for V2 API', async () => {
+    it('should return V3 response type for V3 API', async () => {
       api = getApi({
         guid: 'test-guid-d',
         apiKey: 'test-key',
-        apiVersion: 'v2'
+        apiVersion: 'v3'
       });
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
 
       const result = await api.getUrlRedirections({});
 
-      expect(result).toEqual(mockV2UrlRedirections);
+      expect(result).toEqual(mockV3UrlRedirections);
       expect(Array.isArray(result)).toBe(true);
       if (result.length > 0) {
         expect(result[0].url).toBeDefined();
@@ -164,7 +164,7 @@ describe('getUrlRedirections Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
     });
 
     it('should use GET method', async () => {
@@ -230,7 +230,7 @@ describe('getUrlRedirections Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
     });
 
     it('should return array of URL redirections', async () => {
@@ -271,7 +271,7 @@ describe('getUrlRedirections Unit Tests', () => {
       const lastAccessDate = new Date('2023-01-01T00:00:00.000Z');
       
       // Mock response for incremental update (typically fewer items)
-      api.makeRequest.mockResolvedValueOnce([mockV2UrlRedirections[0]]);
+      api.makeRequest.mockResolvedValueOnce([mockV3UrlRedirections[0]]);
 
       const result = await api.getUrlRedirections({
         lastAccessDate
@@ -289,7 +289,7 @@ describe('getUrlRedirections Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
     });
 
     it('should convert string dates to Date objects', async () => {

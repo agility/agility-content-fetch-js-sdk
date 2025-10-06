@@ -39,7 +39,7 @@ export interface SitemapFlatRequestParams {
 
 // Method overloads for type safety based on API version
 function getSitemapFlat(this: ApiClientInstance & { config: { apiVersion: 'v1' } }, requestParams: SitemapFlatRequestParams): Promise<ApiTypes.V1.SitemapFlat>;
-function getSitemapFlat(this: ApiClientInstance & { config: { apiVersion: 'v2' } }, requestParams: SitemapFlatRequestParams): Promise<ApiTypes.V2.SitemapFlat>;
+function getSitemapFlat(this: ApiClientInstance & { config: { apiVersion: 'v3' } }, requestParams: SitemapFlatRequestParams): Promise<ApiTypes.V3.SitemapFlat>;
 function getSitemapFlat(this: ApiClientInstance, requestParams: SitemapFlatRequestParams): Promise<any> {
 
     validateRequestParams(requestParams);

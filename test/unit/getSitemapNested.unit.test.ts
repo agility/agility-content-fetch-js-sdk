@@ -7,7 +7,7 @@
 import { getApi } from '../../src/api-client';
 import { mockApiClient, mockApiClientWithError, verifyRequestCall, resetAllMocks } from '../utils/mock-helpers';
 import { mockV1SitemapNested } from '../fixtures/v1-responses';
-import { mockV2SitemapNested } from '../fixtures/v2-responses';
+import { mockV3SitemapNested } from '../fixtures/v3-responses';
 
 describe('getSitemapNested Unit Tests', () => {
   let api: any;
@@ -37,7 +37,7 @@ describe('getSitemapNested Unit Tests', () => {
     });
 
     it('should accept languageCode as fallback for locale', async () => {
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
       
       await api.getSitemapNested({
         channelName: 'website',
@@ -54,7 +54,7 @@ describe('getSitemapNested Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
     });
 
     it('should build correct URL with basic parameters', async () => {
@@ -82,7 +82,7 @@ describe('getSitemapNested Unit Tests', () => {
       });
 
       const call = api.makeRequest.mock.calls[0][0];
-      expect(call.baseURL).toContain('/v2/');
+      expect(call.baseURL).toContain('/v3/');
       expect(call.baseURL).toContain('/fetch/en-us');
     });
   });
@@ -107,20 +107,20 @@ describe('getSitemapNested Unit Tests', () => {
       expect(result[0].children).toBeDefined();
     });
 
-    it('should return V2 response type for V2 API', async () => {
+    it('should return V3 response type for V3 API', async () => {
       api = getApi({
         guid: 'test-guid-d',
         apiKey: 'test-key',
-        apiVersion: 'v2'
+        apiVersion: 'v3'
       });
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
 
       const result = await api.getSitemapNested({
         channelName: 'website',
         locale: 'en-us'
       });
 
-      expect(result).toEqual(mockV2SitemapNested);
+      expect(result).toEqual(mockV3SitemapNested);
       expect(Array.isArray(result)).toBe(true);
       expect(result[0].pageID).toBeDefined();
       expect(result[0].children).toBeDefined();
@@ -134,7 +134,7 @@ describe('getSitemapNested Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
     });
 
     it('should use GET method', async () => {
@@ -152,7 +152,7 @@ describe('getSitemapNested Unit Tests', () => {
         apiKey: 'test-key',
         isPreview: true
       });
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
 
       await api.getSitemapNested({
         channelName: 'website',
@@ -160,7 +160,7 @@ describe('getSitemapNested Unit Tests', () => {
       });
 
       const call = api.makeRequest.mock.calls[0][0];
-      expect(call.baseURL).toContain('/v2/');
+      expect(call.baseURL).toContain('/v3/');
       expect(call.baseURL).toContain('/preview/en-us');
     });
   });
@@ -198,7 +198,7 @@ describe('getSitemapNested Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v2');
+      mockApiClient(api, 'v3');
     });
 
     it('should return sitemap with proper nested structure', async () => {

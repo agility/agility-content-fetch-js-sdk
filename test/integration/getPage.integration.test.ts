@@ -65,7 +65,7 @@ describe('getPage Integration', () => {
         });
     });
 
-    describe('V2 API', () => {
+    describe('V3 API', () => {
         it('should retrieve page with V2 fetch API', async () => {
             const api = createV2FetchClient();
             

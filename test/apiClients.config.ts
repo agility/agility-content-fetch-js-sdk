@@ -80,7 +80,7 @@ export function createV1FetchClient() {
 }
 
 /**
- * Creates a V2 API client for fetch (live) mode
+ * Creates a V3 API client for fetch (live) mode
  */
 export function createV2FetchClient() {
     validateTestConfig();
@@ -89,7 +89,7 @@ export function createV2FetchClient() {
         guid: config.guid,
         apiKey: config.apiKeyFetch,
         // Let buildBaseUrl handle the URL construction
-        apiVersion: 'v2'
+        apiVersion: 'v3'
     });
 }
 
@@ -109,7 +109,7 @@ export function createV1PreviewClient() {
 }
 
 /**
- * Creates a V2 API client for preview mode
+ * Creates a V3 API client for preview mode
  */
 export function createV2PreviewClient() {
     validateTestConfig();
@@ -119,7 +119,7 @@ export function createV2PreviewClient() {
         apiKey: config.apiKeyPreview,
         isPreview: true,
         // Let buildBaseUrl handle the URL construction
-        apiVersion: 'v2'
+        apiVersion: 'v3'
     });
 }
 

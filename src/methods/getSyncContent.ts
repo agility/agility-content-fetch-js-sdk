@@ -45,7 +45,7 @@ export interface SyncContentRequestParams {
 
 // Method overloads for type safety based on API version
 function getSyncContent(this: ApiClientInstance & { config: { apiVersion: 'v1' } }, requestParams: SyncContentRequestParams): Promise<ApiTypes.V1.ContentItemSync>;
-function getSyncContent(this: ApiClientInstance & { config: { apiVersion: 'v2' } }, requestParams: SyncContentRequestParams): Promise<ApiTypes.V2.ContentItemSync>;
+function getSyncContent(this: ApiClientInstance & { config: { apiVersion: 'v3' } }, requestParams: SyncContentRequestParams): Promise<ApiTypes.V3.ContentItemSync>;
 function getSyncContent(this: ApiClientInstance, requestParams: SyncContentRequestParams): Promise<any> {
 
     validateRequestParams(requestParams);
