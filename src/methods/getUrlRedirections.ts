@@ -62,9 +62,9 @@ function getUrlRedirections(this: ApiClientInstance, requestParams: UrlRedirecti
 	};
 
 	const self = this;
-	let promise = new Promise<ApiTypes.V1.UrlRedirection[] | ApiTypes.V2.UrlRedirection[]>(function (resolve, reject) {
+	let promise = new Promise<ApiTypes.V1.UrlRedirection[] | ApiTypes.V3.UrlRedirection[]>(function (resolve, reject) {
 		self.makeRequest(req)
-			.then((data: ApiTypes.V1.UrlRedirection[] | ApiTypes.V2.UrlRedirection[]) => {
+			.then((data: ApiTypes.V1.UrlRedirection[] | ApiTypes.V3.UrlRedirection[]) => {
 
 				if (data == undefined || !data) {
 					reject(new Error("The URL redirections could not be retrieved."));
