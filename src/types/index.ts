@@ -64,7 +64,7 @@ export type ContentList = ApiTypes.V1.ContentList;
 export type SyncContent = ApiTypes.V1.ContentItemSync;
 
 /**
- * @deprecated Use ApiTypes.V1.PageSync or ApiTypes.V3.PageSync instead
+ * @deprecated Use ApiTypes.V1.PageSync or ApiTypes.V2.PageSync instead
  * This will be removed in v4.0.0
  */
 export type SyncPages = ApiTypes.V1.PageSync;

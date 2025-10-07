@@ -47,7 +47,7 @@ const defaultConfig: Config = {
 	guid: null,
 	apiKey: null,
 	locale: null,
-	apiVersion: 'v2', // Default to v3 for better types and modern API
+	apiVersion: 'v2', // Default to v2 for better types and modern API
 
 	headers: {},
 	requiresGuidInHeaders: false,

@@ -71,8 +71,8 @@ describe('getPageByPath Integration', () => {
         });
     });
 
-    describe('V3 API', () => {
-        it('should retrieve page by path with V3 fetch API', async () => {
+    describe('V2 API', () => {
+        it('should retrieve page by path with V2 fetch API', async () => {
             const api = createV2FetchClient();
             
             // First, get the sitemap to find a real page path
@@ -82,7 +82,7 @@ describe('getPageByPath Integration', () => {
             });
 
             if (!sitemap || Object.keys(sitemap).length === 0) {
-                console.log(`ℹ️  No pages found in sitemap - skipping V3 fetch getPageByPath test`);
+                console.log(`ℹ️  No pages found in sitemap - skipping V2 fetch getPageByPath test`);
                 return;
             }
 
@@ -102,7 +102,7 @@ describe('getPageByPath Integration', () => {
             expect(result.page.properties).toBeDefined();
         });
 
-        it('should retrieve page by path with V3 preview API', async () => {
+        it('should retrieve page by path with V2 preview API', async () => {
             const api = createV2PreviewClient();
             
             // First, get the sitemap to find a real page path
@@ -112,7 +112,7 @@ describe('getPageByPath Integration', () => {
             });
 
             if (!sitemap || Object.keys(sitemap).length === 0) {
-                console.log(`ℹ️  No pages found in sitemap - skipping V3 preview getPageByPath test`);
+                console.log(`ℹ️  No pages found in sitemap - skipping V2 preview getPageByPath test`);
                 return;
             }
 
