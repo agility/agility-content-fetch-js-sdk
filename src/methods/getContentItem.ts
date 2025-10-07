@@ -1,5 +1,6 @@
 import { buildRequestUrlPath, buildAuthHeader } from '../utils'
-import { ApiClientInstance } from '../types/Client'
+import { ApiClientInstance, TypeError } from '../types/sdk'
+import { ApiTypes } from '../types/generated'
 
 /**
  * Gets the details of a content item by their Content ID.
@@ -33,9 +34,6 @@ import { ApiClientInstance } from '../types/Client'
  *
 */
 
-import { ContentItem } from '../types/ContentItem';
-import { TypeError } from '../types/errors/Errors';
-
 export interface ContentItemRequestParams {
     contentID: number;
     locale?: string;
@@ -44,13 +42,15 @@ export interface ContentItemRequestParams {
     expandAllContentLinks?: boolean;
 }
 
-
 const defaultParams = {
     contentLinkDepth: 1,
     expandAllContentLinks: false
 }
 
-function getContentItem<T>(this: ApiClientInstance, requestParams: ContentItemRequestParams): Promise<ContentItem<T>> {
+// Method overloads for type safety based on API version
+function getContentItem(this: ApiClientInstance & { config: { apiVersion: 'v1' } }, requestParams: ContentItemRequestParams): Promise<ApiTypes.V1.ContentItem>;
+function getContentItem(this: ApiClientInstance & { config: { apiVersion: 'v2' } }, requestParams: ContentItemRequestParams): Promise<ApiTypes.V2.ContentItem>;
+function getContentItem(this: ApiClientInstance, requestParams: ContentItemRequestParams): Promise<any> {
     validateRequestParams(requestParams);
 
     //merge default params with request params

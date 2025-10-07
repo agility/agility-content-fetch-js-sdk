@@ -22,7 +22,3 @@ export type {
 export {
     getApi
 }
-
-module.exports = {
-    getApi
-}

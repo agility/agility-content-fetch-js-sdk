@@ -47,6 +47,7 @@ const defaultConfig: Config = {
 	guid: null,
 	apiKey: null,
 	locale: null,
+	apiVersion: 'v2', // Default to v2 for better types and modern API
 
 	headers: {},
 	requiresGuidInHeaders: false,
@@ -58,7 +59,7 @@ const defaultConfig: Config = {
 };
 
 
-function buildBaseUrl(guid: string) {
+function buildBaseUrl(guid: string, apiVersion?: 'v1' | 'v2') {
 
 	const baseUrlSuffixes: { [key: string]: string } = {
 		u: '',
@@ -69,20 +70,24 @@ function buildBaseUrl(guid: string) {
 		us2: '-usa2'
 	};
 
+	// Add version path for v2 API - version comes after domain, before GUID
+	const versionPath = apiVersion === 'v2' ? '/v2' : '';
+
 	// Match for -us2, -c, -u, -e, -a, -d at the end of the guid
 	const match = guid.match(/-(us2|[ucead])$/);
 
 	if (match) {
 		const env = match[1];
 		if (baseUrlSuffixes.hasOwnProperty(env)) {
-			const url = `https://api${baseUrlSuffixes[env]}.aglty.io/${guid}`;
+			const url = `https://api${baseUrlSuffixes[env]}.aglty.io${versionPath}/${guid}`;
 			return url;
 		}
 	}
 
-	// use default url
-	const legacyUrl = `https://${guid}-api.agilitycms.cloud`;
-	return legacyUrl;
+	// For legacy GUIDs, still use the modern API URL format instead of the legacy format
+	// This allows legacy GUIDs to be routed to modern fetch URLs
+	const url = `https://api-dev.aglty.io${versionPath}/${guid}`;
+	return url;
 }
 
 function validateConfigParams(configParams: Config) {
@@ -105,7 +110,7 @@ export interface ApiClientInstance {
 	makeRequest(req: any): Promise<any>; // Replace 'any' with the proper type for req if possible.
 	getSitemapFlat(params: SitemapFlatRequestParams): Promise<any>;
 	getSitemapNested(params: SitemapNestedRequestParams): Promise<any>;
-	getContentItem(params: ContentItemRequestParams): Promise<any>;
+	getContentItem<T = any>(params: ContentItemRequestParams): Promise<any>;
 	getContentList(params: ContentListRequestParams): Promise<any>;
 	getPage(params: PageRequestParams): Promise<any>;
 	getPageByPath(params: PageByPathRequestParams): Promise<any>;
@@ -129,7 +134,7 @@ class ApiClient {
 
 		//compute the base Url
 		if (!config.baseUrl) {
-			config.baseUrl = buildBaseUrl(config?.guid || '');
+			config.baseUrl = buildBaseUrl(config?.guid || '', config.apiVersion);
 		} else {
 			//we are using a custom url, make sure we include the guid in the headers
 			config.requiresGuidInHeaders = true;
@@ -142,7 +147,7 @@ class ApiClient {
 
 	types = types;
 
-	async getContentItem(params: ContentItemRequestParams) {
+	async getContentItem<T = any>(params: ContentItemRequestParams) {
 		return getContentItem.call(this, params);
 	}
 
@@ -188,13 +193,13 @@ class ApiClient {
 		const isPreview = !!this.config.isPreview
 
 
-		logDebug({ config: this.config, message: `AgilityCMS Fetch API LOG: ${reqConfig.baseURL}${reqConfig.url}` });
+		const fullUrl = `${reqConfig.baseURL}${reqConfig.url}`;
+		
+		logDebug({ config: this.config, message: `AgilityCMS Fetch API LOG: ${fullUrl}` });
 
 
 		//make the request using our axios instance
 		try {
-
-			const fullUrl = `${reqConfig.baseURL}${reqConfig.url}`
 
 
 			let init: any = {
@@ -216,10 +221,11 @@ class ApiClient {
 			const response = await fetch(fullUrl, init)
 			if (!response.ok) {
 				// *** NOT ok ***
+				const fullErrorUrl = `${reqConfig.baseURL}${reqConfig.url}`;
 
 				//if not found, just return
 				if (response.status === 404) {
-					logInfo({ config: this.config, message: `AgilityCMS Fetch API: Request returned a ${response.status} response  for ${reqConfig.baseURL}${reqConfig.url}. ${response.statusText}` })
+					logInfo({ config: this.config, message: `AgilityCMS Fetch API: Request returned a ${response.status} response  for ${fullErrorUrl}. ${response.statusText}` })
 					return
 				}
 

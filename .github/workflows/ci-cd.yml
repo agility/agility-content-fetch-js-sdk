@@ -1,0 +1,64 @@
+name: CI/CD
+
+on:
+  pull_request:
+    branches: [dev, master]
+  push:
+    branches: [dev, master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            ~/.npm
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ matrix.node-version }}-npm-
+            ${{ runner.os }}-node-${{ matrix.node-version }}-
+            
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Security audit
+        run: npm audit --audit-level moderate
+        continue-on-error: true
+        
+      - name: Build project
+        run: npm run build
+        
+      - name: Run tests
+        run: npm test
+        env:
+          AGILITY_GUID: ${{ secrets.AGILITY_GUID }}
+          AGILITY_FETCH_API_KEY: ${{ secrets.AGILITY_FETCH_API_KEY }}
+          AGILITY_PREVIEW_API_KEY: ${{ secrets.AGILITY_PREVIEW_API_KEY }}
+          AGILITY_BASE_URL: ${{ secrets.AGILITY_BASE_URL }}
+        
+      - name: Cache build artifacts
+        uses: actions/cache@v4
+        with:
+          path: dist
+          key: ${{ runner.os }}-build-${{ matrix.node-version }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ matrix.node-version }}-
+
+  

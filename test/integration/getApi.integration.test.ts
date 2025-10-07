@@ -1,4 +1,4 @@
-import * as agilityFetch from '../dist/node';
+import * as agilityFetch from '../../dist/node';
 
 //This is a synchronous test
 describe('getApi:', function () {
@@ -78,58 +78,58 @@ describe('getApi:', function () {
         done();
     });
 
-    it('should return an api client with new stackpath baseUrl based on canada', function (done) {
-        const baseUrl = 'https://api-ca.aglty.io/some-guid-c';
+    it('should construct correct baseUrl for canada GUID', function (done) {
         const api = agilityFetch.getApi({
             guid: 'some-guid-c',
-            apiKey: 'some-access-token',
-            baseUrl: null
+            apiKey: 'some-access-token'
         });
-        expect(api.config.baseUrl).toBe(baseUrl);
+        expect(api.config.baseUrl).toContain('api-ca.aglty.io');
+        expect(api.config.baseUrl).toContain('/v2/');
+        expect(api.config.baseUrl).toContain('some-guid-c');
         done();
     });
 
-    it('should return an api client with new stackpath baseUrl based on usa', function (done) {
-        const baseUrl = 'https://api.aglty.io/some-guid-u';
+    it('should construct correct baseUrl for usa GUID', function (done) {
         const api = agilityFetch.getApi({
             guid: 'some-guid-u',
-            apiKey: 'some-access-token',
-            baseUrl: null
+            apiKey: 'some-access-token'
         });
-        expect(api.config.baseUrl).toBe(baseUrl);
+        expect(api.config.baseUrl).toContain('api.aglty.io');
+        expect(api.config.baseUrl).toContain('/v2/');
+        expect(api.config.baseUrl).toContain('some-guid-u');
         done();
     });
 
-    it('should return an api client with new stackpath baseUrl based on us2', function (done) {
-        const baseUrl = 'https://api-usa2.aglty.io/someguid-us2';
+    it('should construct correct baseUrl for us2 GUID', function (done) {
         const api = agilityFetch.getApi({
             guid: 'someguid-us2',
-            apiKey: 'some-access-token',
-            baseUrl: null
+            apiKey: 'some-access-token'
         });
-        expect(api.config.baseUrl).toBe(baseUrl);
+        expect(api.config.baseUrl).toContain('api-usa2.aglty.io');
+        expect(api.config.baseUrl).toContain('/v2/');
+        expect(api.config.baseUrl).toContain('someguid-us2');
         done();
     });
 
-    it('should return an api client with new stackpath baseUrl based on dev', function (done) {
-        const baseUrl = 'https://api-dev.aglty.io/some-guid-d';
+    it('should construct correct baseUrl for dev GUID', function (done) {
         const api = agilityFetch.getApi({
             guid: 'some-guid-d',
-            apiKey: 'some-access-token',
-            baseUrl: null
+            apiKey: 'some-access-token'
         });
-        expect(api.config.baseUrl).toBe(baseUrl);
+        expect(api.config.baseUrl).toContain('api-dev.aglty.io');
+        expect(api.config.baseUrl).toContain('/v2/');
+        expect(api.config.baseUrl).toContain('some-guid-d');
         done();
     });
 
-    it('should return an api client with legacy stackpath baseUrl', function (done) {
-        const baseUrl = 'https://some-guid-api.agilitycms.cloud';
+    it('should construct correct baseUrl for legacy GUID', function (done) {
         const api = agilityFetch.getApi({
             guid: 'some-guid',
-            apiKey: 'some-access-token',
-            baseUrl: null
+            apiKey: 'some-access-token'
         });
-        expect(api.config.baseUrl).toBe(baseUrl);
+        expect(api.config.baseUrl).toContain('api-dev.aglty.io');
+        expect(api.config.baseUrl).toContain('/v2/');
+        expect(api.config.baseUrl).toContain('some-guid');
         done();
     });
 

@@ -25,7 +25,8 @@ function logWarning({ config, message }: LogProps) {
 
 function logError({ config, message }: LogProps) {
 	if (config.logLevel === 'silent') return
-	console.error('\x1b[41m%s\x1b[0m', message);
+	// console.error('\x1b[41m%s\x1b[0m', message);
+	console.log(message);
 }
 
 
@@ -39,14 +40,19 @@ function buildRequestUrlPath(config, locale) {
 		apiFetchOrPreview = 'fetch';
 	}
 
+	// Version path is now handled in the baseUrl, not here
 	let urlPath = `${config.baseUrl}/${apiFetchOrPreview}/${locale}`;
 	return urlPath;
 }
 
-function buildPathUrl(contentType, referenceName, skip, take, sort, direction, filters, filtersLogicOperator, filterString, contentLinkDepth, expandAllContentLinks) {
+function buildPathUrl(contentType, referenceName, skip, take, sort, direction, filters, filtersLogicOperator, filterString, contentLinkDepth, expandAllContentLinks, fields) {
 	let url = `/${contentType}/${referenceName}?contentLinkDepth=${contentLinkDepth}&`;
 
 	filtersLogicOperator = filtersLogicOperator ? ` ${filtersLogicOperator} ` : ' AND ';
+
+	if (fields) {
+		url += `fields=${encodeURIComponent(fields)}&`;
+	}
 
 	if (sort) {
 		url += `sort=${sort}&`;

@@ -1,6 +1,6 @@
 import { buildRequestUrlPath, buildAuthHeader } from '../utils'
-import { Page } from '../types/Page';
-import { ApiClientInstance } from '../types/Client'
+import { ApiClientInstance, TypeError } from '../types/sdk';
+import { ApiTypes } from '../types/generated';
 
 /**
  * Retrieves a list of pages that need to be synced based on the provided sync pages token, and returns the next sync token.
@@ -43,7 +43,10 @@ export interface SyncPagesRequestParams {
     languageCode?: string;
 }
 
-function getSyncPages(this: ApiClientInstance, requestParams: SyncPagesRequestParams): Promise<Page> {
+// Method overloads for type safety based on API version
+function getSyncPages(this: ApiClientInstance & { config: { apiVersion: 'v1' } }, requestParams: SyncPagesRequestParams): Promise<ApiTypes.V1.PageSync>;
+function getSyncPages(this: ApiClientInstance & { config: { apiVersion: 'v2' } }, requestParams: SyncPagesRequestParams): Promise<ApiTypes.V2.PageSync>;
+function getSyncPages(this: ApiClientInstance, requestParams: SyncPagesRequestParams): Promise<any> {
 
     validateRequestParams(requestParams);
 

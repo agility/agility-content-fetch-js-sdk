@@ -1,7 +1,6 @@
 import { buildRequestUrlPath, buildAuthHeader } from '../utils'
-import { Page } from '../types/Page';
-import { ApiClientInstance } from '../types/Client'
-import { TypeError } from '../types/errors/Errors';
+import { ApiClientInstance, TypeError } from '../types/sdk';
+import { ApiTypes } from '../types/generated';
 
 /**
  * Gets the details of a page by its Page ID.
@@ -42,7 +41,10 @@ export interface PageRequestParams {
     languageCode?: string;
 }
 
-function getPage(this: ApiClientInstance, requestParams: PageRequestParams): Promise<Page> {
+// Method overloads for type safety based on API version
+function getPage(this: ApiClientInstance & { config: { apiVersion: 'v1' } }, requestParams: PageRequestParams): Promise<ApiTypes.V1.Page>;
+function getPage(this: ApiClientInstance & { config: { apiVersion: 'v2' } }, requestParams: PageRequestParams): Promise<ApiTypes.V2.Page>;
+function getPage(this: ApiClientInstance, requestParams: PageRequestParams): Promise<any> {
 
     validateRequestParams(requestParams);
 
