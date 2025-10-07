@@ -1,6 +1,6 @@
 {
   "name": "@agility/content-fetch",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "JS/TS library for the Agility Fetch API",
   "repository": {
     "type": "git",
