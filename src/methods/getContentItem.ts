@@ -49,7 +49,7 @@ const defaultParams = {
 
 // Method overloads for type safety based on API version
 function getContentItem(this: ApiClientInstance & { config: { apiVersion: 'v1' } }, requestParams: ContentItemRequestParams): Promise<ApiTypes.V1.ContentItem>;
-function getContentItem(this: ApiClientInstance & { config: { apiVersion: 'v3' } }, requestParams: ContentItemRequestParams): Promise<ApiTypes.V3.ContentItem>;
+function getContentItem(this: ApiClientInstance & { config: { apiVersion: 'v2' } }, requestParams: ContentItemRequestParams): Promise<ApiTypes.V2.ContentItem>;
 function getContentItem(this: ApiClientInstance, requestParams: ContentItemRequestParams): Promise<any> {
     validateRequestParams(requestParams);
 

@@ -44,7 +44,7 @@ export interface PageByPathRequestParams {
 
 // Method overloads for type safety based on API version
 function getPageByPath(this: ApiClientInstance & { config: { apiVersion: 'v1' } }, requestParams: PageByPathRequestParams): Promise<ApiTypes.V1.Page>;
-function getPageByPath(this: ApiClientInstance & { config: { apiVersion: 'v3' } }, requestParams: PageByPathRequestParams): Promise<ApiTypes.V3.Page>;
+function getPageByPath(this: ApiClientInstance & { config: { apiVersion: 'v2' } }, requestParams: PageByPathRequestParams): Promise<ApiTypes.V2.Page>;
 function getPageByPath(
   this: ApiClientInstance,
   requestParams: PageByPathRequestParams

@@ -23,10 +23,10 @@ export interface Config {
   locale?: string | null;
 
   /**
-   * The API version to use. 'v1' uses legacy string-based data types, 'v3' uses proper data types.
-   * Default is 'v3'. Specify 'v1' only if you need legacy compatibility.
+   * The API version to use. 'v1' uses legacy string-based data types, 'v2' uses proper data types.
+   * Default is 'v2'. Specify 'v1' only if you need legacy compatibility.
    */
-  apiVersion?: 'v1' | 'v3';
+  apiVersion?: 'v1' | 'v2';
   /**
    * Additional headers to include in the request.
    */

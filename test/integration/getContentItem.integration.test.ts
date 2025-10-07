@@ -1,8 +1,8 @@
 import {
     createV1FetchClient,
-    createV3FetchClient,
+    createV2FetchClient,
     createV1PreviewClient,
-    createV3PreviewClient,
+    createV2PreviewClient,
     testConfig
 } from '../apiClients.config';
 
@@ -70,7 +70,7 @@ describe('getContentItem Integration', () => {
 
     describe('V3 API', () => {
         it('should retrieve content item with V3 fetch API', async () => {
-            const api = createV3FetchClient();
+            const api = createV2FetchClient();
             
             // First, get the posts list to find a real content ID
             const contentList = await api.getContentList({
@@ -98,7 +98,7 @@ describe('getContentItem Integration', () => {
         });
 
         it('should retrieve content item with V3 preview API', async () => {
-            const api = createV3PreviewClient();
+            const api = createV2PreviewClient();
             
             // First, get the posts list to find a real content ID
             const contentList = await api.getContentList({

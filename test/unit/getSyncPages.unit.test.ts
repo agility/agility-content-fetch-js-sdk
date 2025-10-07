@@ -7,7 +7,7 @@
 import { getApi } from '../../src/api-client';
 import { mockApiClient, mockApiClientWithError, verifyRequestCall, resetAllMocks } from '../utils/mock-helpers';
 import { mockV1SyncPages } from '../fixtures/v1-responses';
-import { mockV3SyncPages } from '../fixtures/v3-responses';
+import { mockV2SyncPages } from '../fixtures/v2-responses';
 
 describe('getSyncPages Unit Tests', () => {
   let api: any;
@@ -51,7 +51,7 @@ describe('getSyncPages Unit Tests', () => {
     });
 
     it('should accept syncToken of 0 to start new sync', async () => {
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
       
       await api.getSyncPages({
         syncToken: 0,
@@ -62,7 +62,7 @@ describe('getSyncPages Unit Tests', () => {
     });
 
     it('should accept languageCode as fallback for locale', async () => {
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
       
       await api.getSyncPages({
         syncToken: 12345,
@@ -79,7 +79,7 @@ describe('getSyncPages Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
     });
 
     it('should build correct URL with minimal parameters', async () => {
@@ -119,7 +119,7 @@ describe('getSyncPages Unit Tests', () => {
       });
 
       const call = api.makeRequest.mock.calls[0][0];
-      expect(call.baseURL).toContain('/v3/');
+      expect(call.baseURL).toContain('/v2/');
       expect(call.baseURL).toContain('/fetch/en-us');
     });
   });
@@ -144,24 +144,24 @@ describe('getSyncPages Unit Tests', () => {
       expect(Array.isArray(result.items)).toBe(true);
     });
 
-    it('should return V3 response type for V3 API', async () => {
+    it('should return V2 response type for V2 API', async () => {
       api = getApi({
         guid: 'test-guid-d',
         apiKey: 'test-key',
-        apiVersion: 'v3'
+        apiVersion: 'v2'
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
 
       const result = await api.getSyncPages({
         syncToken: 0,
         locale: 'en-us'
       });
 
-      expect(result).toEqual(mockV3SyncPages);
+      expect(result).toEqual(mockV2SyncPages);
       expect(result.syncToken).toBeDefined();
       expect(result.items).toBeDefined();
       expect(Array.isArray(result.items)).toBe(true);
-      expect(result.hasMore).toBeDefined(); // V3 has additional metadata
+      expect(result.hasMore).toBeDefined(); // V2 has additional metadata
       expect(result.nextSyncToken).toBeDefined();
     });
   });
@@ -172,7 +172,7 @@ describe('getSyncPages Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
     });
 
     it('should use GET method', async () => {
@@ -190,7 +190,7 @@ describe('getSyncPages Unit Tests', () => {
         apiKey: 'test-key',
         isPreview: true
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
 
       await api.getSyncPages({
         syncToken: 0,
@@ -198,7 +198,7 @@ describe('getSyncPages Unit Tests', () => {
       });
 
       const call = api.makeRequest.mock.calls[0][0];
-      expect(call.baseURL).toContain('/v3/');
+      expect(call.baseURL).toContain('/v2/');
       expect(call.baseURL).toContain('/preview/en-us');
     });
   });
@@ -236,7 +236,7 @@ describe('getSyncPages Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
     });
 
     it('should return sync response with proper structure', async () => {
@@ -288,7 +288,7 @@ describe('getSyncPages Unit Tests', () => {
       // Mock incremental sync response
       api.makeRequest.mockResolvedValueOnce({
         syncToken: 67891,
-        items: [mockV3SyncPages.items[0]]
+        items: [mockV2SyncPages.items[0]]
       });
 
       const result = await api.getSyncPages({

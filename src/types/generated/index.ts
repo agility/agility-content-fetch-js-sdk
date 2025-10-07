@@ -2,11 +2,11 @@
  * Generated API Types
  * 
  * This file provides namespaced access to generated types from Swagger specs.
- * Types are organized by API version (V1, V3) for clear separation.
+ * Types are organized by API version (V1, V2) for clear separation.
  */
 
 import * as V1Schema from './v1';
-import * as V3Schema from './v3';
+import * as V2Schema from './v2';
 
 export namespace ApiTypes {
   export namespace V1 {
@@ -40,37 +40,37 @@ export namespace ApiTypes {
     export type PageVisibility = V1Schema.components['schemas']['HeadlessContentPageVisibility'];
   }
 
-  export namespace V3 {
+  export namespace V2 {
     // Content Types
-    export type ContentItem = V3Schema.components['schemas']['HeadlessContentItem'];
-    export type ContentList = V3Schema.components['schemas']['HeadlessContentListResponse'];
-    export type ContentItemSync = V3Schema.components['schemas']['HeadlessContentItemHeadlessSync'];
+    export type ContentItem = V2Schema.components['schemas']['HeadlessContentItem'];
+    export type ContentList = V2Schema.components['schemas']['HeadlessContentListResponse'];
+    export type ContentItemSync = V2Schema.components['schemas']['HeadlessContentItemHeadlessSync'];
     
     // Page Types
-    export type Page = V3Schema.components['schemas']['HeadlessContentPage'];
-    export type PageByPath = V3Schema.components['schemas']['HeadlessContentPageByPath'];
-    export type PageSync = V3Schema.components['schemas']['HeadlessContentPageHeadlessSync'];
+    export type Page = V2Schema.components['schemas']['HeadlessContentPage'];
+    export type PageByPath = V2Schema.components['schemas']['HeadlessContentPageByPath'];
+    export type PageSync = V2Schema.components['schemas']['HeadlessContentPageHeadlessSync'];
     
     // Sitemap Types
-    export type SitemapFlat = { [key: string]: V3Schema.components['schemas']['HeadlessContentSiteMapItem'] };
-    export type SitemapNested = V3Schema.components['schemas']['HeadlessContentSiteMapNestedItem'][];
-    export type SitemapItem = V3Schema.components['schemas']['HeadlessContentSiteMapItem'];
-    export type SitemapNestedItem = V3Schema.components['schemas']['HeadlessContentSiteMapNestedItem'];
+    export type SitemapFlat = { [key: string]: V2Schema.components['schemas']['HeadlessContentSiteMapItem'] };
+    export type SitemapNested = V2Schema.components['schemas']['HeadlessContentSiteMapNestedItem'][];
+    export type SitemapItem = V2Schema.components['schemas']['HeadlessContentSiteMapItem'];
+    export type SitemapNestedItem = V2Schema.components['schemas']['HeadlessContentSiteMapNestedItem'];
     
     // Media Types
-    export type Gallery = V3Schema.components['schemas']['HeadlessGallery'];
-    export type MediaItem = V3Schema.components['schemas']['HeadlessMediaItem'];
+    export type Gallery = V2Schema.components['schemas']['HeadlessGallery'];
+    export type MediaItem = V2Schema.components['schemas']['HeadlessMediaItem'];
     
     // Other Types
-    export type UrlRedirection = V3Schema.components['schemas']['UrlRedirection'];
+    export type UrlRedirection = V2Schema.components['schemas']['UrlRedirection'];
     
     // Component Types
-    export type ContentZone = V3Schema.components['schemas']['HeadlessContentZone'];
-    export type ContentItemProperties = V3Schema.components['schemas']['HeadlessContentItemProperties'];
-    export type ContentItemSeo = V3Schema.components['schemas']['HeadlessContentItemSeo'];
-    export type PageVisibility = V3Schema.components['schemas']['HeadlessContentPageVisibility'];
+    export type ContentZone = V2Schema.components['schemas']['HeadlessContentZone'];
+    export type ContentItemProperties = V2Schema.components['schemas']['HeadlessContentItemProperties'];
+    export type ContentItemSeo = V2Schema.components['schemas']['HeadlessContentItemSeo'];
+    export type PageVisibility = V2Schema.components['schemas']['HeadlessContentPageVisibility'];
   }
 }
 
 // Export the raw generated types for advanced usage
-export { V1Schema as V1, V3Schema as V3 };
+export { V1Schema as V1, V2Schema as V2 };

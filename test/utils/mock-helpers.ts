@@ -5,14 +5,14 @@
 
 import { ApiClientInstance } from '../../src/types/sdk';
 import * as v1Fixtures from '../fixtures/v1-responses';
-import * as v3Fixtures from '../fixtures/v3-responses';
+import * as v2Fixtures from '../fixtures/v2-responses';
 
 /**
  * Mock the makeRequest method of an API client
  * @param apiClient - The API client instance to mock
- * @param apiVersion - The API version to mock responses for ('v1' | 'v3')
+ * @param apiVersion - The API version to mock responses for ('v1' | 'v2')
  */
-export function mockApiClient(apiClient: any, apiVersion: 'v1' | 'v3' = 'v3') {
+export function mockApiClient(apiClient: any, apiVersion: 'v1' | 'v2' = 'v2') {
   
   jest.spyOn(apiClient, 'makeRequest').mockImplementation((req: any) => {
     const url = req.url;
@@ -25,7 +25,7 @@ export function mockApiClient(apiClient: any, apiVersion: 'v1' | 'v3' = 'v3') {
       if (contentId === 999999) {
         return Promise.reject(new Error('Content not found'));
       }
-      return Promise.resolve(apiVersion === 'v1' ? v1Fixtures.mockV1ContentItem : v3Fixtures.mockV3ContentItem);
+      return Promise.resolve(apiVersion === 'v1' ? v1Fixtures.mockV1ContentItem : v2Fixtures.mockV2ContentItem);
     }
     
     // Content List requests
@@ -34,7 +34,7 @@ export function mockApiClient(apiClient: any, apiVersion: 'v1' | 'v3' = 'v3') {
       if (referenceName === 'nonexistent') {
         return Promise.resolve({ items: [], totalCount: 0 });
       }
-      return Promise.resolve(apiVersion === 'v1' ? v1Fixtures.mockV1ContentList : v3Fixtures.mockV3ContentList);
+      return Promise.resolve(apiVersion === 'v1' ? v1Fixtures.mockV1ContentList : v2Fixtures.mockV2ContentList);
     }
     
     // Page requests
@@ -43,7 +43,7 @@ export function mockApiClient(apiClient: any, apiVersion: 'v1' | 'v3' = 'v3') {
       if (pageId === 999999) {
         return Promise.reject(new Error('Page not found'));
       }
-      return Promise.resolve(apiVersion === 'v1' ? v1Fixtures.mockV1Page : v3Fixtures.mockV3Page);
+      return Promise.resolve(apiVersion === 'v1' ? v1Fixtures.mockV1Page : v2Fixtures.mockV2Page);
     }
     
     // Page by path requests
@@ -52,7 +52,7 @@ export function mockApiClient(apiClient: any, apiVersion: 'v1' | 'v3' = 'v3') {
       if (path === '/nonexistent') {
         return Promise.reject(new Error('Page not found'));
       }
-      return Promise.resolve(apiVersion === 'v1' ? v1Fixtures.mockV1Page : v3Fixtures.mockV3Page);
+      return Promise.resolve(apiVersion === 'v1' ? v1Fixtures.mockV1Page : v2Fixtures.mockV2Page);
     }
     
     // Gallery requests
@@ -61,32 +61,32 @@ export function mockApiClient(apiClient: any, apiVersion: 'v1' | 'v3' = 'v3') {
       if (galleryId === 999999) {
         return Promise.reject(new Error('Gallery not found'));
       }
-      return Promise.resolve(apiVersion === 'v1' ? v1Fixtures.mockV1Gallery : v3Fixtures.mockV3Gallery);
+      return Promise.resolve(apiVersion === 'v1' ? v1Fixtures.mockV1Gallery : v2Fixtures.mockV2Gallery);
     }
     
     // Sitemap flat requests
     if (url.includes('/sitemap/flat/')) {
-      return Promise.resolve(apiVersion === 'v1' ? v1Fixtures.mockV1SitemapFlat : v3Fixtures.mockV3SitemapFlat);
+      return Promise.resolve(apiVersion === 'v1' ? v1Fixtures.mockV1SitemapFlat : v2Fixtures.mockV2SitemapFlat);
     }
     
     // Sitemap nested requests
     if (url.includes('/sitemap/nested/')) {
-      return Promise.resolve(apiVersion === 'v1' ? v1Fixtures.mockV1SitemapNested : v3Fixtures.mockV3SitemapNested);
+      return Promise.resolve(apiVersion === 'v1' ? v1Fixtures.mockV1SitemapNested : v2Fixtures.mockV2SitemapNested);
     }
     
     // Sync content requests
     if (url.includes('/sync/items')) {
-      return Promise.resolve(apiVersion === 'v1' ? v1Fixtures.mockV1SyncContent : v3Fixtures.mockV3SyncContent);
+      return Promise.resolve(apiVersion === 'v1' ? v1Fixtures.mockV1SyncContent : v2Fixtures.mockV2SyncContent);
     }
     
     // Sync pages requests
     if (url.includes('/sync/pages')) {
-      return Promise.resolve(apiVersion === 'v1' ? v1Fixtures.mockV1SyncPages : v3Fixtures.mockV3SyncPages);
+      return Promise.resolve(apiVersion === 'v1' ? v1Fixtures.mockV1SyncPages : v2Fixtures.mockV2SyncPages);
     }
     
     // URL redirections requests
     if (fullUrl.includes('/urlredirection')) {
-      return Promise.resolve(apiVersion === 'v1' ? v1Fixtures.mockV1UrlRedirections : v3Fixtures.mockV3UrlRedirections);
+      return Promise.resolve(apiVersion === 'v1' ? v1Fixtures.mockV1UrlRedirections : v2Fixtures.mockV2UrlRedirections);
     }
     
     // Default: return error for unhandled requests
@@ -120,10 +120,10 @@ export function mockApiClientWithError(apiClient: any, errorType: 'network' | 'a
  * Create a mock API client with specific configuration
  * @param config - Configuration for the mock client
  */
-export function createMockApiClient(config: { apiVersion?: 'v1' | 'v3', guid?: string, apiKey?: string } = {}) {
+export function createMockApiClient(config: { apiVersion?: 'v1' | 'v2', guid?: string, apiKey?: string } = {}) {
   const mockClient = {
     config: {
-      apiVersion: config.apiVersion || 'v3',
+      apiVersion: config.apiVersion || 'v2',
       guid: config.guid || 'test-guid',
       apiKey: config.apiKey || 'test-key',
       baseUrl: 'https://api.example.com/test-guid',

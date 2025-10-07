@@ -5,9 +5,9 @@
 
 import {
   createV1FetchClient,
-  createV3FetchClient,
+  createV2FetchClient,
   createV1PreviewClient,
-  createV3PreviewClient,
+  createV2PreviewClient,
   testConfig
 } from '../apiClients.config';
 
@@ -44,9 +44,9 @@ describe('API Connectivity Integration Tests', () => {
     });
   });
 
-  describe('V3 API', () => {
-    it('should connect to V3 fetch API', async () => {
-      const api = createV3FetchClient();
+  describe('V2 API', () => {
+    it('should connect to V2 fetch API', async () => {
+      const api = createV2FetchClient();
       
       const result = await api.getContentList({
         referenceName: testConfig.testContentListRef,
@@ -59,8 +59,8 @@ describe('API Connectivity Integration Tests', () => {
       expect(Array.isArray(result.items)).toBe(true);
     });
 
-    it('should connect to V3 preview API', async () => {
-      const api = createV3PreviewClient();
+    it('should connect to V2 preview API', async () => {
+      const api = createV2PreviewClient();
       
       const result = await api.getContentList({
         referenceName: testConfig.testContentListRef,

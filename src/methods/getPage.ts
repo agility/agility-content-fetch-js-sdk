@@ -43,7 +43,7 @@ export interface PageRequestParams {
 
 // Method overloads for type safety based on API version
 function getPage(this: ApiClientInstance & { config: { apiVersion: 'v1' } }, requestParams: PageRequestParams): Promise<ApiTypes.V1.Page>;
-function getPage(this: ApiClientInstance & { config: { apiVersion: 'v3' } }, requestParams: PageRequestParams): Promise<ApiTypes.V3.Page>;
+function getPage(this: ApiClientInstance & { config: { apiVersion: 'v2' } }, requestParams: PageRequestParams): Promise<ApiTypes.V2.Page>;
 function getPage(this: ApiClientInstance, requestParams: PageRequestParams): Promise<any> {
 
     validateRequestParams(requestParams);

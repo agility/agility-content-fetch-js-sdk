@@ -1,8 +1,8 @@
 import {
     createV1FetchClient,
-    createV3FetchClient,
+    createV2FetchClient,
     createV1PreviewClient,
-    createV3PreviewClient,
+    createV2PreviewClient,
     testConfig
 } from '../apiClients.config';
 
@@ -67,7 +67,7 @@ describe('getPage Integration', () => {
 
     describe('V3 API', () => {
         it('should retrieve page with V3 fetch API', async () => {
-            const api = createV3FetchClient();
+            const api = createV2FetchClient();
             
             // First, get the sitemap to find a real page ID
             const sitemap = await api.getSitemapFlat({
@@ -94,7 +94,7 @@ describe('getPage Integration', () => {
         });
 
         it('should retrieve page with V3 preview API', async () => {
-            const api = createV3PreviewClient();
+            const api = createV2PreviewClient();
             
             // First, get the sitemap to find a real page ID
             const sitemap = await api.getSitemapFlat({

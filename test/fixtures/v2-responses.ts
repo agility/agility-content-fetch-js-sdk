@@ -1,9 +1,9 @@
 /**
- * Mock API responses for V3 API testing
- * These fixtures represent typical V3 API response structures with proper data types
+ * Mock API responses for V2 API testing
+ * These fixtures represent typical V2 API response structures with proper data types
  */
 
-export const mockV3ContentItem = {
+export const mockV2ContentItem = {
   contentID: 123,
   properties: {
     state: 2,
@@ -21,7 +21,7 @@ export const mockV3ContentItem = {
   }
 };
 
-export const mockV3ContentList = {
+export const mockV2ContentList = {
   items: [
     {
       contentID: 123,
@@ -59,7 +59,7 @@ export const mockV3ContentList = {
   totalCount: 2
 };
 
-export const mockV3Page = {
+export const mockV2Page = {
   pageID: 789,
   name: "Test Page",
   path: "/test-page",
@@ -101,7 +101,7 @@ export const mockV3Page = {
   }
 };
 
-export const mockV3Gallery = {
+export const mockV2Gallery = {
   galleryID: 1,
   name: "Test Gallery",
   description: "Test gallery description",
@@ -129,7 +129,7 @@ export const mockV3Gallery = {
   modifiedDate: new Date("2023-01-02T00:00:00.000Z")
 };
 
-export const mockV3SitemapFlat = {
+export const mockV2SitemapFlat = {
   "/": {
     pageID: 1,
     name: "Home",
@@ -156,7 +156,7 @@ export const mockV3SitemapFlat = {
   }
 };
 
-export const mockV3SitemapNested = [
+export const mockV2SitemapNested = [
   {
     pageID: 1,
     name: "Home",
@@ -186,7 +186,7 @@ export const mockV3SitemapNested = [
   }
 ];
 
-export const mockV3SyncContent = {
+export const mockV2SyncContent = {
   syncToken: 12345,
   items: [
     {
@@ -209,7 +209,7 @@ export const mockV3SyncContent = {
   nextSyncToken: 12346
 };
 
-export const mockV3SyncPages = {
+export const mockV2SyncPages = {
   syncToken: 67890,
   items: [
     {
@@ -228,7 +228,7 @@ export const mockV3SyncPages = {
   nextSyncToken: 67891
 };
 
-export const mockV3UrlRedirections = [
+export const mockV2UrlRedirections = [
   {
     url: "/old-page",
     destinationUrl: "/new-page",
@@ -246,14 +246,14 @@ export const mockV3UrlRedirections = [
 ];
 
 // Error responses (same structure as V1 but with proper typing)
-export const mockV3ErrorResponse = {
+export const mockV2ErrorResponse = {
   error: "Bad Request",
   message: "Invalid request parameters",
   statusCode: 400,
   timestamp: new Date("2023-01-01T00:00:00.000Z")
 };
 
-export const mockV3NotFoundResponse = {
+export const mockV2NotFoundResponse = {
   error: "Not Found",
   message: "The requested resource was not found",
   statusCode: 404,

@@ -37,7 +37,7 @@ export interface UrlRedirectionsRequestParams {
 
 // Method overloads for type safety based on API version
 function getUrlRedirections(this: ApiClientInstance & { config: { apiVersion: 'v1' } }, requestParams: UrlRedirectionsRequestParams): Promise<ApiTypes.V1.UrlRedirection[]>;
-function getUrlRedirections(this: ApiClientInstance & { config: { apiVersion: 'v3' } }, requestParams: UrlRedirectionsRequestParams): Promise<ApiTypes.V3.UrlRedirection[]>;
+function getUrlRedirections(this: ApiClientInstance & { config: { apiVersion: 'v2' } }, requestParams: UrlRedirectionsRequestParams): Promise<ApiTypes.V2.UrlRedirection[]>;
 function getUrlRedirections(this: ApiClientInstance, requestParams: UrlRedirectionsRequestParams): Promise<any> {
 
 	validateRequestParams(requestParams);
@@ -62,9 +62,9 @@ function getUrlRedirections(this: ApiClientInstance, requestParams: UrlRedirecti
 	};
 
 	const self = this;
-	let promise = new Promise<ApiTypes.V1.UrlRedirection[] | ApiTypes.V3.UrlRedirection[]>(function (resolve, reject) {
+	let promise = new Promise<ApiTypes.V1.UrlRedirection[] | ApiTypes.V2.UrlRedirection[]>(function (resolve, reject) {
 		self.makeRequest(req)
-			.then((data: ApiTypes.V1.UrlRedirection[] | ApiTypes.V3.UrlRedirection[]) => {
+			.then((data: ApiTypes.V1.UrlRedirection[] | ApiTypes.V2.UrlRedirection[]) => {
 
 				if (data == undefined || !data) {
 					reject(new Error("The URL redirections could not be retrieved."));

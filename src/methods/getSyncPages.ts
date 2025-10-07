@@ -45,7 +45,7 @@ export interface SyncPagesRequestParams {
 
 // Method overloads for type safety based on API version
 function getSyncPages(this: ApiClientInstance & { config: { apiVersion: 'v1' } }, requestParams: SyncPagesRequestParams): Promise<ApiTypes.V1.PageSync>;
-function getSyncPages(this: ApiClientInstance & { config: { apiVersion: 'v3' } }, requestParams: SyncPagesRequestParams): Promise<ApiTypes.V3.PageSync>;
+function getSyncPages(this: ApiClientInstance & { config: { apiVersion: 'v2' } }, requestParams: SyncPagesRequestParams): Promise<ApiTypes.V2.PageSync>;
 function getSyncPages(this: ApiClientInstance, requestParams: SyncPagesRequestParams): Promise<any> {
 
     validateRequestParams(requestParams);

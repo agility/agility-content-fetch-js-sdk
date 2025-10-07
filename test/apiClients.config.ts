@@ -80,16 +80,16 @@ export function createV1FetchClient() {
 }
 
 /**
- * Creates a V3 API client for fetch (live) mode
+ * Creates a V2 API client for fetch (live) mode
  */
-export function createV3FetchClient() {
+export function createV2FetchClient() {
     validateTestConfig();
     
     return agilityFetch.getApi({
         guid: config.guid,
         apiKey: config.apiKeyFetch,
         // Let buildBaseUrl handle the URL construction
-        apiVersion: 'v3'
+        apiVersion: 'v2'
     });
 }
 
@@ -109,9 +109,9 @@ export function createV1PreviewClient() {
 }
 
 /**
- * Creates a V3 API client for preview mode
+ * Creates a V2 API client for preview mode
  */
-export function createV3PreviewClient() {
+export function createV2PreviewClient() {
     validateTestConfig();
     
     return agilityFetch.getApi({
@@ -119,15 +119,15 @@ export function createV3PreviewClient() {
         apiKey: config.apiKeyPreview,
         isPreview: true,
         // Let buildBaseUrl handle the URL construction
-        apiVersion: 'v3'
+        apiVersion: 'v2'
     });
 }
 
-// Legacy functions for backward compatibility (default to V3)
+// Legacy functions for backward compatibility (default to V2)
 export function createApiClient() {
-    return createV3FetchClient();
+    return createV2FetchClient();
 }
 
 export function createPreviewApiClient() {
-    return createV3PreviewClient();
+    return createV2PreviewClient();
 }

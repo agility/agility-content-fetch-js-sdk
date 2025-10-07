@@ -7,7 +7,7 @@
 import { getApi } from '../../src/api-client';
 import { mockApiClient, mockApiClientWithError, verifyRequestCall, resetAllMocks } from '../utils/mock-helpers';
 import { mockV1Page } from '../fixtures/v1-responses';
-import { mockV3Page } from '../fixtures/v3-responses';
+import { mockV2Page } from '../fixtures/v2-responses';
 
 describe('getPageByPath Unit Tests', () => {
   let api: any;
@@ -46,7 +46,7 @@ describe('getPageByPath Unit Tests', () => {
     });
 
     it('should accept languageCode as fallback for locale', async () => {
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
       
       await api.getPageByPath({
         pagePath: '/about',
@@ -73,7 +73,7 @@ describe('getPageByPath Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
     });
 
     it('should build correct URL with minimal parameters', async () => {
@@ -173,13 +173,13 @@ describe('getPageByPath Unit Tests', () => {
       expect(result.zones).toBeDefined();
     });
 
-    it('should return V3 Page type for V3 API', async () => {
+    it('should return V2 Page type for V2 API', async () => {
       api = getApi({
         guid: 'test-guid-d',
         apiKey: 'test-key',
-        apiVersion: 'v3'
+        apiVersion: 'v2'
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
 
       const result = await api.getPageByPath({
         pagePath: '/about',
@@ -187,19 +187,19 @@ describe('getPageByPath Unit Tests', () => {
         locale: 'en-us'
       });
 
-      expect(result).toEqual(mockV3Page);
+      expect(result).toEqual(mockV2Page);
       expect(result.pageID).toBeDefined();
       expect(result.zones).toBeDefined();
-      expect(result.seo).toBeDefined(); // V3 has SEO data
+      expect(result.seo).toBeDefined(); // V2 has SEO data
     });
 
-    it('should default to V3 when no version specified', async () => {
+    it('should default to V2 when no version specified', async () => {
       api = getApi({
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
 
-      expect(api.config.apiVersion).toBe('v3');
+      expect(api.config.apiVersion).toBe('v2');
     });
   });
 
@@ -209,7 +209,7 @@ describe('getPageByPath Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
     });
 
     it('should use GET method', async () => {
@@ -230,7 +230,7 @@ describe('getPageByPath Unit Tests', () => {
       });
 
       const call = api.makeRequest.mock.calls[0][0];
-      expect(call.baseURL).toContain('/v3/');
+      expect(call.baseURL).toContain('/v2/');
       expect(call.baseURL).toContain('/fetch/en-us');
     });
 
@@ -240,7 +240,7 @@ describe('getPageByPath Unit Tests', () => {
         apiKey: 'test-key',
         isPreview: true
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
 
       await api.getPageByPath({
         pagePath: '/about',
@@ -249,7 +249,7 @@ describe('getPageByPath Unit Tests', () => {
       });
 
       const call = api.makeRequest.mock.calls[0][0];
-      expect(call.baseURL).toContain('/v3/');
+      expect(call.baseURL).toContain('/v2/');
       expect(call.baseURL).toContain('/preview/en-us');
     });
   });
@@ -299,7 +299,7 @@ describe('getPageByPath Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
     });
 
     it('should apply default contentLinkDepth of 2', async () => {
@@ -342,7 +342,7 @@ describe('getPageByPath Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
     });
 
     it('should return page with proper structure', async () => {

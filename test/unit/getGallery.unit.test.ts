@@ -7,7 +7,7 @@
 import { getApi } from '../../src/api-client';
 import { mockApiClient, mockApiClientWithError, verifyRequestCall, resetAllMocks } from '../utils/mock-helpers';
 import { mockV1Gallery } from '../fixtures/v1-responses';
-import { mockV3Gallery } from '../fixtures/v3-responses';
+import { mockV2Gallery } from '../fixtures/v2-responses';
 
 describe('getGallery Unit Tests', () => {
   let api: any;
@@ -29,7 +29,7 @@ describe('getGallery Unit Tests', () => {
     });
 
     it('should accept valid galleryID', async () => {
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
       
       await api.getGallery({
         galleryID: 123
@@ -45,7 +45,7 @@ describe('getGallery Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
     });
 
     it('should build correct URL with galleryID', async () => {
@@ -96,33 +96,33 @@ describe('getGallery Unit Tests', () => {
       expect(Array.isArray(result.media)).toBe(true);
     });
 
-    it('should return V3 response type for V3 API', async () => {
+    it('should return V2 response type for V2 API', async () => {
       api = getApi({
         guid: 'test-guid-d',
         apiKey: 'test-key',
-        apiVersion: 'v3'
+        apiVersion: 'v2'
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
 
       const result = await api.getGallery({
         galleryID: 123
       });
 
-      expect(result).toEqual(mockV3Gallery);
+      expect(result).toEqual(mockV2Gallery);
       expect(result.galleryID).toBeDefined();
       expect(result.media).toBeDefined();
       expect(Array.isArray(result.media)).toBe(true);
-      expect(result.createdDate).toBeDefined(); // V3 has additional metadata
+      expect(result.createdDate).toBeDefined(); // V2 has additional metadata
       expect(result.modifiedDate).toBeDefined();
     });
 
-    it('should default to V3 when no version specified', async () => {
+    it('should default to V2 when no version specified', async () => {
       api = getApi({
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
 
-      expect(api.config.apiVersion).toBe('v3');
+      expect(api.config.apiVersion).toBe('v2');
     });
   });
 
@@ -132,7 +132,7 @@ describe('getGallery Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
     });
 
     it('should use GET method', async () => {
@@ -211,7 +211,7 @@ describe('getGallery Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
     });
 
     it('should apply default contentLinkDepth of 1', async () => {
@@ -231,7 +231,7 @@ describe('getGallery Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
     });
 
     it('should return gallery with proper structure', async () => {
@@ -262,8 +262,8 @@ describe('getGallery Unit Tests', () => {
         expect(firstMediaItem.url).toBeDefined();
         expect(firstMediaItem.label).toBeDefined();
         
-        // V3 should have additional metadata
-        if (api.config.apiVersion === 'v3') {
+        // V2 should have additional metadata
+        if (api.config.apiVersion === 'v2') {
           expect(firstMediaItem.size).toBeDefined();
           expect(firstMediaItem.width).toBeDefined();
           expect(firstMediaItem.height).toBeDefined();

@@ -7,7 +7,7 @@
 import { getApi } from '../../src/api-client';
 import { mockApiClient, mockApiClientWithError, verifyRequestCall, resetAllMocks } from '../utils/mock-helpers';
 import { mockV1ContentItem } from '../fixtures/v1-responses';
-import { mockV3ContentItem } from '../fixtures/v3-responses';
+import { mockV2ContentItem } from '../fixtures/v2-responses';
 
 describe('getContentItem Unit Tests', () => {
   let api: any;
@@ -61,7 +61,7 @@ describe('getContentItem Unit Tests', () => {
     });
 
     it('should accept languageCode as fallback for locale', async () => {
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
       
       await api.getContentItem({
         contentID: 123,
@@ -78,7 +78,7 @@ describe('getContentItem Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
     });
 
     it('should build correct URL with minimal parameters', async () => {
@@ -140,30 +140,30 @@ describe('getContentItem Unit Tests', () => {
       expect(typeof result.properties.modified).toBe('string'); // V1 uses string dates
     });
 
-    it('should return V3 response type for V3 API', async () => {
+    it('should return V2 response type for V2 API', async () => {
       api = getApi({
         guid: 'test-guid-d',
         apiKey: 'test-key',
-        apiVersion: 'v3'
+        apiVersion: 'v2'
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
 
       const result = await api.getContentItem({
         contentID: 123,
         locale: 'en-us'
       });
 
-      expect(result).toEqual(mockV3ContentItem);
-      expect(result.properties.modified instanceof Date).toBe(true); // V3 uses Date objects
+      expect(result).toEqual(mockV2ContentItem);
+      expect(result.properties.modified instanceof Date).toBe(true); // V2 uses Date objects
     });
 
-    it('should default to V3 when no version specified', async () => {
+    it('should default to V2 when no version specified', async () => {
       api = getApi({
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
 
-      expect(api.config.apiVersion).toBe('v3');
+      expect(api.config.apiVersion).toBe('v2');
     });
   });
 
@@ -173,7 +173,7 @@ describe('getContentItem Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
     });
 
     it('should use GET method', async () => {
@@ -192,7 +192,7 @@ describe('getContentItem Unit Tests', () => {
       });
 
       const call = api.makeRequest.mock.calls[0][0];
-      expect(call.baseURL).toContain('/v3/');
+      expect(call.baseURL).toContain('/v2/');
       expect(call.baseURL).toContain('/fetch/en-us');
     });
 
@@ -202,7 +202,7 @@ describe('getContentItem Unit Tests', () => {
         apiKey: 'test-key',
         isPreview: true
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
 
       await api.getContentItem({
         contentID: 123,
@@ -210,7 +210,7 @@ describe('getContentItem Unit Tests', () => {
       });
 
       const call = api.makeRequest.mock.calls[0][0];
-      expect(call.baseURL).toContain('/v3/');
+      expect(call.baseURL).toContain('/v2/');
       expect(call.baseURL).toContain('/preview/en-us');
     });
   });
@@ -257,7 +257,7 @@ describe('getContentItem Unit Tests', () => {
         guid: 'test-guid-d',
         apiKey: 'test-key'
       });
-      mockApiClient(api, 'v3');
+      mockApiClient(api, 'v2');
     });
 
     it('should apply default contentLinkDepth of 1', async () => {
