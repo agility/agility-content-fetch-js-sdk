@@ -352,23 +352,27 @@ describe('getContentList:', () => {
 			fields: requestedFields,
 		});
 		expect(contentList.items.length).toBeGreaterThan(0);
+
 		for (const item of contentList.items) {
-			// Check that the specified fields exist
-			expect(item.contentID).toBeDefined();
-			expect(item.fields).toBeDefined();
-			expect(item.fields.title).toBeDefined();
-			// Now check that no extra top-level fields are present (excluding allowed always-present fields)
-			const allowedTopLevel = ['contentID', 'fields'];
+			// The only top-level keys should be those asked for
+			const allowedTopLevel = ['contentID', 'fields','properties','seo'];
 			const topLevelFields = Object.keys(item);
 			for (const key of topLevelFields) {
 				expect(allowedTopLevel).toContain(key);
 			}
-			// Now verify that only 'title' is present in 'fields'
+			expect(topLevelFields.length).toBe(allowedTopLevel.length);
+
+			// contentID should be present and defined
+			expect(item.contentID).toBeDefined();
+
+			// fields should be present and only contain 'title'
+			expect(item.fields).toBeDefined();
 			const allowedFieldFields = ['title'];
 			const fieldKeys = Object.keys(item.fields);
-			for (const fk of fieldKeys) {
-				expect(allowedFieldFields).toContain(fk);
-			}
+			expect(fieldKeys).toEqual(allowedFieldFields);
+
+			// Ensure 'title' really exists
+			expect(item.fields.title).toBeDefined();
 		}
 	});
 
