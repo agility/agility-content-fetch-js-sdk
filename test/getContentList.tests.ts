@@ -345,13 +345,31 @@ describe('getContentList:', () => {
 
 	it('should retrieve a content list with only the specified fields', async () => {
 		const api = createApiClient();
+		const requestedFields = ['contentID', 'fields.title'];
 		const contentList = await api.getContentList({
 			referenceName: 'posts',
 			locale: 'en-us',
-			fields: ['contentID', 'fields.title'],
+			fields: requestedFields,
 		});
-		expect(contentList.items[0].contentID).toBeDefined();
-		expect(contentList.items[0].fields.title).toBeDefined();
+		expect(contentList.items.length).toBeGreaterThan(0);
+		for (const item of contentList.items) {
+			// Check that the specified fields exist
+			expect(item.contentID).toBeDefined();
+			expect(item.fields).toBeDefined();
+			expect(item.fields.title).toBeDefined();
+			// Now check that no extra top-level fields are present (excluding allowed always-present fields)
+			const allowedTopLevel = ['contentID', 'fields'];
+			const topLevelFields = Object.keys(item);
+			for (const key of topLevelFields) {
+				expect(allowedTopLevel).toContain(key);
+			}
+			// Now verify that only 'title' is present in 'fields'
+			const allowedFieldFields = ['title'];
+			const fieldKeys = Object.keys(item.fields);
+			for (const fk of fieldKeys) {
+				expect(allowedFieldFields).toContain(fk);
+			}
+		}
 	});
 
 });
