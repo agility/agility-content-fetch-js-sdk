@@ -15,6 +15,7 @@ import { TypeError } from '../types/errors/Errors';
  * @param {string} requestParams.languageCode - DEPRECATED: Use locale instead - The language code of the content you want to retrieve.
  * @param {number} [requestParams.contentLinkDepth] - The depth, representing the levels in which you want linked content auto-resolved. Default is **1**.
  * @param {boolean} [requestParams.expandAllContentLinks] - Whether or not to expand entire linked content references, includings lists and items that are rendered in the CMS as Grid or Link. Default is **false**
+ * @param {Array.<string>} [requestParams.fields] - The fields to include in the results. Default is **all fields**.
  * @param {number} [requestParams.take] - The maximum number of items to retrieve in this request. Default is **10**. Maximum allowed is **250**.
  * @param {number} [requestParams.skip] - The number of items to skip from the list. Default is **0**. Used for implementing pagination.
  * @param {string} [requestParams.sort] - The field to sort the results by. Example **fields.title** or **properties.modified**.
@@ -94,6 +95,11 @@ export interface ContentListRequestParams {
 	expandAllContentLinks?: boolean;
 
 	/**
+	 * The fields to include in the results. Default is **all fields**.
+	 */
+	fields?: Array<string>;
+
+	/**
 	 * The number of items to retrieve in this request. Default is 10. Maximum allowed is 250.
 	 */
 	take?: number;
@@ -164,6 +170,9 @@ function validateRequestParams(requestParams) {
 	} else if ((requestParams.take || requestParams.take == 0) && !isNaN(requestParams.take) && requestParams.take < 1) {
 		//take parameter must be greater than 0
 		throw new TypeError('Take parameter must be greater than 0.', validateRequestParams);
+	} else if (requestParams.fields && !Array.isArray(requestParams.fields)) {
+		//fields parameter must be an array
+		throw new TypeError('Fields parameter must be an array.', validateRequestParams);
 	} else if (requestParams.take && !isNaN(requestParams.take) && requestParams.take > 250) {
 		//take parameter cannot be greater than 250
 		throw new TypeError('Take parameter must be 250 or less.', validateRequestParams);

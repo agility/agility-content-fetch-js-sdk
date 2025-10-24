@@ -1,6 +1,6 @@
 {
   "name": "@agility/content-fetch",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "description": "JS/TS library for the Agility Fetch API",
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
     "build": "node build.js",
     "prepare": "yarn build",
     "test": "jest",
+    "test-content-list": "jest test/getContentList.tests.ts",
     "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },
   "keywords": [
