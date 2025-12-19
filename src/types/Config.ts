@@ -33,7 +33,12 @@ export interface Config {
   logLevel?: 'debug' | 'info' | 'warn' | 'error' | 'silent';
 
   /**
-   * Used for debugging purposes.  Default is false.
+   * Enable debug mode for detailed logging. Default is false.
+   * When enabled:
+   * - Adds comprehensive request/response logging with timing information
+   * - Includes response headers in the returned data as 'agilityResponseHeaders'
+   * - Logs error details including status codes, headers, and response bodies
+   * - Sanitizes sensitive data (API keys) in debug output
    */
   debug?: boolean;
 
