@@ -28,6 +28,64 @@ function logError({ config, message }: LogProps) {
 	console.error('\x1b[41m%s\x1b[0m', message);
 }
 
+interface DebugDetails {
+	type: 'request' | 'response' | 'error';
+	url?: string;
+	method?: string;
+	headers?: Record<string, any>;
+	statusCode?: number;
+	statusText?: string;
+	duration?: number;
+	timestamp?: string;
+	errorMessage?: string;
+	responsePreview?: string;
+}
+
+/**
+ * Sanitizes sensitive information from headers (API keys)
+ */
+function sanitizeHeaders(headers: Record<string, any> | Headers): Record<string, any> {
+	const sanitized: Record<string, any> = {};
+
+	if (headers instanceof Headers) {
+		// Convert Headers to object
+		headers.forEach((value, key) => {
+			if (key.toLowerCase() === 'apikey') {
+				sanitized[key] = '***REDACTED***';
+			} else {
+				sanitized[key] = value;
+			}
+		});
+	} else {
+		// Regular object
+		Object.keys(headers).forEach(key => {
+			if (key.toLowerCase() === 'apikey') {
+				sanitized[key] = '***REDACTED***';
+			} else {
+				sanitized[key] = headers[key];
+			}
+		});
+	}
+
+	return sanitized;
+}
+
+/**
+ * Logs detailed debug information about requests and responses
+ */
+function logDebugDetails({ config, details }: { config: Config, details: DebugDetails }) {
+	if (!config.debug) return;
+
+	const sanitizedDetails = {
+		...details,
+		headers: details.headers ? sanitizeHeaders(details.headers) : undefined
+	};
+
+	console.log('\x1b[36m%s\x1b[0m', '=== AgilityCMS Fetch API Debug ===');
+	console.log(JSON.stringify(sanitizedDetails, null, 2));
+	console.log('\x1b[36m%s\x1b[0m', '===================================');
+}
+
 
 
 function buildRequestUrlPath(config, locale) {
@@ -118,5 +176,6 @@ export {
 	logError,
 	logDebug,
 	logInfo,
-	logWarning
+	logWarning,
+	logDebugDetails
 }
