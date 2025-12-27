@@ -11,6 +11,7 @@ export function createApiClient() {
     var api = agilityFetch.getApi({
         guid: guid,
         apiKey: apiKeyFetch,
+        apiVersion: "v1",
         baseUrl: `https://api-dev.aglty.io/${guid}`
     });
     return api;
@@ -22,6 +23,7 @@ export function createPreviewApiClient() {
         guid: guid,
         apiKey: apiKeyPreview,
         isPreview: true,
+        apiVersion: "v1",
         baseUrl: `https://api-dev.aglty.io/${guid}`
     });
     return api;

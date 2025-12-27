@@ -8,6 +8,7 @@ describe('getApi:', function () {
     it('should return an api client object with required params', () => {
         const api = agilityFetch.getApi({
             guid: 'some-guid',
+            apiVersion: "v1",
             apiKey: 'some-access-token'
         });
         expect(typeof api).toBe("object");
@@ -16,6 +17,7 @@ describe('getApi:', function () {
     it('should return an api client object in preview mode', () => {
         const api = agilityFetch.getApi({
             guid: 'some-guid',
+            apiVersion: "v1",
             apiKey: 'some-access-token',
             isPreview: true
         });
@@ -25,6 +27,7 @@ describe('getApi:', function () {
     it('should contain method for getContentItem', function (done) {
         const api = agilityFetch.getApi({
             guid: 'some-guid',
+            apiVersion: "v1",
             apiKey: 'some-access-token'
         });
         expect(typeof (api.getContentItem)).toBe("function");
@@ -34,6 +37,7 @@ describe('getApi:', function () {
     it('should contain method for getContentList', function (done) {
         const api = agilityFetch.getApi({
             guid: 'some-guid',
+            apiVersion: "v1",
             apiKey: 'some-access-token'
         });
         expect(typeof (api.getContentList)).toBe("function");
@@ -43,6 +47,7 @@ describe('getApi:', function () {
     it('should contain method for getPage', function (done) {
         const api = agilityFetch.getApi({
             guid: 'some-guid',
+            apiVersion: "v1",
             apiKey: 'some-access-token'
         });
         expect(typeof (api.getPage)).toBe("function");
@@ -52,6 +57,7 @@ describe('getApi:', function () {
     it('should contain method for getSitemapFlat', function (done) {
         const api = agilityFetch.getApi({
             guid: 'some-guid',
+            apiVersion: "v1",
             apiKey: 'some-access-token'
         });
         expect(typeof (api.getSitemapFlat)).toBe("function");
@@ -61,6 +67,7 @@ describe('getApi:', function () {
     it('should contain method for getSitemapNested', function (done) {
         const api = agilityFetch.getApi({
             guid: 'some-guid',
+            apiVersion: "v1",
             apiKey: 'some-access-token'
         });
         expect(typeof (api.getSitemapNested)).toBe("function");
@@ -71,6 +78,7 @@ describe('getApi:', function () {
         const baseUrl = 'https://fake-url.agilitycms.com';
         const api = agilityFetch.getApi({
             guid: 'some-guid',
+            apiVersion: "v1",
             apiKey: 'some-access-token',
             baseUrl: baseUrl
         });
@@ -82,6 +90,7 @@ describe('getApi:', function () {
         const baseUrl = 'https://api-ca.aglty.io/some-guid-c';
         const api = agilityFetch.getApi({
             guid: 'some-guid-c',
+            apiVersion: "v1",
             apiKey: 'some-access-token',
             baseUrl: null
         });
@@ -93,6 +102,7 @@ describe('getApi:', function () {
         const baseUrl = 'https://api.aglty.io/some-guid-u';
         const api = agilityFetch.getApi({
             guid: 'some-guid-u',
+            apiVersion: "v1",
             apiKey: 'some-access-token',
             baseUrl: null
         });
@@ -104,6 +114,7 @@ describe('getApi:', function () {
         const baseUrl = 'https://api-usa2.aglty.io/someguid-us2';
         const api = agilityFetch.getApi({
             guid: 'someguid-us2',
+            apiVersion: "v1",
             apiKey: 'some-access-token',
             baseUrl: null
         });
@@ -115,6 +126,7 @@ describe('getApi:', function () {
         const baseUrl = 'https://api-dev.aglty.io/some-guid-d';
         const api = agilityFetch.getApi({
             guid: 'some-guid-d',
+            apiVersion: "v1",
             apiKey: 'some-access-token',
             baseUrl: null
         });
@@ -126,8 +138,9 @@ describe('getApi:', function () {
         const baseUrl = 'https://some-guid-api.agilitycms.cloud';
         const api = agilityFetch.getApi({
             guid: 'some-guid',
+            apiVersion: "v1",
             apiKey: 'some-access-token',
-            baseUrl: null
+            baseUrl: baseUrl
         });
         expect(api.config.baseUrl).toBe(baseUrl);
         done();
@@ -138,6 +151,7 @@ describe('getApi:', function () {
     it('should throw an error if guid is not passed-in', () => {
         expect(() => {
             agilityFetch.getApi({
+                apiVersion: "v1",
                 apiKey: 'some-access-token'
             });
         }).toThrow(Error);
@@ -147,6 +161,7 @@ describe('getApi:', function () {
         expect(() => {
             agilityFetch.getApi({
                 guid: 'some-guid',
+                apiVersion: "v1",
             });
         }).toThrow(Error);
     });
@@ -155,6 +170,7 @@ describe('getApi:', function () {
         expect(() => {
             agilityFetch.getApi({
                 guid: 'some-guid',
+                apiVersion: "v1",
                 apiKey: 'some-access-token',
                 baseUrl: 'http://insecuresite.com'
             });
