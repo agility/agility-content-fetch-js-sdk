@@ -305,24 +305,21 @@ class ApiClient {
 
 			return data
 
-		} catch (error) {
-			const duration = Date.now() - startTime;
-
-			// Log detailed exception information if debug is enabled
-			if (this.config.debug) {
-				logDebugDetails({
-					config: this.config,
-					details: {
-						type: 'error',
-						url: `${reqConfig.baseURL}${reqConfig.url}`,
-						errorMessage: error instanceof Error ? error.message : String(error),
-						duration,
-						timestamp: new Date().toISOString()
+		} catch (error: any) {
+			logError({
+				config: this.config,
+				message: `AgilityCMS Fetch API ERROR: Request failed for ${reqConfig.baseURL}${reqConfig.url}`,
+				details: {
+					name: error?.name,
+					message: error?.message,
+					stack: error?.stack,
+					cause: {
+						name: error?.cause?.name,
+						message: error?.cause?.message,
+						code: error?.cause?.code,
 					}
-				});
-			}
-
-			logError({ config: this.config, message: `AgilityCMS Fetch API ERROR: Request failed for ${reqConfig.baseURL}${reqConfig.url} ... ${error}` })
+				}
+			})
 		}
 	}
 }
