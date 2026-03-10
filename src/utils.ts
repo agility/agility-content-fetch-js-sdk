@@ -2,8 +2,8 @@ import { Config } from "./types/Config";
 
 interface LogProps {
 	config: Config,
-	message: string
-
+	message: string,
+	details?: Record<string, any>
 }
 
 function logDebug({ config, message }: LogProps) {
@@ -23,9 +23,10 @@ function logWarning({ config, message }: LogProps) {
 
 
 
-function logError({ config, message }: LogProps) {
+function logError({ config, message, details }: LogProps) {
 	if (config.logLevel === 'silent') return
 	console.error('\x1b[41m%s\x1b[0m', message);
+	if (details) console.error(details);
 }
 
 
