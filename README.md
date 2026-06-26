@@ -5,13 +5,13 @@
 
 This is the official JavaScript/TypeScript library for accessing live and preview content from your [Agility CMS](https://agilitycms.com) instance.
 
-You can use this in both node and browser based JS apps.
+You can use this in both Node.js and browser-based JavaScript apps.
 
 Don't have an Agility CMS instance? Sign up for [Free Trial](https://agilitycms.com/free) today!
 
 ## Features
 
-- Queries the high-availability, CDN backed Agility Fetch REST API
+- Query the high-availability, CDN-backed Agility Fetch REST API
 - Get a sitemap for a given channel
 - Get a page, including its content zones, modules, and their content
 - Get a content item
@@ -21,7 +21,7 @@ Don't have an Agility CMS instance? Sign up for [Free Trial](https://agilitycms.
 
 ## Getting Started
 
-In order to use this sdk, you'll need to install the `@agility/content-fetch` package and you'll also need to authenticate your requests.
+In order to use this SDK, you'll need to install the `@agility/content-fetch` package and you'll also need to authenticate your requests.
 
 ### Prerequisites
 
@@ -61,33 +61,31 @@ const contentItems = await api.getContentItem({
 
 ## Documentation
 
-Full documentation for this SDK can be found in our [Agility Fetch JS SDK Reference Doc](https://agilitydocs.netlify.com/agility-content-fetch-js-sdk/).
+Full documentation for this SDK can be found in our [Agility Fetch JS SDK Reference Doc](https://agilitycms.com/docs/javascript/content-fetch-js-sdk).
 
-For docs & help around Agility CMS, please see [Agility CMS Documentation](https://help.agilitycms.com/hc/en-us)
+For docs & help around Agility CMS, please see [Agility CMS Documentation](https://agilitycms.com/docs)
 
 ## Tutorials
 
-[About the Content Fetch API](https://help.agilitycms.com/hc/en-us/articles/360031985112-About-the-Content-Fetch-API)
+[About using the Content Fetch API and authenticating API calls](https://agilitycms.com/docs/developers/content-fetch-api)
 
-[Authenticating your Content Fetch API Calls](https://help.agilitycms.com/hc/en-us/articles/360032225191-Authenticating-your-Content-Fetch-API-Calls)
+[Retrieving your API Key(s), Guid, and API URL](https://agilitycms.com/docs/training-guide/admin-api-keys)
 
-[Retrieving your API Key(s), Guid, and API URL](https://help.agilitycms.com/hc/en-us/articles/360031919212-Retrieving-your-API-Key-s-Guid-and-API-URL-)
+[Making your First Call with the Content Fetch API](https://agilitycms.com/docs/training-guide/developer-api-basics)
 
-[Making your First Call with the Content Fetch API](https://help.agilitycms.com/hc/en-us/articles/360031918152-Making-your-First-API-Call-with-the-Content-Fetch-API)
+[Calilng the Content Fetch API using the Javascript SDK](https://agilitycms.com/docs/javascript/content-fetch-js-sdk)
 
-[Calilng the Content Fetch API using the Javascript SDK](https://help.agilitycms.com/hc/en-us/articles/360031945912-Calling-the-Content-Fetch-API-using-the-JavaScript-SDK)
+[Page Management in a Headless CMS](https://agilitycms.com/docs/developers/page-management-in-a-headless-cms)
 
-[Page Management in a Headless CMS](https://help.agilitycms.com/hc/en-us/articles/360032554331-Page-Management-in-a-Headless-CMS)
+[Using Agility CMS with Next.js](https://agilitycms.com/docs/nextjs)
 
-[Using Agility CMS with Create React App](https://help.agilitycms.com/hc/en-us/articles/360031121692-Using-Agility-CMS-with-Create-React-App-CRA-)
+[Creating a Next.js component in Agility CMS](https://agilitycms.com/docs/training-guide/developer-component-development)
 
-[Creating a Module for the Agility CMS Create React App](https://help.agilitycms.com/hc/en-us/articles/360031590791-Creating-a-Module-for-the-Agility-CMS-Create-React-App)
+[Creating a page model in Agility CMS](https://agilitycms.com/docs/developers/page-models)
 
-[Creating a Page Template for the Agility CMS Create React App](https://help.agilitycms.com/hc/en-us/articles/360032611011-Creating-a-Page-Template-for-the-Agility-CMS-Create-React-App)
+[Deploying your Agility CMS Next.js app to Vercel](https://agilitycms.com/docs/nextjs/deploying-next-js-to-vercel)
 
-[Deploying your Agility CMS Create React App](https://help.agilitycms.com/hc/en-us/articles/360032203552-Deploying-your-Agility-CMS-Create-React-App)
-
-[Content Webhooks](https://help.agilitycms.com/hc/en-us/articles/360035934911)
+[Webhooks](https://agilitycms.com/docs/developers/webhooks)
 
 ## Contributing
 
