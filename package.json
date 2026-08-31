@@ -20,7 +20,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "node build.js",
-    "prepare": "yarn build",
+    "prepare": "npm run build",
     "test": "jest",
     "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },
