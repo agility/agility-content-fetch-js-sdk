@@ -98,3 +98,21 @@ An essential part of contributing to this SDK is adding and running unit tests t
 ```
 > npm run test
 ```
+
+### Publishing a New Release
+
+Releases are published to npm automatically by [`.github/workflows/npm-publish.yml`](.github/workflows/npm-publish.yml) whenever a `v*` tag is pushed to the repo. To cut a release:
+
+1. Bump the `version` field in `package.json` (following [semver](https://semver.org)) and merge that change into `master`.
+2. Tag the merge commit and push the tag:
+   ```
+   git tag v2.0.12
+   git push origin v2.0.12
+   ```
+3. The workflow verifies the tag matches `package.json`'s version, builds the package, and publishes it to npm under the `beta` dist-tag.
+4. Once you've verified the `beta` release, promote it to `latest`:
+   ```
+   npm dist-tag add @agility/content-fetch@2.0.12 latest
+   ```
+
+Publishing uses npm's [Trusted Publishing](https://docs.npmjs.com/trusted-publishers) (OIDC) — no `NPM_TOKEN` secret is stored in this repo.
