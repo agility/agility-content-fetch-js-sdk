@@ -34,11 +34,14 @@ export interface Config {
 
   /**
    * Enable debug mode for detailed logging. Default is false.
+   * Detailed logging is also enabled when logLevel is set to 'debug'.
    * When enabled:
-   * - Adds comprehensive request/response logging with timing information
-   * - Includes response headers in the returned data as 'agilityResponseHeaders'
-   * - Logs error details including status codes, headers, and response bodies
-   * - Sanitizes sensitive data (API keys) in debug output
+   * - Adds comprehensive structured request/response/error logging with timing information,
+   *   instance guid, api type (fetch/preview), and request/response headers
+   * - Logs error details including status codes, headers, response body previews,
+   *   and exception name/message/stack
+   * - Sanitizes sensitive data (API keys, auth tokens) in debug output
+   * - When debug is true, also includes response headers in the returned data as 'agilityResponseHeaders'
    */
   debug?: boolean;
 
