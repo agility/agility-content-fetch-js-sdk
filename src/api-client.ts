@@ -9,7 +9,7 @@ import getUrlRedirections, { UrlRedirectionsRequestParams } from './methods/getU
 
 import getSyncContent, { SyncContentRequestParams } from './methods/getSyncContent'
 import getSyncPages, { SyncPagesRequestParams } from './methods/getSyncPages'
-import { logError, logDebug, logInfo, logDebugDetails } from './utils'
+import { logError, logDebug, logInfo, logDebugDetails, headersToObject } from './utils'
 import { Config } from './types/Config'
 import { isHttps } from './utils'
 import * as types from './types'
@@ -186,17 +186,13 @@ class ApiClient {
 	async makeRequest(reqConfig: RequestParams) {
 
 		const isPreview = !!this.config.isPreview
+		const apiType = isPreview ? 'preview' : 'fetch'
 		const startTime = Date.now();
+		const fullUrl = `${reqConfig.baseURL}${reqConfig.url}`
 
+		logDebug({ config: this.config, message: `AgilityCMS Fetch API LOG: ${fullUrl}` });
 
-		logDebug({ config: this.config, message: `AgilityCMS Fetch API LOG: ${reqConfig.baseURL}${reqConfig.url}` });
-
-
-		//make the request using our axios instance
 		try {
-
-			const fullUrl = `${reqConfig.baseURL}${reqConfig.url}`
-
 
 			let init: any = {
 				...this.config.fetchConfig,
@@ -214,19 +210,18 @@ class ApiClient {
 				delete init.next
 			}
 
-			// Log detailed request information if debug is enabled
-			if (this.config.debug) {
-				logDebugDetails({
-					config: this.config,
-					details: {
-						type: 'request',
-						url: fullUrl,
-						method: init.method,
-						headers: init.headers,
-						timestamp: new Date().toISOString()
-					}
-				});
-			}
+			logDebugDetails({
+				config: this.config,
+				details: {
+					type: 'request',
+					url: fullUrl,
+					method: init.method,
+					guid: this.config.guid,
+					apiType,
+					requestHeaders: init.headers,
+					timestamp: new Date().toISOString()
+				}
+			});
 
 			const response = await fetch(fullUrl, init)
 			const duration = Date.now() - startTime;
@@ -234,71 +229,67 @@ class ApiClient {
 			if (!response.ok) {
 				// *** NOT ok ***
 
-				// Log detailed error information if debug is enabled
-				if (this.config.debug) {
-					const responseHeaders: Record<string, string> = {};
-					response.headers.forEach((value, key) => {
-						responseHeaders[key] = value;
-					});
-
-					let errorBody = '';
-					try {
-						errorBody = await response.text();
-					} catch (e) {
-						errorBody = 'Unable to read error response body';
-					}
-
-					logDebugDetails({
-						config: this.config,
-						details: {
-							type: 'error',
-							url: fullUrl,
-							method: init.method,
-							statusCode: response.status,
-							statusText: response.statusText,
-							headers: responseHeaders,
-							responsePreview: errorBody.substring(0, 500), // First 500 chars
-							duration,
-							timestamp: new Date().toISOString()
-						}
-					});
+				let errorBody = '';
+				try {
+					errorBody = await response.text();
+				} catch (e) {
+					errorBody = 'Unable to read error response body';
 				}
+
+				logDebugDetails({
+					config: this.config,
+					details: {
+						type: 'error',
+						url: fullUrl,
+						method: init.method,
+						guid: this.config.guid,
+						apiType,
+						statusCode: response.status,
+						statusText: response.statusText,
+						requestHeaders: init.headers,
+						responseHeaders: headersToObject(response.headers),
+						responsePreview: errorBody.substring(0, 2000),
+						responsePreviewTruncated: errorBody.length > 2000,
+						duration,
+						timestamp: new Date().toISOString()
+					}
+				});
+
+				const bodySnippet = errorBody ? ` Response body: ${errorBody.substring(0, 500)}` : '';
 
 				//if not found, just return
 				if (response.status === 404) {
-					logInfo({ config: this.config, message: `AgilityCMS Fetch API: Request returned a ${response.status} response  for ${reqConfig.baseURL}${reqConfig.url}. ${response.statusText}` })
+					logInfo({ config: this.config, message: `AgilityCMS Fetch API: Request returned a ${response.status} response for ${fullUrl}. ${response.statusText}.${bodySnippet}` })
 					return
 				}
 
 				// all other errors
-				logError({ config: this.config, message: `AgilityCMS Fetch API ERROR: Request returned a ${response.status} response  for ${reqConfig.baseURL}${reqConfig.url}. ${response.statusText}` })
+				logError({ config: this.config, message: `AgilityCMS Fetch API ERROR: Request returned a ${response.status} (${response.statusText}) response for ${fullUrl}. Duration: ${duration}ms.${bodySnippet}` })
 				return
 			}
 
 			// *** OK ***
 			let data = await response.json()
 
-			// Log detailed response information if debug is enabled
+			logDebugDetails({
+				config: this.config,
+				details: {
+					type: 'response',
+					url: fullUrl,
+					method: init.method,
+					guid: this.config.guid,
+					apiType,
+					statusCode: response.status,
+					statusText: response.statusText,
+					responseHeaders: headersToObject(response.headers),
+					contentType: response.headers.get('content-type') ?? undefined,
+					contentLength: response.headers.get('content-length') ?? undefined,
+					duration,
+					timestamp: new Date().toISOString()
+				}
+			});
+
 			if (this.config.debug) {
-				const responseHeaders: Record<string, string> = {};
-				response.headers.forEach((value, key) => {
-					responseHeaders[key] = value;
-				});
-
-				logDebugDetails({
-					config: this.config,
-					details: {
-						type: 'response',
-						url: fullUrl,
-						method: init.method,
-						statusCode: response.status,
-						statusText: response.statusText,
-						headers: responseHeaders,
-						duration,
-						timestamp: new Date().toISOString()
-					}
-				});
-
 				// Add response headers to the data for backward compatibility
 				data['agilityResponseHeaders'] = response.headers
 			}
@@ -308,21 +299,23 @@ class ApiClient {
 		} catch (error) {
 			const duration = Date.now() - startTime;
 
-			// Log detailed exception information if debug is enabled
-			if (this.config.debug) {
-				logDebugDetails({
-					config: this.config,
-					details: {
-						type: 'error',
-						url: `${reqConfig.baseURL}${reqConfig.url}`,
-						errorMessage: error instanceof Error ? error.message : String(error),
-						duration,
-						timestamp: new Date().toISOString()
-					}
-				});
-			}
+			logDebugDetails({
+				config: this.config,
+				details: {
+					type: 'error',
+					url: fullUrl,
+					method: 'GET',
+					guid: this.config.guid,
+					apiType,
+					errorName: error instanceof Error ? error.name : undefined,
+					errorMessage: error instanceof Error ? error.message : String(error),
+					errorStack: error instanceof Error ? error.stack : undefined,
+					duration,
+					timestamp: new Date().toISOString()
+				}
+			});
 
-			logError({ config: this.config, message: `AgilityCMS Fetch API ERROR: Request failed for ${reqConfig.baseURL}${reqConfig.url} ... ${error}` })
+			logError({ config: this.config, message: `AgilityCMS Fetch API ERROR: Request failed for ${fullUrl} after ${duration}ms ... ${error}` })
 		}
 	}
 }

@@ -32,58 +32,77 @@ interface DebugDetails {
 	type: 'request' | 'response' | 'error';
 	url?: string;
 	method?: string;
-	headers?: Record<string, any>;
+	guid?: string | null;
+	apiType?: 'fetch' | 'preview';
+	requestHeaders?: Record<string, any>;
+	responseHeaders?: Record<string, any>;
 	statusCode?: number;
 	statusText?: string;
+	contentType?: string;
+	contentLength?: string;
 	duration?: number;
 	timestamp?: string;
+	errorName?: string;
 	errorMessage?: string;
+	errorStack?: string;
 	responsePreview?: string;
+	responsePreviewTruncated?: boolean;
+}
+
+const SENSITIVE_HEADERS = ['apikey', 'authorization', 'x-api-key'];
+
+/**
+ * Converts a fetch Headers instance (or plain object) to a plain object
+ */
+function headersToObject(headers: Record<string, any> | Headers): Record<string, any> {
+	const obj: Record<string, any> = {};
+
+	if (headers instanceof Headers) {
+		headers.forEach((value, key) => {
+			obj[key] = value;
+		});
+	} else {
+		Object.keys(headers).forEach(key => {
+			obj[key] = headers[key];
+		});
+	}
+
+	return obj;
 }
 
 /**
- * Sanitizes sensitive information from headers (API keys)
+ * Sanitizes sensitive information from headers (API keys, auth tokens)
  */
 function sanitizeHeaders(headers: Record<string, any> | Headers): Record<string, any> {
-	const sanitized: Record<string, any> = {};
+	const sanitized = headersToObject(headers);
 
-	if (headers instanceof Headers) {
-		// Convert Headers to object
-		headers.forEach((value, key) => {
-			if (key.toLowerCase() === 'apikey') {
-				sanitized[key] = '***REDACTED***';
-			} else {
-				sanitized[key] = value;
-			}
-		});
-	} else {
-		// Regular object
-		Object.keys(headers).forEach(key => {
-			if (key.toLowerCase() === 'apikey') {
-				sanitized[key] = '***REDACTED***';
-			} else {
-				sanitized[key] = headers[key];
-			}
-		});
-	}
+	Object.keys(sanitized).forEach(key => {
+		if (SENSITIVE_HEADERS.includes(key.toLowerCase())) {
+			sanitized[key] = '***REDACTED***';
+		}
+	});
 
 	return sanitized;
 }
 
 /**
- * Logs detailed debug information about requests and responses
+ * Logs detailed debug information about requests, responses, and errors
+ * in a uniform structured format. Enabled by config.debug or logLevel 'debug'.
  */
 function logDebugDetails({ config, details }: { config: Config, details: DebugDetails }) {
-	if (!config.debug) return;
+	if (!config.debug && config.logLevel !== 'debug') return;
 
-	const sanitizedDetails = {
+	const sanitizedDetails: DebugDetails = {
 		...details,
-		headers: details.headers ? sanitizeHeaders(details.headers) : undefined
+		requestHeaders: details.requestHeaders ? sanitizeHeaders(details.requestHeaders) : undefined,
+		responseHeaders: details.responseHeaders ? sanitizeHeaders(details.responseHeaders) : undefined
 	};
 
-	console.log('\x1b[36m%s\x1b[0m', '=== AgilityCMS Fetch API Debug ===');
-	console.log(JSON.stringify(sanitizedDetails, null, 2));
-	console.log('\x1b[36m%s\x1b[0m', '===================================');
+	const banner = `=== AgilityCMS Fetch API Debug [${details.type.toUpperCase()}] ===`;
+	const log = details.type === 'error' ? console.error : console.log;
+	log('\x1b[36m%s\x1b[0m', banner);
+	log(JSON.stringify(sanitizedDetails, null, 2));
+	log('\x1b[36m%s\x1b[0m', '='.repeat(banner.length));
 }
 
 
@@ -177,5 +196,8 @@ export {
 	logDebug,
 	logInfo,
 	logWarning,
-	logDebugDetails
+	logDebugDetails,
+	headersToObject
 }
+
+export type { DebugDetails }
