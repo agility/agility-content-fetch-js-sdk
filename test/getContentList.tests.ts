@@ -266,7 +266,11 @@ describe('getContentList:', () => {
 			],
 			filtersLogicOperator: api.types.FilterLogicOperators.OR,
 		});
-		expect(contentList.items[0].contentID).toBe(16);
+		//OR should return the exact contentID match PLUS the other items matching the referenceName condition
+		//(the AND version of this query returns only contentID 16 - see the AND test below)
+		const contentIDs = contentList.items.map((item: any) => item.contentID);
+		expect(contentIDs).toContain(16);
+		expect(contentList.items.length).toBeGreaterThan(1);
 	});
 
 
@@ -293,7 +297,10 @@ describe('getContentList:', () => {
 			locale: 'en-us',
 			filterString: `contentID[eq]15 or properties.referenceName[like]"posts"`
 		});
-		expect(contentList.items[0].contentID).toBe(16);
+		//the OR filter string should return the exact contentID match PLUS the other items matching the referenceName condition
+		const contentIDs = contentList.items.map((item: any) => item.contentID);
+		expect(contentIDs).toContain(15);
+		expect(contentList.items.length).toBeGreaterThan(1);
 	});
 
 	it('should expand all content links when expandContentLinks are set to true', async () => {
