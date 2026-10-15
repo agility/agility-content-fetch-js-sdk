@@ -60,6 +60,6 @@ import { PageScripts } from "./PageScripts";
       dynamicItemContentID?: number;
       visible: SitemapVisibility; // Replace with the actual SitemapVisibility type
       seo?: SEOProperties;
-      scripts?: PageScripts;
+      scripts?: PageScripts | null;
     }
   
