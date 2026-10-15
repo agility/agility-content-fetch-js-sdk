@@ -15,6 +15,7 @@
  * @property {string} [redirectUrl] - If this page is a *link*, then this property will show the intended destination redirect.
  * @property {number} [dynamicItemContentID] - If this page is a dynamic page, then this property will show the associated contentID of the dynamic content item.
  * @property {AgilityFetch.Types.SitemapVisibility} visible - Object that contains properties pertaining to the intended visibility of this page for seo and menus.
+ * @property {AgilityFetch.Types.PageScripts} [scripts] - The page's custom head/body scripts, and whether it opts out of the instance's global scripts.
  */
 
     // Define the SystemProperties interface if necessary
@@ -42,6 +43,7 @@ import { ContentZone } from "./ContentZone";
 import { SystemProperties } from "./SystemProperties";
 import { SitemapVisibility } from "./SitemapVisibility";
 import { SEOProperties } from "./SEO";
+import { PageScripts } from "./PageScripts";
 
     export interface Page {
       pageID: number;
@@ -58,5 +60,6 @@ import { SEOProperties } from "./SEO";
       dynamicItemContentID?: number;
       visible: SitemapVisibility; // Replace with the actual SitemapVisibility type
       seo?: SEOProperties;
+      scripts?: PageScripts;
     }
   
