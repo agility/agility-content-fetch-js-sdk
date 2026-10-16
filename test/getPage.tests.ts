@@ -12,6 +12,7 @@ describe('getPage:', () => {
     });
 
     expect(page.pageID).toBe(3);
+    expect(page.scripts?.excludedFromGlobal).toBe(false);
   });
 
 
