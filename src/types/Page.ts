@@ -16,6 +16,7 @@
  * @property {number} [dynamicItemContentID] - If this page is a dynamic page, then this property will show the associated contentID of the dynamic content item.
  * @property {AgilityFetch.Types.SitemapVisibility} visible - Object that contains properties pertaining to the intended visibility of this page for seo and menus.
  * @property {AgilityFetch.Types.PageScripts} [scripts] - The page's custom head/body scripts, and whether it opts out of the instance's global scripts.
+ * @property {AgilityFetch.Types.GeoProperties} [geo] - The page's GEO / AEO properties (schema.org type, summary, structured data, AI-engine settings). Omitted when the page has none.
  */
 
     // Define the SystemProperties interface if necessary
@@ -44,6 +45,7 @@ import { SystemProperties } from "./SystemProperties";
 import { SitemapVisibility } from "./SitemapVisibility";
 import { SEOProperties } from "./SEO";
 import { PageScripts } from "./PageScripts";
+import { GeoProperties } from "./Geo";
 
     export interface Page {
       pageID: number;
@@ -61,5 +63,6 @@ import { PageScripts } from "./PageScripts";
       visible: SitemapVisibility; // Replace with the actual SitemapVisibility type
       seo?: SEOProperties;
       scripts?: PageScripts | null;
+      geo?: GeoProperties;
     }
   
