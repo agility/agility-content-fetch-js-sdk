@@ -1,6 +1,6 @@
 // Type-level tests for the GEO / AEO page properties (PROD-2726). ts-jest type-checks this file,
 // so a shape that no longer matches the Fetch API contract fails the suite. No API calls.
-import type { Page, GeoProperties, SEOProperties, SchemaType } from '../src/index';
+import type { Page, ContentItem, GeoProperties, SEOProperties, SchemaType } from '../src/index';
 
 describe('GEO types:', () => {
   it('accepts a page with geo and the new seo properties', () => {
@@ -68,5 +68,17 @@ describe('GEO types:', () => {
     const bad: SchemaType = 'Article';
     const good: SchemaType = 'CollectionPage';
     expect([bad, good]).toHaveLength(2);
+  });
+
+  it('accepts geo on a content item (a dynamic page list item) and leaves it optional', () => {
+    const item: ContentItem<{ title: string }> = {
+      contentID: 42,
+      properties: { state: 2, modified: new Date(), versionID: 7, referenceName: 'posts', definitionName: 'Post', itemOrder: 0 },
+      fields: { title: 'A post' },
+      geo: { schemaType: 'ItemPage', summary: 'The post in one sentence.', ai: { crawl: 'block' } },
+    };
+    const plain: ContentItem = { ...item, geo: undefined };
+    expect(item.geo?.ai?.crawl).toBe('block');
+    expect(plain.geo).toBeUndefined();
   });
 });

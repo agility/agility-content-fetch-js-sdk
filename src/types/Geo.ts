@@ -52,7 +52,9 @@ export interface GeoAi {
 export type StructuredData = Record<string, unknown> | Record<string, unknown>[];
 
 /**
- * The GEO / AEO (generative and answer engine optimization) properties of a **Page**.
+ * The GEO / AEO (generative and answer engine optimization) properties of a **Page**, or of a
+ * **Content Item** in a list that backs a dynamic page (the item's own values; how they combine with
+ * the dynamic page's is up to the renderer, e.g. `@agility/geo`).
  * Every property is optional, and the API leaves out any property that isn't set.
  * Unknown properties may be added in later versions, so don't treat this shape as closed.
  * @interface GeoProperties

@@ -17,10 +17,10 @@ export interface SEORobots {
  * @property {string} metaHTML - The meta HTML for the content item.
  * @property {boolean} menuVisible - Whether the content item should be visible in the menu.
  * @property {boolean} sitemapVisible - Whether the content item should be visible in the sitemap.
- * @property {string} [title] - The page's `<title>`, when it differs from the page title. Pages only; omitted when not set.
- * @property {string} [canonicalUrl] - The page's canonical URL override. Pages only; omitted when not set.
- * @property {SEORobots} [robots] - The page's robots directives. Pages only; omitted when not set.
- * @property {string} [ogImage] - The URL of the page's social share (Open Graph) image. Pages only; omitted when not set.
+ * @property {string} [title] - The page's `<title>`, when it differs from the page title. Pages and dynamic page items; omitted when not set.
+ * @property {string} [canonicalUrl] - The page's canonical URL override. Pages and dynamic page items; omitted when not set.
+ * @property {SEORobots} [robots] - The page's robots directives. Pages and dynamic page items; omitted when not set.
+ * @property {string} [ogImage] - The URL of the page's social share (Open Graph) image. Pages and dynamic page items; omitted when not set.
  */
 
 export interface SEOProperties {
